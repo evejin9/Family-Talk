@@ -2,26 +2,36 @@
   {
     "id": 1, 
     "name": "아빠",
-    "imagePath": "./image/dad.jpg"
+    "imagePath": "https://i.ibb.co/zNJwG5W/dad.jpg"
   },
   {
     "id": 2, 
     "name": "엄마",
-    "imagePath": "./image/mom.jpg"
+    "imagePath": "https://i.ibb.co/YcWhC5B/mom.jpg"
   },
   {
     "id": 3, 
     "name": "누나",
-    "imagePath": "./image/girl.jpg"
+    "imagePath": "https://i.ibb.co/PT4Ytn8/girl.jpg"
   },
   {
     "id": 4, 
     "name": "나",
-    "imagePath": "./image/boy.jpg"
+    "imagePath": "https://i.ibb.co/ryrvrSy/boy.jpg"
   },
   {
     "id": 5, 
     "name": "동생",
-    "imagePath": "./image/baby.jpg"
+    "imagePath": "https://i.ibb.co/TtjLkpY/baby.jpg"
+  },
+  {
+    "id": 6, 
+    "name": "할머니",
+    "imagePath": "https://i.ibb.co/ykw3K1S/grandmom.jpg"
+  },
+  {
+    "id": 5, 
+    "name": "할아버지",
+    "imagePath": "https://i.ibb.co/dfPhQF2/granddad.jpg"
   }
 ]

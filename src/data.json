@@ -2,36 +2,43 @@
   {
     "id": 1, 
     "name": "아빠",
-    "imagePath": "https://i.ibb.co/zNJwG5W/dad.jpg"
+    "imagePath": "https://i.ibb.co/zNJwG5W/dad.jpg",
+    "birth": "1968-01-24"
   },
   {
     "id": 2, 
     "name": "엄마",
-    "imagePath": "https://i.ibb.co/YcWhC5B/mom.jpg"
+    "imagePath": "https://i.ibb.co/YcWhC5B/mom.jpg",
+    "birth": "1970-05-06"
   },
   {
     "id": 3, 
     "name": "누나",
-    "imagePath": "https://i.ibb.co/PT4Ytn8/girl.jpg"
+    "imagePath": "https://i.ibb.co/PT4Ytn8/girl.jpg",
+    "birth": "1995-04-23"
   },
   {
     "id": 4, 
     "name": "나",
-    "imagePath": "https://i.ibb.co/ryrvrSy/boy.jpg"
+    "imagePath": "https://i.ibb.co/ryrvrSy/boy.jpg",
+    "birth": "1997-12-04"
   },
   {
     "id": 5, 
     "name": "동생",
-    "imagePath": "https://i.ibb.co/TtjLkpY/baby.jpg"
+    "imagePath": "https://i.ibb.co/TtjLkpY/baby.jpg",
+    "birth": "2000-07-23"
   },
   {
     "id": 6, 
     "name": "할머니",
-    "imagePath": "https://i.ibb.co/ykw3K1S/grandmom.jpg"
+    "imagePath": "https://i.ibb.co/ykw3K1S/grandmom.jpg",
+    "birth": "1948-08-03"
   },
   {
     "id": 5, 
     "name": "할아버지",
-    "imagePath": "https://i.ibb.co/dfPhQF2/granddad.jpg"
+    "imagePath": "https://i.ibb.co/dfPhQF2/granddad.jpg",
+    "birth": "1943-12-13"
   }
 ]

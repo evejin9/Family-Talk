@@ -1,5 +1,4 @@
 import React from 'react';
-import { isCompositeComponent } from 'react-dom/test-utils';
 import { Outlet, useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import { FaHome } from "react-icons/fa";

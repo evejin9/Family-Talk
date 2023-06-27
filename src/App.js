@@ -32,6 +32,8 @@ const GlobalStyled = createGlobalStyle`
   .show-content {
     width: 100%;
     height: 100%;
+    overflow-y: scroll;
+    overflow-x: hidden;
   }
 
   .cursor-point {

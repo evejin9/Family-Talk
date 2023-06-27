@@ -20,7 +20,7 @@ function Calendar(props) {
       <>
         <CalendarHeder currentMonth={currentMonth} prevMonth={prevMonth} nextMonth={nextMonth} />
         <CalendarDay />
-        <CalendarSells currentMonth={currentMonth}/>
+        {/* <CalendarSells currentMonth={currentMonth}/> */}
       </>
     </div>
   );

@@ -9,9 +9,6 @@ import Chat from './page/Chat';
 import Calendar from './page/Calendar';
 import Photo from './page/Photo';
 
-import data from "./data.json";
-
-console.log(data);
 
 const GlobalStyled = createGlobalStyle`
   ${reset}

@@ -1,0 +1,27 @@
+[
+  {
+    "id": 1, 
+    "name": "아빠",
+    "imagePath": "./image/dad.jpg"
+  },
+  {
+    "id": 2, 
+    "name": "엄마",
+    "imagePath": "./image/mom.jpg"
+  },
+  {
+    "id": 3, 
+    "name": "누나",
+    "imagePath": "./image/girl.jpg"
+  },
+  {
+    "id": 4, 
+    "name": "나",
+    "imagePath": "./image/boy.jpg"
+  },
+  {
+    "id": 5, 
+    "name": "동생",
+    "imagePath": "./image/baby.jpg"
+  }
+]

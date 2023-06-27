@@ -1,8 +1,9 @@
 [
   {
     "id": 1,
-    "imagePath": "./image/famsta1.jpg",
-    "content": "이번 글에서는 리액트에서 리스트를 렌더링하는 방법에 대해서 배워보겠습니다.\n리스트를 렌더링하기 위해서는 자바스크립트 배열에서 제공하는 map함수를 사용합니다.",
+    "imagePath": "https://i.ibb.co/SBJvbVH/famsta1.jpg",
+
+    "content": "우리 가족 첫 바다여행",
     "comments": [
       {
         "id": 11,
@@ -28,8 +29,8 @@
   },
   {
     "id": 2,
-    "imagePath": "./image/famsta2.jpg",
-    "content": "이번 글에서는 리액트의 조건부 렌더링에 대해서 배워보도록 하겠습니다.\n조건부 렌더링은 말 그대로 조건에 따라서 렌더링을 다르게 한다는 의미입니다.",
+    "imagePath": "https://i.ibb.co/BVFcm86/famsta2.jpg",
+    "content": "차에서 두근두근",
     "comments": [
       {
         "id": 21,
@@ -55,8 +56,8 @@
   },
   {
     "id": 3,
-    "imagePath": "./image/famsta3.jpg",
-    "content": "이번 글에서는 리액트의 Hook에 대해서 배워보도록 하겠습니다.\nHook은 리액트의 함수 컴포넌트의 흐름에 끼어들어서 다양한 작업들을 처리하기 위해서 사용합니다.",
+    "imagePath": "https://i.ibb.co/GcfGvL7/famsta3.jpg",
+    "content": "평화로운 우리의 여름",
     "comments": [
       {
         "id": 31,
@@ -82,8 +83,8 @@
   },
   {
     "id": 4,
-    "imagePath": "./image/famsta4.jpg",
-    "content": "이번 글에서는 리액트의 컴포넌트에 대해서 설명을 해보려고 합니다.\n리액트가 컴포넌트 기반이라는 것은 리액트를 조금만 공부해보신 분들도 다 알고 계실겁니다.\n그렇다면 컴포넌트는 도대체 뭘까요?",
+    "imagePath": "https://i.ibb.co/PZfRtjd/famsta4.jpg",
+    "content": "오랜만에 외식~~",
     "comments": [
       {
         "id": 41,
@@ -109,8 +110,8 @@
   },
   {
     "id": 5,
-    "imagePath": "./image/famsta5.jpg",
-    "content": "오늘은 제가 만든 리액트 강의를 소개해드리려고 합니다.\n강의 이름은 '처음 만난 리액트'입니다.\n강의 이름에서 이미 느끼셨을텐데, 리액트 초보자분들을 위한 강의입니다.",
+    "imagePath": "https://i.ibb.co/nzMzDkf/famsta5.jpg",
+    "content": "살인 진드기 조심!!!",
     "comments": [
       {
         "id": 51,
@@ -136,8 +137,8 @@
   },
   {
     "id": 6,
-    "imagePath": "./image/famsta6.jpg",
-    "content": "제 블로그에 오신 것을 환영합니다.\n앞으로 유익한 글들을 자주 올리도록 하겠습니다!",
+    "imagePath": "https://i.ibb.co/f4Bf8V8/famsta6.jpg",
+    "content": "삼겹살 홈파티!!",
     "comments": [
       {
         "id": 61,

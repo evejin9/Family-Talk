@@ -1,81 +1,72 @@
 import React from 'react';
 import styled from 'styled-components';
+import { BsFillArrowUpCircleFill } from "react-icons/bs";
+
+import chatData from "../chatData.json";
+import userData from "../data.json";
+import MyChatItem from '../components/chat/MyChatItem';
+import OtherUserChatItem from '../components/chat/OtherUserChatItem';
 
 const ChatUi = styled.div`
   width: 100%;
   height: 100%;
+  font-size: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 `
 
 const UserChat = styled.div`
   padding: 20px 0;
-  font-size: 15px;
-  /* display: flex;
-  justify-content: center;
-  align-items: center; */
+  width: 85%;
+  background-color: #efefef;
+  border-radius: 10px;
   flex: 1;
-  
-  .my-chat {
-    display: flex;
-    justify-content: flex-end;
-    align-items: center;
-
-    .chatArea {
-      padding: 0 5px;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: flex-end;
-    }
-  }
-
-  .other-chat {
-    display: flex;
-    justify-content: flex-start;
-    align-items: center;
-  }
-
-`;
-
-const MyChat = styled.div`
+  text-align: center;
 `;
 
 const ChatInput = styled.div`
+  position: relative;
+
+  input {
+    margin: 10px;
+    background-color: #efefef;
+    width: 355px;
+    height: 50px;
+    border-radius: 10px;
+    border: none;
+  }
+
+  svg {
+    font-size: 30px;
+    color: #f5cc8d;
+    position: absolute;
+    bottom: 20px;
+    right: 23px;
+  }
 `;
 
 function Chat(props) {
 
+  const date = new Date();
+  const today = `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}`
+
   return (
     <ChatUi>
-
       <UserChat>
-        <div className='my-chat'>
-          <span>21:00</span>
-          <div className='chatArea'>
-            <span>나</span>
-            <p>아빠, 내가 바퀴벌레로 변하면 어떻게 할 거야?</p>
-          </div>
-        </div>
-
-        <br />
-
-        <div className='other-chat'>
-          <img />사진
-          <div>
-            <span>아빠</span>
-            <p>세스코 불러야지</p>
-          </div>
-          <span>21:00</span>
-        </div>
-
-
+      {today}
+        {chatData.map((chat) => {
+          return chat.name === '나' ? 
+            <MyChatItem chat={chat} key={chat.id} />
+            : <OtherUserChatItem chat={chat} key={chat.id} userData={userData} />
+        })}
       </UserChat>
 
-      <MyChat>
-
-      </MyChat>
-
+      {/* 채팅 input 창 */}
       <ChatInput>
         <input />
+        <BsFillArrowUpCircleFill />
       </ChatInput>
     </ChatUi>
   );

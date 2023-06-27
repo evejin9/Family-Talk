@@ -1,10 +1,11 @@
 import React from 'react';
-import {BsFillArrowLeftCircleFill, BsFillArrowRightCircleFill} from 'react-icons/bs'
-import { format } from 'date-fns'
-import styled, {} from 'styled-components'
+import {BsFillArrowLeftCircleFill, BsFillArrowRightCircleFill} from 'react-icons/bs';
+import { format } from 'date-fns';
+import styled, {} from 'styled-components';
+import { isSameMonth, isSameDay, addDays, parse } from 'date-fns';
 
 
-const Heder = styled.div`
+const Header = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -40,9 +41,9 @@ const StyledSpan = styled.span`
 
 
 
-function CalendarHeder({ currentMonth, prevMonth, nextMonth }) {
+function CalendarHeader({ currentMonth, prevMonth, nextMonth }) {
   return (
-    <Heder className='heder'>
+    <Header className='heder'>
       <StyledDiv className='heder-start'>
         <StyledSpan className='year'>
           <StyledSpan className='month'>
@@ -56,8 +57,8 @@ function CalendarHeder({ currentMonth, prevMonth, nextMonth }) {
         <BsFillArrowLeftCircleFill className='left' size={18} color='grey' onClick={prevMonth}/>
         <BsFillArrowRightCircleFill className='right' size={18} color='grey' onClick={nextMonth }/>
       </StyledDiv>
-    </Heder>
+    </Header>
   );
 }
 
-export default CalendarHeder;
+export default CalendarHeader;

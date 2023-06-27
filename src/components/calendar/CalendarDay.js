@@ -5,13 +5,12 @@ import styled from 'styled-components';
 const StyledDiv = styled.div`
   display: flex;
   font-size: 16px;
-  justify-content: space-around;
+  /* justify-content: space-around; */
   margin-top: 5px;
   font-weight: 600;
-
+  margin-left: 5px;
   .col {
-    /* background-color: orange; */
-    border-bottom: 1px solid gray;
+    margin-right: 40px;
   }
 `;
 

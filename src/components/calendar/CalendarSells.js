@@ -3,38 +3,98 @@ import { addDays, endOfMonth, endOfWeek, format, isSameDay, isSameMonth, parse, 
 import styled from 'styled-components';
 // import { format } from 'date-fns/esm';
 
-const Styled = styled.div`
-  display: flex;
+
+
+const CalendarContainer = styled.div`
+  .body {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+  }
+
+  .row {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+    margin-top: 5PX;
+  }
+
+  .col {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    width: 12.8%;
+    padding-left: 1%;
+    background: #b0c4de;
+    border-radius: 6px;
+    font-weight: 600;
+    font-size: 0.65em;
+    padding: 2px;
+    color: #333;
+    height: 40px;
+  }
+
+  .col.cell {
+    cursor: pointer;
+    transition: all 0.3s ease;
+
+    &:hover {
+      background: #1e90ff;
+    }
+
+    &.disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+    }
+
+    &.selected {
+      background: #1e90ff;
+      color: #fff;
+    }
+
+    &.not-valid {
+      color: gray;
+    }
+    span {
+      margin-left: 3PX;
+      margin-top: 2PX;
+    }
+  }
+
+  .text {
+    /* margin: 4px 0 0 4px; */
+  }
 `;
 
-
 function CalendarSells({ currentMonth, selectedDate, onDateClick }) {
-
-  const monthStart = startOfMonth(currentMonth)
-  const monthEnd = endOfMonth(monthStart)
-  const startDate = startOfWeek(monthStart)
-  const endDate = endOfWeek(monthEnd)
+  const monthStart = startOfMonth(currentMonth);
+  const monthEnd = endOfMonth(monthStart);
+  const startDate = startOfWeek(monthStart);
+  const endDate = endOfWeek(monthEnd);
 
   const rows = [];
   let days = [];
   let day = startDate;
   let formattedDate = '';
 
-
   while (day <= endDate) {
     for (let i = 0; i < 7; i++) {
-      formattedDate = format(day, 'd')
+      formattedDate = format(day, 'd');
       const cloneDay = day;
       days.push(
-        <Styled
+        <div
           className={`col cell ${!isSameMonth(day, monthStart)
             ? 'disabled'
             : isSameDay(day, selectedDate)
-              ? 'selected'
-              : format(currentMonth, 'M') !== format(day, 'M')
-                ? 'not-valid'
-                : 'valid'
-            }`}
+            ? 'selected'
+            : format(currentMonth, 'M') !== format(day, 'M')
+            ? 'not-valid'
+            : 'valid'
+          }`}
           key={day}
           onClick={() => onDateClick(parse(cloneDay))}
         >
@@ -47,20 +107,19 @@ function CalendarSells({ currentMonth, selectedDate, onDateClick }) {
           >
             {formattedDate}
           </span>
-        </Styled>,
+        </div>
       );
       day = addDays(day, 1);
     }
     rows.push(
-      <Styled className="row" key={day}>
+      <div className="row" key={day}>
         {days}
-      </Styled>,
+      </div>
     );
     days = [];
   }
 
-
-  return <Styled className="body">{rows}</Styled>;
-};
+  return <CalendarContainer>{rows}</CalendarContainer>;
+}
 
 export default CalendarSells;

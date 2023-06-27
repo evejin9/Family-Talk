@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+// import dayjs from 'dayjs';
 
 import data from "../data.json";
 import familyImg from "../image/family-photo-main.jpg";
@@ -21,25 +22,45 @@ const StyledImg = styled.img`
 
 function Main(props) {
 
+  // var date = dayjs();
+  // console.log(date.format("YYYY-MM-DD"));
+
   // 생일 디데이 구하기
-  const today = new Date();
-  const familyBirth = data.map((person) => person.birth); // family 생일 배열
-  const birthDay = new Date(familyBirth[1]);
+  // const today = dayjs();
+  // const familyBirthDate = data.map(person => person.birth); // 생년월일 배열
+  // // console.log(familyBirth);
+  // const familyBirthday = (familyBirthDate.map(date => date.substring(5, 10))).sort(); // 생일(월일) 추출하여 생일별 순차적용
+  // console.log(familyBirthday);
+
+  // familyBirthday
+
+
+  // console.log(today.format("MM-DD"));
+
+
+  
+  // const aa = dayjs(familyBirth[0]);
+  // console.log(aa.format("MM-DD"));
+
+
+
+
+
+
+  // console.log(dayjs(familyBirth).format("YY-MM-DD"));
+  // console.log(familyBirth.sort());
+
+  // const birthDay = dayjs(familyBirth[1]);
+  // console.log(birthDay.format("YYYY-MM-DD"));
   // console.log(familyBirth[1]);
 
-  const monthDay = familyBirth[1].substring(5, 10); // 문자열 추출(월,일 추출)
-  const thisYearBirth = `${today.getFullYear()}-${monthDay}`; // 올해의 생일
+  // const monthDay = familyBirth[1].substring(5, 10); // 문자열 추출(월,일 추출)
+  // const thisYearBirth = `${today.getFullYear()}-${monthDay}`; // 올해의 생일
   // console.log(thisYearBirth);
-  const someDay = new Date(thisYearBirth);
-
-  const diffDate = someDay.getTime() - today.getTime();
-  const dDayResult = Math.ceil(diffDate / (1000 * 60 * 60 * 24));
-  const Day = dDayResult > 0 ? dDayResult * (-1) : `+${dDayResult * (-1)}`;
-
-  if (Day > 0) {
-    const nextYearBirth = `${today.getFullYear() + 1}-${monthDay}`;
-  }
-  console.log(Day);
+  // const someDay = new Date(thisYearBirth);
+  // const diffDate = someDay.getTime() - today.getTime();
+  // const dDayResult = Math.ceil(diffDate / (1000 * 60 * 60 * 24));
+  // const Day = dDayResult > 0 ? dDayResult * (-1) : `+${dDayResult * (-1)}`;
 
 
 

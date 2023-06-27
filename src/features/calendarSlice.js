@@ -5,7 +5,7 @@ const initialState = {
 }
 
 const calendarSlice = createSlice({
-  name: '',
+  name: 'calendar',
   initialState,
   reducers: {
 

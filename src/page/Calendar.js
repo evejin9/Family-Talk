@@ -5,6 +5,10 @@ import CalendarDay from '../components/calendar/CalendarDay';
 import CalendarSells from '../components/calendar/CalendarSells';
 import CalendarHeader from '../components/calendar/CalendarHeader';
 
+
+
+
+
 function Calendar(props) {
 
   const [currentMonth, setcurrentMonth] = useState(new Date());
@@ -23,11 +27,11 @@ function Calendar(props) {
 
   return (
     <div className='show-content'>
-      <>
+      <div className='calendar'>
         <CalendarHeader currentMonth={currentMonth} prevMonth={prevMonth} nextMonth={nextMonth} />
         <CalendarDay />
         <CalendarSells currentMonth={currentMonth} selectedDate={selectedDate} onDateClick={onDateClick}/>
-      </>
+      </div>
     </div>
   );
 }

@@ -1,9 +1,10 @@
 import React from 'react';
+import PhotoList from '../components/photo/PhotoList';
 
 function Photo(props) {
   return (
     <div className='show-content'>
-        <p> 사진 </p>
+        <PhotoList />
     </div>
   );
 }

@@ -1,10 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
 
-import data from "../../data.json";
-
-console.log(data);
-
 const OtherUserChat = styled.div`
   padding: 10px 0;
   display: flex;
@@ -33,17 +29,10 @@ const OtherUserChat = styled.div`
 function OtherUserChatItem(props) {
   const { chat : {id, name, content, time}, userData } = props;
 
-  console.log(userData);
-
   return (
     <OtherUserChat>
-      {/* {userData.map(user => {
-        console.log(user.imagePath);
-        return user.name === name && <img src={user.imagePath} />
-      })} */}
-      {data.map(user => {
-        console.log(user.imagePath);
-        return user.name === name && <img src={user.imagePath} />
+      {userData.map(user => {
+        return user.name === name && <img key={user.id} src={user.imagePath} />
       })}
       <div className='chatArea'>
         <span>{name}</span>

@@ -7,7 +7,7 @@ import { AiFillCalendar } from "react-icons/ai";
 import { HiPhoto } from "react-icons/hi2";
 
 const LayoutStyled = styled.div`
-  width: 85%;
+  width: 100%;
   margin: 0 auto;
   height: 100%;
   display: flex;
@@ -42,6 +42,10 @@ const Navbar = styled.nav`
   }
 `;
 
+const OutletStyled = styled(Outlet)`
+  padding: 30px;
+`
+
 function Layout(props) {
 
   const navigate = useNavigate('/');
@@ -49,7 +53,7 @@ function Layout(props) {
 
   return (
     <LayoutStyled>
-      <Outlet />
+      <OutletStyled />
       <Navbar>
         <ul>
           <li className='cursor-point' onClick={() => navigate('/')}><FaHome /></li>

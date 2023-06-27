@@ -2,26 +2,31 @@
   {
     "id": 1, 
     "name": "아빠",
+    "birth": "1968-01-24",
     "imagePath": "./image/dad.jpg"
   },
   {
     "id": 2, 
     "name": "엄마",
+    "birth": "1970-05-06",
     "imagePath": "./image/mom.jpg"
   },
   {
     "id": 3, 
     "name": "누나",
+    "birth": "1995-04-23",
     "imagePath": "./image/girl.jpg"
   },
   {
     "id": 4, 
     "name": "나",
+    "birth": "1997-12-04",
     "imagePath": "./image/boy.jpg"
   },
   {
     "id": 5, 
     "name": "동생",
+    "birth": "2000-07-23",
     "imagePath": "./image/baby.jpg"
   }
 ]

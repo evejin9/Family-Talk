@@ -11,9 +11,6 @@ import Photo from './page/Photo';
 
 import data from "./data.json";
 
-console.log(data);
-
-
 const GlobalStyled = createGlobalStyle`
   ${reset}
   

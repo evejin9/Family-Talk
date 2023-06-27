@@ -8,7 +8,7 @@ import userData from "../data.json";
 
 import MyChatItem from '../components/chat/MyChatItem';
 import OtherUserChatItem from '../components/chat/OtherUserChatItem';
-import { chatListArray } from '../features/chatSlice';
+import { addChatList, chatListArray, getChatList, } from '../features/chatSlice';
 
 
 const ChatUi = styled.div`
@@ -58,18 +58,26 @@ const ChatInput = styled.div`
 `;
 
 function Chat(props) {
-  const chatList = useSelector(chatListArray);
+  const [newChat, setNewChat] = useState('');
+  // const chatList = useSelector(chatListArray);
   const dispatch = useDispatch();
-
-  console.log(chatList);
 
   const date = new Date();
   const today = `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}`
 
-  // useEffect(() => {
-  // dispatch(chatListArray(chatData));
-  // }, []);
-
+  useEffect(() => {
+    dispatch(getChatList(chatData));
+  }, []);
+  
+  const handleNewChat = (e) => {
+    setNewChat(e.target.value);
+  };
+  
+  const addNewChat = () => {
+    dispatch(addChatList(newChat));
+    setNewChat('');
+  }
+  
   return (
     <ChatUi>
       <UserChat>
@@ -85,8 +93,16 @@ function Chat(props) {
 
       {/* 채팅 input 창 */}
       <ChatInput>
-        <input />
-        <BsFillArrowUpCircleFill />
+        <input 
+          value={newChat} 
+          onChange={handleNewChat}
+          onKeyUp={(e) => {
+            if(e.key === 'Enter') {
+              addNewChat();
+            }
+          }} 
+        />
+        <BsFillArrowUpCircleFill onClick={() => addNewChat()} />
       </ChatInput>
     </ChatUi>
   );

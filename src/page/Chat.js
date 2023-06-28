@@ -1,7 +1,8 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import styled from 'styled-components';
 import { useDispatch, useSelector } from 'react-redux';
 import { BsFillArrowUpCircleFill } from "react-icons/bs";
+import dayjs from "dayjs";
 
 import chatData from "../chatData.json";
 import userData from "../data.json";
@@ -22,16 +23,29 @@ const ChatUi = styled.div`
 `
 
 const UserChat = styled.div`
-  padding: 20px 0;
   width: 100%;
+  padding: 20px 10px;
+  box-sizing: border-box;
   background-color: #efefef;
   border-radius: 10px;
   flex: 1;
-  text-align: center;
+
+  overflow-x: hidden;
+  overflow-y: auto;
+  
+  &::-webkit-scrollbar {
+    width: 5px;
+  }
+  &::-webkit-scrollbar-thumb {
+    border-radius: 2px;
+    background: #ccc;
+    cursor: pointer;
+  }
 
   .today {
     font-size: 14px;
     font-weight: 600;
+    text-align: center;
   }
 `;
 
@@ -40,7 +54,9 @@ const ChatInput = styled.div`
   width: 100%;
 
   input {
-    margin: 40px 0 20px;
+    margin-top: 40px;
+    padding: 0 63px 0 20px;
+    box-sizing: border-box;
     background-color: #efefef;
     width: 100%;
     height: 50px;
@@ -52,18 +68,24 @@ const ChatInput = styled.div`
     font-size: 30px;
     color: #f5cc8d;
     position: absolute;
-    bottom: 30px;
+    bottom: 10px;
     right: 23px;
   }
 `;
 
 function Chat(props) {
   const [newChat, setNewChat] = useState('');
-  // const chatList = useSelector(chatListArray);
+
+  const chatList = useSelector(chatListArray);
   const dispatch = useDispatch();
 
-  const date = new Date();
-  const today = `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}`
+  const myChat = new Set(chatList);
+  const myChat2 = [...myChat];
+
+  const date = dayjs();
+  const today = date.format(`YYYY-MM-DD`);
+
+  const nextId = useRef(3);
 
   useEffect(() => {
     dispatch(getChatList(chatData));
@@ -74,16 +96,18 @@ function Chat(props) {
   };
   
   const addNewChat = () => {
-    dispatch(addChatList(newChat));
+    newChat !== '' &&
+    dispatch(addChatList({newChat, nextId}));
     setNewChat('');
   }
   
   return (
-    <ChatUi>
+    <ChatUi className='show-content'>
       <UserChat>
-        <span className='today'>{today}</span>
+        {/* <div className='today'>2023-06-26</div> */}
+        <div className='today'>{today}</div>
 
-        {chatData.map((chat) => {
+        {myChat2.map((chat) => {
           return chat.name === '나' ? 
             <MyChatItem chat={chat} key={chat.id} /> : 
             <OtherUserChatItem chat={chat} key={chat.id} userData={userData} />

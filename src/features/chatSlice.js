@@ -1,8 +1,10 @@
 import { createSlice } from "@reduxjs/toolkit"
+import dayjs from "dayjs";
 
 const initialState = {
   chatList: [],
 }
+
 
 const chatSlice = createSlice({
   name: 'chat',
@@ -11,14 +13,18 @@ const chatSlice = createSlice({
     getChatList: (state, { payload: chat }) => {
       state.chatList.push(...chat);
     },
-    addChatList: (state, { payload: chat }) => {
-      console.log(chat);
+    addChatList: (state, { payload: { newChat, nextId } }) => {
+      const now = dayjs();
+      const time = now.format(`hh:mm`);
+
       state.chatList.push({
-        id: 4,
+        id: `${nextId.current += 1}`,
         name: "나",
-        content: chat,
-        time: "21:06",
-      })
+        content: newChat,
+        time: time,
+      });
+
+
     },
   }
 });

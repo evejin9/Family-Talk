@@ -87,7 +87,7 @@ function Chat(props) {
   const dispatch = useDispatch();
 
   const date = new Date();
-  const today = format( date, `yyyy-MM-dd`);
+  const today = format(date, `yyyy-MM-dd`);
 
   // const myChat = new Set(chatList);
   // const myNewChat = [...myChat];
@@ -96,10 +96,12 @@ function Chat(props) {
   const messageRef = useRef(null);
 
   useEffect(() => {
-    console.log(messageRef);
     dispatch(getChatList(chatData));
-    messageRef.current?.srollIntoView({ hehavior: 'smooth' });
   }, []);
+  
+  useEffect(() => {    
+    messageRef.current.scrollIntoView();
+  }, [chatList])
   
   const handleNewChat = (e) => {
     setNewChat(e.target.value);

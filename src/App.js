@@ -44,7 +44,6 @@ const GlobalStyled = createGlobalStyle`
       background: #ccc;
       cursor: pointer;
     }
-
   }
 
   .cursor-point {

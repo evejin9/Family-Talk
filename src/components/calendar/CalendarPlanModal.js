@@ -13,14 +13,15 @@ const Wrapper = styled.div`
   flex-direction: column;
 `;
 
-const SelectedDate = styled.div`
+const SelectedDateDiv = styled.div`
   display: flex;
   width: 100px;
-  background-color: orange;
+  /* background-color: orange; */
   margin-bottom: 10px;
   justify-content: center;
   align-items: center;
   margin-left: 310px;
+  font-size: 14px;
 `;
 
 const TitleInput = styled.input`
@@ -62,14 +63,18 @@ const StyledButton = styled.button`
 
 function CalendarPlanModal({selectedDate, closeModal, onDateClick, selectedDateCl }) {
 
+  // const [selectedDates, setSelectedDates] = useState(selectedDate);
 
-  const naveigate = useNavigate()
+  // const handleSelectedDares = () => {
+  //   setSelectedDates(selectedDate)
+  // }
 
-  // console.log(selectedDate);
+
+  console.log(selectedDate);
 
   return (
     <Wrapper>
-      <SelectedDate>{undefined}ddddd</SelectedDate>
+      <SelectedDateDiv>{selectedDate}</SelectedDateDiv>
       <TitleInput placeholder='Title'/>
       <DetailInput />
       <ButtonWrapper>

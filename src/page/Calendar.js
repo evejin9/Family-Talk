@@ -15,7 +15,7 @@ function Calendar(props) {
   const [selectedDate, setSelectedDate] = useState(new Date());
   const [modal, setModal] = useState(false);
 
-  const selectedDateCl = [{selectedDate}]
+  
 
   const clickModal = () => {
     setModal(true);
@@ -44,7 +44,7 @@ function Calendar(props) {
         <CalendarHeader currentMonth={currentMonth} prevMonth={prevMonth} nextMonth={nextMonth} />
         <CalendarDay />
         <CalendarSells currentMonth={currentMonth} selectedDate={selectedDate} clickModal={clickModal} onDateClick={onDateClick} />
-        {modal && <CalendarPlanModal closeModal={closeModal} selectedDate={selectedDate} onDateClick={onDateClick} selectedDateCl={selectedDateCl}/>}
+        {modal && <CalendarPlanModal closeModal={closeModal} selectedDate={selectedDate} onDateClick={onDateClick} />}
       </div>
     </div>
   );

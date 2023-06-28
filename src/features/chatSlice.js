@@ -15,7 +15,7 @@ const chatSlice = createSlice({
     },
     addChatList: (state, { payload: { newChat, nextId } }) => {
       const now = new Date();
-      const time = format(now, `hh:mm`);
+      const time = format(now, `HH:mm`);
 
       state.chatList.push({
         id: `${nextId.current += 1}`,
@@ -23,8 +23,6 @@ const chatSlice = createSlice({
         content: newChat,
         time: time,
       });
-
-
     },
   }
 });

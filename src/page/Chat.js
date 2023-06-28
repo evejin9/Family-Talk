@@ -105,6 +105,7 @@ function Chat(props) {
   
   const handleNewChat = (e) => {
     setNewChat(e.target.value);
+    // e.preventDefault()
   };
   
   const addNewChat = () => {
@@ -116,7 +117,6 @@ function Chat(props) {
   return (
     <ChatUi className='show-content'>
       <UserChat>
-        {/* <div className='today'>2023-06-26</div> */}
         <div className='today'>{today}</div>
 
         {chatList.map((chat) => {
@@ -125,6 +125,7 @@ function Chat(props) {
             <OtherUserChatItem chat={chat} key={chat.id} userData={userData} />
         })}
 
+        {/* 하단으로 자동 스크롤 하기 위한 div */}
         <div ref={messageRef}></div>
 
       </UserChat>
@@ -141,7 +142,10 @@ function Chat(props) {
             }
           }} 
         />
-        <BsFillArrowUpCircleFill className='cursor-point' onClick={() => addNewChat()} />
+        <BsFillArrowUpCircleFill 
+          className='cursor-point' 
+          onClick={() => addNewChat()} 
+        />
       </ChatInput>
     </ChatUi>
   );

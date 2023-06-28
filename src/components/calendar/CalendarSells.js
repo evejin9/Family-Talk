@@ -91,7 +91,7 @@ function CalendarSells({ currentMonth, selectedDate, onDateClick, clickModal }) 
   while (day <= endDate) {
     for (let i = 0; i < 7; i++) {
       formattedDate = format(day, 'd');
-      const cloneDay = day;
+      const cloneDay = format(day, 'yyyy-MM-dd');
       days.push(
         <div
           className={`col cell ${!isSameMonth(day, monthStart)

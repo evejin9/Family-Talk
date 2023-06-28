@@ -1,6 +1,7 @@
 import React from 'react';
 import { addDays, endOfMonth, endOfWeek, format, isSameDay, isSameMonth, parse, startOfMonth, startOfWeek } from 'date-fns'
 import styled from 'styled-components';
+import CalendarPlanModal from './CalendarPlanModal';
 // import { format } from 'date-fns/esm';
 
 
@@ -70,7 +71,7 @@ const CalendarContainer = styled.div`
   }
 `;
 
-function CalendarSells({ currentMonth, selectedDate, onDateClick }) {
+function CalendarSells({ currentMonth, selectedDate, onDateClick, clickModal }) {
   const monthStart = startOfMonth(currentMonth);
   const monthEnd = endOfMonth(monthStart);
   const startDate = startOfWeek(monthStart);
@@ -80,6 +81,12 @@ function CalendarSells({ currentMonth, selectedDate, onDateClick }) {
   let days = [];
   let day = startDate;
   let formattedDate = '';
+
+  const handleDateClick = (clickedDate) => {
+    onDateClick(clickedDate);
+    clickModal();
+  };
+  // console.log(selectedDate);
 
   while (day <= endDate) {
     for (let i = 0; i < 7; i++) {
@@ -96,7 +103,7 @@ function CalendarSells({ currentMonth, selectedDate, onDateClick }) {
             : 'valid'
           }`}
           key={day}
-          onClick={() => onDateClick(parse(cloneDay))}
+          onClick={() => handleDateClick(cloneDay)}
         >
           <span
             className={

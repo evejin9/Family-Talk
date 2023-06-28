@@ -14,13 +14,14 @@ const LayoutStyled = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  background-color: aliceblue;
+  background-color: #f0f8ff;
 `;
 
 const Navbar = styled.nav`
   width: 100%;
   height: 50px;
-  background-color: #e4505d;
+  background-color: #f0f8ff;
+  border-top: 2px solid #f5cc8d;
 
   svg {
     font-size: 25px;
@@ -33,10 +34,10 @@ const Navbar = styled.nav`
     align-items: center;
 
     li {
-      color: aquamarine;
+      color: #acacac;
       
       &:hover {
-        color: aliceblue;
+        color: #f5cc8d;
       }
     }
   }

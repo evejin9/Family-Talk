@@ -27,10 +27,24 @@ const GlobalStyled = createGlobalStyle`
   }
 
   .show-content {
+    padding: 20px;
+    box-sizing: border-box;
     width: 100%;
     height: 100%;
-    overflow-y: scroll;
+
+    /* 스크롤 커스텀 */
     overflow-x: hidden;
+    overflow-y: auto;
+
+    &::-webkit-scrollbar {
+      width: 5px;
+    }
+    &::-webkit-scrollbar-thumb {
+      border-radius: 2px;
+      background: #ccc;
+      cursor: pointer;
+    }
+
   }
 
   .cursor-point {
@@ -48,7 +62,6 @@ const Container = styled.div`
 const Wrapper = styled.div`
     width: 500px;
     height: 750px;
-    background-color: orange;
   `;
 
 function App() {

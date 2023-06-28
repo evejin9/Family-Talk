@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit"
-import dayjs from "dayjs";
+import { format }from "date-fns";
 
 const initialState = {
   chatList: [],
@@ -11,11 +11,11 @@ const chatSlice = createSlice({
   initialState,
   reducers: {
     getChatList: (state, { payload: chat }) => {
-      state.chatList.push(...chat);
+      state.chatList = chat;
     },
     addChatList: (state, { payload: { newChat, nextId } }) => {
-      const now = dayjs();
-      const time = now.format(`hh:mm`);
+      const now = new Date();
+      const time = format(now, `hh:mm`);
 
       state.chatList.push({
         id: `${nextId.current += 1}`,

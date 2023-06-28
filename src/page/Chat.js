@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import styled from 'styled-components';
 import { useDispatch, useSelector } from 'react-redux';
 import { BsFillArrowUpCircleFill } from "react-icons/bs";
-import dayjs from "dayjs";
+import { format } from "date-fns";
 
 import chatData from "../chatData.json";
 import userData from "../data.json";
@@ -62,14 +62,21 @@ const ChatInput = styled.div`
     height: 50px;
     border-radius: 10px;
     border: none;
+    &:focus {
+      outline: none;
+    }
   }
-
+  
   svg {
     font-size: 30px;
     color: #f5cc8d;
     position: absolute;
     bottom: 10px;
     right: 23px;
+
+    &:hover {
+      color: red;
+    }
   }
 `;
 
@@ -79,16 +86,19 @@ function Chat(props) {
   const chatList = useSelector(chatListArray);
   const dispatch = useDispatch();
 
-  const myChat = new Set(chatList);
-  const myChat2 = [...myChat];
+  const date = new Date();
+  const today = format( date, `yyyy-MM-dd`);
 
-  const date = dayjs();
-  const today = date.format(`YYYY-MM-DD`);
+  // const myChat = new Set(chatList);
+  // const myNewChat = [...myChat];
 
   const nextId = useRef(3);
+  const messageRef = useRef(null);
 
   useEffect(() => {
+    console.log(messageRef);
     dispatch(getChatList(chatData));
+    messageRef.current?.srollIntoView({ hehavior: 'smooth' });
   }, []);
   
   const handleNewChat = (e) => {
@@ -107,17 +117,20 @@ function Chat(props) {
         {/* <div className='today'>2023-06-26</div> */}
         <div className='today'>{today}</div>
 
-        {myChat2.map((chat) => {
+        {chatList.map((chat) => {
           return chat.name === '나' ? 
             <MyChatItem chat={chat} key={chat.id} /> : 
             <OtherUserChatItem chat={chat} key={chat.id} userData={userData} />
         })}
+
+        <div ref={messageRef}></div>
 
       </UserChat>
 
       {/* 채팅 input 창 */}
       <ChatInput>
         <input 
+          type='text'
           value={newChat} 
           onChange={handleNewChat}
           onKeyUp={(e) => {
@@ -126,7 +139,7 @@ function Chat(props) {
             }
           }} 
         />
-        <BsFillArrowUpCircleFill onClick={() => addNewChat()} />
+        <BsFillArrowUpCircleFill className='cursor-point' onClick={() => addNewChat()} />
       </ChatInput>
     </ChatUi>
   );

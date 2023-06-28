@@ -30,14 +30,11 @@ const StyledDiv = styled.div`
 const StyledSpan = styled.span`
   .month {
     font-size: 20px;
-    margin-left: 10px;
+    margin-left: 7px;
     margin-right: 7px ;
     font-weight: bold;
   }
-  .year {
-    font-size: 14px;
-    
-  }
+
 `;
 
 
@@ -46,7 +43,7 @@ function CalendarHeader({ currentMonth, prevMonth, nextMonth }) {
   return (
     <Header className='heder'>
       <StyledDiv className='heder-start'>
-        <StyledSpan className='year'>
+        <StyledSpan className='year' >
           <StyledSpan className='month'>
             {format(currentMonth, 'M')}월
           </StyledSpan>

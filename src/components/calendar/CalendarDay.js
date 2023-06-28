@@ -9,8 +9,12 @@ const StyledDiv = styled.div`
   margin-top: 5px;
   font-weight: 600;
   margin-left: 5px;
+  
   .col {
     margin-right: 40px;
+    background-color: #b0c4de;
+    border-radius: 6px;
+    
   }
 `;
 

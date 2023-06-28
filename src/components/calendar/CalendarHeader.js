@@ -23,6 +23,7 @@ const StyledDiv = styled.div`
   svg {
     margin-left: 5px;
     margin-right: 5px;
+    cursor: pointer;
   }
 `;
 
@@ -35,7 +36,7 @@ const StyledSpan = styled.span`
   }
   .year {
     font-size: 14px;
-    font-weight: 400;
+    
   }
 `;
 
@@ -54,7 +55,7 @@ function CalendarHeader({ currentMonth, prevMonth, nextMonth }) {
       </StyledDiv>
 
       <StyledDiv className='heder-end'>
-        <BsFillArrowLeftCircleFill className='left' size={18} color='grey' onClick={prevMonth}/>
+        <BsFillArrowLeftCircleFill className='left' size={18} color='grey' onClick={prevMonth} />
         <BsFillArrowRightCircleFill className='right' size={18} color='grey' onClick={nextMonth }/>
       </StyledDiv>
     </Header>

@@ -9,19 +9,21 @@ const Mychat = styled.div`
   align-items: flex-end;
 
   .chatArea {
-      padding: 0 5px;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: flex-end;
+    max-width: 70%;
+    padding: 0 5px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-end;
+    
+    .contentArea {
+      margin-top: 5px;
+      padding: 10px;
+      background-color: #d9d9d9;
+      border-radius: 10px;
     };
-
-  .contentArea {
-    margin-top: 5px;
-    padding: 10px;
-    background-color: #d9d9d9;
-    border-radius: 10px;
   };
+
 `;
 
 function MyChatItem(props) {

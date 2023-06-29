@@ -98,6 +98,7 @@ const ChatInput = styled.div`
   
   input {
     width: 100%;
+    height: 30px;
     background-color: #efefef;
     border: none;
     flex: 1;

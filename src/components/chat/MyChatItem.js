@@ -32,7 +32,11 @@ function MyChatItem(props) {
       <span>{time}</span>
       <div className='chatArea'>
         <span>{name}</span>
-        <p className='contentArea'>{content}</p>
+        {
+          content.includes('data:image')
+          ? <p className='contentArea'><img src={content} /></p>
+          : <p className='contentArea'>{content}</p>
+        }
       </div>
     </Mychat>
   );

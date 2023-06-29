@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
 import { Placeholder } from 'react-bootstrap';
+import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
+import { addCalendarTitle, selectTitle } from '../../features/calendarSlice';
 
 const Wrapper = styled.div`
   display: flex;
@@ -57,37 +59,41 @@ const StyledButton = styled.button`
   margin-top: 5px;
   border-radius: 6px;
   /* border: 0.8px solid #b0c4de; */
-  color: gray;
+  color: black;
   cursor: pointer;
 `;
 
-function CalendarPlanModal({selectedDate, closeModal, onDateClick, selectedDateCl }) {
+function CalendarPlanModal({ selectedDate, closeModal, onDateClick, selectedDateCl }) {
+  const [title, setTitle] = useState('');
+  const [content, setContent] = useState('');
+  const selectedData = useSelector(selectTitle)
+  const dispatch = useDispatch();
 
-  // const [selectedDates, setSelectedDates] = useState(selectedDate);
-
-  // const handleSelectedDares = () => {
-  //   setSelectedDates(selectedDate)
-  // }
-
-
-  console.log(selectedDate);
+  const handleCalendarData = () => {
+    dispatch(addCalendarTitle({ title, selectedDate, content }));
+    closeModal();
+  };
 
   return (
     <Wrapper>
       <SelectedDateDiv>{selectedDate}</SelectedDateDiv>
-      <TitleInput placeholder='Title'/>
-      <DetailInput />
+      <TitleInput
+        placeholder='Title'
+        onChange={(e) => setTitle(e.target.value)}
+        value={title}
+      >
+      </TitleInput>
+      <DetailInput
+        onChange={(e) => setContent(e.target.value)}
+        value={content}
+      >
+      </DetailInput>
       <ButtonWrapper>
-        <StyledButton onClick={closeModal}>
-          close
-        </StyledButton>
-        <StyledButton onClick={undefined}>
-          save
-          </StyledButton>
+        <StyledButton onClick={closeModal}>close</StyledButton>
+        <StyledButton onClick={handleCalendarData}>save</StyledButton>
       </ButtonWrapper>
     </Wrapper>
   );
-  
 }
 
 export default CalendarPlanModal;

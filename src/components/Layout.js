@@ -15,6 +15,7 @@ const LayoutStyled = styled.div`
   justify-content: center;
   align-items: center;
   background-color: #f0f8ff;
+  position: relative;
 `;
 
 const Navbar = styled.nav`

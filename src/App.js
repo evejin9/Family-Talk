@@ -11,6 +11,7 @@ import Photo from './pages/Photo';
 
 import data from "./data.json";
 
+
 const GlobalStyled = createGlobalStyle`
   ${reset}
   
@@ -24,6 +25,7 @@ const GlobalStyled = createGlobalStyle`
   
   * {
     font-size: 14px;
+    /* user-select: none; */
   }
 
   .show-content {

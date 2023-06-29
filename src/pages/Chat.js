@@ -1,8 +1,9 @@
 import React, { useEffect, useRef, useState } from 'react';
 import styled from 'styled-components';
 import { useDispatch, useSelector } from 'react-redux';
-import { BsFillArrowUpCircleFill } from "react-icons/bs";
 import { format } from "date-fns";
+import { BsFillArrowUpCircleFill } from "react-icons/bs";
+import { AiOutlinePlusCircle, AiOutlineCloseCircle } from "react-icons/ai";
 
 import chatData from "../chatData.json";
 import userData from "../data.json";
@@ -20,6 +21,11 @@ const ChatUi = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
+
+  img {
+    max-height: 150px;
+    max-width: 100%;
+  }
 `
 
 const UserChat = styled.div`
@@ -49,39 +55,96 @@ const UserChat = styled.div`
   }
 `;
 
-const ChatInput = styled.div`
-  position: relative;
+const InputArea = styled.div`
   width: 100%;
+  margin-top: 40px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+`
+
+const ImgUploadInput = styled.label`
+  padding-right: 10px;
 
   input {
-    margin-top: 40px;
-    padding: 0 63px 0 20px;
-    box-sizing: border-box;
-    background-color: #efefef;
+    display:none;
+  }
+
+  svg {
+    font-size: 30px;
+    color: #f5cc8d;
+
+    &:hover {
+      color: red;
+    }
+  }
+  
+  img {
+    max-height: 150px;
+    max-width: 100%;
+  }
+`
+
+const ChatInput = styled.div`
+  position: relative;
+  /* width: 100%; */
+  padding: 10px 63px 10px 20px;
+  box-sizing: border-box;
+  background-color: #efefef;
+  width: 100%;
+  height: 100%;
+  border-radius: 10px;
+  /* display: flex; */
+  
+  input {
     width: 100%;
-    height: 50px;
-    border-radius: 10px;
+    height: 30px;
+    background-color: #efefef;
     border: none;
+    flex: 1;
     &:focus {
       outline: none;
     }
   }
   
-  svg {
+  .addButton {
     font-size: 30px;
     color: #f5cc8d;
     position: absolute;
     bottom: 10px;
     right: 23px;
+    
+    &:hover {
+      color: red;
+    }
+  }
+  `;
 
+const InputImgArea = styled.div`
+  width: 100%;
+  display: flex;
+  align-items: center;
+
+  img {
+    max-height: 150px;
+    max-width: 90%;
+    display: ${props => props.src ? "none" : "content" };
+  }
+  svg {
+    color: #f5cc8d;
+    font-size: 20px;
+    margin: 5px;
     &:hover {
       color: red;
     }
   }
 `;
 
+// console.log(chatData.length);
+
 function Chat(props) {
   const [newChat, setNewChat] = useState('');
+  const [imgFile, setImgFile] = useState('');
 
   const chatList = useSelector(chatListArray);
   const dispatch = useDispatch();
@@ -89,11 +152,10 @@ function Chat(props) {
   const date = new Date();
   const today = format(date, `yyyy-MM-dd`);
 
-  // const myChat = new Set(chatList);
-  // const myNewChat = [...myChat];
 
-  const nextId = useRef(3);
+  const nextId = useRef(chatData.length);
   const messageRef = useRef(null);
+  const imgRef = useRef();
 
   useEffect(() => {
     dispatch(getChatList(chatData));
@@ -103,15 +165,35 @@ function Chat(props) {
     messageRef.current.scrollIntoView();
   }, [chatList])
   
+  const saveImgFile = (e) => {
+    const targetFile = e.target.files;
+    if (targetFile.length === 0 ) {
+      return;
+    }
+
+    const saveFile = targetFile[0];
+    const reader = new FileReader();
+
+    console.log(reader);
+
+    reader?.readAsDataURL(saveFile);
+    reader.onloadend = () => {
+      setImgFile(reader.result);
+      setNewChat(reader.result);
+    }
+  }
+
   const handleNewChat = (e) => {
     setNewChat(e.target.value);
-    // e.preventDefault()
+    // e.preventDefault();
   };
   
   const addNewChat = () => {
-    newChat !== '' &&
+    newChat !== '' && 
+    
     dispatch(addChatList({newChat, nextId}));
     setNewChat('');
+    setImgFile('');
   }
   
   return (
@@ -130,23 +212,50 @@ function Chat(props) {
 
       </UserChat>
 
+      {/* 사진 업로드 input 및 버튼 */}
+
       {/* 채팅 input 창 */}
-      <ChatInput>
-        <input 
-          type='text'
-          value={newChat} 
-          onChange={handleNewChat}
-          onKeyUp={(e) => {
-            if(e.key === 'Enter') {
-              addNewChat();
-            }
-          }} 
-        />
-        <BsFillArrowUpCircleFill 
-          className='cursor-point' 
-          onClick={() => addNewChat()} 
-        />
-      </ChatInput>
+      <InputArea>
+        <ImgUploadInput>
+          <AiOutlinePlusCircle />
+          <input 
+            type='file' 
+            accept='image/*'
+            onChange={saveImgFile}
+            ref={imgRef}
+          />
+        </ImgUploadInput>
+        
+        <ChatInput>
+          {imgFile
+            ? 
+              <InputImgArea>
+                <img src={imgFile ? imgFile : undefined} /> 
+                <AiOutlineCloseCircle 
+                  onClick={() => {
+                    setImgFile('') 
+                    setNewChat('')
+                  }}
+                />
+              </InputImgArea>
+            : <input 
+              type='text'
+              value={newChat} 
+              onChange={handleNewChat}
+              onKeyUp={(e) => {
+                if(e.key === 'Enter') {
+                  addNewChat();
+                  }
+              }} 
+            />
+          }
+          
+          <BsFillArrowUpCircleFill 
+            className='cursor-point addButton' 
+            onClick={() => addNewChat()} 
+          />
+        </ChatInput>
+      </InputArea>
     </ChatUi>
   );
 }

@@ -8,11 +8,11 @@ const CommentListWrapper = styled.div`
 `
 
 function CommentList({post}) {
-const {name, comments} = post;
-// console.log(comments);
+const {name, comments, setComment} = post;
+console.log(setComment);
   return (
     <CommentListWrapper>
-      {comments.map((comment) => <Comment key={comment.content.id} name ={name} comment={comment} />)}
+      {comments.map((comment) => <Comment key={comment.id} name={name} comment={comment} />)}
     </CommentListWrapper>
   );
 }

@@ -12,7 +12,7 @@ const StyledDiv = styled.div`
   
   .col {
     margin-right: 40px;
-    background-color: #b0c4de;
+    background-color: rgb(239,239,239);
     border-radius: 6px;
     
   }
@@ -25,7 +25,7 @@ function CalendarDay(props) {
 
 
   const days = [];
-  const date = ['Sun', 'Mon', 'Thu', 'Wed', 'Thrs', 'Fri', 'Sat'];
+  const date = ['Sun', 'Mon', 'Thu', 'Wed', 'Thu', 'Fri', 'Sat'];
 
   for (let  i = 0; i < 7; i++) {
     days.push(

@@ -1,6 +1,8 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
+import { MoonLoader } from "react-spinners";
+import { useSelector } from 'react-redux';
 
 const StyledSection = styled.div`
   width: 100%;
@@ -8,12 +10,11 @@ const StyledSection = styled.div`
   margin-top: 20px;
   border-radius: 8px;
   font-size: 18px;
+  padding: 0 20px;
+  box-sizing: border-box;
   display: flex;
   align-items: center;
   justify-content: space-around;
-
-  padding: 0 20px;
-  box-sizing: border-box;
 
   &.container_cool{
     background: #005AA7;
@@ -26,11 +27,18 @@ const StyledSection = styled.div`
     background: linear-gradient(to bottom, #F37335, #FDC830);
   }
 
-  & p {
-    color: #fff;
+  .weather-contents{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
 
-    &.temp {
-      font-size: 26px;
+    & p {
+      color: #fff;
+  
+      &.temp {
+        font-size: 26px;
+      }
     }
   }
 `;
@@ -56,7 +64,6 @@ function MainWeather(props) {
   const getCurrentLocation = () => {
     navigator.geolocation.getCurrentPosition((position) => {
       const { latitude, longitude } = position.coords;
-      // console.log("현재 위도 경도는?", latitude, longitude);
       getWeatherByCurrentLocation(latitude, longitude);
     });
   };
@@ -83,16 +90,26 @@ function MainWeather(props) {
     }
   };
 
-  if (loading) {
-    return <div>로딩</div>
-  }
-
   return (
     <StyledSection className={temp > 26 ? "container_warm" : "container_cool"}>
-      <img className="img-fluid" src={`http://openweathermap.org/img/wn/${icon}@2x.png`} />
-      <p className='temp'>{Math.round(temp)}º</p>
-      <p>{todayData()}</p>
-      <p>{name}</p>
+      {
+        loading
+        ?
+        <MoonLoader
+          color="#F5CC8D"
+          cssOverride={{}}
+          loading
+          size={30}
+          speedMultiplier={0.6}
+        />
+        : 
+        <div className='weather-contents'>
+          <p>{todayData()}</p>
+          <img src={`http://openweathermap.org/img/wn/${icon}@2x.png`} />
+          <p className='temp'>{Math.round(temp)}º</p>
+          <p>{name}</p>
+        </div>
+      }
     </StyledSection>
   );
 }
@@ -106,15 +123,5 @@ export default MainWeather;
 
 // http://api.openweathermap.org/data/2.5/weather?id=1835848&appid=1eb8c3144c11e82d58bf7e93e3eed28f
 
-
 // (참고)
 // https://nnuoyos.tistory.com/275?category=571216
-
-// 로딩
-// <MoonLoader
-// color="#F5CC8D"
-// cssOverride={{}}
-// loading
-// size={30}
-// speedMultiplier={0.6}
-// />;

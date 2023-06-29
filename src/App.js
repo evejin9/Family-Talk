@@ -1,13 +1,13 @@
 import './App.css';
 import styled, { createGlobalStyle } from 'styled-components';
 import reset from "styled-reset";
-import Main from './page/Main';
+import Main from './pages/Main';
 import { Route, Routes } from 'react-router-dom';
 
 import Layout from './components/Layout';
-import Chat from './page/Chat';
-import Calendar from './page/Calendar';
-import Photo from './page/Photo';
+import Chat from './pages/Chat';
+import Calendar from './pages/Calendar';
+import Photo from './pages/Photo';
 
 import data from "./data.json";
 

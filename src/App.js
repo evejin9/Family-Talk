@@ -25,6 +25,7 @@ const GlobalStyled = createGlobalStyle`
   
   * {
     font-size: 14px;
+    /* user-select: none; */
   }
 
   .show-content {

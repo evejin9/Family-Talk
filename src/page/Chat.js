@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import { useDispatch, useSelector } from 'react-redux';
 import { format } from "date-fns";
 import { BsFillArrowUpCircleFill } from "react-icons/bs";
-import { AiOutlinePlusCircle } from "react-icons/ai";
+import { AiOutlinePlusCircle, AiOutlineCloseCircle } from "react-icons/ai";
 
 import chatData from "../chatData.json";
 import userData from "../data.json";
@@ -107,25 +107,40 @@ const ChatInput = styled.div`
     }
   }
   
-  img {
-    max-height: 150px;
-    max-width: 100%;
-    display: ${props => props.imgFile ? "none" : "content" };
-    /* display: }; */
-  }
-
-  svg {
+  .addButton {
     font-size: 30px;
     color: #f5cc8d;
     position: absolute;
     bottom: 10px;
     right: 23px;
+    
+    &:hover {
+      color: red;
+    }
+  }
+  `;
 
+const InputImgArea = styled.div`
+  width: 100%;
+  display: flex;
+  align-items: center;
+
+  img {
+    max-height: 150px;
+    max-width: 90%;
+    display: ${props => props.src ? "none" : "content" };
+  }
+  svg {
+    color: #f5cc8d;
+    font-size: 20px;
+    margin: 5px;
     &:hover {
       color: red;
     }
   }
 `;
+
+// console.log(chatData.length);
 
 function Chat(props) {
   const [newChat, setNewChat] = useState('');
@@ -137,7 +152,8 @@ function Chat(props) {
   const date = new Date();
   const today = format(date, `yyyy-MM-dd`);
 
-  const nextId = useRef(3);
+
+  const nextId = useRef(chatData.length);
   const messageRef = useRef(null);
   const imgRef = useRef();
 
@@ -149,10 +165,18 @@ function Chat(props) {
     messageRef.current.scrollIntoView();
   }, [chatList])
   
-  const saveImgFile = () => {
-    const file = imgRef.current.files[0];
+  const saveImgFile = (e) => {
+    const targetFile = e.target.files;
+    if (targetFile.length === 0 ) {
+      return;
+    }
+
+    const saveFile = targetFile[0];
     const reader = new FileReader();
-    reader.readAsDataURL(file);
+
+    console.log(reader);
+
+    reader?.readAsDataURL(saveFile);
     reader.onloadend = () => {
       setImgFile(reader.result);
       setNewChat(reader.result);
@@ -204,7 +228,16 @@ function Chat(props) {
         
         <ChatInput>
           {imgFile
-            ? <img src={imgFile ? imgFile : undefined} imgFile={imgFile} /> 
+            ? 
+              <InputImgArea>
+                <img src={imgFile ? imgFile : undefined} /> 
+                <AiOutlineCloseCircle 
+                  onClick={() => {
+                    setImgFile('') 
+                    setNewChat('')
+                  }}
+                />
+              </InputImgArea>
             : <input 
               type='text'
               value={newChat} 
@@ -218,7 +251,7 @@ function Chat(props) {
           }
           
           <BsFillArrowUpCircleFill 
-            className='cursor-point' 
+            className='cursor-point addButton' 
             onClick={() => addNewChat()} 
           />
         </ChatInput>

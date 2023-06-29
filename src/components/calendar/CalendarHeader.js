@@ -52,8 +52,8 @@ function CalendarHeader({ currentMonth, prevMonth, nextMonth }) {
       </StyledDiv>
 
       <StyledDiv className='heder-end'>
-        <BsFillArrowLeftCircleFill className='left' size={18} color='grey' onClick={prevMonth} />
-        <BsFillArrowRightCircleFill className='right' size={18} color='grey' onClick={nextMonth }/>
+        <BsFillArrowLeftCircleFill className='left' size={18} color='#f5cc8d' onClick={prevMonth} />
+        <BsFillArrowRightCircleFill className='right' size={18} color='#f5cc8d' onClick={nextMonth }/>
       </StyledDiv>
     </Header>
   );

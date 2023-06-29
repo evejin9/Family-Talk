@@ -1,15 +1,14 @@
 import React from 'react';
 import styled from 'styled-components';
-import familyImg from "../../image/famsta5.jpg";
+import familyImg from "../../images/main-photo.jpg";
 import { MdEdit } from "react-icons/md";
 
 const MainPhotoStyled = styled.div`
   position: relative;
 `;
 const StyledImg = styled.img`
-
   width: 100%;
-  height: 500px;
+  height: 380px;
   background: url(${familyImg});
   background-repeat: no-repeat;
   background-size: cover;

@@ -24,7 +24,8 @@ const CalendarContainer = styled.div`
     align-items: center;
     margin-bottom: 10px;
     margin-top: 5PX;
-    width: 66%;
+    width: 70%;
+    /* margin-left: 200px; */
   }
 
   .col {
@@ -41,7 +42,7 @@ const CalendarContainer = styled.div`
     padding: 2px;
     color: #333;
     height: 100px;
-    margin-right: 2px;
+    margin-right: 4px;
   }
 
   .col.cell {

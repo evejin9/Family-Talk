@@ -6,10 +6,11 @@ const StyledDiv = styled.div`
   display: flex;
   font-size: 16px;
   /* justify-content: space-around; */
-  margin-top: 5px;
+  margin-top: 20px;
   font-weight: 600;
   margin-left: 5px;
   width: 65%;
+  margin-bottom: 40px;
   
   .col {
     margin-right: 40px;

@@ -11,7 +11,7 @@ const Header = styled.div`
   align-items: center;
   /* border-bottom: 1px solid gray; */
   margin-top: 70px;
-  width: 65%;
+  width: 68%;
   margin-bottom: 10px;
 `;
 

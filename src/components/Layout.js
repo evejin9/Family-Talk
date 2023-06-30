@@ -26,7 +26,7 @@ const Navbar = styled.nav`
   justify-content: center;
   background-color: #fff;
   /* margin: 0 auto; */
-  z-index: 10;
+  z-index: 9;
 
   svg {
     font-size: 25px;
@@ -82,6 +82,14 @@ const ChatButton = styled.div`
   }
 `
 
+const ChatBox = styled.div`
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  background-color: none;
+  display: ${props => props.showModal ? "flex" : "none" };
+  z-index: 10;
+`
 
 function Layout(props) {
   const [showChatModal, setShowChatModal] = useState(false);
@@ -124,9 +132,20 @@ function Layout(props) {
       
       {/* 채팅 버튼 */}
       <ChatButton>
-        <BsFillChatFill className='cursor-point' onClick={undefined} />
+        <BsFillChatFill className='cursor-point' onClick={handleChatModal} />
       </ChatButton>
-      {/* <Chat showChatModal={showChatModal} /> */}
+      
+      {/* 채팅 모달 */}
+      <ChatBox 
+        showModal = {showChatModal} 
+        onKeyUp={(e) => {
+          if(e.key === "Escape") {
+            setShowChatModal(false);
+          };
+        }}
+      >
+        <Chat setShowChatModal={setShowChatModal} />
+      </ChatBox>
     </LayoutStyled>
   );  
 }

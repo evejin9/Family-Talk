@@ -6,8 +6,8 @@ import { useSelector } from 'react-redux';
 
 const PlanListWrapper = styled.div`
   /* background-color: orange; */
-  width: 400px;
-  height: 300px;
+  width: 270px;
+  /* height: 300px; */
   position: absolute;
   top: 0;
   right: 0px;
@@ -15,8 +15,8 @@ const PlanListWrapper = styled.div`
 
 const StyledPlanList = styled.div`
   background-color: #f5cc8d;
-  width: 80%;
-  height: 20px;
+  width: 90%;
+  /* height: 20px; */
   margin-left: 20px;
   margin-top: 20px;
   border-radius: 6px;
@@ -26,7 +26,7 @@ const StyledPlanList = styled.div`
 `;
 
 const SelectedDate = styled.div`
-  margin-left: 50px;
+  margin-left: 20px;
   display: flex;
   align-items: center;
   justify-content: flex-end;
@@ -46,6 +46,7 @@ function PlanList({ currentMonth, selectedDate, onDateClick, clickModal }) {
 
   return (
     <PlanListWrapper>
+      <div>일정 리스트</div>
       {selectedTitle.map((item, index) => {
         return <StyledPlanList>
           {item.title}

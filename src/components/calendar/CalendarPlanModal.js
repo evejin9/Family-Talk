@@ -7,39 +7,42 @@ import { addCalendarTitle, selectTitle } from '../../features/calendarSlice';
 
 const Wrapper = styled.div`
   display: flex;
-  width: 400px;
-  height: 300px;
+  width: 600px;
+  height: 600px;
   justify-content: center;
   align-items: center;
-  background-color: gray;
+  /* background-color:  */
   flex-direction: column;
+  opacity: 50;
 
 `;
 
 const SelectedDateDiv = styled.div`
   display: flex;
   width: 100px;
-  /* background-color: orange; */
+  background-color: #f5cc8d;
   margin-bottom: 10px;
   justify-content: center;
   align-items: center;
-  margin-left: 310px;
+  margin-left: 500px;
   font-size: 14px;
+  border-radius: 6px;
 `;
 
 const TitleInput = styled.input`
-  background-color: #b0c4de;
+  background-color: #f5cc8d;
   height: 30px;
   margin-bottom: 15px;
-  width: 100%;
+  width: 60%;
   border-radius: 10px;
   border: none;
+  margin-top: 10px;
 `;
 
 const DetailInput = styled.textarea`
-  background-color: #b0c4de;
-  height: 250px;
-  width: 100%;
+  background-color: #f5cc8d;
+  height: 350px;
+  width: 60%;
   border-radius: 10px;
   border: none;
   resize: none;
@@ -48,7 +51,7 @@ const DetailInput = styled.textarea`
 const ButtonWrapper = styled.div`
   display: flex;
   width: 50%;
-  justify-content: space-around;
+  justify-content: space-between;
   align-items: center;
 
 `;
@@ -56,7 +59,7 @@ const ButtonWrapper = styled.div`
 
 const StyledButton = styled.button`
   height: 30px;
-  background-color: #b0c4de;
+  background-color: #f5cc8d;
   margin-top: 5px;
   border-radius: 6px;
   /* border: 0.8px solid #b0c4de; */

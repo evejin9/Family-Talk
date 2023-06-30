@@ -4,6 +4,7 @@ import { BiSolidCommentDetail, BiCommentDetail } from "react-icons/bi";
 import { BsFillArrowUpCircleFill } from "react-icons/bs";
 import { FaRegHeart, FaHeart } from "react-icons/fa";
 import { AiFillPlusCircle } from "react-icons/ai";
+import { BsCheck2 } from "react-icons/bs";
 import { FiMoreHorizontal } from "react-icons/fi";
 import CommentList from './CommentList';
 import { Form, useNavigate } from 'react-router-dom';
@@ -21,7 +22,7 @@ position: relative;
   box-sizing: border-box;
   flex-direction: column;
   align-items: center;
-  width: 55%;
+  width: 60%;
   max-height: 700px;
   overflow: hidden;
   margin-bottom: 5px;
@@ -55,15 +56,17 @@ position: relative;
 
 
 .mainContent {
-  width: 45%;
+  width: 40%;
   display: flex;
   flex-direction: column;
-  margin-left: 40px;
+  margin-left: 2%;
+  justify-content: space-between;
+
   .profileImgNameMore {
     display: flex;
     align-items: center;
-    margin-bottom: 3%;
-    height: 15%;
+    height: 50px;
+    margin-bottom: 3px;
     img {
       display: inline;
       border-radius: 50%;
@@ -81,8 +84,7 @@ position: relative;
     }
   }
   .contentAndComment {
-    min-height: 70%;
-    max-height: 70%;
+    height: auto;
     overflow: auto;
     &::-webkit-scrollbar {
       width: 5px;
@@ -106,8 +108,7 @@ position: relative;
   }
 
     .writeComment {
-      height: 15%;
-      bottom: 0%;
+      height: 40px;
       display: flex;
       justify-content: center;
       align-items: end;
@@ -123,9 +124,13 @@ position: relative;
       background: none;
       outline: none;
       border: none;
-      height: 5%;
-      line-height: 100%;
-      text-align: start;
+      height: 100%;
+      /* line-height: 100%; */
+      display: flex;
+      align-items: end;
+      svg {
+        font-size: 20px;
+      }
     }
   }
   } 
@@ -154,10 +159,11 @@ function PhotoListItem(props) {
 
   return (
     <PhotoLIstItemWrapper>
-        <div className='uploadImage'>
-          <img src={post.imagePath} alt='img'></img>
-        </div>
-        <div className='mainContent'>
+      <div className='uploadImage'>
+        <img src={post.imagePath} alt='img'></img>
+      </div>
+      <div className='mainContent'>
+        <div className='profileContentComment'>
           <div className='profileImgNameMore'>
             <img src={post.profileImage} alt='profileImg'></img>
             <span className='name'>{post.name}</span> 
@@ -169,14 +175,15 @@ function PhotoListItem(props) {
               <CommentList key={post.id} post={post}/>
             </div>
           </div>
+        </div>
           <div className='writeComment'>
             <input type='text'>
             </input>
             <button type='button' className='commentButton'>
-              
+              <BsCheck2/>
             </button>
           </div>
-        </div>
+      </div>
 
           {/* <div className='icon'>
             <button type='button' onClick={() => {setLike(!like)}}>

@@ -14,6 +14,7 @@ const CalendarContainer = styled.div`
     flex-direction: column;
     justify-content: flex-start;
     align-items: center;
+
   }
 
   .row {
@@ -23,6 +24,7 @@ const CalendarContainer = styled.div`
     align-items: center;
     margin-bottom: 10px;
     margin-top: 5PX;
+    width: 66%;
   }
 
   .col {
@@ -30,7 +32,7 @@ const CalendarContainer = styled.div`
     flex-direction: column;
     justify-content: flex-start;
     align-items: flex-start;
-    width: 12.8%;
+    width: 50px;
     padding-left: 1%;
     background: rgb(239,239,239);
     border-radius: 6px;
@@ -38,7 +40,8 @@ const CalendarContainer = styled.div`
     font-size: 0.65em;
     padding: 2px;
     color: #333;
-    height: 40px;
+    height: 100px;
+    margin-right: 2px;
   }
 
   .col.cell {
@@ -119,6 +122,7 @@ function CalendarSells({ currentMonth, selectedDate, onDateClick, clickModal }) 
           }`}
           key={day}
           onClick={() => handleDateClick(cloneDay)}
+          
         >
           <span
             className={

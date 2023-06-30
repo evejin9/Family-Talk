@@ -9,13 +9,15 @@ const StyledDiv = styled.div`
   margin-top: 5px;
   font-weight: 600;
   margin-left: 5px;
+  width: 65%;
   
   .col {
     margin-right: 40px;
     background-color: rgb(239,239,239);
     border-radius: 6px;
-    
-  }
+    margin-left: 20px;
+    width: 160px;
+  } 
 `;
 
 

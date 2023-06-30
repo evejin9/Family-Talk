@@ -9,7 +9,10 @@ const Header = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  border-bottom: 1px solid gray;
+  /* border-bottom: 1px solid gray; */
+  margin-top: 70px;
+  width: 65%;
+  margin-bottom: 10px;
 `;
 
 const StyledDiv = styled.div`

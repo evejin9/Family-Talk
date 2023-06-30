@@ -5,6 +5,7 @@ import CalendarDay from '../components/calendar/CalendarDay';
 import CalendarSells from '../components/calendar/CalendarSells';
 import CalendarHeader from '../components/calendar/CalendarHeader';
 import CalendarPlanModal from '../components/calendar/CalendarPlanModal';
+import PlanList from '../components/calendar/PlanList';
 
 
 
@@ -37,17 +38,20 @@ function Calendar(props) {
     setSelectedDate(day);
   };
 
-  
   return (
     <div className='show-content'>
-      <div className='calendar'>
+      <div className='calendar' style={{ position: 'relative' }}>
         <CalendarHeader currentMonth={currentMonth} prevMonth={prevMonth} nextMonth={nextMonth} />
         <CalendarDay />
-        <CalendarSells currentMonth={currentMonth} selectedDate={selectedDate} clickModal={clickModal} onDateClick={onDateClick} />
-        {modal && <CalendarPlanModal closeModal={closeModal} selectedDate={selectedDate} onDateClick={onDateClick}/>}
+        <CalendarSells currentMonth={currentMonth} selectedDate={selectedDate} clickModal={clickModal} onDateClick={onDateClick}>
+        </CalendarSells>
+        <PlanList currentMonth={currentMonth} selectedDate={selectedDate} clickModal={clickModal} onDateClick={onDateClick}/>
+        {modal && (
+          <div className='modal-container' style={{ position: 'absolute', top:'300px', right: '0', }}>
+            <CalendarPlanModal closeModal={closeModal} selectedDate={selectedDate} onDateClick={onDateClick} />
+          </div>
+        )}
       </div>
     </div>
-  );
-}
-
+  )}
 export default Calendar;

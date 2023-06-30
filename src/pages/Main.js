@@ -4,6 +4,11 @@ import MainPhoto from '../components/main/MainPhoto';
 import MainDday from '../components/main/MainDday';
 import MainTodaySchedule from '../components/main/MainTodaySchedule';
 import MainWeather from '../components/main/MainWeather';
+import styled from 'styled-components';
+
+const MainWrapper = styled.div`
+  display: flex;
+`;
 
 function Main(props) {
   const now = new Date();
@@ -18,13 +23,11 @@ function Main(props) {
 
   return (
     <div className='show-content'>
-      {/* 메인 사진 */}
-      <MainPhoto />
-      {/* 날씨정보 */}
-      <MainWeather today={today} />
-      {/* 오늘의 일정 */}
+      <MainWrapper>
+        <MainPhoto />
+        <MainWeather today={today} />
+      </MainWrapper>
       <MainTodaySchedule today={today} />
-      {/* 디데이 */}
       <MainDday />
     </div>
   );

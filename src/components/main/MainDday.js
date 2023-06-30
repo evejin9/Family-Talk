@@ -8,7 +8,7 @@ import styled from 'styled-components';
 
 const StyledSection = styled.div`
   width: 100%;
-  height: 50px;
+  height: 10vh;
   margin-top: 20px;
   border-radius: 8px;
   color: #333333;
@@ -17,12 +17,6 @@ const StyledSection = styled.div`
   align-items: center;
   padding: 0 20px;
   box-sizing: border-box;
-
-  /* cursor: pointer;
-  
-  :hover {
-    background-color: #F5CC8D;
-  } */
 
   & div {
     display: flex;

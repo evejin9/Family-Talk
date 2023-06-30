@@ -2,12 +2,16 @@ import React from 'react';
 import styled from 'styled-components';
 
 const CommentWrapper = styled.div`
+  height: auto;
+  & + & {
+    margin-top: 1%;
+  } 
+
   .name{ 
     display: inline;
     font-size: 12px;
     font-weight: bold;
-    margin-left: 20px;
-    margin-right: 10px;
+    margin-right: 2%;
   }
   .content {
     display: inline;

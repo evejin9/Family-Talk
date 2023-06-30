@@ -14,14 +14,15 @@ const LayoutStyled = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  background-color: #f0f8ff;
+  /* background-color: #f0f8ff; */
   position: relative;
+  border: 1px solid;
 `;
 
 const Navbar = styled.nav`
   width: 100%;
   height: 50px;
-  background-color: #f0f8ff;
+  /* background-color: #f0f8ff; */
   border-top: 2px solid #f5cc8d;
 
   svg {

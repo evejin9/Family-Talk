@@ -174,8 +174,6 @@ function Chat(props) {
     const saveFile = targetFile[0];
     const reader = new FileReader();
 
-    console.log(reader);
-
     reader?.readAsDataURL(saveFile);
     reader.onloadend = () => {
       setImgFile(reader.result);

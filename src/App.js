@@ -20,7 +20,7 @@ const GlobalStyled = createGlobalStyle`
     width: 100%;
     height: 100%;
     box-sizing: border-box;
-    background-color: #e9ecef;
+    /* background-color: #e9ecef; */
   }
   
   * {
@@ -61,8 +61,8 @@ const Container = styled.div`
   `;
 
 const Wrapper = styled.div`
-    width: 500px;
-    height: 750px;
+    width: 1200px;
+    height: 850px;
   `;
 
 function App() {

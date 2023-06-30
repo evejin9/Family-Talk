@@ -14,13 +14,17 @@ import { addChatList, chatListArray, getChatList, } from '../features/chatSlice'
 
 
 const ChatUi = styled.div`
-  width: 100%;
-  height: 100%;
+  background-color: #fff;
+  padding: 10px;
+  border: 1px solid;
+  border-radius: 10px;
   font-size: 10px;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  position: absolute;
+
 
   img {
     max-height: 150px;
@@ -195,7 +199,7 @@ function Chat(props) {
   }
   
   return (
-    <ChatUi className='show-content'>
+    <ChatUi>
       <UserChat>
         <div className='today'>{today}</div>
 

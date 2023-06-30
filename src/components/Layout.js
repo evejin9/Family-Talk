@@ -1,14 +1,8 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Outlet, useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
-import { FaHome } from "react-icons/fa";
 import { BsFillChatFill } from "react-icons/bs";
-import { AiFillCalendar } from "react-icons/ai";
-import { HiPhoto } from "react-icons/hi2";
-import MainPhoto from './main/MainPhoto';
-import MainWeather from './main/MainWeather';
-import MainTodaySchedule from './main/MainTodaySchedule';
-import MainDday from './main/MainDday';
+import Chat from '../pages/Chat';
 
 const LayoutStyled = styled.div`
   width: 100%;
@@ -73,10 +67,29 @@ const OutletStyled = styled(Outlet)`
   padding: 30px;
 `;
 
+const ChatButton = styled.div`
+  position: fixed;
+  bottom: 40px;
+  right: 70px;
+
+  svg {
+    font-size: 40px;
+
+    color: #f5cc8d;
+    &:hover {
+      color: red;
+    }
+  }
+`
+
 
 function Layout(props) {
-
+  const [showChatModal, setShowChatModal] = useState(false);
   const navigate = useNavigate('/');
+
+  const handleChatModal = () => {
+    setShowChatModal(true);
+  };
 
 
   return (
@@ -106,9 +119,14 @@ function Layout(props) {
           <p>유저 이름</p>          
           <p>유저 생일</p>          
         </ProfileCard>
-
         <OutletStyled />
       </ShowItem>
+      
+      {/* 채팅 버튼 */}
+      <ChatButton>
+        <BsFillChatFill className='cursor-point' onClick={undefined} />
+      </ChatButton>
+      {/* <Chat showChatModal={showChatModal} /> */}
     </LayoutStyled>
   );  
 }

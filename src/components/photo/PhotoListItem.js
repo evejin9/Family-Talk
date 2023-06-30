@@ -13,14 +13,16 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 const PhotoLIstItemWrapper = styled.div`
 /* background-color: #efeeef; */
 border-radius: 8px;
+display: flex;
+position: relative;
 
   .uploadImage{
   display: flex;
   box-sizing: border-box;
   flex-direction: column;
   align-items: center;
-  width: 455px;
-  max-height: 455px;
+  width: 55%;
+  max-height: 700px;
   overflow: hidden;
   margin-bottom: 5px;
   justify-content: center;
@@ -37,95 +39,96 @@ border-radius: 8px;
   margin-top: 30px;
 }
 
-.iconAndContent {
+/* .iconAndContent {
   display: flex;
   flex-direction: column;
-  max-width: 420px;
   position: relative;
   height: auto;
-}
+} */
 
-.icon {
+/* .icon {
   margin-left: 15px;
   svg {
     font-size: 25px;
   }
-}
+} */
 
-.postContent {
-  margin-top: 5px;
-  margin-bottom: 5px;
-  margin-left: 15px;
-  flex-wrap: wrap;
-  overflow: hidden;
-  height: auto;
-}
 
-.profile {
+.mainContent {
+  width: 45%;
   display: flex;
-  align-items: center;
-  img {
-    display: inline;
-    border-radius: 50%;
-    width: 50px;
-    height: 50px;
-    margin: 10px;
-  }
-  .name {
-    display: inline;
-    margin-right: 310px;
-  }
-  svg {
-    font-size: 30px;
-    cursor: pointer;
-    color: gray;
-  }
-}
-
-input {
-  background: none;
-  outline: none;
-  border: none;
-  border-bottom: solid 1px black;
-  opacity: .5;
-  margin: 10px 0 10px 15px;
-  width: 390px;
-  flex-wrap: wrap;
-  }
-
-
-  button {
-  background: none;
-  outline: none;
-  border: none;
-  svg {
-    color: gray;
-  }
-  }
-
-  .writePost {
-    position: absolute;
-    right: 5px;
-    bottom : 60px;
-
+  flex-direction: column;
+  margin-left: 40px;
+  .profileImgNameMore {
+    display: flex;
+    align-items: center;
+    margin-bottom: 3%;
+    height: 15%;
+    img {
+      display: inline;
+      border-radius: 50%;
+      width: 50px;
+      height: 50px;
+      margin-right: 2%;
+    }
+    .name {
+      width: 75%;
+    }
     svg {
       font-size: 30px;
-      color: #f5cc8d;
       cursor: pointer;
-
-      &:hover {
-        color: red;
-      }
+      color: gray;
     }
   }
-  .commentButton {
-    svg {
-    font-size: 30px;
-    color: #f5cc8d;
-    cursor: pointer;
+  .contentAndComment {
+    min-height: 70%;
+    max-height: 70%;
+    overflow: auto;
+    &::-webkit-scrollbar {
+      width: 5px;
+    }
+    &::-webkit-scrollbar-thumb {
+      border-radius: 2px;
+      background: #ccc;
+      cursor: pointer;
+    }
+    .postContent {
+      flex-wrap: wrap;
+      overflow: hidden;
+      height: auto;
+      margin-bottom: 3%;
+      }
+    .comment {
+      margin-bottom: 3%;
+      height: auto;
+
+    }
   }
+
+    .writeComment {
+      height: 15%;
+      bottom: 0%;
+      display: flex;
+      justify-content: center;
+      align-items: end;
+      width: 100%;
+    input {
+      background: none;
+      outline: none;
+      border: none;
+      border-bottom: solid 1px black;
+      width: 85%;
+      }
+    button {
+      background: none;
+      outline: none;
+      border: none;
+      height: 5%;
+      line-height: 100%;
+      text-align: start;
+    }
   }
-  
+  } 
 `
 const StyledModal = styled(Modal)`
   width: 100%;
@@ -151,70 +154,45 @@ function PhotoListItem(props) {
 
   return (
     <PhotoLIstItemWrapper>
-      <div className='profile'>
-        <img src={post.profileImage} alt='profileImg'></img>
-        <div className='name'>{post.name}</div>
-        <div className='moreView'><FiMoreHorizontal/></div>
-      </div>
         <div className='uploadImage'>
           <img src={post.imagePath} alt='img'></img>
         </div>
-          <div className='icon'>
+        <div className='mainContent'>
+          <div className='profileImgNameMore'>
+            <img src={post.profileImage} alt='profileImg'></img>
+            <span className='name'>{post.name}</span> 
+            <FiMoreHorizontal/>
+          </div>
+          <div className='contentAndComment'>
+            <div className='postContent'>{post.content}</div>
+            <div className='comment'>
+              <CommentList key={post.id} post={post}/>
+            </div>
+          </div>
+          <div className='writeComment'>
+            <input type='text'>
+            </input>
+            <button type='button' className='commentButton'>
+              
+            </button>
+          </div>
+        </div>
+
+          {/* <div className='icon'>
             <button type='button' onClick={() => {setLike(!like)}}>
               {like ? <FaRegHeart /> : <FaHeart style={{color: 'red'}}/>}
             </button>
-            
             <button type="button" onClick={() => {setVisible(!visible)}}>
               {visible ? <BiCommentDetail/> : <BiSolidCommentDetail/>}
             </button> 
-          </div>
-          <div className='postContent'>{post.content}</div>
-          <CommentList key={post.id} post={post}/>
-          <div className='writeComment'>
+          </div> */}
+          {/* <div className='writeComment'>
             <input type='text'>
             </input>
             <button type='button' className='commentButton'>
               <BsFillArrowUpCircleFill/>
             </button>
-          </div>
-          <div className='writePost'>
-            <button type='button' variant="primary" onClick={handleShow}>
-              <AiFillPlusCircle/>
-            </button>
-            <div className='modal'>
-              <StyledModal show={show} onHide={handleClose} 
-              style={{
-
-              }}>
-                <Modal.Header closeButton style={{backgroundColor: '#efeeef'}}>
-                </Modal.Header>
-                <Modal.Body 
-                style={{
-                  backgroundColor: '#efeeef',
-                  height: '180px'
-                  }}>
-                  <input type='file'></input>
-                  <input style={{
-                    width: '465px',
-                    height: '100px',
-                    marginTop: '20px',
-                    backgroundColor: '#efeeef'
-                    }} 
-                    type='text'>
-                  </input>
-                </Modal.Body>
-                <Modal.Footer style={{backgroundColor: '#efeeef'}}>
-                  <Button variant="primary" onClick={handleClose} 
-                  style={{
-                    backgroundColor: '#f5cc8d',
-                    border: 'none'
-                    }}>
-                    게시
-                  </Button>
-                </Modal.Footer>
-              </StyledModal>
-            </div>
-          </div>
+          </div> */}
     </PhotoLIstItemWrapper>
   );
 }

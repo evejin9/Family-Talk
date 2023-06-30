@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import { useDispatch, useSelector } from 'react-redux';
 import { format } from "date-fns";
 import { BsFillArrowUpCircleFill } from "react-icons/bs";
-import { AiOutlinePlusCircle, AiOutlineCloseCircle } from "react-icons/ai";
+import { AiOutlinePlusCircle, AiOutlineClose as CloseButton } from "react-icons/ai";
 
 import chatData from "../chatData.json";
 import userData from "../data.json";
@@ -14,16 +14,22 @@ import { addChatList, chatListArray, getChatList, } from '../features/chatSlice'
 
 
 const ChatUi = styled.div`
+  width: 500px;
+  height: 700px;
+  padding: 10px 15px;
   background-color: #fff;
-  padding: 10px;
-  border: 1px solid;
+  box-shadow: 3px 4px 10px 0 rgba(0, 0, 0, 0.4);
   border-radius: 10px;
-  font-size: 10px;
-  display: flex;
+  font-size: 12px;
   flex-direction: column;
   justify-content: center;
-  align-items: center;
-  position: absolute;
+  /* align-items: center; */
+  position: fixed;
+  margin: auto;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
 
 
   img {
@@ -34,6 +40,7 @@ const ChatUi = styled.div`
 
 const UserChat = styled.div`
   width: 100%;
+  height: 80%;
   padding: 20px 10px;
   box-sizing: border-box;
   background-color: #efefef;
@@ -103,6 +110,7 @@ const ChatInput = styled.div`
   input {
     width: 100%;
     height: 30px;
+    font-size: 14px;
     background-color: #efefef;
     border: none;
     flex: 1;
@@ -144,9 +152,25 @@ const InputImgArea = styled.div`
   }
 `;
 
-// console.log(chatData.length);
+const ModalCloseButton = styled.div`
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  padding-bottom: 10px;
+
+  svg {
+    color: #f5cc8d;
+    font-size: 20px;
+
+    &:hover {
+      color: red;
+    }
+  }
+`;
 
 function Chat(props) {
+  const { setShowChatModal } = props;
+
   const [newChat, setNewChat] = useState('');
   const [imgFile, setImgFile] = useState('');
 
@@ -198,8 +222,17 @@ function Chat(props) {
     setImgFile('');
   }
   
+  const handleShowChatModal = () => {
+    setShowChatModal(false);
+  }
+
+
   return (
-    <ChatUi>
+    <ChatUi >
+      <ModalCloseButton>
+        <CloseButton className='cursor-point' onClick={handleShowChatModal} />
+      </ModalCloseButton>
+
       <UserChat>
         <div className='today'>{today}</div>
 
@@ -211,12 +244,9 @@ function Chat(props) {
 
         {/* 하단으로 자동 스크롤 하기 위한 div */}
         <div ref={messageRef}></div>
-
       </UserChat>
 
       {/* 사진 업로드 input 및 버튼 */}
-
-      {/* 채팅 input 창 */}
       <InputArea>
         <ImgUploadInput>
           <AiOutlinePlusCircle />
@@ -225,31 +255,31 @@ function Chat(props) {
             accept='image/*'
             onChange={saveImgFile}
             ref={imgRef}
-          />
+            />
         </ImgUploadInput>
         
+        {/* 채팅 input 창 */}
         <ChatInput>
-          {imgFile
-            ? 
-              <InputImgArea>
-                <img src={imgFile ? imgFile : undefined} /> 
-                <AiOutlineCloseCircle 
-                  onClick={() => {
-                    setImgFile('') 
-                    setNewChat('')
-                  }}
-                />
-              </InputImgArea>
+          {imgFile? 
+            <InputImgArea>
+              <img src={imgFile ? imgFile : undefined} /> 
+              <CloseButton 
+                onClick={() => {
+                  setImgFile('') 
+                  setNewChat('')
+                }}
+              />
+            </InputImgArea>
             : <input 
-              type='text'
-              value={newChat} 
-              onChange={handleNewChat}
-              onKeyUp={(e) => {
-                if(e.key === 'Enter') {
-                  addNewChat();
-                  }
-              }} 
-            />
+                type='text'
+                value={newChat} 
+                onChange={handleNewChat}
+                onKeyUp={(e) => {
+                  if(e.key === 'Enter') {
+                    addNewChat();
+                    }
+                }} 
+              />
           }
           
           <BsFillArrowUpCircleFill 

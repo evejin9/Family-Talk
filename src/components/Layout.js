@@ -5,6 +5,10 @@ import { FaHome } from "react-icons/fa";
 import { BsFillChatFill } from "react-icons/bs";
 import { AiFillCalendar } from "react-icons/ai";
 import { HiPhoto } from "react-icons/hi2";
+import MainPhoto from './main/MainPhoto';
+import MainWeather from './main/MainWeather';
+import MainTodaySchedule from './main/MainTodaySchedule';
+import MainDday from './main/MainDday';
 
 const LayoutStyled = styled.div`
   width: 100%;
@@ -12,7 +16,7 @@ const LayoutStyled = styled.div`
   height: 100%;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center;
   /* background-color: #f0f8ff; */
   position: relative;
@@ -21,9 +25,14 @@ const LayoutStyled = styled.div`
 
 const Navbar = styled.nav`
   width: 100%;
-  height: 50px;
-  /* background-color: #f0f8ff; */
-  border-top: 2px solid #f5cc8d;
+  height: 70px;
+  border-bottom: 2px solid #f5cc8d;
+  position: fixed;
+  display: flex;
+  justify-content: center;
+  background-color: #fff;
+  /* margin: 0 auto; */
+  z-index: 10;
 
   svg {
     font-size: 25px;
@@ -32,7 +41,7 @@ const Navbar = styled.nav`
   ul {
     height: 100%;
     display: flex;
-    justify-content: space-around;
+    justify-content: space-between;
     align-items: center;
 
     li {
@@ -45,9 +54,25 @@ const Navbar = styled.nav`
   }
 `;
 
-const OutletStyled = styled(Outlet)`
-  padding: 30px;
+
+const ShowItem = styled.div`
+  width: 100%;
+  height: 100%;
+  margin-top: 70px;
+  display: flex;
+  justify-content: center;
+`;
+
+const ProfileCard = styled.div`
+  width: 30%;
+  background-color: aliceblue;
 `
+
+const OutletStyled = styled(Outlet)`
+  margin-top: 70px;
+  padding: 30px;
+`;
+
 
 function Layout(props) {
 
@@ -55,16 +80,35 @@ function Layout(props) {
 
 
   return (
-    <LayoutStyled>
-      <OutletStyled />
+    <LayoutStyled >
       <Navbar>
-        <ul>
+        {/* 모바일 버전 메뉴 */}
+        {/* <ul className='m-nav'>
           <li className='cursor-point' onClick={() => navigate('/')}><FaHome /></li>
           <li className='cursor-point' onClick={() => navigate('/chat')}><BsFillChatFill /></li>
           <li className='cursor-point' onClick={() => navigate('/calendar')}><AiFillCalendar /></li>
           <li className='cursor-point' onClick={() => navigate('/photo')}><HiPhoto /></li>
+        </ul> */}
+
+        <ul className='inner'>
+          <li className='cursor-point' onClick={() => navigate('/')}>Home</li>
+          <li className='cursor-point' onClick={() => navigate('/members')}>Members</li>
+          <li className='cursor-point' onClick={() => navigate('/calendar')}>Calendar</li>
+          <li className='cursor-point' onClick={() => navigate('/photo')}>Photo</li>
         </ul>
+        {/* 버튼 */}
       </Navbar>
+
+      <ShowItem  >
+      {/* 유저 정보 */}
+        <ProfileCard>
+          <p>유저 사진</p>          
+          <p>유저 이름</p>          
+          <p>유저 생일</p>          
+        </ProfileCard>
+
+        <OutletStyled />
+      </ShowItem>
     </LayoutStyled>
   );  
 }

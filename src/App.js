@@ -5,11 +5,11 @@ import Main from './pages/Main';
 import { Route, Routes } from 'react-router-dom';
 
 import Layout from './components/Layout';
-import Chat from './pages/Chat';
 import Calendar from './pages/Calendar';
 import Photo from './pages/Photo';
 
 import data from "./data.json";
+import Members from './pages/Members';
 
 
 const GlobalStyled = createGlobalStyle`
@@ -29,7 +29,7 @@ const GlobalStyled = createGlobalStyle`
   }
 
   .show-content {
-    padding: 20px;
+    /* padding: 20px; */
     box-sizing: border-box;
     width: 100%;
     height: 100%;
@@ -51,18 +51,21 @@ const GlobalStyled = createGlobalStyle`
   .cursor-point {
     cursor: pointer;
   }
+
+  .inner {
+    width: 1200px;
+  }
 `;
 
 const Container = styled.div`
-  height: 100vh;
+  min-height: 100vh;
   display: flex;
   justify-content: center;
-  align-items: center;
   `;
 
 const Wrapper = styled.div`
     width: 1200px;
-    height: 850px;
+    /* height: 850px; */
   `;
 
 function App() {
@@ -74,7 +77,7 @@ function App() {
           <Routes>
             <Route path='/' element={<Layout />}>
               <Route path='/' element={<Main />} />
-              <Route path='/chat' element={<Chat />} />
+              <Route path='/members' element={<Members />} />
               <Route path='/calendar' element={<Calendar />} />
               <Route path='/photo' element={<Photo />} />
             </Route>

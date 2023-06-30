@@ -6,8 +6,7 @@ import { useSelector } from 'react-redux';
 
 const StyledSection = styled.div`
   width: 100%;
-  height: 100px;
-  margin-top: 20px;
+  height: 40vh;
   border-radius: 8px;
   font-size: 18px;
   padding: 0 20px;
@@ -29,23 +28,37 @@ const StyledSection = styled.div`
 
   .weather-contents{
     width: 100%;
+    height: 100%;
+    color: #fff;
     display: flex;
-    align-items: center;
-    justify-content: space-around;
+    flex-direction: column;
+    justify-content: center;
 
-    & p {
-      color: #fff;
-  
-      &.temp {
-        font-size: 26px;
+    .contents-flex {
+      display: flex;
+      align-items: center;
+      justify-content: space-around;
+
+      &.top {
+        font-size: 24px;
+        padding: 10px 0;
+        
+        p:last-child {
+          font-size: 30px;
+        }
+      }
+
+      & .temp {
+        font-size: 60px;
+      }
+      & .temp-icon {
+        width: 130px;
       }
     }
   }
 `;
 
-
 function MainWeather({ today }) {
-
   const [weather, setWeather] = useState();
   const [name, setName] = useState();
   const [icon, setIcon] = useState();
@@ -53,12 +66,7 @@ function MainWeather({ today }) {
   const [loading, setLoading] = useState(false);
   
   const todayData = () => {
-    // const week = ['SUN', 'MON', 'THU', 'WED', 'THR', 'FRI', 'SAT'];
-    // const now = new Date();
-    // const todayMonth = now.getMonth() > 9 ? now.getMonth() + 1 : `0${now.getMonth() + 1}`;
-    // const todayDate = now.getDate() > 9 ? now.getDate() : '0' + now.getDate();
-    // const dayOfWeek = week[now.getDay()];
-    return `${today.todayMonth}.${today.todayDate} ${today.dayOfWeek}`;
+    return `${today.todayYear}.${today.todayMonth}.${today.todayDate} ${today.dayOfWeek}`;
   };
 
   const getCurrentLocation = () => {
@@ -104,10 +112,14 @@ function MainWeather({ today }) {
         />
         : 
         <div className='weather-contents'>
-          <p>{todayData()}</p>
-          <img src={`http://openweathermap.org/img/wn/${icon}@2x.png`} />
-          <p className='temp'>{Math.round(temp)}º</p>
-          <p>{name}</p>
+          <div className='contents-flex top'>
+            <p>{todayData()}</p>
+            <p>{name}</p>
+          </div>
+          <div className='contents-flex'>
+            <p className='temp'>{Math.round(temp)}º</p>
+            <img className='temp-icon' src={`http://openweathermap.org/img/wn/${icon}@2x.png`} />
+          </div>
         </div>
       }
     </StyledSection>

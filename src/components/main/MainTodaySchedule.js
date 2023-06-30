@@ -6,7 +6,7 @@ import { useNavigate } from 'react-router-dom';
 
 const StyledSection = styled.div`
   width: 100%;
-  height: 50px;
+  height: 10vh;
   margin-top: 20px;
   border-radius: 8px;
   color: #333333;
@@ -37,7 +37,6 @@ function MainTodaySchedule({ today }) {
     const todayFullDate = `${today.todayYear}-${today.todayMonth}-${today.todayDate}`;
     return schedule.date === todayFullDate;
   });
-  // console.log(todaySchedule);
 
   const handleCalendar = () => {
     const result = window.confirm('캘린더 화면으로 이동합니다. 이동하시겠습니까?');

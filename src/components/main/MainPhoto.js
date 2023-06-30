@@ -4,11 +4,13 @@ import familyImg from "../../images/main-photo.jpg";
 import { MdEdit } from "react-icons/md";
 
 const MainPhotoStyled = styled.div`
+  width: 100%;
   position: relative;
 `;
 const StyledImg = styled.img`
   width: 100%;
-  height: 380px;
+  height: 40vh;
+  border-radius: 8px;
   background: url(${familyImg});
   background-repeat: no-repeat;
   background-size: cover;

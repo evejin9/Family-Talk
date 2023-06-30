@@ -44,8 +44,8 @@ const StyledSection = styled.div`
 `;
 
 
-function MainWeather(props) {
-  
+function MainWeather({ today }) {
+
   const [weather, setWeather] = useState();
   const [name, setName] = useState();
   const [icon, setIcon] = useState();
@@ -53,12 +53,12 @@ function MainWeather(props) {
   const [loading, setLoading] = useState(false);
   
   const todayData = () => {
-    const week = ['MON', 'THU', 'WED', 'THR', 'FRI', 'SAT', 'SUN'];
-    const now = new Date();
-    const todayMonth = now.getMonth() > 9 ? now.getMonth() + 1 : `0${now.getMonth() + 1}`;
-    const todayDate = now.getDate() > 9 ? now.getDate() : '0' + now.getDate();
-    const dayOfWeek = week[now.getDay()];
-    return `${todayMonth}.${todayDate} ${dayOfWeek}`;
+    // const week = ['SUN', 'MON', 'THU', 'WED', 'THR', 'FRI', 'SAT'];
+    // const now = new Date();
+    // const todayMonth = now.getMonth() > 9 ? now.getMonth() + 1 : `0${now.getMonth() + 1}`;
+    // const todayDate = now.getDate() > 9 ? now.getDate() : '0' + now.getDate();
+    // const dayOfWeek = week[now.getDay()];
+    return `${today.todayMonth}.${today.todayDate} ${today.dayOfWeek}`;
   };
 
   const getCurrentLocation = () => {

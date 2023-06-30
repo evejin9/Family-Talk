@@ -6,16 +6,24 @@ import MainTodaySchedule from '../components/main/MainTodaySchedule';
 import MainWeather from '../components/main/MainWeather';
 
 function Main(props) {
-
+  const now = new Date();
+  const week = ['SUN', 'MON', 'THU', 'WED', 'THR', 'FRI', 'SAT'];
+  const today = {
+    nowDate : now,
+    todayYear : now.getFullYear(),
+    todayMonth : now.getMonth() > 9 ? now.getMonth() + 1 : `0${now.getMonth() + 1}`,
+    todayDate : now.getDate() > 9 ? now.getDate() : '0' + now.getDate(),
+    dayOfWeek : week[now.getDay()]
+  };
 
   return (
     <div className='show-content'>
       {/* 메인 사진 */}
       <MainPhoto />
       {/* 날씨정보 */}
-      <MainWeather />
+      <MainWeather today={today} />
       {/* 오늘의 일정 */}
-      <MainTodaySchedule />
+      <MainTodaySchedule today={today} />
       {/* 디데이 */}
       <MainDday />
     </div>

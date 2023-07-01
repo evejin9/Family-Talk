@@ -14,7 +14,8 @@ const Wrapper = styled.div`
   /* background-color:  */
   flex-direction: column;
   opacity: 50;
-
+  transition: 0.4s ease;
+  transition-delay: 0.35s;
 `;
 
 const SelectedDateDiv = styled.div`

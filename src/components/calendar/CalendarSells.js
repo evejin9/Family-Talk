@@ -72,15 +72,18 @@ const CalendarContainer = styled.div`
     }
     }
     .title {
-      /* width: 10px; */
+      width: 70px;
       background-color: #f5cc8d;
       margin-top: 5px;
       margin-left: 2px;
       display: flex;
-      justify-content: center;
+      justify-content: start;
       align-items: center;
-      font-size: 2px;
-      border-radius: 6px;
+      font-size: 1px;
+      border-radius: 4px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis
     }
   
   .text {
@@ -135,11 +138,14 @@ function CalendarSells({ currentMonth, selectedDate, onDateClick, clickModal }) 
             {formattedDate}
           </span>
 
+          {selectedTitle
+            .filter((item) => item.date === cloneDay)
+            .map((item, index) => (
+              <div className='title' key={index}>
+                {item.title}
+              </div>
+            ))}
             
-            <div className='title'>
-              {selectedTitle.find((item) => item.date === cloneDay)?.title}
-            </div>
-        
         
         </div>
       );

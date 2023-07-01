@@ -13,6 +13,14 @@ const PlanListWrapper = styled.div`
   right: 0px;
 `;
 
+const ScheduleList = styled.div`
+  font-size: 18px;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`;
+
 const StyledPlanList = styled.div`
   background-color: #f5cc8d;
   width: 90%;
@@ -20,10 +28,20 @@ const StyledPlanList = styled.div`
   margin-left: 20px;
   margin-top: 20px;
   border-radius: 6px;
-  font-size: 14px;
+  font-size: 12px;
   display: flex;
   align-items: center;
+  
 `;
+
+const StyledTitle = styled.div`
+  width: 60%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+`;
+
+
 
 const SelectedDate = styled.div`
   margin-left: 20px;
@@ -46,14 +64,16 @@ function PlanList({ currentMonth, selectedDate, onDateClick, clickModal }) {
 
   return (
     <PlanListWrapper>
-      <div>일정 리스트</div>
+      <ScheduleList>Schedule List</ScheduleList>
       {selectedTitle.map((item, index) => {
         return <StyledPlanList>
-          {item.title}
-          <SelectedDate>
-          {item.date}
-          </SelectedDate>
-          </StyledPlanList>
+                  <StyledTitle>
+                  {item.title}
+                  </StyledTitle>
+                  <SelectedDate>
+                  {item.date}
+                  </SelectedDate>
+                </StyledPlanList>
       })}
     </PlanListWrapper>
   );

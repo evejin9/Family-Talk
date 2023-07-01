@@ -138,11 +138,11 @@ function Layout(props) {
       {/* 채팅 모달 */}
       <ChatBox 
         showModal = {showChatModal} 
-        onKeyUp={(e) => {
-          if(e.key === "Escape") {
-            setShowChatModal(false);
-          };
-        }}
+        // onKeyUp={(e) => {
+        //   if(e.key === "Escape") {
+        //     setShowChatModal(false);
+        //   };
+        // }}
       >
         <Chat setShowChatModal={setShowChatModal} />
       </ChatBox>

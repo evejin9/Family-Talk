@@ -2,6 +2,9 @@ import React, { useState } from 'react';
 import { Outlet, useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import { BsFillChatFill } from "react-icons/bs";
+
+import userData from "../data.json";
+
 import Chat from '../pages/Chat';
 
 const LayoutStyled = styled.div`
@@ -55,11 +58,40 @@ const ShowItem = styled.div`
   margin-top: 70px;
   display: flex;
   justify-content: center;
+  `;
+
+const ProfileArea = styled.div`
+  width: 35%;
+  padding: 10px;
+  position: relative;
+  /* display: flex;
+  align-items: center; */
 `;
 
 const ProfileCard = styled.div`
-  width: 30%;
-  background-color: aliceblue;
+  width: 280px;
+  height: 500px;
+  padding: 10px;
+  border-radius: 15px;
+  background-color: #efefef;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  position: absolute;
+  /* position: fixed; */
+  margin: 0 auto;
+  top: 60px;
+  left: 0;
+  right: 0;
+
+
+  img {
+  }
+
+  .name {
+    font-size: 25px;
+    padding: 10px 0;
+  }
 `
 
 const OutletStyled = styled(Outlet)`
@@ -121,12 +153,16 @@ function Layout(props) {
       </Navbar>
 
       <ShowItem  >
-      {/* 유저 정보 */}
-        <ProfileCard>
-          <p>유저 사진</p>          
-          <p>유저 이름</p>          
-          <p>유저 생일</p>          
-        </ProfileCard>
+        {/* 유저 정보 */}
+        <ProfileArea>
+          <ProfileCard>
+            <img src={userData[0].imagePath} /> 
+            <p className='name'>{userData[0].name}</p>          
+            <p className='birth'>{userData[0].birth}</p>          
+          </ProfileCard>
+        </ProfileArea>
+
+        {/* 페이지 영역 */}
         <OutletStyled />
       </ShowItem>
       
@@ -136,14 +172,7 @@ function Layout(props) {
       </ChatButton>
       
       {/* 채팅 모달 */}
-      <ChatBox 
-        showModal = {showChatModal} 
-        // onKeyUp={(e) => {
-        //   if(e.key === "Escape") {
-        //     setShowChatModal(false);
-        //   };
-        // }}
-      >
+      <ChatBox showModal = {showChatModal} >
         <Chat setShowChatModal={setShowChatModal} />
       </ChatBox>
     </LayoutStyled>

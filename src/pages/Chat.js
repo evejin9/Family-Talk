@@ -15,12 +15,13 @@ import { addChatList, chatListArray, getChatList, } from '../features/chatSlice'
 
 const ChatUi = styled.div`
   width: 500px;
-  height: 700px;
+  max-height: 700px;
   padding: 10px 15px;
   background-color: #fff;
   box-shadow: 3px 4px 10px 0 rgba(0, 0, 0, 0.4);
   border-radius: 10px;
   font-size: 12px;
+  display: flex;
   flex-direction: column;
   justify-content: center;
   /* align-items: center; */
@@ -40,7 +41,7 @@ const ChatUi = styled.div`
 
 const UserChat = styled.div`
   width: 100%;
-  height: 80%;
+  /* height: 80%; */
   padding: 20px 10px;
   box-sizing: border-box;
   background-color: #efefef;
@@ -98,12 +99,11 @@ const ImgUploadInput = styled.label`
 
 const ChatInput = styled.div`
   position: relative;
-  /* width: 100%; */
   padding: 10px 63px 10px 20px;
   box-sizing: border-box;
   background-color: #efefef;
   width: 100%;
-  height: 100%;
+  /* height: 100%; */
   border-radius: 10px;
   /* display: flex; */
   
@@ -224,6 +224,8 @@ function Chat(props) {
   
   const handleShowChatModal = () => {
     setShowChatModal(false);
+    setImgFile('');
+    setNewChat('');
   }
 
 
@@ -277,6 +279,9 @@ function Chat(props) {
                 onKeyUp={(e) => {
                   if(e.key === 'Enter') {
                     addNewChat();
+                  } else if (e.key === 'Escape') {
+                      setShowChatModal(false);
+                      setNewChat('');
                     }
                 }} 
               />

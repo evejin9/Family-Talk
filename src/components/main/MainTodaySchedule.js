@@ -31,7 +31,7 @@ function MainTodaySchedule({ today }) {
   const navigator = useNavigate();
 
   const selectCalendarTitle = useSelector(selectTitle);
-  console.log(selectCalendarTitle);
+  // console.log(selectCalendarTitle);
 
   const todaySchedule = selectCalendarTitle.filter((schedule) => {
     const todayFullDate = `${today.todayYear}-${today.todayMonth}-${today.todayDate}`;

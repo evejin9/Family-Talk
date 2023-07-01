@@ -49,7 +49,7 @@ function Members(props) {
   return (
     <MembersBox>
       {userdata.map((user) =>  
-        <MembersCard>
+        <MembersCard key={user.id}>
           <div className='name'>
             <img src={user.imagePath}></img>
             <p>{user.name}</p>

@@ -2,6 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import { selectTitle } from '../../features/calendarSlice';
 import { useSelector } from 'react-redux';
+import { GoDotFill } from 'react-icons/go';
 
 
 const PlanListWrapper = styled.div`
@@ -22,7 +23,7 @@ const ScheduleList = styled.div`
 `;
 
 const StyledPlanList = styled.div`
-  background-color: #f5cc8d;
+  /* background-color: #f5cc8d; */
   width: 90%;
   /* height: 20px; */
   margin-left: 20px;
@@ -31,20 +32,23 @@ const StyledPlanList = styled.div`
   font-size: 12px;
   display: flex;
   align-items: center;
+  border: 0.4px solid #f5cc8d;
   
 `;
 
 const StyledTitle = styled.div`
-  width: 60%;
+  width: 50%;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+  margin-left: 5px;
+  font-weight: 600;
 `;
 
 
 
 const SelectedDate = styled.div`
-  margin-left: 20px;
+  margin-left: 10px;
   display: flex;
   align-items: center;
   justify-content: flex-end;
@@ -67,6 +71,7 @@ function PlanList({ currentMonth, selectedDate, onDateClick, clickModal }) {
       <ScheduleList>Schedule List</ScheduleList>
       {selectedTitle.map((item, index) => {
         return <StyledPlanList>
+                  <GoDotFill color='#f5cc8d' size={15}></GoDotFill>
                   <StyledTitle>
                   {item.title}
                   </StyledTitle>

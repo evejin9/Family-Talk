@@ -8,12 +8,12 @@ const StyledDiv = styled.div`
   /* justify-content: space-around; */
   margin-top: 20px;
   font-weight: 600;
-  margin-left: 5px;
+  /* margin-left: 5px; */
   width: 65%;
-  margin-bottom: 40px;
+  margin-bottom: 28px;
   
   .col {
-    margin-right: 40px;
+    margin-right: 33px;
     background-color: rgb(239,239,239);
     border-radius: 6px;
     margin-left: 20px;

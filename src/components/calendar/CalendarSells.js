@@ -5,7 +5,7 @@ import CalendarPlanModal from './CalendarPlanModal';
 import { useSelector } from 'react-redux';
 import { addCalendarTitle, selectTitle } from '../../features/calendarSlice';
 // import { format } from 'date-fns/esm';
-
+import { BsDot, GoDotFill } from 'react-icons/go'
 
 
 const CalendarContainer = styled.div`
@@ -42,7 +42,7 @@ const CalendarContainer = styled.div`
     padding: 2px;
     color: #333;
     height: 100px;
-    margin-right: 4px;
+    margin-right: 5px;
   }
 
   .col.cell {
@@ -71,24 +71,25 @@ const CalendarContainer = styled.div`
       margin-top: 2PX;
     }
     }
-    .title {
+`;
+
+const SellInTitle = styled.div`
       width: 70px;
-      background-color: #f5cc8d;
+      /* background-color: #f5cc8d; */
       margin-top: 5px;
       margin-left: 2px;
       display: flex;
       justify-content: start;
       align-items: center;
       font-size: 1px;
-      border-radius: 4px;
+      font-weight: 600;
+      
+    .title {
       white-space: nowrap;
       overflow: hidden;
-      text-overflow: ellipsis
+      text-overflow: ellipsis;
+      margin-left: 2px;
     }
-  
-  .text {
-    /* margin: 4px 0 0 4px; */
-  }
 `;
 
 function CalendarSells({ currentMonth, selectedDate, onDateClick, clickModal }) {
@@ -141,9 +142,13 @@ function CalendarSells({ currentMonth, selectedDate, onDateClick, clickModal }) 
           {selectedTitle
             .filter((item) => item.date === cloneDay)
             .map((item, index) => (
-              <div className='title' key={index}>
+              <SellInTitle
+                key={index}>
+                <GoDotFill color='#f5cc8d' size={11}></GoDotFill>
+                <div className='title'>
                 {item.title}
-              </div>
+                </div>
+              </SellInTitle>
             ))}
             
         

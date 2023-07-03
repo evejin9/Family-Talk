@@ -40,7 +40,7 @@ function Calendar(props) {
 
   return (
     <div className='show-content'>
-      <div className='calendar' style={{ marginLeft: '30px'}}>
+      <div className='calendar' style={{  marginLeft: '30px'}}>
         <CalendarHeader currentMonth={currentMonth} prevMonth={prevMonth} nextMonth={nextMonth} />
         <CalendarDay />
         <CalendarSells currentMonth={currentMonth} selectedDate={selectedDate} clickModal={clickModal} onDateClick={onDateClick}>

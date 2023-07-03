@@ -3,7 +3,7 @@ import { Placeholder } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import styled, { keyframes } from 'styled-components';
-import { addCalendarTitle, selectTitle } from '../../features/calendarSlice';
+import { addCalendarTitle, clearSelectedPlan, selectSelectedPlan, selectTitle,  updatedPlan } from '../../features/calendarSlice';
 
 const fadeIn = keyframes`
   from {
@@ -17,7 +17,7 @@ const fadeIn = keyframes`
 const Wrapper = styled.div`
   display: flex;
   width: 1200px;
-  height: 1040px;
+  height: 100vb;
   justify-content: center;
   align-items: center;
   background-color: gray;
@@ -25,6 +25,7 @@ const Wrapper = styled.div`
   /* opacity: 0.3; */
   background-color: rgba(0, 0, 0, 0.1);
   animation: ${fadeIn} 0.4s ease-in-out;
+  /* margin-left: 200px; */
 `;
 
 const SelectedDateDiv = styled.div`
@@ -80,10 +81,23 @@ const StyledButton = styled.button`
 const CalendarPlanModal = ({ selectedDate, closeModal, onDateClick, selectedDateCl }) => {
   const [title, setTitle] = useState('');
   const [content, setContent] = useState('');
-  const selectedData = useSelector(selectTitle)
+  const [addTitle, setAddTitle] = useState();
+  const [addContent, setAddContent] = useState();
+
+
+
+  const selectedData = useSelector(selectTitle);
+  const selectedPlan = useSelector(selectSelectedPlan);
   const dispatch = useDispatch();
 
   
+  useEffect(() => {
+    return () => {
+      dispatch(clearSelectedPlan())
+    }
+  },[]) 
+
+
   useEffect(() => {
     setTitle(selectedData?.title || '');
     setContent(selectedData?.content || '');
@@ -99,14 +113,16 @@ const CalendarPlanModal = ({ selectedDate, closeModal, onDateClick, selectedDate
   return (
     <Wrapper>
       <SelectedDateDiv>{selectedDate}</SelectedDateDiv>
-      <TitleInput
+      <TitleInput 
         placeholder='Title'
         onChange={(e) => setTitle(e.target.value)}
-        value={title}
+        value={selectedPlan ? selectedPlan.title : title}
       />
+      
       <DetailInput
+        placeholder='Content'
         onChange={(e) => setContent(e.target.value)}
-        value={content}
+        value={selectedPlan ? selectedPlan.content : content}
       />
       <ButtonWrapper>
         <StyledButton onClick={closeModal}>close</StyledButton>

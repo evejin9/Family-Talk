@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
-import { addCalendarTitle, selectTitle } from '../../features/calendarSlice';
+import { addCalendarTitle, selectTitle, getSelectedPlan } from '../../features/calendarSlice';
 import { useDispatch, useSelector } from 'react-redux';
 import { GoDotFill } from 'react-icons/go';
 
@@ -64,25 +64,27 @@ function PlanList({ currentMonth, selectedDate, onDateClick, clickModal }) {
   const selectedTitle = useSelector(selectTitle);
   const { title = '' } = selectedTitle.find((item) => item.date === selectedDate) || {};
   
-  // const [titles, setTitles] = useState('');
-  // const [content, setContent] = useState('');
-  // const selectedData = useSelector(selectTitle)
-  // const dispatch = useDispatch();
+  const [titles, setTitles] = useState('');
+  const [content, setContent] = useState('');
+  const dispatch = useDispatch();
 
-  // const handleCalendarData = () => {
-  //   dispatch(addCalendarTitle({ titles, selectedDate, content }));
-  //   setTitles('');
-  //   setContent('');
-  // };
+  const handleCalendarData = () => {
+    dispatch(addCalendarTitle({ titles, selectedDate, content }));
+    setTitles('');
+    setContent('');
+  };
 
-
+  const handleClickPlan = (id) => {
+    clickModal();
+    dispatch(getSelectedPlan(id));
+  };
 
 
   return (
     <PlanListWrapper>
       <ScheduleList>Schedule List</ScheduleList>
       {selectedTitle.map((item, index) => {
-        return <StyledPlanList onClick={clickModal} key={index}>
+        return <StyledPlanList onClick={() => handleClickPlan(item.id)} key={index}>
                   <GoDotFill color='#f5cc8d' size={15}></GoDotFill>
                   <StyledTitle>
                   {item.title}

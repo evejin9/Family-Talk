@@ -3,7 +3,7 @@ import { Placeholder } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import styled, { keyframes } from 'styled-components';
-import { addCalendarTitle, clearSelectedPlan, selectSelectedPlan, selectTitle,  updatedPlan } from '../../features/calendarSlice';
+import { addCalendarTitle, clearSelectedPlan, deleteCalendarTitle, selectSelectedPlan, selectTitle,  updateCalendarTitle,  updatedPlan } from '../../features/calendarSlice';
 
 const fadeIn = keyframes`
   from {
@@ -81,33 +81,50 @@ const StyledButton = styled.button`
 const CalendarPlanModal = ({ selectedDate, closeModal, onDateClick, selectedDateCl }) => {
   const [title, setTitle] = useState('');
   const [content, setContent] = useState('');
-  const [addTitle, setAddTitle] = useState();
-  const [addContent, setAddContent] = useState();
-
-
-
   const selectedData = useSelector(selectTitle);
   const selectedPlan = useSelector(selectSelectedPlan);
   const dispatch = useDispatch();
 
-  
   useEffect(() => {
     return () => {
       dispatch(clearSelectedPlan())
     }
-  },[]) 
-
+  }, []) 
 
   useEffect(() => {
-    setTitle(selectedData?.title || '');
-    setContent(selectedData?.content || '');
-  }, [selectedData]);
+    if (selectedPlan) {
+      setTitle(selectedPlan.title || '');
+      setContent(selectedPlan.content || '');
+    } else {
+      setTitle('');
+      setContent('');
+    }
+  }, [selectedPlan]);
 
   const handleCalendarData = () => {
-    dispatch(addCalendarTitle({ title, selectedDate, content }));
+    if (selectedPlan) {
+      dispatch(updateCalendarTitle({ id: selectedPlan.id, title, content }));
+    } else {
+      dispatch(addCalendarTitle({ title, selectedDate, content }));
+    }
     setTitle('');
     setContent('');
     closeModal();
+  };
+
+  const handleDelete = () => {
+    if (selectedPlan) {
+      dispatch(deleteCalendarTitle(selectedPlan.id));
+    }
+    closeModal();
+  };
+
+  const handleTitleChange = (e) => {
+    setTitle(e.target.value);
+  };
+
+  const handleContentChange = (e) => {
+    setContent(e.target.value);
   };
 
   return (
@@ -115,17 +132,21 @@ const CalendarPlanModal = ({ selectedDate, closeModal, onDateClick, selectedDate
       <SelectedDateDiv>{selectedDate}</SelectedDateDiv>
       <TitleInput 
         placeholder='Title'
-        onChange={(e) => setTitle(e.target.value)}
-        value={selectedPlan ? selectedPlan.title : title}
+        onChange={handleTitleChange}
+        value={title}
       />
       
       <DetailInput
         placeholder='Content'
-        onChange={(e) => setContent(e.target.value)}
-        value={selectedPlan ? selectedPlan.content : content}
+        onChange={handleContentChange}
+        value={content}
       />
+      
       <ButtonWrapper>
         <StyledButton onClick={closeModal}>close</StyledButton>
+        {selectedPlan && (
+          <StyledButton onClick={handleDelete}>delete</StyledButton>
+        )}
         <StyledButton onClick={handleCalendarData}>save</StyledButton>
       </ButtonWrapper>
     </Wrapper>

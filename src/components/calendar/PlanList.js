@@ -10,7 +10,7 @@ const PlanListWrapper = styled.div`
   width: 270px;
   /* height: 300px; */
   position: absolute;
-  top: 180px;
+  top: 100px;
   right: 0px;
 `;
 
@@ -64,15 +64,15 @@ function PlanList({ currentMonth, selectedDate, onDateClick, clickModal }) {
   const selectedTitle = useSelector(selectTitle);
   const { title = '' } = selectedTitle.find((item) => item.date === selectedDate) || {};
   
-  const [titles, setTitles] = useState('');
-  const [content, setContent] = useState('');
+  // const [titles, setTitles] = useState('');
+  // const [content, setContent] = useState('');
   const dispatch = useDispatch();
 
-  const handleCalendarData = () => {
-    dispatch(addCalendarTitle({ titles, selectedDate, content }));
-    setTitles('');
-    setContent('');
-  };
+  // const handleCalendarData = () => {
+  //   dispatch(addCalendarTitle({ titles, selectedDate, content }));
+  //   setTitles('');
+  //   setContent('');
+  // };
 
   const handleClickPlan = (id) => {
     clickModal();

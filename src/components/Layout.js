@@ -6,6 +6,7 @@ import { BsFillChatFill } from "react-icons/bs";
 import userData from "../data.json";
 
 import Chat from '../pages/Chat';
+import LoginModal from './LogInModal';
 
 const LayoutStyled = styled.div`
   width: 100%;
@@ -92,14 +93,9 @@ const ProfileCard = styled.div`
   .name {
     font-size: 26px;
     font-weight: 600;
-    padding: 20px 0;
+    padding: 30px 0;
   }
-  
-  .relation {
-    font-size: 20px;
-    font-weight: 600;
-    padding: 20px 0 20px;
-  }
+
   .birth {
     font-size: 20px;
   }
@@ -169,7 +165,6 @@ function Layout(props) {
           <ProfileCard>
             <img src={userData[0].imagePath} /> 
             <p className='name'>{userData[0].name} 님</p>          
-            <p className='relation'>{userData[0].relation}</p>          
             <p className='birth'>{userData[0].birth}</p>          
           </ProfileCard>
         </ProfileArea>
@@ -187,6 +182,9 @@ function Layout(props) {
       <ChatBox showModal = {showChatModal} >
         <Chat setShowChatModal={setShowChatModal} />
       </ChatBox>
+      
+      {/* 로그인 모달 */}
+      <LoginModal />
     </LayoutStyled>
   );  
 }

@@ -29,7 +29,6 @@ const StyledSection = styled.div`
 `;
 
 function MainDday(props) {
-  // console.log(data);
   const familyBirthDate = data.map(person => {
     const today = new Date();
     const personBirth = new Date(person.birth);
@@ -45,37 +44,18 @@ function MainDday(props) {
       nextYearDday: differenceInCalendarDays(today, nextYearBirth)
     }
   });
-  // console.log(familyBirthDate); // [{…}, {…}, {…}, {…}, {…}, {…}, {…}]
 
-  const personThisYearDday = familyBirthDate.map(person => person.thisYearDday);
-  // console.log(personThisYearDday); // [155, 53, 66, -159, -25, -36, -168]
-
-  // const personNextYearDday = familyBirthDate.map(person => person.nextYearDday);
-  // console.log(personNextYearDday); // [-205, -308, -295, -245, -362, -244, -254]
-
-
-  const thisYearBirthDday = personThisYearDday.filter(dday => {
+  const personThisYearDday = familyBirthDate.map(person => person.thisYearDday); // 가족원전체 올해 생일 디데이
+  const personNextYearDday = familyBirthDate.map(person => person.nextYearDday); // 가족원전체 내년 생일 디데이
+  const thisYearBirthDday = personThisYearDday.filter(dday => { // 다가올 올해 생일
     return dday <= 0;
   });
-  // console.log(thisYearBirthDday); // [-159, -25, -36, -168]
-
-  // if (thisYearBirthDday.length === 0) {
-  //   const personNextYearDday = familyBirthDate.map(person => person.nextYearDday);
-  //   console.log(personNextYearDday);
-  // } else {
-    
-  // }
-
-  const showDday = Math.max.apply(null, thisYearBirthDday);
-
+  const dDay = thisYearBirthDday.length === 0 ? personNextYearDday : thisYearBirthDday; // 올해 생일이 전부 지났으면 내년생일 배열
+  const showDday = Math.max.apply(null, dDay); // 가장 적게남은 보여줄 디데이
   const showDdayPerson = familyBirthDate.filter(person => {
-    return person.thisYearDday === showDday;
+    return person.thisYearDday === showDday || person.nextYearDday === showDday;
   });
-
-  // thisYearBirthDday 배열이 빈 배열이면 nextYearDday로 재확인하기
-  
-  // 만약 personThisYearDday가 모두 양수이면 nextYearDday로 재확인하기
-  
+  // console.log(showDdayPerson[0]);
 
   return (
     <StyledSection>
@@ -86,7 +66,7 @@ function MainDday(props) {
             : `D${showDday}`
           }</p>
         <p>
-          {`${showDdayPerson[0].name}(${showDdayPerson[0].relation})`} 생일
+          {`${showDdayPerson[0].name}(${showDdayPerson[0].members})`} 생일
         </p>
       </div>
     </StyledSection>

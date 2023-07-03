@@ -1,22 +1,30 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Placeholder } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import styled from 'styled-components';
+import styled, { keyframes } from 'styled-components';
 import { addCalendarTitle, selectTitle } from '../../features/calendarSlice';
+
+const fadeIn = keyframes`
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+`;
 
 const Wrapper = styled.div`
   display: flex;
   width: 1200px;
-  height: 100vh;
+  height: 1040px;
   justify-content: center;
   align-items: center;
   background-color: gray;
   flex-direction: column;
-  opacity: 0.3;
-  transition: 0.4s ease;
-  transition-delay: 0.35s;
-  
+  /* opacity: 0.3; */
+  background-color: rgba(0, 0, 0, 0.1);
+  animation: ${fadeIn} 0.4s ease-in-out;
 `;
 
 const SelectedDateDiv = styled.div`
@@ -69,14 +77,22 @@ const StyledButton = styled.button`
   cursor: pointer;
 `;
 
-function CalendarPlanModal({ selectedDate, closeModal, onDateClick, selectedDateCl }) {
+const CalendarPlanModal = ({ selectedDate, closeModal, onDateClick, selectedDateCl }) => {
   const [title, setTitle] = useState('');
   const [content, setContent] = useState('');
   const selectedData = useSelector(selectTitle)
   const dispatch = useDispatch();
 
+  
+  useEffect(() => {
+    setTitle(selectedData?.title || '');
+    setContent(selectedData?.content || '');
+  }, [selectedData]);
+
   const handleCalendarData = () => {
     dispatch(addCalendarTitle({ title, selectedDate, content }));
+    setTitle('');
+    setContent('');
     closeModal();
   };
 
@@ -87,13 +103,11 @@ function CalendarPlanModal({ selectedDate, closeModal, onDateClick, selectedDate
         placeholder='Title'
         onChange={(e) => setTitle(e.target.value)}
         value={title}
-      >
-      </TitleInput>
+      />
       <DetailInput
         onChange={(e) => setContent(e.target.value)}
         value={content}
-      >
-      </DetailInput>
+      />
       <ButtonWrapper>
         <StyledButton onClick={closeModal}>close</StyledButton>
         <StyledButton onClick={handleCalendarData}>save</StyledButton>

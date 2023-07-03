@@ -1,7 +1,7 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
-import { selectTitle } from '../../features/calendarSlice';
-import { useSelector } from 'react-redux';
+import { addCalendarTitle, selectTitle } from '../../features/calendarSlice';
+import { useDispatch, useSelector } from 'react-redux';
 import { GoDotFill } from 'react-icons/go';
 
 
@@ -10,7 +10,7 @@ const PlanListWrapper = styled.div`
   width: 270px;
   /* height: 300px; */
   position: absolute;
-  top: 0;
+  top: 180px;
   right: 0px;
 `;
 
@@ -23,7 +23,6 @@ const ScheduleList = styled.div`
 `;
 
 const StyledPlanList = styled.div`
-  /* background-color: #f5cc8d; */
   width: 90%;
   /* height: 20px; */
   margin-left: 20px;
@@ -33,6 +32,10 @@ const StyledPlanList = styled.div`
   display: flex;
   align-items: center;
   border: 0.4px solid #f5cc8d;
+  cursor: pointer;
+  &:hover {
+    background-color: #f5cc8d;
+  }
   
 `;
 
@@ -61,7 +64,16 @@ function PlanList({ currentMonth, selectedDate, onDateClick, clickModal }) {
   const selectedTitle = useSelector(selectTitle);
   const { title = '' } = selectedTitle.find((item) => item.date === selectedDate) || {};
   
-  console.log(title);
+  // const [titles, setTitles] = useState('');
+  // const [content, setContent] = useState('');
+  // const selectedData = useSelector(selectTitle)
+  // const dispatch = useDispatch();
+
+  // const handleCalendarData = () => {
+  //   dispatch(addCalendarTitle({ titles, selectedDate, content }));
+  //   setTitles('');
+  //   setContent('');
+  // };
 
 
 
@@ -70,7 +82,7 @@ function PlanList({ currentMonth, selectedDate, onDateClick, clickModal }) {
     <PlanListWrapper>
       <ScheduleList>Schedule List</ScheduleList>
       {selectedTitle.map((item, index) => {
-        return <StyledPlanList>
+        return <StyledPlanList onClick={clickModal} key={index}>
                   <GoDotFill color='#f5cc8d' size={15}></GoDotFill>
                   <StyledTitle>
                   {item.title}

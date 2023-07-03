@@ -7,11 +7,9 @@ const StyledSection = styled.div`
   height: 40vh;
   border-radius: 8px;
   font-size: 18px;
-  padding: 0 20px;
-  box-sizing: border-box;
+  margin-left: 20px;
   display: flex;
   align-items: center;
-  justify-content: space-around;
 
   &.container_cool{
     background: #005AA7;
@@ -24,34 +22,28 @@ const StyledSection = styled.div`
     background: linear-gradient(to bottom, #F37335, #FDC830);
   }
 
-  .weather-contents{
-    width: 100%;
-    height: 100%;
+  .weather-contents {
     color: #fff;
     display: flex;
-    flex-direction: column;
+    flex-wrap: wrap;
     justify-content: center;
+    align-items: center;
+    
+    & * {
+      margin: 0 20px;
+    }
 
-    .contents-flex {
-      display: flex;
-      align-items: center;
-      justify-content: space-around;
-
-      &.top {
-        font-size: 24px;
-        padding: 10px 0;
-        
-        p:last-child {
-          font-size: 30px;
-        }
-      }
-
-      & .temp {
-        font-size: 60px;
-      }
-      & .temp-icon {
-        width: 130px;
-      }
+    .today-date {
+      font-size: 24px;
+    }
+    .location {
+      font-size: 30px;
+    }
+    .temp {
+      font-size: 60px;
+    }
+    .temp-icon {
+      width: 120px;
     }
   }
 `;
@@ -62,7 +54,6 @@ function MainWeather({ today }) {
   const [icon, setIcon] = useState();
   const [temp, setTemp] = useState();
   const [loading, setLoading] = useState(false);
-  const [error, setError] = useState();
   
   const todayData = () => {
     return `${today.todayYear}.${today.todayMonth}.${today.todayDate} ${today.dayOfWeek}`;
@@ -91,10 +82,8 @@ function MainWeather({ today }) {
       setIcon(data.weather[0].icon);
       setTemp(data.main.temp);
       setLoading(false);
-      console.log(icon);
     } catch (error) {
-      // console.error(error);
-      // setError(error.message);
+      console.error(error);
       setLoading(false);
     }
   };
@@ -113,14 +102,10 @@ function MainWeather({ today }) {
         />
         : 
         <div className='weather-contents'>
-          <div className='contents-flex top'>
-            <p>{todayData()}</p>
-            <p>{name}</p>
-          </div>
-          <div className='contents-flex'>
-            <p className='temp'>{Math.round(temp)}º</p>
-            <img className='temp-icon' src={`http://openweathermap.org/img/wn/${icon}@2x.png`} />
-          </div>
+          <p className='today-date'>{todayData()}</p>
+          <p className='location'>{name}</p>
+          <p className='temp'>{Math.round(temp)}º</p>
+          <img className='temp-icon' src={`http://openweathermap.org/img/wn/${icon}@2x.png`} />
         </div>
       }
     </StyledSection>

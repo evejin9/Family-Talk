@@ -29,9 +29,7 @@ const StyledSection = styled.div`
 
 function MainTodaySchedule({ today }) {
   const navigator = useNavigate();
-
   const selectCalendarTitle = useSelector(selectTitle);
-  // console.log(selectCalendarTitle);
 
   const todaySchedule = selectCalendarTitle.filter((schedule) => {
     const todayFullDate = `${today.todayYear}-${today.todayMonth}-${today.todayDate}`;
@@ -51,7 +49,7 @@ function MainTodaySchedule({ today }) {
       <p>
         {todaySchedule.length === 0 
           ? `일정이 없습니다.` 
-          : todaySchedule.length > 1
+          : todaySchedule.length >= 1
             ? `${todaySchedule.map(schedule => schedule.title)}`
             : todaySchedule
         }

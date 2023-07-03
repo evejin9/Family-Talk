@@ -29,7 +29,7 @@ const StyledSection = styled.div`
 `;
 
 function MainDday(props) {
-
+  // console.log(data);
   const familyBirthDate = data.map(person => {
     const today = new Date();
     const personBirth = new Date(person.birth);
@@ -50,10 +50,21 @@ function MainDday(props) {
   const personThisYearDday = familyBirthDate.map(person => person.thisYearDday);
   // console.log(personThisYearDday); // [155, 53, 66, -159, -25, -36, -168]
 
+  // const personNextYearDday = familyBirthDate.map(person => person.nextYearDday);
+  // console.log(personNextYearDday); // [-205, -308, -295, -245, -362, -244, -254]
+
+
   const thisYearBirthDday = personThisYearDday.filter(dday => {
-    return dday < 0;
+    return dday <= 0;
   });
   // console.log(thisYearBirthDday); // [-159, -25, -36, -168]
+
+  // if (thisYearBirthDday.length === 0) {
+  //   const personNextYearDday = familyBirthDate.map(person => person.nextYearDday);
+  //   console.log(personNextYearDday);
+  // } else {
+    
+  // }
 
   const showDday = Math.max.apply(null, thisYearBirthDday);
 
@@ -64,14 +75,16 @@ function MainDday(props) {
   // thisYearBirthDday 배열이 빈 배열이면 nextYearDday로 재확인하기
   
   // 만약 personThisYearDday가 모두 양수이면 nextYearDday로 재확인하기
-  // const e = personThisYearDday.filter(day => day < 0);
-  // console.log(e);
+  
 
   return (
     <StyledSection>
       <div>
-        {/* 생일이 가장 가까운 사람 보여주기 */}
-        <p>D{showDday}</p>
+        <p>
+          {showDday == 0
+            ? `D-Day`
+            : `D${showDday}`
+          }</p>
         <p>
           {`${showDdayPerson[0].name}(${showDdayPerson[0].relation})`} 생일
         </p>

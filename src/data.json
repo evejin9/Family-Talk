@@ -1,7 +1,7 @@
 [
   {
     "id": "aa", 
-    "passward": 1234,
+    "password": 1234,
     "name": "신형만",
     "imagePath": "https://i.ibb.co/zNJwG5W/dad.jpg",
     "birth": "1968-01-24",
@@ -38,7 +38,7 @@
   },
   {
     "id": "bb", 
-    "passward": 1234,
+    "password": 1234,
     "name": "봉미선",
     "imagePath": "https://i.ibb.co/YcWhC5B/mom.jpg",
     "birth": "1970-05-06",
@@ -75,7 +75,7 @@
   },
   {
     "id": "cc",
-    "passward": 1234,
+    "password": 1234,
     "name": "신앵두",
     "imagePath": "https://i.ibb.co/PT4Ytn8/girl.jpg",
     "birth": "1995-04-23",
@@ -112,7 +112,7 @@
   },
   {
     "id": "dd",
-    "passward": 1234,
+    "password": 1234,
     "name": "신짱구",
     "imagePath": "https://i.ibb.co/ryrvrSy/boy.jpg",
     "birth": "1997-12-04",
@@ -149,7 +149,7 @@
   },
   {
     "id": "ee", 
-    "passward": 1234,
+    "password": 1234,
     "name": "신짱아",
     "imagePath": "https://i.ibb.co/TtjLkpY/baby.jpg",
     "birth": "2000-06-29",
@@ -186,7 +186,7 @@
   },
   {
     "id": "ff", 
-    "passward": 1234,
+    "password": 1234,
     "name": "이옥분",
     "imagePath": "https://i.ibb.co/ykw3K1S/grandmom.jpg",
     "birth": "1948-07-03",
@@ -223,7 +223,7 @@
   },
   {
     "id": "gg", 
-    "passward": 1234,
+    "password": 1234,
     "name": "신돌식",
     "imagePath": "https://i.ibb.co/dfPhQF2/granddad.jpg",
     "birth": "1943-12-13",

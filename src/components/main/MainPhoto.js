@@ -4,15 +4,12 @@ import styled from 'styled-components';
 const StyledMainPhoto = styled.div`
   width: 100%;
   height: 40vh;
-
+  border-radius: 8px;
+  overflow: hidden;
 `;
 const StyledImg = styled.img`
-  width: 100%;
-  height: 100%;
-  border-radius: 8px;
-  background-repeat: no-repeat;
-  background-size: cover;
-  background-position: center;
+  /* width: 100%;
+  height: 100%; */
   cursor: pointer;
 `;
 

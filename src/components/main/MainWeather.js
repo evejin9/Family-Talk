@@ -1,8 +1,6 @@
-import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { MoonLoader } from "react-spinners";
-import { useSelector } from 'react-redux';
 
 const StyledSection = styled.div`
   width: 100%;
@@ -64,6 +62,7 @@ function MainWeather({ today }) {
   const [icon, setIcon] = useState();
   const [temp, setTemp] = useState();
   const [loading, setLoading] = useState(false);
+  const [error, setError] = useState();
   
   const todayData = () => {
     return `${today.todayYear}.${today.todayMonth}.${today.todayDate} ${today.dayOfWeek}`;
@@ -92,8 +91,10 @@ function MainWeather({ today }) {
       setIcon(data.weather[0].icon);
       setTemp(data.main.temp);
       setLoading(false);
+      console.log(icon);
     } catch (error) {
-      console.error(error);
+      // console.error(error);
+      // setError(error.message);
       setLoading(false);
     }
   };

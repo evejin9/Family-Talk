@@ -39,6 +39,7 @@ function MainDday(props) {
     return {
       id: person.id,
       name: person.name,
+      relation: person.relation,
       birth: person.birth,
       thisYearDday: differenceInCalendarDays(today, thisYearBirth),
       nextYearDday: differenceInCalendarDays(today, nextYearBirth)
@@ -72,7 +73,7 @@ function MainDday(props) {
         {/* 생일이 가장 가까운 사람 보여주기 */}
         <p>D{showDday}</p>
         <p>
-          {showDdayPerson[0].name} 생일
+          {`${showDdayPerson[0].name}(${showDdayPerson[0].relation})`} 생일
         </p>
       </div>
     </StyledSection>

@@ -98,7 +98,7 @@ function CalendarSells({ currentMonth, selectedDate, onDateClick, clickModal }) 
   const startDate = startOfWeek(monthStart);
   const endDate = endOfWeek(monthEnd);
   const selectedTitle = useSelector(selectTitle);
-
+  console.log(selectedTitle);
   const { title = '' } = selectedTitle.find((item) => item.date === selectedDate) || {};
 
   const rows = [];

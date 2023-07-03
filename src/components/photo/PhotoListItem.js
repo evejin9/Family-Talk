@@ -1,15 +1,13 @@
-import React, { useState } from 'react';
+import React, { useCallback, useState } from 'react';
 import styled from 'styled-components';
-import { BiSolidCommentDetail, BiCommentDetail } from "react-icons/bi";
-import { BsFillArrowUpCircleFill } from "react-icons/bs";
-import { FaRegHeart, FaHeart } from "react-icons/fa";
-import { AiFillPlusCircle } from "react-icons/ai";
 import { BsCheck2 } from "react-icons/bs";
 import { FiMoreHorizontal } from "react-icons/fi";
 import CommentList from './CommentList';
-import { Form, useNavigate } from 'react-router-dom';
-import { Button, Modal } from 'react-bootstrap';
+import { useNavigate } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import { uuid } from "react-uuid";
+import { BsFillTrash3Fill } from "react-icons/bs";
+import { PiPencil, PiTrash } from "react-icons/pi";
 
 const PhotoLIstItemWrapper = styled.div`
 /* background-color: #efeeef; */
@@ -133,29 +131,17 @@ position: relative;
       }
     }
   }
+  button {
+      background: none;
+      outline: none;
+      border: none;
+      width: auto;
+    }
   } 
 `
-const StyledModal = styled(Modal)`
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, .7);
-  position: fixed;
-  top: 0;
-  left: 0;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-`
-
 
 function PhotoListItem(props) {
-  const { post } = props;
-  const [visible, setVisible] = useState(true);
-  const [like, setLike] = useState(true);
-
-  const [show, setShow] = useState(false);
-  const handleClose = () => setShow(false);
-  const handleShow = () => setShow(true);
+  const { post, onRemove} = props;
 
   return (
     <PhotoLIstItemWrapper>
@@ -167,7 +153,10 @@ function PhotoListItem(props) {
           <div className='profileImgNameMore'>
             <img src={post.profileImage} alt='profileImg'></img>
             <span className='name'>{post.name}</span> 
-            <FiMoreHorizontal/>
+            <button><PiPencil /></button>
+            <button
+              onClick={() => {onRemove(post.id);}}
+            ><PiTrash /></button>
           </div>
           <div className='contentAndComment'>
             <div className='postContent'>{post.content}</div>
@@ -184,22 +173,6 @@ function PhotoListItem(props) {
             </button>
           </div>
       </div>
-
-          {/* <div className='icon'>
-            <button type='button' onClick={() => {setLike(!like)}}>
-              {like ? <FaRegHeart /> : <FaHeart style={{color: 'red'}}/>}
-            </button>
-            <button type="button" onClick={() => {setVisible(!visible)}}>
-              {visible ? <BiCommentDetail/> : <BiSolidCommentDetail/>}
-            </button> 
-          </div> */}
-          {/* <div className='writeComment'>
-            <input type='text'>
-            </input>
-            <button type='button' className='commentButton'>
-              <BsFillArrowUpCircleFill/>
-            </button>
-          </div> */}
     </PhotoLIstItemWrapper>
   );
 }

@@ -10,6 +10,7 @@ import Photo from './pages/Photo';
 
 import data from "./data.json";
 import Members from './pages/Members';
+import WritePhoto from './components/photo/WritePhoto';
 
 
 const GlobalStyled = createGlobalStyle`
@@ -80,6 +81,7 @@ function App() {
               <Route path='/members' element={<Members />} />
               <Route path='/calendar' element={<Calendar />} />
               <Route path='/photo' element={<Photo />} />
+              <Route path='/writePhoto' element={<WritePhoto />} />
             </Route>
           </Routes>
         </Wrapper>

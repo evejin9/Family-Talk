@@ -3,6 +3,7 @@ import mainSlice from "../features/mainSlice";
 import chatSlice from "../features/chatSlice";
 import calendarSlice from "../features/calendarSlice";
 import photoSlice from "../features/photoSlice";
+import loginSlice from "../features/loginSlice";
 
 export const store = configureStore({
   reducer: {
@@ -10,5 +11,6 @@ export const store = configureStore({
     chat: chatSlice,
     calendar: calendarSlice,
     photo: photoSlice,
+    login: loginSlice
   }
 });

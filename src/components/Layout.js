@@ -59,6 +59,7 @@ const ShowItem = styled.div`
   margin-top: 70px;
   display: flex;
   justify-content: center;
+  position: relative;
   `;
 
 const ProfileArea = styled.div`
@@ -184,7 +185,7 @@ function Layout(props) {
       </ChatBox>
       
       {/* 로그인 모달 */}
-      <LoginModal />
+        {/* <LoginModal /> */}
     </LayoutStyled>
   );  
 }

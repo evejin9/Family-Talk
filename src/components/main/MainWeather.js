@@ -3,13 +3,15 @@ import styled from 'styled-components';
 import { MoonLoader } from "react-spinners";
 
 const StyledSection = styled.div`
-  width: 100%;
+  width: 50%;
   height: 40vh;
+  min-width: 450px;
   border-radius: 8px;
   font-size: 18px;
-  margin-left: 20px;
+  /* margin-left: 20px; */
   display: flex;
   align-items: center;
+  justify-content: center;
 
   &.container_cool{
     background: #005AA7;

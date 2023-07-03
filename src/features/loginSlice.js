@@ -1,7 +1,12 @@
 import { createSlice } from "@reduxjs/toolkit";
 
+
 const initialState = {
-  logInData: []
+  logInData: {
+    id: '',
+    password: ''
+  },
+  logInUserInfo: {},
 }
 
 const logInSlice = createSlice({
@@ -9,16 +14,18 @@ const logInSlice = createSlice({
   initialState,
   reducers: {
     pushLogIn: (state, {payload: { logInId, logInPw } }) => {
-      state.logInData.push({
-        id: logInId,
-        password: logInPw
-      })
+      state.logInData.id = logInId;
+      state.logInData.password = logInPw;
+    },
+    findLoginUser: (state, {payload}) => {
+      console.log(payload);
+      state.logInUserInfo = payload
     }
   }
 })
 
-export const { pushLogIn } = logInSlice.actions;
+export const { pushLogIn, findLoginUser } = logInSlice.actions;
 
-export const logData = (state) => state.login.logInData; 
+export const LogInUser = (state) => state.login.logInUserInfo; 
 
 export default logInSlice.reducer;

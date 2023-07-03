@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
 
-import { logData, pushLogIn } from '../features/loginSlice';
+import { findLoginUser, pushLogIn } from '../features/loginSlice';
 
 import userData from "../data.json";
 
@@ -11,7 +11,7 @@ const LogInModalWrapper = styled.div`
   height: 100%;
   background-color: #fff;
   position: absolute;
-  display: flex;
+  display: ${props => props.showLogInModal ? `flex` : `none`};
   justify-content: center;
   align-items: center;
 `;
@@ -65,6 +65,7 @@ const LogInBox = styled.div`
 `;
 
 function LoginModal(props) {
+  const [showLogInModal, setShowLogInModal] = useState(true);
   const [logInId, setLogInId] = useState('');
   const [logInPw, setLogInPw] = useState('');
 
@@ -79,17 +80,22 @@ function LoginModal(props) {
   };
 
   const submitLoginData = () => {
-    if(logInId === userData.id && logInPw === userData.password) {
-      alert(`환영합니다!`);
+    const logInUser = userData.find(user =>  user.id === logInId);
+
+    if(logInId === logInUser?.id && Number(logInPw) === logInUser?.password) {
       dispatch(pushLogIn({logInId, logInPw}));
+      dispatch(findLoginUser(logInUser));
+      alert(`${logInUser.name}님, 환영합니다!`);
+      setLogInId('');
+      setLogInPw('');
+      setShowLogInModal(false);
     } else {
-      alert(`아이디와 비밀번호를 다시 입력해주세요`)
+      alert(`아이디와 비밀번호를 다시 확인해주세요`);
     }
-    
   }
 
   return (
-    <LogInModalWrapper>
+    <LogInModalWrapper showLogInModal={showLogInModal} >
       <LogInBox>
           <h2>사이트 이름</h2>
           <input type='text' value={logInId} placeholder='아이디' onChange={handleLogId} />

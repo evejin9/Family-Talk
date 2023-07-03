@@ -185,7 +185,7 @@ function Layout(props) {
       </ChatBox>
       
       {/* 로그인 모달 */}
-        {/* <LoginModal /> */}
+        <LoginModal />
     </LayoutStyled>
   );  
 }

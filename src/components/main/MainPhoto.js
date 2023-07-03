@@ -2,8 +2,9 @@ import React, { useRef, useState } from 'react';
 import styled from 'styled-components';
 
 const StyledMainPhoto = styled.div`
-  width: 100%;
+  width: 50%;
   height: 40vh;
+  min-width: 450px;
   border-radius: 8px;
   overflow: hidden;
 `;

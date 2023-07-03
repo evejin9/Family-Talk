@@ -8,6 +8,7 @@ import styled from 'styled-components';
 
 const MainWrapper = styled.div`
   display: flex;
+  flex-wrap: wrap;
 `;
 
 function Main(props) {
@@ -27,8 +28,10 @@ function Main(props) {
         <MainPhoto />
         <MainWeather today={today} />
       </MainWrapper>
-      <MainTodaySchedule today={today} />
-      <MainDday />
+      <MainWrapper>
+        <MainTodaySchedule today={today} />
+        <MainDday />
+      </MainWrapper>
     </div>
   );
 }

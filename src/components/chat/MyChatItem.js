@@ -27,13 +27,13 @@ const Mychat = styled.div`
 `;
 
 function MyChatItem(props) {
-  const { chat : {id, name, content, time} } = props;
+  const { chat : {id, relation, content, time} } = props;
 
   return (
     <Mychat>
       <span>{time}</span>
       <div className='chatArea'>
-        <span>{name}</span>
+        <span>{relation}</span>
         {
           content.includes('data:image')
           ? <p className='contentArea'><img src={content} /></p>

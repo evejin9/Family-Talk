@@ -19,7 +19,7 @@ const chatSlice = createSlice({
 
       state.chatList.push({
         id: `${nextId.current += 1}`,
-        name: "나",
+        relation: "나",
         content: newChat,
         time: time,
       });

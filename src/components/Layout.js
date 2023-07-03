@@ -62,14 +62,15 @@ const ShowItem = styled.div`
 
 const ProfileArea = styled.div`
   width: 35%;
-  padding: 10px;
   position: relative;
   /* display: flex;
   align-items: center; */
+  box-sizing: border-box;
+  margin: 10px;
 `;
 
 const ProfileCard = styled.div`
-  width: 280px;
+  width: 100%;
   height: 500px;
   padding: 10px;
   border-radius: 15px;
@@ -83,14 +84,24 @@ const ProfileCard = styled.div`
   top: 60px;
   left: 0;
   right: 0;
-
-
+  
+  
   img {
   }
-
+  
   .name {
-    font-size: 25px;
-    padding: 10px 0;
+    font-size: 26px;
+    font-weight: 600;
+    padding: 20px 0;
+  }
+  
+  .relation {
+    font-size: 20px;
+    font-weight: 600;
+    padding: 20px 0 20px;
+  }
+  .birth {
+    font-size: 20px;
   }
 `
 
@@ -158,6 +169,7 @@ function Layout(props) {
           <ProfileCard>
             <img src={userData[0].imagePath} /> 
             <p className='name'>{userData[0].name} 님</p>          
+            <p className='relation'>{userData[0].relation}</p>          
             <p className='birth'>{userData[0].birth}</p>          
           </ProfileCard>
         </ProfileArea>

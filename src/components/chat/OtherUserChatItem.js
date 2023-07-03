@@ -5,7 +5,7 @@ const OtherUserChat = styled.div`
   padding: 10px 0;
   display: flex;
   justify-content: flex-start;
-  align-items: flex-end;
+  align-items: flex-start;
 
   .profile {
     width: 50px;
@@ -30,15 +30,15 @@ const OtherUserChat = styled.div`
 `;
 
 function OtherUserChatItem(props) {
-  const { chat : {id, name, content, time}, userData } = props;
+  const { chat : {id, name, relation, content, time}, userData } = props;
 
   return (
     <OtherUserChat>
       {userData.map(user => {
-        return user.name === name && <img className='profile' key={user.id} src={user.imagePath} />
+        return user.relation === relation && <img className='profile' key={user.id} src={user.imagePath} />
       })}
       <div className='chatArea'>
-        <span>{name}</span>
+        <span>{relation}</span>
         {
           content.includes('data:image')
           ? <p className='contentArea'><img src={content} /></p>

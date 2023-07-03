@@ -206,6 +206,7 @@ function Chat(props) {
     reader.onloadend = () => {
       setImgFile(reader.result);
       setNewChat(reader.result);
+      e.target.value = '';
     }
   }
 
@@ -239,7 +240,7 @@ function Chat(props) {
         <div className='today'>{today}</div>
 
         {chatList.map((chat) => {
-          return chat.name === '나' ? 
+          return chat.relation === '나' ? 
             <MyChatItem chat={chat} key={chat.id} /> : 
             <OtherUserChatItem chat={chat} key={chat.id} userData={userData} />
         })}

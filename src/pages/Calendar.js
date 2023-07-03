@@ -40,14 +40,14 @@ function Calendar(props) {
 
   return (
     <div className='show-content'>
-      <div className='calendar' style={{ position: 'relative', marginLeft: '30px'}}>
+      <div className='calendar' style={{ marginLeft: '30px'}}>
         <CalendarHeader currentMonth={currentMonth} prevMonth={prevMonth} nextMonth={nextMonth} />
         <CalendarDay />
         <CalendarSells currentMonth={currentMonth} selectedDate={selectedDate} clickModal={clickModal} onDateClick={onDateClick}>
         </CalendarSells>
         <PlanList currentMonth={currentMonth} selectedDate={selectedDate} clickModal={clickModal} onDateClick={onDateClick}/>
         {modal && (
-          <div className='modal-container' style={{ position: 'absolute', top:'10%', right: '33%', }}>
+          <div className='modal-container' style={{ position: 'absolute', top:'0%', right: '0%', }}>
             <CalendarPlanModal closeModal={closeModal} selectedDate={selectedDate} onDateClick={onDateClick} />
           </div>
         )}

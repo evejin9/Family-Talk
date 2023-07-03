@@ -7,15 +7,16 @@ import { addCalendarTitle, selectTitle } from '../../features/calendarSlice';
 
 const Wrapper = styled.div`
   display: flex;
-  width: 600px;
-  height: 600px;
+  width: 1200px;
+  height: 100vh;
   justify-content: center;
   align-items: center;
-  /* background-color:  */
+  background-color: gray;
   flex-direction: column;
-  opacity: 50;
+  opacity: 0.3;
   transition: 0.4s ease;
   transition-delay: 0.35s;
+  
 `;
 
 const SelectedDateDiv = styled.div`
@@ -34,7 +35,7 @@ const TitleInput = styled.input`
   background-color: #f5cc8d;
   height: 30px;
   margin-bottom: 15px;
-  width: 60%;
+  width: 40%;
   border-radius: 10px;
   border: none;
   margin-top: 10px;
@@ -43,7 +44,7 @@ const TitleInput = styled.input`
 const DetailInput = styled.textarea`
   background-color: #f5cc8d;
   height: 350px;
-  width: 60%;
+  width: 40%;
   border-radius: 10px;
   border: none;
   resize: none;
@@ -51,7 +52,7 @@ const DetailInput = styled.textarea`
 
 const ButtonWrapper = styled.div`
   display: flex;
-  width: 50%;
+  width: 30%;
   justify-content: space-between;
   align-items: center;
 

@@ -157,7 +157,7 @@ function Layout(props) {
         <ProfileArea>
           <ProfileCard>
             <img src={userData[0].imagePath} /> 
-            <p className='name'>{userData[0].name}</p>          
+            <p className='name'>{userData[0].name} 님</p>          
             <p className='birth'>{userData[0].birth}</p>          
           </ProfileCard>
         </ProfileArea>

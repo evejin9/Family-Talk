@@ -1,7 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
 
-import userdata from "../data.json";
+import data from "../data.json";
+
 
 const MembersBox = styled.div`
   width: 100%;
@@ -10,22 +11,21 @@ const MembersBox = styled.div`
   justify-content: center;
   align-items: center;
   flex-wrap: wrap;
-`;
+  `;
 
 const MembersCard = styled.div`
   width: 300px;
-  height: 200px;
   background-color: #efefef;
   border-radius: 20px;
   box-shadow: 4px 4px 10px 0px rgba(0, 0, 0, 0.15);
   padding: 20px;
   margin: 20px;
-
-  .name {
+  
+  .relation {
     display: flex;
     align-items: center;
     padding-bottom: 20px;
-
+    
     img {
       width: 80px;
       height: 80px;
@@ -37,26 +37,36 @@ const MembersCard = styled.div`
       font-weight: 600;
     }
   }
-
-  .birth { 
+  
+  .birth, .name { 
     font-size: 20px;
     font-weight: 500;
     padding: 10px 0;
   }
-`;
+  `;
+
+
 
 function Members(props) {
+
+  const newUser = [...data];
+  
   return (
     <MembersBox>
-      {userdata.map((user) =>  
-        <MembersCard key={user.id}>
-          <div className='name'>
-            <img src={user.imagePath}></img>
-            <p>{user.name}</p>
-          </div>
-          <p className='birth'>생년월일: {user.birth}</p>
-        </MembersCard>
-      )}
+      {
+        newUser.sort((a,b) => {
+          if (a.birth < b.birth) return -1;
+        }).map((user) => 
+          <MembersCard key={user.id}>
+            <div className='relation'>
+              <img src={user.imagePath}></img>
+              <p>{user.relation}</p>
+            </div>
+            <p className='name'>이름: {user.name}</p>
+            <p className='birth'>생년월일: {user.birth}</p>
+          </MembersCard>
+        )
+      }
     </MembersBox>
   );
 }

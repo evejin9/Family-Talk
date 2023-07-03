@@ -3,10 +3,10 @@ import { Outlet, useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import { BsFillChatFill } from "react-icons/bs";
 
-import userData from "../data.json";
-
 import Chat from '../pages/Chat';
 import LoginModal from './LogInModal';
+import { LogInUser } from '../features/loginSlice';
+import { useSelector } from 'react-redux';
 
 const LayoutStyled = styled.div`
   width: 100%;
@@ -133,6 +133,7 @@ const ChatBox = styled.div`
 
 function Layout(props) {
   const [showChatModal, setShowChatModal] = useState(false);
+  const logInUSerInfo = useSelector(LogInUser)
   const navigate = useNavigate('/');
 
   const handleChatModal = () => {
@@ -164,9 +165,9 @@ function Layout(props) {
         {/* 유저 정보 */}
         <ProfileArea>
           <ProfileCard>
-            <img src={userData[0].imagePath} /> 
-            <p className='name'>{userData[0].name} 님</p>          
-            <p className='birth'>{userData[0].birth}</p>          
+            <img src={logInUSerInfo.imagePath} /> 
+            <p className='name'>{logInUSerInfo.name} 님</p>          
+            <p className='birth'>{logInUSerInfo.birth}</p>          
           </ProfileCard>
         </ProfileArea>
 

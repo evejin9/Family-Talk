@@ -18,7 +18,6 @@ const logInSlice = createSlice({
       state.logInData.password = logInPw;
     },
     findLoginUser: (state, {payload}) => {
-      console.log(payload);
       state.logInUserInfo = payload
     }
   }

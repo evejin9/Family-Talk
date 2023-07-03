@@ -97,9 +97,25 @@ function LoginModal(props) {
   return (
     <LogInModalWrapper showLogInModal={showLogInModal} >
       <LogInBox>
+          <p>아이디: aa ~ gg 중 아무거나 / 비번: 1234</p>
           <h2>사이트 이름</h2>
-          <input type='text' value={logInId} placeholder='아이디' onChange={handleLogId} />
-          <input type='text' value={logInPw} placeholder='비밀번호' onChange={handleLogPw} />
+          <input 
+            type='text' 
+            value={logInId} 
+            placeholder='아이디' 
+            onChange={handleLogId} 
+          />
+          <input 
+            type='text' 
+            value={logInPw} 
+            placeholder='비밀번호' 
+            onChange={handleLogPw} 
+            onKeyUp={e => {
+              if(e.key === 'Enter') {
+                submitLoginData();
+              }
+            }}
+          />
           <button onClick={submitLoginData}>로그인</button>
           <div>
             <ul>

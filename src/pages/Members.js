@@ -2,6 +2,8 @@ import React from 'react';
 import styled from 'styled-components';
 
 import data from "../data.json";
+import { useSelector } from 'react-redux';
+import { LogInUser, findLoginUser } from '../features/loginSlice';
 
 
 const MembersBox = styled.div`
@@ -48,19 +50,21 @@ const MembersCard = styled.div`
 
 
 function Members(props) {
+  const logInUser = useSelector(LogInUser);
 
   const newUser = [...data];
+
+  console.log(logInUser);
   
   return (
     <MembersBox>
       {
-        newUser.sort((a,b) => {
-          if (a.birth < b.birth) return -1;
-        }).map((user) => 
+        newUser.sort((a,b) => { if (a.birth < b.birth) return -1; })
+        .map((user) => 
           <MembersCard key={user.id}>
             <div className='relation'>
               <img src={user.imagePath}></img>
-              <p>{user.relation}</p>
+                <p>{user.relation}</p>
             </div>
             <p className='name'>이름: {user.name}</p>
             <p className='birth'>생년월일: {user.birth}</p>

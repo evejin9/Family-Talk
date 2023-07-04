@@ -140,8 +140,13 @@ position: relative;
   } 
 `
 
-function PhotoListItem(props) {
-  const { post, onRemove} = props;
+function PhotoListItem({post}) {
+  console.log('post: ', post);
+
+
+  const onRemove = () => {
+
+  }
 
   return (
     <PhotoLIstItemWrapper>
@@ -161,7 +166,7 @@ function PhotoListItem(props) {
           <div className='contentAndComment'>
             <div className='postContent'>{post.content}</div>
             <div className='comment'>
-              <CommentList key={post.id} post={post}/>
+              <CommentList key={post.id} comments={post?.comments?.length ? post.comments : []}/>
             </div>
           </div>
         </div>

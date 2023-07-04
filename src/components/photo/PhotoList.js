@@ -1,10 +1,11 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import dataPhoto from "../../dataPhoto.json";
 import PhotoListItem from './PhotoListItem';
 import styled from 'styled-components';
 import CommentList from './CommentList';
-import { useNavigate } from 'react-router-dom';
+import { useFetcher, useNavigate } from 'react-router-dom';
 import { BsPlusCircleFill } from "react-icons/bs";
+import { getPhotoList } from '../../utils/local-storage.util';
 
 const PhotoListWrapper = styled.div`
   .writePhotoButton {
@@ -32,14 +33,21 @@ const PhotoListWrapper = styled.div`
 `
 
 function PhotoList(props) {
-  const {posts, onRemove} = props;
-  console.log(posts);
 
   const navigate = useNavigate('/')
+
+  const [photoList, setPhotoList] = useState([])
+
+  useEffect(() => {
+    const res = getPhotoList()
+    console.log('res: ', res);
+    setPhotoList(res)
+  }, [])
+
   return (
     <PhotoListWrapper>
-      {dataPhoto.map((post) => 
-        <PhotoListItem key={post.id} post={post} posts={posts} onRemove={onRemove} />
+      {photoList.map((post) => 
+        <PhotoListItem key={post.id} post={post} />
       )}
       <button className='writePhotoButton' onClick={() => navigate('/writePhoto')}><BsPlusCircleFill/></button>
     </PhotoListWrapper>

@@ -1,9 +1,9 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { addDays, endOfMonth, endOfWeek, format, isSameDay, isSameMonth, parse, startOfMonth, startOfWeek } from 'date-fns'
 import styled from 'styled-components';
 import CalendarPlanModal from './CalendarPlanModal';
-import { useSelector } from 'react-redux';
-import { addCalendarTitle, selectTitle } from '../../features/calendarSlice';
+import { useDispatch, useSelector } from 'react-redux';
+import { addCalendarTitle, deleteCalendarTitle, selectTitle } from '../../features/calendarSlice';
 // import { format } from 'date-fns/esm';
 import { BsDot, GoDotFill } from 'react-icons/go'
 
@@ -92,13 +92,15 @@ const SellInTitle = styled.div`
     }
 `;
 
-function CalendarSells({ currentMonth, selectedDate, onDateClick, clickModal }) {
+function CalendarSells({ currentMonth, selectedDate, onDateClick, clickModal, filteredSelectedTitle }) {
   const monthStart = startOfMonth(currentMonth);
   const monthEnd = endOfMonth(monthStart);
   const startDate = startOfWeek(monthStart);
   const endDate = endOfWeek(monthEnd);
   const selectedTitle = useSelector(selectTitle);
-  console.log(selectedTitle);
+  const dispatch = useDispatch();
+  const [deletedItems, setDeletedItems] = useState([]);
+
   const { title = '' } = selectedTitle.find((item) => item.date === selectedDate) || {};
 
   const rows = [];
@@ -110,6 +112,10 @@ function CalendarSells({ currentMonth, selectedDate, onDateClick, clickModal }) 
     onDateClick(clickedDate);
     clickModal();
   };
+
+  
+
+  
 
   while (day <= endDate) {
     for (let i = 0; i < 7; i++) {
@@ -127,7 +133,6 @@ function CalendarSells({ currentMonth, selectedDate, onDateClick, clickModal }) 
           }`}
           key={day}
           onClick={() => handleDateClick(cloneDay)}
-          
         >
           <span
             className={
@@ -139,19 +144,14 @@ function CalendarSells({ currentMonth, selectedDate, onDateClick, clickModal }) 
             {formattedDate}
           </span>
 
-          {selectedTitle
+          {filteredSelectedTitle
             .filter((item) => item.date === cloneDay)
             .map((item, index) => (
-              <SellInTitle
-                key={index}>
+              <SellInTitle key={index}>
                 <GoDotFill color='#f5cc8d' size={11}></GoDotFill>
-                <div className='title'>
-                {item.title}
-                </div>
+                <div className='title'>{item.title}</div>
               </SellInTitle>
             ))}
-            
-        
         </div>
       );
 

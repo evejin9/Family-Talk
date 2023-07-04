@@ -35,7 +35,7 @@ const calendarSlice = createSlice({
       deleteCalendarTitle(state, action) {
       const id = action.payload;
       state.titles = state.titles.filter(title => title.id !== id);
-      state.selectedTitle = null; // 선택된 타이틀 초기화
+      state.selectedTitle = null;
     },
   },
     

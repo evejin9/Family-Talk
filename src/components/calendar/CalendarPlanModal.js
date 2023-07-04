@@ -17,7 +17,7 @@ const fadeIn = keyframes`
 const Wrapper = styled.div`
   display: flex;
   width: 1200px;
-  height: 100vb;
+  height: 800px;
   justify-content: center;
   align-items: center;
   background-color: gray;
@@ -87,9 +87,9 @@ const CalendarPlanModal = ({ selectedDate, closeModal, onDateClick, selectedDate
 
   useEffect(() => {
     return () => {
-      dispatch(clearSelectedPlan())
-    }
-  }, []) 
+      dispatch(clearSelectedPlan());
+    };
+  }, []);
 
   useEffect(() => {
     if (selectedPlan) {
@@ -130,23 +130,23 @@ const CalendarPlanModal = ({ selectedDate, closeModal, onDateClick, selectedDate
   return (
     <Wrapper>
       <SelectedDateDiv>{selectedDate}</SelectedDateDiv>
-      <TitleInput 
+      <TitleInput
         placeholder='Title'
         onChange={handleTitleChange}
         value={title}
       />
-      
+
       <DetailInput
         placeholder='Content'
         onChange={handleContentChange}
         value={content}
       />
-      
+
       <ButtonWrapper>
         <StyledButton onClick={closeModal}>close</StyledButton>
-        {selectedPlan && (
+        {/* {selectedPlan && (
           <StyledButton onClick={handleDelete}>delete</StyledButton>
-        )}
+        )} */}
         <StyledButton onClick={handleCalendarData}>save</StyledButton>
       </ButtonWrapper>
     </Wrapper>

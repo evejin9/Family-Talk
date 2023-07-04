@@ -14,7 +14,7 @@ const StyledDiv = styled.div`
   
   .col {
     margin-right: 33px;
-    background-color: rgb(239,239,239);
+    background-color: #f5cc8d;
     border-radius: 6px;
     margin-left: 20px;
     width: 160px;

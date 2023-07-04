@@ -10,7 +10,7 @@ const Header = styled.div`
   justify-content: space-between;
   align-items: center;
   /* border-bottom: 1px solid gray; */
-  margin-top: 70px;
+  margin-top: 20px;
   width: 68%;
   margin-bottom: 10px;
 `;

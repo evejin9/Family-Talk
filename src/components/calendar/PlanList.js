@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
-import { addCalendarTitle, selectTitle, getSelectedPlan } from '../../features/calendarSlice';
+import { addCalendarTitle, selectTitle, getSelectedPlan, deleteCalendarTitle } from '../../features/calendarSlice';
 import { useDispatch, useSelector } from 'react-redux';
 import { GoDotFill } from 'react-icons/go';
+import { MdDeleteForever } from 'react-icons/md'
 
 
 const PlanListWrapper = styled.div`
@@ -40,7 +41,7 @@ const StyledPlanList = styled.div`
 `;
 
 const StyledTitle = styled.div`
-  width: 50%;
+  width: 30%;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -51,7 +52,7 @@ const StyledTitle = styled.div`
 
 
 const SelectedDate = styled.div`
-  margin-left: 10px;
+  margin-left: 3px;
   display: flex;
   align-items: center;
   justify-content: flex-end;
@@ -59,20 +60,10 @@ const SelectedDate = styled.div`
 
 
 
-function PlanList({ currentMonth, selectedDate, onDateClick, clickModal }) {
-
+function PlanList({ currentMonth, selectedDate, onDateClick, clickModal, filteredSelectedTitle, handleDelete }) {
   const selectedTitle = useSelector(selectTitle);
-  const { title = '' } = selectedTitle.find((item) => item.date === selectedDate) || {};
-  
-  // const [titles, setTitles] = useState('');
-  // const [content, setContent] = useState('');
+  const [deletedItems, setDeletedItems] = useState([]);
   const dispatch = useDispatch();
-
-  // const handleCalendarData = () => {
-  //   dispatch(addCalendarTitle({ titles, selectedDate, content }));
-  //   setTitles('');
-  //   setContent('');
-  // };
 
   const handleClickPlan = (id) => {
     clickModal();
@@ -83,17 +74,20 @@ function PlanList({ currentMonth, selectedDate, onDateClick, clickModal }) {
   return (
     <PlanListWrapper>
       <ScheduleList>Schedule List</ScheduleList>
-      {selectedTitle.map((item, index) => {
-        return <StyledPlanList onClick={() => handleClickPlan(item.id)} key={index}>
-                  <GoDotFill color='#f5cc8d' size={15}></GoDotFill>
-                  <StyledTitle>
-                  {item.title}
-                  </StyledTitle>
-                  <SelectedDate>
-                  {item.date}
-                  </SelectedDate>
-                </StyledPlanList>
-      })}
+        <>
+        {filteredSelectedTitle.map((item, index) => (
+        <StyledPlanList onClick={() => handleClickPlan(item.id)} key={index}>
+          <GoDotFill color='#f5cc8d' size={15} />
+          <StyledTitle>{item.title}</StyledTitle>
+          <SelectedDate>{item.date}</SelectedDate>
+          <MdDeleteForever 
+            onClick={(e) => {e.stopPropagation(); handleDelete(item.id);} } 
+            size={30} 
+            style={{  marginLeft: '40px'}}>
+          </MdDeleteForever>
+        </StyledPlanList>
+        ))}
+      </>
     </PlanListWrapper>
   );
 }

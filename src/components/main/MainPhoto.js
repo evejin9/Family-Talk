@@ -18,7 +18,7 @@ const StyledMainPhoto = styled.div`
 
 const StyledSwiper = styled(Swiper)`
   width: 100%;
-  height: 40vh;
+  height: 50vh;
 `;
 
 const StyledSwiperSlide = styled(SwiperSlide)`
@@ -68,16 +68,15 @@ function MainPhoto(props) {
         modules={[Navigation, Pagination, Scrollbar, Autoplay]}
         loop={true}
         autoplay={{
-          delay: 2000,
+          delay: 3000,
         }}
         spaceBetween={20}
         slidesPerView={1}
         // navigation
         pagination={{ clickable: true }}
         // scrollbar={{ draggable: true }}
-        onSwiper={(swiper) => console.log(swiper)}
-        onSlideChange={() => console.log('slide change')}
-
+        // onSwiper={(swiper) => console.log(swiper)}
+        // onSlideChange={() => console.log('slide change')}
       >
         <StyledSwiperSlide>
           <img src={image} />
@@ -88,14 +87,9 @@ function MainPhoto(props) {
         <StyledSwiperSlide>
           <img src="https://ifh.cc/g/m85k78.jpg" />
         </StyledSwiperSlide>
-        
-        {/* <SwiperSlide>두번째</SwiperSlide>
-        <SwiperSlide>세번째</SwiperSlide>
-        <SwiperSlide>네번째</SwiperSlide> */}
       </StyledSwiper>
   
     // <StyledMainPhoto>
-
     //   <StyledImg
     //     src={image}
     //     alt='프로필 사진'

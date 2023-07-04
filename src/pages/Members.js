@@ -8,7 +8,7 @@ import { LogInUser } from '../features/loginSlice';
 
 const MembersBox = styled.div`
   width: 100%;
-  padding: 20px;
+  /* padding: 20px; */
   display: flex;
   justify-content: center;
   align-items: center;
@@ -16,12 +16,12 @@ const MembersBox = styled.div`
   `;
 
 const MembersCard = styled.div`
-  width: 300px;
+  width: 250px;
   background-color: #efefef;
   border-radius: 20px;
   box-shadow: 4px 4px 10px 0px rgba(0, 0, 0, 0.15);
   padding: 20px;
-  margin: 20px;
+  margin: 0px 20px 20px 20px;
   
   .relation {
     display: flex;
@@ -29,19 +29,19 @@ const MembersCard = styled.div`
     padding-bottom: 20px;
     
     img {
-      width: 80px;
-      height: 80px;
+      width: 60px;
+      height: 60px;
       border-radius: 50%;
       margin-right: 10px;
     }
     p {
-      font-size: 20px;
+      font-size: 18px;
       font-weight: 600;
     }
   }
   
   .birth, .name { 
-    font-size: 20px;
+    font-size: 15px;
     font-weight: 500;
     padding: 10px 0;
   }

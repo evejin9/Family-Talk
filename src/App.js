@@ -11,6 +11,8 @@ import Photo from './pages/Photo';
 import data from "./data.json";
 import Members from './pages/Members';
 import WritePhoto from './components/photo/WritePhoto';
+import LogIn from './pages/LogIn';
+import { useState } from 'react';
 
 
 const GlobalStyled = createGlobalStyle`
@@ -71,19 +73,26 @@ const Wrapper = styled.div`
   `;
 
 function App() {
+  const [showLogInModal, setShowLogInModal] = useState(true);
   return (
     <>
       <GlobalStyled />
       <Container>
         <Wrapper>
           <Routes>
-            <Route path='/' element={<Layout />}>
-              <Route path='/' element={<Main />} />
-              <Route path='/members' element={<Members />} />
-              <Route path='/calendar' element={<Calendar />} />
-              <Route path='/photo' element={<Photo />} />
-              <Route path='/writePhoto' element={<WritePhoto />} />
-            </Route>
+              {
+                showLogInModal 
+                ? 
+                  <Route path='/' element={<LogIn showLogInModal={showLogInModal} setShowLogInModal={setShowLogInModal} />} />
+                : 
+                  <Route path='/' element={<Layout />}>
+                    <Route path='/' element={<Main />} />
+                    <Route path='/members' element={<Members />} />
+                    <Route path='/calendar' element={<Calendar />} />
+                    <Route path='/photo' element={<Photo />} />
+                    <Route path='/writePhoto' element={<WritePhoto />} />
+                  </Route>
+              }
           </Routes>
         </Wrapper>
       </Container>

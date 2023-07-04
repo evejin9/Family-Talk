@@ -16,8 +16,8 @@ const fadeIn = keyframes`
 
 const Wrapper = styled.div`
   display: flex;
-  width: 1200px;
-  height: 800px;
+  width: 900px;
+  height: 700px;
   justify-content: center;
   align-items: center;
   background-color: gray;
@@ -35,7 +35,7 @@ const SelectedDateDiv = styled.div`
   margin-bottom: 10px;
   justify-content: center;
   align-items: center;
-  margin-left: 500px;
+  margin-left: 260px;
   font-size: 14px;
   border-radius: 6px;
 `;
@@ -48,6 +48,7 @@ const TitleInput = styled.input`
   border-radius: 10px;
   border: none;
   margin-top: 10px;
+  padding-left: 15px;
 `;
 
 const DetailInput = styled.textarea`
@@ -57,6 +58,8 @@ const DetailInput = styled.textarea`
   border-radius: 10px;
   border: none;
   resize: none;
+  padding-left: 15px;
+  padding-top: 15px;
 `;
 
 const ButtonWrapper = styled.div`
@@ -144,9 +147,6 @@ const CalendarPlanModal = ({ selectedDate, closeModal, onDateClick, selectedDate
 
       <ButtonWrapper>
         <StyledButton onClick={closeModal}>close</StyledButton>
-        {/* {selectedPlan && (
-          <StyledButton onClick={handleDelete}>delete</StyledButton>
-        )} */}
         <StyledButton onClick={handleCalendarData}>save</StyledButton>
       </ButtonWrapper>
     </Wrapper>

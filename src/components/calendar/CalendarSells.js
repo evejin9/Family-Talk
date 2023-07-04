@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { addDays, endOfMonth, endOfWeek, format, isSameDay, isSameMonth, parse, startOfMonth, startOfWeek } from 'date-fns'
 import styled from 'styled-components';
 import CalendarPlanModal from './CalendarPlanModal';
@@ -42,7 +42,7 @@ const CalendarContainer = styled.div`
     padding: 2px;
     color: #333;
     height: 70px;
-    margin-right: 5px;
+    margin-right: 3px;
   }
 
   .col.cell {
@@ -74,7 +74,7 @@ const CalendarContainer = styled.div`
 `;
 
 const SellInTitle = styled.div`
-      width: 70px;
+      width: 50px;
       /* background-color: #f5cc8d; */
       margin-top: 5px;
       margin-left: 2px;
@@ -82,13 +82,15 @@ const SellInTitle = styled.div`
       justify-content: start;
       align-items: center;
       font-size: 1px;
-      font-weight: 600;
+      font-weight: 500;
       
     .title {
       white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis;
       margin-left: 2px;
+      font-size: 7px;
+      width: 50px;
     }
 `;
 
@@ -102,6 +104,9 @@ function CalendarSells({ currentMonth, selectedDate, onDateClick, clickModal, fi
   const [deletedItems, setDeletedItems] = useState([]);
 
   const { title = '' } = selectedTitle.find((item) => item.date === selectedDate) || {};
+
+
+  
 
   const rows = [];
   let days = [];
@@ -141,18 +146,25 @@ function CalendarSells({ currentMonth, selectedDate, onDateClick, clickModal, fi
                 : ''
             }
           >
-            {formattedDate}
+            {formattedDate.toString()}
           </span>
 
           {filteredSelectedTitle
-            .filter((item) => item.date === cloneDay)
-            .map((item, index) => (
-              <SellInTitle key={index}>
-                <GoDotFill color='#f5cc8d' size={11}></GoDotFill>
-                <div className='title'>{item.title}</div>
-              </SellInTitle>
+              .filter((item) => {
+                const date = item.date instanceof Date ? format(item.date, 'yyyy-MM-dd') : item.date;
+                return date === cloneDay;
+              })
+              .map((item, index) => (
+                <SellInTitle key={index}>
+                  <GoDotFill color='#f5cc8d' size={11}></GoDotFill>
+                  <div className='title'>{item.title}</div>
+                </SellInTitle>
             ))}
-        </div>
+          </div>
+      
+      
+      
+      
       );
 
       day = addDays(day, 1);

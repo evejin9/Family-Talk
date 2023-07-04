@@ -6,6 +6,14 @@ import { useSelector } from 'react-redux';
 import { uuid } from "react-uuid";
 import { LogInUser } from '../features/loginSlice';
 import EditPhoto from '../components/photo/EditPhoto';
+import WritePhoto from "../components/photo/WritePhoto";
+import styled from 'styled-components';
+
+const PhotoWrapper = styled.div`
+.hidden {
+  display: none;
+}
+`
 
 function Photo() {
   // useEffect(() => {
@@ -13,25 +21,30 @@ function Photo() {
   //   initPhotoList(dataPhoto)
   // }, [])
   const [posts, setPosts] = useState([]);
-
+  // console.log(posts);
   const logInUSerInfo = useSelector(LogInUser)
 
   const handleInsert = useCallback((imagePath, content) => {
     const post = {
       name: logInUSerInfo.name,
       profileImage: logInUSerInfo.imagePath,
-      imagePath:"",
-      content: ''
+      imagePath,
+      content
     }
     setPosts(posts => posts.concat(post))
   }, [])
 
-
+console.log(handleInsert);
 
   return (
-    <div className='show-content'>
+    <PhotoWrapper className='show-content'>
         <PhotoList post={dataPhoto} />
-    </div>
+
+        <div className='hidden'>
+          <WritePhoto onInsert={handleInsert}/>
+          <EditPhoto post={dataPhoto} onInsert={handleInsert}/>
+        </div>
+    </PhotoWrapper>
     
   );
 }

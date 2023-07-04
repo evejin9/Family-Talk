@@ -33,8 +33,9 @@ align-items: start;
 }
 `
 
-function WritePhoto() {
+function WritePhoto({onInsert}) {
 
+  console.log(onInsert);
   const logInUSerInfo = useSelector(LogInUser)
   const navigate = useNavigate('/')
   
@@ -65,14 +66,15 @@ function WritePhoto() {
   }
 
   const submit = () => {
-    console.log('formValue: ', formValue);
-    const itemUuid = uuid()
-    console.log('itemUuid: ', itemUuid);
+    // console.log('formValue: ', formValue);
+    // const itemUuid = uuid()
+    // console.log('itemUuid: ', itemUuid);
+    // registPhotoItem({
+    //   id: itemUuid,
+    //   ...formValue
+    // });
 
-    registPhotoItem({
-      id: itemUuid,
-      ...formValue
-    });
+    // onInsert(formValue)
 
     navigate('/photo')
   }
@@ -85,7 +87,7 @@ function WritePhoto() {
       <div className='showImage'>
         {
           formValue.imagePath
-          ? <img src={formValue.imagePath}></img>
+          ? <img alt='사진' src={formValue.imagePath}></img>
           : ''
         }
       </div>

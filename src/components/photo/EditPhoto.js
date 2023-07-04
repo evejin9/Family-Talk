@@ -36,7 +36,7 @@ align-items: start;
 function EditPhoto(props) {
 
   const { editId } = useParams();
-  console.log(props);
+  // console.log(props);
 
   return (
     <EditPhotoWrapper>

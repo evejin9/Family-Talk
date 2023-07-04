@@ -15,6 +15,7 @@ const PhotoLIstItemWrapper = styled.div`
 border-radius: 8px;
 display: flex;
 position: relative;
+margin-bottom: 50px;
 
   .uploadImage{
   display: flex;
@@ -35,9 +36,6 @@ position: relative;
   }
 }
 
-& + & {
-  margin-top: 30px;
-}
 
 /* .iconAndContent {
   display: flex;

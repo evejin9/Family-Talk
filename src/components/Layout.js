@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Outlet, useNavigate } from 'react-router-dom';
+import { NavLink, Outlet, useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import { BsFillChatFill } from "react-icons/bs";
 
@@ -43,14 +43,19 @@ const Navbar = styled.nav`
     justify-content: space-between;
     align-items: center;
     font-size: 13px;
+  }
+`;
 
-    li {
-      color: #acacac;
-      
-      &:hover {
-        color: #f5cc8d;
-      }
-    }
+const Category = styled(NavLink)`
+  color: #acacac;
+  text-decoration: none;
+
+  &:hover {
+    color: #f5cc8d;
+  }
+
+  &.active {
+    color: #edaa45;
   }
 `;
 
@@ -62,7 +67,7 @@ const ShowItem = styled.div`
   display: flex;
   justify-content: center;
   position: relative;
-  `;
+`;
 
 const ProfileArea = styled.div`
   width: 25%;
@@ -109,11 +114,6 @@ const ProfileCard = styled.div`
   .birth {
     font-size: 15px;
   }
-`
-
-const OutletStyled = styled(Outlet)`
-  margin-top: 70px;
-  padding: 30px;
 `;
 
 const ChatButton = styled.div`
@@ -129,7 +129,7 @@ const ChatButton = styled.div`
       color: red;
     }
   }
-`
+`;
 
 const ChatBox = styled.div`
   width: 100%;
@@ -138,7 +138,7 @@ const ChatBox = styled.div`
   background-color: none;
   display: ${props => props.showModal ? "flex" : "none" };
   z-index: 10;
-`
+`;
 
 function Layout(props) {
   const [showChatModal, setShowChatModal] = useState(false);
@@ -165,10 +165,10 @@ function Layout(props) {
         </ul> */}
 
         <ul className='inner'>
-          <li className='cursor-point' onClick={() => navigate('/')}>Home</li>
-          <li className='cursor-point' onClick={() => navigate('/members')}>Members</li>
-          <li className='cursor-point' onClick={() => navigate('/calendar')}>Calendar</li>
-          <li className='cursor-point' onClick={() => navigate('/photo')}>Photo</li>
+          <li><Category to="/">Home</Category></li>
+          <li><Category to="/members">Members</Category></li>
+          <li><Category to="/calendar">Calendar</Category></li>
+          <li><Category to="/photo">Photo</Category></li>
         </ul>
         {/* 버튼 */}
       </Navbar>
@@ -185,7 +185,7 @@ function Layout(props) {
         </ProfileArea>
 
         {/* 페이지 영역 */}
-        <OutletStyled />
+        <Outlet />
       </ShowItem>
       
       {/* 채팅 버튼 */}

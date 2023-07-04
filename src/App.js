@@ -61,7 +61,7 @@ const GlobalStyled = createGlobalStyle`
   }
 
   .inner {
-    width: 1200px;
+    width: 900px;
   }
 `;
 
@@ -72,7 +72,7 @@ const Container = styled.div`
   `;
 
 const Wrapper = styled.div`
-    width: 1200px;
+    width: 900px;
     /* height: 850px; */
   `;
 

@@ -13,6 +13,8 @@ const Header = styled.div`
   margin-top: 20px;
   width: 68%;
   margin-bottom: 10px;
+
+  
 `;
 
 const StyledDiv = styled.div`

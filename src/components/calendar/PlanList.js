@@ -33,6 +33,7 @@ const StyledPlanList = styled.div`
   display: flex;
   align-items: center;
   border: 0.4px solid #f5cc8d;
+  padding: 3px 0;
   cursor: pointer;
   &:hover {
     background-color: #f5cc8d;
@@ -82,7 +83,7 @@ function PlanList({ currentMonth, selectedDate, onDateClick, clickModal, filtere
           <SelectedDate>{item.date}</SelectedDate>
           <MdDeleteForever 
             onClick={(e) => {e.stopPropagation(); handleDelete(item.id);} } 
-            size={30} 
+            size={25} 
             style={{  marginLeft: '40px'}}>
           </MdDeleteForever>
         </StyledPlanList>

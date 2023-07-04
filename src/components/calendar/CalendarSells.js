@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { addDays, endOfMonth, endOfWeek, format, isSameDay, isSameMonth, parse, startOfMonth, startOfWeek } from 'date-fns'
+import { addDays, endOfMonth, endOfWeek, format, isSameDay, isSameMonth, parse, startOfMonth, startOfWeek, parseISO  } from 'date-fns'
 import styled from 'styled-components';
 import CalendarPlanModal from './CalendarPlanModal';
 import { useDispatch, useSelector } from 'react-redux';
@@ -109,6 +109,7 @@ function CalendarSells({ currentMonth, selectedDate, onDateClick, clickModal, fi
   let formattedDate = '';
 
   const handleDateClick = (clickedDate) => {
+    const parsedDate = parseISO(clickedDate);
     onDateClick(clickedDate);
     clickModal();
   };

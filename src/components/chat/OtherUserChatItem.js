@@ -30,12 +30,12 @@ const OtherUserChat = styled.div`
 `;
 
 function OtherUserChatItem(props) {
-  const { chat : {id, name, relation, content, time}, userData } = props;
+  const { chat : {id, name, content, time}, userData, target : { memberId, relation } }  = props;
 
   return (
     <OtherUserChat>
       {userData.map(user => {
-        return user.relation === relation && <img className='profile' key={user.id} src={user.imagePath} />
+        return user.id === memberId && <img className='profile' key={user.id} src={user.imagePath} />
       })}
       <div className='chatArea'>
         <span>{relation}</span>

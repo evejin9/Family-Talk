@@ -27,7 +27,7 @@ const Mychat = styled.div`
 `;
 
 function MyChatItem(props) {
-  const { chat : {id, relation, content, time} } = props;
+  const { chat : {id, content, time}, target : { memberId, relation } } = props;
 
   return (
     <Mychat>

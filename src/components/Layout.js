@@ -96,9 +96,8 @@ const ProfileCard = styled.div`
   
   
   img {
-    border: 2px solid #ccc;
+    border: 1px solid #ccc;
     border-radius: 8px;
-    padding: 20px;
   }
   
   .name {

@@ -52,9 +52,9 @@ const MembersCard = styled.div`
 function Members(props) {
   const logInUser = useSelector(LogInUser);
 
-  const NewData = [...data];
+  const newData = [...data];
 
-  const oldAgeArray = NewData.sort((a, b) => { if (a.birth < b.birth) return -1; })
+  const oldAgeArray = newData.sort((a, b) => { if (a.birth < b.birth) return -1; })
 
   const loginUserRelation = logInUser.members;
   
@@ -62,20 +62,19 @@ function Members(props) {
     <MembersBox>
       {
         oldAgeArray.map((user) => 
+
         // 로그인 유저가 가지고 있는 
-        // members.memberId와 user.id의 값이 일치하면 members.relation을 출력
-        // console.log(user)
-
-
+        // logInUser.embers.memberId와 user.id의 값이 일치하는 index를 찾아내어
+        // logInUser.members.relation을 출력
 
         <MembersCard key={user.id}>
             <div className='relation'>
               <img src={user.imagePath}></img>
-              {/* <p>{logInUser.members[1].relation}</p> */}
+              <p>{logInUser.members[1].relation}</p>
             </div>
             <p className='name'>이름: {user.name}</p>
             <p className='birth'>생년월일: {user.birth}</p>
-          </MembersCard>
+        </MembersCard>
         )
       }
     </MembersBox>

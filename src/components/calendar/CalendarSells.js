@@ -41,7 +41,7 @@ const CalendarContainer = styled.div`
     font-size: 0.65em;
     padding: 2px;
     color: #333;
-    height: 100px;
+    height: 70px;
     margin-right: 5px;
   }
 

@@ -5,26 +5,27 @@ import styled from 'styled-components';
 import { findLoginUser, pushLogIn } from '../features/loginSlice';
 
 import userData from "../data.json";
+import logo from "../images/logo.png";
 
 const LogInModalWrapper = styled.div`
-  width: 100vw;
+  width: 100%;
   height: 100%;
   background-color: #fff;
-  position: absolute;
+  /* position: absolute; */
   display: ${props => props.showLogInModal ? `flex` : `none`};
   justify-content: center;
-  align-items: center;
+  align-items:center;
 `;
 
 const LogInBox = styled.div`
+  /* margin-top: 200px; */
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
 
-  h2{
-    font-size: 60px;
-    padding: 60px;
+  .logo {
+    margin-bottom: 60px;
   }
 
   input {
@@ -64,8 +65,9 @@ const LogInBox = styled.div`
   }
 `;
 
-function LoginModal(props) {
-  const [showLogInModal, setShowLogInModal] = useState(true);
+function LogIn(props) {
+  const { showLogInModal, setShowLogInModal } = props;
+  // const [showLogInModal, setShowLogInModal] = useState(true);
   const [logInId, setLogInId] = useState('');
   const [logInPw, setLogInPw] = useState('');
 
@@ -98,7 +100,7 @@ function LoginModal(props) {
     <LogInModalWrapper showLogInModal={showLogInModal} >
       <LogInBox>
           <p>아이디: aa ~ gg 중 아무거나 / 비번: 1234</p>
-          <h2>사이트 이름</h2>
+          <img className='logo' src={logo}  />
           <input 
             type='text' 
             value={logInId} 
@@ -129,4 +131,4 @@ function LoginModal(props) {
   );
 }
 
-export default LoginModal;
+export default LogIn;

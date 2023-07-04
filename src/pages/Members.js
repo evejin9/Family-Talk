@@ -3,7 +3,7 @@ import styled from 'styled-components';
 
 import data from "../data.json";
 import { useSelector } from 'react-redux';
-import { LogInUser, findLoginUser } from '../features/loginSlice';
+import { LogInUser } from '../features/loginSlice';
 
 
 const MembersBox = styled.div`
@@ -52,19 +52,26 @@ const MembersCard = styled.div`
 function Members(props) {
   const logInUser = useSelector(LogInUser);
 
-  const newUser = [...data];
+  const NewData = [...data];
 
-  console.log(logInUser);
+  const oldAgeArray = NewData.sort((a, b) => { if (a.birth < b.birth) return -1; })
+
+  const loginUserRelation = logInUser.members;
   
   return (
     <MembersBox>
       {
-        newUser.sort((a,b) => { if (a.birth < b.birth) return -1; })
-        .map((user) => 
-          <MembersCard key={user.id}>
+        oldAgeArray.map((user) => 
+        // 로그인 유저가 가지고 있는 
+        // members.memberId와 user.id의 값이 일치하면 members.relation을 출력
+        // console.log(user)
+
+
+
+        <MembersCard key={user.id}>
             <div className='relation'>
               <img src={user.imagePath}></img>
-                <p>{user.relation}</p>
+              {/* <p>{logInUser.members[1].relation}</p> */}
             </div>
             <p className='name'>이름: {user.name}</p>
             <p className='birth'>생년월일: {user.birth}</p>

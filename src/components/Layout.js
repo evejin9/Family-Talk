@@ -4,7 +4,6 @@ import styled from 'styled-components';
 import { BsFillChatFill } from "react-icons/bs";
 
 import Chat from '../pages/Chat';
-import LoginModal from './LogInModal';
 import { LogInUser } from '../features/loginSlice';
 import { useSelector } from 'react-redux';
 
@@ -170,7 +169,7 @@ function Layout(props) {
         </ul>
         {/* 버튼 */}
       </Navbar>
-
+      
       <ShowItem  >
         {/* 유저 정보 */}
         <ProfileArea>

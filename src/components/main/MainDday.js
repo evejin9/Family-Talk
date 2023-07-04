@@ -7,16 +7,12 @@ import styled from 'styled-components';
 // import differenceInCalendarDays from "@bit/date-fns.date-fns.difference-in-calendar-days";
 
 const StyledSection = styled.div`
-  width: 100%;
-  height: 10vh;
-  min-width: 450px;
-  margin-top: 20px;
-  border-radius: 8px;
+  width: 50%;
+  height: 70%;
   color: #333333;
-  background-color: #EFEFEF;
   display: flex;
   align-items: center;
-  padding: 0 20px;
+  padding: 0 25px;
   box-sizing: border-box;
 
   & div {

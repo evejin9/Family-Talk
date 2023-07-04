@@ -4,6 +4,8 @@ import data from "../../data.json";
 import differenceInCalendarDays from "date-fns/differenceInCalendarDays";
 import { differenceInDays, format } from 'date-fns';
 import styled from 'styled-components';
+import { useSelector } from 'react-redux';
+import { LogInUser } from '../../features/loginSlice';
 // import differenceInCalendarDays from "@bit/date-fns.date-fns.difference-in-calendar-days";
 
 const StyledSection = styled.div`
@@ -26,6 +28,8 @@ const StyledSection = styled.div`
 `;
 
 function MainDday(props) {
+  const logInUserInfo = useSelector(LogInUser);
+
   const familyBirthDate = data.map(person => {
     const today = new Date();
     const personBirth = new Date(person.birth);
@@ -52,7 +56,14 @@ function MainDday(props) {
   const showDdayPerson = familyBirthDate.filter(person => {
     return person.thisYearDday === showDday || person.nextYearDday === showDday;
   });
-  // console.log(showDdayPerson[0]);
+  // console.log(showDdayPerson[0]); // 생일인 멤버 정보
+
+  // console.log(logInUserInfo.members); // 로그인 유저 정보 및 멤버 아이디,관계 정보
+
+  const birthMember = logInUserInfo.members.filter(member => {
+    return member.memberId === showDdayPerson[0].id;
+  })
+  // console.log(birthMember[0].relation);
 
   return (
     <StyledSection>
@@ -63,7 +74,7 @@ function MainDday(props) {
             : `D${showDday}`
           }</p>
         <p>
-          {`${showDdayPerson[0].name}(${showDdayPerson[0].members})`} 생일
+          {`${birthMember[0].relation}(${showDdayPerson[0].name})`} 생일
         </p>
       </div>
     </StyledSection>

@@ -8,6 +8,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import { uuid } from "react-uuid";
 import { BsFillTrash3Fill } from "react-icons/bs";
 import { PiPencil, PiTrash } from "react-icons/pi";
+import EditPhoto from './EditPhoto';
 
 const PhotoLIstItemWrapper = styled.div`
 /* background-color: #efeeef; */
@@ -141,9 +142,9 @@ position: relative;
 `
 
 function PhotoListItem({post}) {
-  console.log('post: ', post);
+  // console.log(post.id);
 
-
+  const navigate = useNavigate('/')
   const onRemove = () => {
 
   }
@@ -158,7 +159,7 @@ function PhotoListItem({post}) {
           <div className='profileImgNameMore'>
             <img src={post.profileImage} alt='profileImg'></img>
             <span className='name'>{post.name}</span> 
-            <button><PiPencil /></button>
+            <button onClick={() => navigate(`/editPhoto/${post.id}`)} ><PiPencil /></button>
             <button
               onClick={() => {onRemove(post.id);}}
             ><PiTrash /></button>

@@ -78,7 +78,6 @@ const Wrapper = styled.div`
   `;
 
 function App() {
-  const [showLogInModal, setShowLogInModal] = useState(true);
   return (
     <>
       <GlobalStyled />
@@ -93,7 +92,7 @@ function App() {
               <Route path='/writePhoto' element={<WritePhoto />} />
               <Route path='/editPhoto/:editPhotoId' element={<EditPhoto />} />
             </Route>
-            <Route path='/login' element={<LogIn showLogInModal={showLogInModal} setShowLogInModal={setShowLogInModal} />} />
+            <Route path='/login' element={<LogIn />} />
           </Routes>
         </Wrapper>
       </Container>

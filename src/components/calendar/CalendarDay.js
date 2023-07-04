@@ -4,19 +4,19 @@ import styled from 'styled-components';
 
 const StyledDiv = styled.div`
   display: flex;
-  font-size: 16px;
+  font-size: 14px;
   /* justify-content: space-around; */
   margin-top: 20px;
   font-weight: 600;
   /* margin-left: 5px; */
-  width: 65%;
+  width: 40%;
   margin-bottom: 28px;
   
   .col {
     margin-right: 33px;
     background-color: #f5cc8d;
     border-radius: 6px;
-    margin-left: 20px;
+    margin-left: 3px;
     width: 160px;
   } 
 `;

@@ -16,6 +16,7 @@ import EditPhoto from './components/photo/EditPhoto';
 
 import LogIn from './pages/LogIn';
 import { useState } from 'react';
+import AutoCheck from './components/AutoCheck';
 
 
 
@@ -84,7 +85,7 @@ function App() {
       <Container>
         <Wrapper>
           <Routes>
-            <Route path='/' element={<Layout />}>
+            <Route path='/' element={<AutoCheck><Layout /></AutoCheck>}>
               <Route index element={<Main />} />
               <Route path='/members' element={<Members />} />
               <Route path='/calendar' element={<Calendar />} />

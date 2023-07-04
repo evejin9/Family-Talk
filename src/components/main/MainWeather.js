@@ -3,17 +3,26 @@ import styled from 'styled-components';
 import { MoonLoader } from "react-spinners";
 
 const StyledSection = styled.div`
-  width: 50%;
-  height: 40vh;
-  min-width: 450px;
+  width: 100%;
+  height: 10vh;
+  border: 2px solid #efefef;
   border-radius: 8px;
   font-size: 18px;
-  /* margin-left: 20px; */
+  margin-top: 20px;
   display: flex;
   align-items: center;
   justify-content: center;
 
-  &.container_cool{
+  @media screen and (max-width: 740px) {
+    p {
+      font-size: 14px;
+    }
+    img {
+      width: 80px;
+    }
+  }
+
+  /* &.container_cool{
     background: #005AA7;
     background: -webkit-linear-gradient(to bottom, #005AA7, #FFFDE4);
     background: linear-gradient(to bottom, #005AA7, #FFFDE4);
@@ -22,10 +31,10 @@ const StyledSection = styled.div`
     background: #FDC830;
     background: -webkit-linear-gradient(to bottom, #F37335, #FDC830);
     background: linear-gradient(to bottom, #F37335, #FDC830);
-  }
+  } */
 
   .weather-contents {
-    color: #fff;
+    /* color: #fff; */
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
@@ -36,16 +45,16 @@ const StyledSection = styled.div`
     }
 
     .today-date {
-      font-size: 24px;
+      /* font-size: 24px; */
     }
     .location {
-      font-size: 30px;
+      /* font-size: 30px; */
     }
     .temp {
-      font-size: 60px;
+      /* font-size: 60px; */
     }
     .temp-icon {
-      width: 120px;
+      /* width: 120px; */
     }
   }
 `;
@@ -91,7 +100,9 @@ function MainWeather({ today }) {
   };
 
   return (
-    <StyledSection className={temp > 26 ? "container_warm" : "container_cool"}>
+    <StyledSection
+      // className={temp > 26 ? "container_warm" : "container_cool"}
+    >
       {
         loading
         ?

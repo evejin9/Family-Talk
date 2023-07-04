@@ -1,5 +1,5 @@
 export const getPhotoItem = (id) => {
-  const photoListString = window.localStorage.getItem('photoLIst')
+  const photoListString = window.localStorage.getItem('photoList')
   const photoList = JSON.parse(photoListString)
 
   return photoList.find(photo => photo.id === id)
@@ -16,7 +16,7 @@ export const registPhotoItem = (data) => {
   if(!photoListString) photoListString = JSON.stringify([])
 
   const photoList = JSON.parse(photoListString)
-  const newPhotoList = JSON.stringify([...photoList, data])
+  const newPhotoList = JSON.stringify([data,...photoList])
   window.localStorage.setItem('photoList', newPhotoList)
 }
 export const initPhotoList = (photoList) => {

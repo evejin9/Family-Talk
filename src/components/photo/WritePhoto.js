@@ -5,6 +5,7 @@ import { LogInUser } from '../../features/loginSlice';
 import { useSelector } from 'react-redux';
 import { registPhotoItem } from '../../utils/local-storage.util';
 import  uuid  from "react-uuid";
+import { useNavigate } from 'react-router-dom';
 
 const WritePhotoWrapper = styled.div`
 width: 100%;
@@ -35,11 +36,11 @@ align-items: start;
 function WritePhoto() {
 
   const logInUSerInfo = useSelector(LogInUser)
+  const navigate = useNavigate('/')
   
-  useEffect(() => {
-    console.log('logInUSerInfo: ', logInUSerInfo);
-
-  }, [])
+  // useEffect(() => {
+  //   console.log('logInUSerInfo: ', logInUSerInfo);
+  // }, []);
 
   const formInitValue = {
     name: logInUSerInfo.name,
@@ -72,6 +73,8 @@ function WritePhoto() {
       id: itemUuid,
       ...formValue
     });
+
+    navigate('/photo')
   }
 
   return (

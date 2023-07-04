@@ -63,7 +63,7 @@ function Calendar(props) {
         <PlanList currentMonth={currentMonth} selectedDate={selectedDate} clickModal={clickModal} onDateClick={onDateClick} filteredSelectedTitle={filteredSelectedTitle}
         handleDelete={handleDelete}/>
         {modal && (
-          <div className='modal-container' style={{ position: 'absolute', top:'0%', right: '0%', }}>
+          <div className='modal-container' style={{ position: 'absolute', top:'-10%', right: '0%', }}>
             <CalendarPlanModal closeModal={closeModal} selectedDate={selectedDate} onDateClick={onDateClick} />
           </div>
         )}

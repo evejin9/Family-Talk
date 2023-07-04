@@ -8,15 +8,15 @@ import { MdDeleteForever } from 'react-icons/md'
 
 const PlanListWrapper = styled.div`
   /* background-color: orange; */
-  width: 270px;
+  width: 220px;
   /* height: 300px; */
   position: absolute;
-  top: 100px;
+  top: 60px;
   right: 0px;
 `;
 
 const ScheduleList = styled.div`
-  font-size: 18px;
+  font-size: 14px;
   font-weight: bold;
   display: flex;
   align-items: center;
@@ -33,6 +33,8 @@ const StyledPlanList = styled.div`
   display: flex;
   align-items: center;
   border: 0.4px solid #f5cc8d;
+  padding: 3px 0;
+
   cursor: pointer;
   &:hover {
     background-color: #f5cc8d;
@@ -47,6 +49,7 @@ const StyledTitle = styled.div`
   text-overflow: ellipsis;
   margin-left: 5px;
   font-weight: 600;
+  font-size: 11px;
 `;
 
 
@@ -56,6 +59,7 @@ const SelectedDate = styled.div`
   display: flex;
   align-items: center;
   justify-content: flex-end;
+  font-size: 10px;
 `;
 
 
@@ -82,8 +86,8 @@ function PlanList({ currentMonth, selectedDate, onDateClick, clickModal, filtere
           <SelectedDate>{item.date}</SelectedDate>
           <MdDeleteForever 
             onClick={(e) => {e.stopPropagation(); handleDelete(item.id);} } 
-            size={30} 
-            style={{  marginLeft: '40px'}}>
+            size={25} 
+            style={{  marginLeft: '20px'}}>
           </MdDeleteForever>
         </StyledPlanList>
         ))}

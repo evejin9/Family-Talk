@@ -13,13 +13,13 @@ const chatSlice = createSlice({
     getChatList: (state, { payload: chat }) => {
       state.chatList = chat;
     },
-    addChatList: (state, { payload: { newChat, nextId } }) => {
+    addChatList: (state, { payload: { newChat, nextId, logInUser } }) => {
       const now = new Date();
       const time = format(now, `HH:mm`);
 
       state.chatList.push({
         id: `${nextId.current += 1}`,
-        relation: "나",
+        memberId: logInUser.id,
         content: newChat,
         time: time,
       });

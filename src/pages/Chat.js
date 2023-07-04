@@ -11,6 +11,7 @@ import userData from "../data.json";
 import MyChatItem from '../components/chat/MyChatItem';
 import OtherUserChatItem from '../components/chat/OtherUserChatItem';
 import { addChatList, chatListArray, getChatList, } from '../features/chatSlice';
+import { LogInUser } from '../features/loginSlice';
 
 
 const ChatUi = styled.div`
@@ -175,6 +176,8 @@ function Chat(props) {
   const [imgFile, setImgFile] = useState('');
 
   const chatList = useSelector(chatListArray);
+  const logInUser = useSelector(LogInUser);
+
   const dispatch = useDispatch();
 
   const date = new Date();
@@ -218,7 +221,7 @@ function Chat(props) {
   const addNewChat = () => {
     newChat !== '' && 
     
-    dispatch(addChatList({newChat, nextId}));
+    dispatch(addChatList({newChat, nextId, logInUser}));
     setNewChat('');
     setImgFile('');
   }
@@ -240,9 +243,13 @@ function Chat(props) {
         <div className='today'>{today}</div>
 
         {chatList.map((chat) => {
-          return chat.relation === '나' ? 
-            <MyChatItem chat={chat} key={chat.id} /> : 
-            <OtherUserChatItem chat={chat} key={chat.id} userData={userData} />
+          const target = logInUser.members.find((a) => a.memberId === chat.memberId);
+
+          return (
+            target.relation === '나' ? 
+            <MyChatItem chat={chat} key={chat.id} target={target} /> : 
+            <OtherUserChatItem chat={chat} key={chat.id} userData={userData} target={target} />
+          )
         })}
 
         {/* 하단으로 자동 스크롤 하기 위한 div */}

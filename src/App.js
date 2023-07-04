@@ -11,8 +11,12 @@ import Photo from './pages/Photo';
 import data from "./data.json";
 import Members from './pages/Members';
 import WritePhoto from './components/photo/WritePhoto';
+
+import EditPhoto from './components/photo/EditPhoto';
+
 import LogIn from './pages/LogIn';
 import { useState } from 'react';
+
 
 
 const GlobalStyled = createGlobalStyle`
@@ -91,6 +95,7 @@ function App() {
                     <Route path='/calendar' element={<Calendar />} />
                     <Route path='/photo' element={<Photo />} />
                     <Route path='/writePhoto' element={<WritePhoto />} />
+                    <Route path='/editPhoto/:editPhotoId' element={<EditPhoto />} />
                   </Route>
               }
           </Routes>

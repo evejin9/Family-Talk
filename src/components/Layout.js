@@ -8,6 +8,8 @@ import LoginModal from './LogInModal';
 import { LogInUser } from '../features/loginSlice';
 import { useSelector } from 'react-redux';
 
+import logo from "../images/logo.png";
+
 const LayoutStyled = styled.div`
   width: 100%;
   margin: 0 auto;
@@ -18,7 +20,7 @@ const LayoutStyled = styled.div`
   align-items: center;
   /* background-color: #f0f8ff; */
   position: relative;
-  border: 1px solid;
+  /* border: 1px solid; */
 `;
 
 const Navbar = styled.nav`
@@ -56,49 +58,57 @@ const Navbar = styled.nav`
 const ShowItem = styled.div`
   width: 100%;
   height: 100%;
-  margin-top: 70px;
+  margin-top: 100px;
   display: flex;
   justify-content: center;
   position: relative;
   `;
 
 const ProfileArea = styled.div`
-  width: 35%;
+  width: 25%;
   position: relative;
   /* display: flex;
   align-items: center; */
   box-sizing: border-box;
-  margin: 10px;
+  margin: 20px;
+
+  img {
+    /* padding: 20px; */
+    width: 100%;
+  }
 `;
 
 const ProfileCard = styled.div`
   width: 100%;
-  height: 500px;
+  /* height: 400px; */
   padding: 10px;
   border-radius: 15px;
-  background-color: #efefef;
+  /* background-color: #efefef; */
   display: flex;
   flex-direction: column;
   justify-content: center;
   position: absolute;
   /* position: fixed; */
   margin: 0 auto;
-  top: 60px;
+  top: 180px;
   left: 0;
   right: 0;
   
   
   img {
+    border: 2px solid #ccc;
+    border-radius: 8px;
+    padding: 20px;
   }
   
   .name {
-    font-size: 26px;
+    font-size: 20px;
     font-weight: 600;
     padding: 30px 0;
   }
 
   .birth {
-    font-size: 20px;
+    font-size: 15px;
   }
 `
 
@@ -164,6 +174,7 @@ function Layout(props) {
       <ShowItem  >
         {/* 유저 정보 */}
         <ProfileArea>
+          <img src={logo} />
           <ProfileCard>
             <img src={logInUSerInfo.imagePath} /> 
             <p className='name'>{logInUSerInfo.name} 님</p>          
@@ -186,7 +197,7 @@ function Layout(props) {
       </ChatBox>
       
       {/* 로그인 모달 */}
-        <LoginModal />
+        {/* <LoginModal /> */}
     </LayoutStyled>
   );  
 }

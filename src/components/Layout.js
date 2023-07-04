@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import { BsFillChatFill } from "react-icons/bs";
 
 import Chat from '../pages/Chat';
-import { LogInUser } from '../features/loginSlice';
+import { LogInUser, isUserLogin } from '../features/loginSlice';
 import { useSelector } from 'react-redux';
 
 import logo from "../images/logo.png";
@@ -142,7 +142,10 @@ const ChatBox = styled.div`
 
 function Layout(props) {
   const [showChatModal, setShowChatModal] = useState(false);
-  const logInUSerInfo = useSelector(LogInUser)
+
+  const logInUSerInfo = useSelector(LogInUser);
+  const isLogin = useSelector(isUserLogin);
+
   const navigate = useNavigate('/');
 
   const handleChatModal = () => {

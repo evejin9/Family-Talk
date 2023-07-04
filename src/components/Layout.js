@@ -144,9 +144,6 @@ function Layout(props) {
   const [showChatModal, setShowChatModal] = useState(false);
 
   const logInUSerInfo = useSelector(LogInUser);
-  const isLogin = useSelector(isUserLogin);
-
-  const navigate = useNavigate('/');
 
   const handleChatModal = () => {
     setShowChatModal(true);
@@ -197,9 +194,6 @@ function Layout(props) {
       <ChatBox showModal = {showChatModal} >
         <Chat setShowChatModal={setShowChatModal} />
       </ChatBox>
-      
-      {/* 로그인 모달 */}
-        {/* <LoginModal /> */}
     </LayoutStyled>
   );  
 }

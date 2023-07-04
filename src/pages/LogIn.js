@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
 
-import { findLoginUser, pushLogIn } from '../features/loginSlice';
+import { findLoginUser, isUserLogin } from '../features/loginSlice';
 
 import userData from "../data.json";
 import logo from "../images/logo.png";
@@ -13,7 +13,7 @@ const LogInModalWrapper = styled.div`
   height: 100%;
   background-color: #fff;
   /* position: absolute; */
-  display: ${props => props.showLogInModal ? `flex` : `none`};
+  display: ${props => props.isLogin ? `none` : `flex`};
   justify-content: center;
   align-items:center;
 `;
@@ -67,10 +67,10 @@ const LogInBox = styled.div`
 `;
 
 function LogIn(props) {
-  const { showLogInModal, setShowLogInModal } = props;
-  // const [showLogInModal, setShowLogInModal] = useState(true);
   const [logInId, setLogInId] = useState('');
   const [logInPw, setLogInPw] = useState('');
+
+  const isLogin = useSelector(isUserLogin);
 
   const navigate = useNavigate();
 
@@ -88,20 +88,18 @@ function LogIn(props) {
     const logInUser = userData.find(user =>  user.id === logInId);
 
     if(logInId === logInUser?.id && Number(logInPw) === logInUser?.password) {
-      dispatch(pushLogIn({logInId, logInPw}));
       dispatch(findLoginUser(logInUser));
       alert(`${logInUser.name}님, 환영합니다!`);
       setLogInId('');
       setLogInPw('');
-      setShowLogInModal(false);
       navigate('/');
     } else {
       alert(`아이디와 비밀번호를 다시 확인해주세요`);
     }
   }
 
-  return (
-    <LogInModalWrapper showLogInModal={showLogInModal} >
+  return (    
+    <LogInModalWrapper isLogin={isLogin} >
       <LogInBox>
           <p>아이디: aa ~ gg 중 아무거나 / 비번: 1234</p>
           <img className='logo' src={logo}  />
@@ -122,11 +120,7 @@ function LogIn(props) {
               }
             }}
           />
-          <button 
-            onClick={submitLoginData}
-          >
-            로그인
-          </button>
+          <button onClick={submitLoginData}> 로그인 </button>
           <div>
             <ul>
               <li className='cursor-point'>비밀번호 찾기</li>

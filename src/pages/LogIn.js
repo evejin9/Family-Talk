@@ -6,6 +6,7 @@ import { findLoginUser, pushLogIn } from '../features/loginSlice';
 
 import userData from "../data.json";
 import logo from "../images/logo.png";
+import { useNavigate } from 'react-router';
 
 const LogInModalWrapper = styled.div`
   width: 100%;
@@ -71,6 +72,8 @@ function LogIn(props) {
   const [logInId, setLogInId] = useState('');
   const [logInPw, setLogInPw] = useState('');
 
+  const navigate = useNavigate();
+
   const dispatch = useDispatch();
 
   const handleLogId = (e) => {
@@ -91,6 +94,7 @@ function LogIn(props) {
       setLogInId('');
       setLogInPw('');
       setShowLogInModal(false);
+      navigate('/');
     } else {
       alert(`아이디와 비밀번호를 다시 확인해주세요`);
     }
@@ -118,7 +122,11 @@ function LogIn(props) {
               }
             }}
           />
-          <button onClick={submitLoginData}>로그인</button>
+          <button 
+            onClick={submitLoginData}
+          >
+            로그인
+          </button>
           <div>
             <ul>
               <li className='cursor-point'>비밀번호 찾기</li>

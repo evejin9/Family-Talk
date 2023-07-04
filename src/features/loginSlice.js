@@ -7,6 +7,7 @@ const initialState = {
     password: ''
   },
   logInUserInfo: {},
+  isLogin: false,
 }
 
 const logInSlice = createSlice({
@@ -18,7 +19,8 @@ const logInSlice = createSlice({
       state.logInData.password = logInPw;
     },
     findLoginUser: (state, {payload}) => {
-      state.logInUserInfo = payload
+      state.logInUserInfo = payload;
+      state.isLogin = true;
     }
   }
 })
@@ -26,5 +28,7 @@ const logInSlice = createSlice({
 export const { pushLogIn, findLoginUser } = logInSlice.actions;
 
 export const LogInUser = (state) => state.login.logInUserInfo; 
+export const isUserLogin = (state) => state.login.isLogin; 
+
 
 export default logInSlice.reducer;

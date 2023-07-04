@@ -1,31 +1,39 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
-import styled from 'styled-components';
 import { selectTitle } from '../../features/calendarSlice';
 import { useNavigate } from 'react-router-dom';
+import styled from 'styled-components';
+import { AiOutlinePlusCircle } from "react-icons/ai";
 
 const StyledSection = styled.div`
-  width: 100%;
-  height: 10vh;
-  min-width: 450px;
-  margin-top: 20px;
-  border-radius: 8px;
+  width: 50%;
+  height: 70%;
   color: #333333;
-  background-color: #EFEFEF;
+  border-right: 2px solid #F5CC8D;
+  padding: 0 25px;
+  box-sizing: border-box;
   display: flex;
   align-items: center;
-  padding: 0 20px;
-  box-sizing: border-box;
+  justify-content: space-between;
 
-  cursor: pointer;
-  
-  :hover {
-    background-color: #F5CC8D;
+  div {
+    display: flex;
+
+    p:first-child {
+      font-weight: 700;
+      margin-right: 20px;
+    }
   }
-  p:first-child {
-    font-weight: 700;
-    margin-right: 20px;
+
+  svg {
+    font-size: 20px;
+    cursor: pointer;
+
+    :hover {
+      color: #F5CC8D;
+    }
   }
+
 `;
 
 function MainTodaySchedule({ today }) {
@@ -45,16 +53,19 @@ function MainTodaySchedule({ today }) {
   };
 
   return (
-    <StyledSection onClick={handleCalendar}>
-      <p>오늘의 일정</p>
-      <p>
-        {todaySchedule.length === 0 
-          ? `일정이 없습니다.` 
-          : todaySchedule.length >= 1
+    <StyledSection>
+      <div>
+        <p>오늘의 일정</p>
+        <p>
+          {todaySchedule.length === 0 
+            ? `일정이 없습니다.` 
+            : todaySchedule.length >= 1
             ? `${todaySchedule.map(schedule => schedule.title)}`
             : todaySchedule
-        }
-      </p>
+          }
+        </p>
+      </div>
+      <AiOutlinePlusCircle onClick={handleCalendar} />
     </StyledSection>
   );
 }

@@ -7,8 +7,19 @@ import MainWeather from '../components/main/MainWeather';
 import styled from 'styled-components';
 
 const MainWrapper = styled.div`
+  width: 100%;
+  height: 10vh;
+  border: 2px solid #efefef;
+  border-radius: 8px;
+  margin-top: 20px;
+
   display: flex;
   flex-wrap: wrap;
+  align-items: center;
+
+  & div + div {
+    /* margin-left: 20px; */
+  }
 `;
 
 function Main(props) {
@@ -24,10 +35,8 @@ function Main(props) {
 
   return (
     <div className='show-content'>
-      <MainWrapper>
-        <MainPhoto />
-        <MainWeather today={today} />
-      </MainWrapper>
+      <MainPhoto />
+      <MainWeather today={today} />
       <MainWrapper>
         <MainTodaySchedule today={today} />
         <MainDday />

@@ -43,6 +43,7 @@ function WritePhoto() {
 
   const formInitValue = {
     name: logInUSerInfo.name,
+    profileImage: logInUSerInfo.imagePath,
     imagePath:"",
     content: ''
   }

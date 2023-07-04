@@ -61,21 +61,23 @@ function Members(props) {
   return (
     <MembersBox>
       {
-        oldAgeArray.map((user) => 
-
         // 로그인 유저가 가지고 있는 
         // logInUser.embers.memberId와 user.id의 값이 일치하는 index를 찾아내어
         // logInUser.members.relation을 출력
+        oldAgeArray.map((user) => {
+          const target = loginUserRelation.find((a) => a.memberId === user.id);
 
-        <MembersCard key={user.id}>
-            <div className='relation'>
-              <img src={user.imagePath}></img>
-              <p>{logInUser.members[1].relation}</p>
-            </div>
-            <p className='name'>이름: {user.name}</p>
-            <p className='birth'>생년월일: {user.birth}</p>
-        </MembersCard>
-        )
+          return (
+            <MembersCard key={user.id}>
+              <div className='relation'>
+                <img src={user.imagePath}></img>
+                <p>{target.relation}</p>
+              </div>
+              <p className='name'>이름: {user.name}</p>
+              <p className='birth'>생년월일: {user.birth}</p>
+            </MembersCard>
+          )
+        })
       }
     </MembersBox>
   );

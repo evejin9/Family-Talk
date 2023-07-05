@@ -60,12 +60,24 @@ function SignUp(props) {
     number: '',
   });
 
+  const [userIdError, setUserIdError] = useState(false);
+  const [pwError, setPwError] = useState(false);
+  const [configError, setConfigError] = useState(false);
+  const [userNameError, setUserNameError] = useState(false);
+  const [numberError, setNumberError] = useState(false);
+
   const { userId, pw, confirmPw, userName, birth, number } = inputValue;
 
   const navigate = useNavigate();
 
   const handleUserId = (e) => {
     const { name, value } = e.target;
+
+    // if (name === 'userID') {
+    //   if (value.length < 5) setUserIdError(false);
+    //   else setUserIdError(true);
+    //   setUserIdError(true);
+    // }
 
     setInputValue({
       ...inputValue,

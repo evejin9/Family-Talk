@@ -17,6 +17,7 @@ import EditPhoto from './components/photo/EditPhoto';
 import LogIn from './pages/LogIn';
 import { useState } from 'react';
 import AutoCheck from './components/AutoCheck';
+import PhotoList from './components/photo/PhotoList';
 
 
 
@@ -88,9 +89,11 @@ function App() {
               <Route index element={<Main />} />
               <Route path='/members' element={<Members />} />
               <Route path='/calendar' element={<Calendar />} />
-              <Route path='/photo' element={<Photo />} />
-              <Route path='/photo/writePhoto' element={<WritePhoto />} />
-              <Route path='/photo/editPhoto/:editPhotoId' element={<EditPhoto />} />
+              <Route path='/photo' element={<Photo />} >
+                <Route index element={<PhotoList />} />
+                <Route path='writePhoto' element={<WritePhoto />} />
+                <Route path='editPhoto/:editPhotoId' element={<EditPhoto />} />
+              </Route>
             </Route>
             <Route path='/login' element={<LogIn />} />
           </Routes>

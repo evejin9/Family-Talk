@@ -15,7 +15,6 @@ import EditPhoto from './components/photo/EditPhoto';
 
 import LogIn from './pages/LogIn';
 import { useState } from 'react';
-import AutoCheck from './components/AutoCheck';
 import PhotoList from './components/photo/PhotoList';
 import AuthCheck from './components/AuthCheck';
 import SignUp from './pages/SignUp';

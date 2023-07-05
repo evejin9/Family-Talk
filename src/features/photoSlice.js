@@ -8,7 +8,7 @@ const photoSlice = createSlice({
   name: 'photo',
   initialState,
   reducers: {
-
+    
   }
 });
 

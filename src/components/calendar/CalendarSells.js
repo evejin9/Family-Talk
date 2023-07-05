@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { addDays, endOfMonth, endOfWeek, format, isSameDay, isSameMonth, parse, startOfMonth, startOfWeek } from 'date-fns'
+import { addDays, endOfMonth, endOfWeek, format, isSameDay, isSameMonth, parse, startOfMonth, startOfWeek, parseISO } from 'date-fns'
 import styled from 'styled-components';
 import CalendarPlanModal from './CalendarPlanModal';
 import { useDispatch, useSelector } from 'react-redux';
@@ -105,27 +105,24 @@ function CalendarSells({ currentMonth, selectedDate, onDateClick, clickModal, fi
 
   const { title = '' } = selectedTitle.find((item) => item.date === selectedDate) || {};
 
-
-  
-
   const rows = [];
   let days = [];
   let day = startDate;
   let formattedDate = '';
+
+
 
   const handleDateClick = (clickedDate) => {
     onDateClick(clickedDate);
     clickModal();
   };
 
-  
-
-  
-
   while (day <= endDate) {
     for (let i = 0; i < 7; i++) {
       formattedDate = format(day, 'd');
-      const cloneDay = format(day, 'yyyy-MM-dd');
+      const cloneDay = format(day, `yyyy-MM-dd`);
+      const parsedDate = parseISO(cloneDay);
+
       days.push(
         <div
           className={`col cell ${!isSameMonth(day, monthStart)
@@ -137,7 +134,7 @@ function CalendarSells({ currentMonth, selectedDate, onDateClick, clickModal, fi
             : 'valid'
           }`}
           key={day}
-          onClick={() => handleDateClick(cloneDay)}
+          onClick={() => handleDateClick(parsedDate)}
         >
           <span
             className={
@@ -150,25 +147,23 @@ function CalendarSells({ currentMonth, selectedDate, onDateClick, clickModal, fi
           </span>
 
           {filteredSelectedTitle
-              .filter((item) => {
-                const date = item.date instanceof Date ? format(item.date, 'yyyy-MM-dd') : item.date;
-                return date === cloneDay;
-              })
-              .map((item, index) => (
-                <SellInTitle key={index}>
-                  <GoDotFill color='#f5cc8d' size={11}></GoDotFill>
-                  <div className='title'>{item.title}</div>
-                </SellInTitle>
+            .filter((item) => {
+              const date = item.date instanceof Date ? format(item.date, 'yyyy-MM-dd') : item.date;
+              console.log(typeof date, '<=>', typeof cloneDay);
+              return date === cloneDay;
+            })
+            .map((item, index) => (
+              <SellInTitle key={index}>
+                <GoDotFill color='#f5cc8d' size={11}></GoDotFill>
+                <div className='title'>{item.title}</div>
+              </SellInTitle>
             ))}
-          </div>
-      
-      
-      
-      
+        </div>
       );
 
       day = addDays(day, 1);
     }
+
     rows.push(
       <div className="row" key={day}>
         {days}
@@ -177,7 +172,6 @@ function CalendarSells({ currentMonth, selectedDate, onDateClick, clickModal, fi
 
     days = [];
   }
-
 
   return <CalendarContainer>{rows}</CalendarContainer>;
 }

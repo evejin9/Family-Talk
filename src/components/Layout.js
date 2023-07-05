@@ -186,7 +186,7 @@ function Layout(props) {
           <li><Category to="/members">Members</Category></li>
           <li><Category to="/calendar">Calendar</Category></li>
           <li><Category to="/photo">Photo</Category></li>
-          <li><Button title="Logout" onClick={() => {}} /></li>
+          <li><Button title="Logout" onClick={() => dispatch(logOutUser())} /></li>
         </ul>
         {/* 버튼 */}
       </Navbar>
@@ -199,7 +199,7 @@ function Layout(props) {
             <img src={logInUSerInfo.imagePath} /> 
             <div className='name-logout'>
               <p className='name'>{logInUSerInfo.name} 님</p>
-              <IoLogOutOutline onClick={() => dispatch(logOutUser())} />          
+              {/* <IoLogOutOutline onClick={() => dispatch(logOutUser())} />           */}
             </div>
             <p className='birth'>{logInUSerInfo.birth}</p>          
           </ProfileCard>

@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useCallback, useEffect } from 'react';
 import styled from 'styled-components';
 import { useState } from "react";
 import { LogInUser } from '../../features/loginSlice';
@@ -9,49 +9,53 @@ import { useNavigate } from 'react-router-dom';
 
 const WritePhotoWrapper = styled.div`
 width: 100%;
-display: flex;
-flex-direction: column;
 align-items: start; 
-.showImage {
-  width: 100%;
-  object-fit: cover;
-  img {
-    width: 100%;
-  }
+
+.plusImage {
+
 }
-.writeContent {
-  width: 100%;
-  margin-top: 5px;
-  input {
-    background: none;
-    outline: none;
-    border: none;
-    border-bottom: solid 1px black;
-    width: 100%;
+.imgAndTextInput{
+  display: flex;
+  .showImage {
+    width: 60%;
+    object-fit: cover;
+
+    background-color: pink;
+    display: block;
+    img {
+      width: 100%;
     }
+  }
+  .writeContent {
+    width: 40%;
+    margin-top: 5px;
+    display: block;
+    input {
+      background: none;
+      outline: none;
+      border: none;
+      border-bottom: solid 1px black;
+      width: 100%;
+      }
+}
 
 }
 `
 
 function WritePhoto({onInsert}) {
-
   console.log(onInsert);
   const logInUSerInfo = useSelector(LogInUser)
+
   const navigate = useNavigate('/')
   
-  // useEffect(() => {
-  //   console.log('logInUSerInfo: ', logInUSerInfo);
-  // }, []);
-
   const formInitValue = {
     name: logInUSerInfo.name,
     profileImage: logInUSerInfo.imagePath,
     imagePath:"",
     content: ''
   }
-  const [] = useState()
 
-  const [formValue, setFormValue] = useState(formInitValue)
+  const [posts, setPosts] = useState((formInitValue));
 
   const imageFileChange = (e) => {
     const file = e.target.files[0]
@@ -61,41 +65,41 @@ function WritePhoto({onInsert}) {
 
     reader.onload = () => {
       const result = reader.result
-      setFormValue({...formValue, imagePath: result})
+      setPosts({...posts, imagePath: result})
     }
   }
 
   const submit = () => {
-    // console.log('formValue: ', formValue);
-    // const itemUuid = uuid()
-    // console.log('itemUuid: ', itemUuid);
-    // registPhotoItem({
-    //   id: itemUuid,
-    //   ...formValue
-    // });
-
-    // onInsert(formValue)
-
+    onInsert(posts);
+    setPosts('')
     navigate('/photo')
   }
 
+  const handleChange = (e) => {
+    onInsert(posts)
+    setPosts('')
+  }
+
+
   return (
-    <WritePhotoWrapper>
+    <WritePhotoWrapper onSubmit={submit}>
       <div className='plusImage'>
         <input type='file' onChange={imageFileChange}></input>
       </div>
-      <div className='showImage'>
-        {
-          formValue.imagePath
-          ? <img alt='사진' src={formValue.imagePath}></img>
-          : ''
-        }
+      <div className='imgAndTextInput'>
+        <div className='showImage'>
+          {
+            posts.imagePath
+            ? <img alt='사진' src={posts.imagePath}></img>
+            : ''
+          }
+        </div>
+        <div className='writeContent'>
+          <input type='text' placeholder='내용을 입력하세요' value={posts} onChange={handleChange} >
+          </input>
+        </div>
       </div>
-      <div className='writeContent'>
-        <input type='text' placeholder='내용을 입력하세요' onChange={(e) => setFormValue({...formValue, content: e.target.value})}>
-        </input>
-      </div>
-      <button onClick={submit}>게시</button>
+      <button type='submit'>게시</button>
     </WritePhotoWrapper>
   );
 }

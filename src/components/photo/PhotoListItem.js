@@ -96,6 +96,7 @@ margin-bottom: 50px;
       overflow: hidden;
       height: auto;
       margin-bottom: 3%;
+      padding-top: 10px;
       }
     .comment {
       margin-bottom: 3%;
@@ -157,7 +158,7 @@ function PhotoListItem({post}) {
           <div className='profileImgNameMore'>
             <img src={post.profileImage} alt='profileImg'></img>
             <span className='name'>{post.name}</span> 
-            <button onClick={() => navigate(`/editPhoto/${post.id}`)} ><PiPencil /></button>
+            <button onClick={() => navigate(`/photo/editPhoto/${post.id}`)} ><PiPencil /></button>
             <button
               onClick={() => {onRemove(post.id);}}
             ><PiTrash /></button>

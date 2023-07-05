@@ -12,19 +12,16 @@ import "swiper/css/scrollbar";
 const StyledMainPhoto = styled.div`
   width: 100%;
   height: 50vh;
-  border-radius: 8px;
-  overflow: hidden;
+  /* overflow: hidden; */
 `;
 
 const StyledSwiper = styled(Swiper)`
   width: 100%;
-  height: 50vh;
 `;
 
 const StyledSwiperSlide = styled(SwiperSlide)`
   img {
     width: 100%;
-
   }
 `;
 
@@ -64,6 +61,7 @@ function MainPhoto(props) {
   };
 
   return (
+    <StyledMainPhoto>
       <StyledSwiper
         modules={[Navigation, Pagination, Scrollbar, Autoplay]}
         loop={true}
@@ -88,6 +86,7 @@ function MainPhoto(props) {
           <img src="https://ifh.cc/g/m85k78.jpg" />
         </StyledSwiperSlide>
       </StyledSwiper>
+    </StyledMainPhoto>
   
     // <StyledMainPhoto>
     //   <StyledImg

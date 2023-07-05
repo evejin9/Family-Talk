@@ -75,7 +75,7 @@ const ProfileArea = styled.div`
   /* display: flex;
   align-items: center; */
   box-sizing: border-box;
-  margin: 20px;
+  margin-right: 30px;
 
   img {
     /* padding: 20px; */

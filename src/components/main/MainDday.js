@@ -74,7 +74,7 @@ function MainDday(props) {
             : `D${showDday}`
           }</p>
         <p>
-          {`${birthMember[0].relation}(${showDdayPerson[0].name})`} 생일
+          {`${birthMember[0].relation}`} 생일
         </p>
       </div>
     </StyledSection>

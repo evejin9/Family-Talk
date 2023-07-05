@@ -8,6 +8,7 @@ import { LogInUser } from '../features/loginSlice';
 import EditPhoto from '../components/photo/EditPhoto';
 import WritePhoto from "../components/photo/WritePhoto";
 import styled from 'styled-components';
+import { Outlet } from 'react-router-dom';
 
 const PhotoWrapper = styled.div`
 .hidden {
@@ -20,30 +21,10 @@ function Photo() {
   //   // console.log(dataPhoto);
   //   initPhotoList(dataPhoto)
   // }, [])
-  const [posts, setPosts] = useState([]);
-  
-  
-  const logInUSerInfo = useSelector(LogInUser)
-
-  const handleInsert = useCallback((imagePath, content) => {
-    const post = {
-      name: logInUSerInfo.name,
-      profileImage: logInUSerInfo.imagePath,
-      imagePath,
-      content
-    }
-    setPosts(posts => posts.concat(post))
-  }, [])
-
 
   return (
     <PhotoWrapper className='show-content'>
-        <PhotoList post={dataPhoto} />
-
-        <div className='hidden'>
-          <WritePhoto onInsert={handleInsert}/>
-          <EditPhoto />
-        </div>
+      <Outlet />
     </PhotoWrapper>
     
   );

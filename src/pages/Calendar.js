@@ -17,18 +17,17 @@ function Calendar(props) {
   const [currentMonth, setcurrentMonth] = useState(new Date());
   const [selectedDate, setSelectedDate] = useState(new Date());
   const [modal, setModal] = useState(false);
-  const selectedTitle = useSelector(selectTitle);
   const [deletedItems, setDeletedItems] = useState([]);
+  const selectedTitle = useSelector(selectTitle);
   const dispatch = useDispatch();
 
 
   
 
-
-  const handleDelete = (id) => {
+  function handleDelete(id) {
     setDeletedItems([...deletedItems, id]);
     dispatch(deleteCalendarTitle(id));
-  };
+  }
 
   const filteredSelectedTitle = selectedTitle.filter(
     (item) => !deletedItems.includes(item.id)
@@ -61,8 +60,7 @@ function Calendar(props) {
       <div className='calendar' style={{  marginLeft: '30px', }}>
         <CalendarHeader currentMonth={currentMonth} prevMonth={prevMonth} nextMonth={nextMonth} />
         <CalendarDay />
-        <CalendarSells currentMonth={currentMonth} selectedDate={selectedDate} clickModal={clickModal} onDateClick={onDateClick} filteredSelectedTitle={filteredSelectedTitle}>
-        </CalendarSells>
+        <CalendarSells currentMonth={currentMonth} selectedDate={selectedDate} clickModal={clickModal} onDateClick={onDateClick} filteredSelectedTitle={filteredSelectedTitle} />
         <PlanList currentMonth={currentMonth} selectedDate={selectedDate} clickModal={clickModal} onDateClick={onDateClick} filteredSelectedTitle={filteredSelectedTitle}
         handleDelete={handleDelete}/>
         {modal && (

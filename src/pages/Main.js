@@ -42,7 +42,6 @@ function Main(props) {
         <MainTodaySchedule today={today} />
         <MainDday />
       </MainWrapper>
-      <Button title="게시글을 눌러주세요" onClick={() => {}} />
     </div>
   );
 }

@@ -68,7 +68,9 @@ function PlanList({ currentMonth, selectedDate, onDateClick, clickModal, filtere
   const selectedTitle = useSelector(selectTitle);
   const [deletedItems, setDeletedItems] = useState([]);
   const dispatch = useDispatch();
+  const sortedSelectedTitle = filteredSelectedTitle.slice().sort((a, b) => new Date(a.date) - new Date(b.date));
 
+  
   const handleClickPlan = (id) => {
     clickModal();
     dispatch(getSelectedPlan(id));
@@ -79,7 +81,7 @@ function PlanList({ currentMonth, selectedDate, onDateClick, clickModal, filtere
     <PlanListWrapper>
       <ScheduleList>Schedule List</ScheduleList>
         <>
-        {filteredSelectedTitle.map((item, index) => (
+        {sortedSelectedTitle.map((item, index) => (
         <StyledPlanList onClick={() => handleClickPlan(item.id)} key={index}>
           <GoDotFill color='#f5cc8d' size={15} />
           <StyledTitle>{item.title}</StyledTitle>

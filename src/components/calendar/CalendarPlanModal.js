@@ -16,8 +16,8 @@ const fadeIn = keyframes`
 
 const Wrapper = styled.div`
   display: flex;
-  width: 900px;
-  height: 700px;
+  width: 1905px;
+  height: 920px;
   justify-content: center;
   align-items: center;
   background-color: gray;
@@ -35,7 +35,7 @@ const SelectedDateDiv = styled.div`
   margin-bottom: 10px;
   justify-content: center;
   align-items: center;
-  margin-left: 260px;
+  margin-left: 390px;
   font-size: 14px;
   border-radius: 6px;
 `;
@@ -44,7 +44,7 @@ const TitleInput = styled.input`
   background-color: #f5cc8d;
   height: 30px;
   margin-bottom: 15px;
-  width: 40%;
+  width: 26%;
   border-radius: 10px;
   border: none;
   margin-top: 10px;
@@ -54,7 +54,7 @@ const TitleInput = styled.input`
 const DetailInput = styled.textarea`
   background-color: #f5cc8d;
   height: 350px;
-  width: 40%;
+  width: 26%;
   border-radius: 10px;
   border: none;
   resize: none;
@@ -64,7 +64,7 @@ const DetailInput = styled.textarea`
 
 const ButtonWrapper = styled.div`
   display: flex;
-  width: 30%;
+  width: 26%;
   justify-content: space-between;
   align-items: center;
 
@@ -132,7 +132,7 @@ const CalendarPlanModal = ({ selectedDate, closeModal, onDateClick, selectedDate
 
   return (
     <Wrapper>
-      <SelectedDateDiv>{selectedDate}</SelectedDateDiv>
+      <SelectedDateDiv>{selectedPlan ? selectedPlan.date: selectedDate}</SelectedDateDiv>
       <TitleInput
         placeholder='Title'
         onChange={handleTitleChange}

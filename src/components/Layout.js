@@ -1,13 +1,15 @@
 import React, { useState } from 'react';
 import { NavLink, Outlet, useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
+import { useDispatch, useSelector } from 'react-redux';
 import { BsFillChatFill } from "react-icons/bs";
-
-import Chat from '../pages/Chat';
-import { LogInUser, isUserLogin } from '../features/loginSlice';
-import { useSelector } from 'react-redux';
+import { IoLogOutOutline } from "react-icons/io5";
 
 import logo from "../images/logo.png";
+
+import Chat from '../pages/Chat';
+import { LogInUser, isUserLogin, logOutUser } from '../features/loginSlice';
+
 
 const LayoutStyled = styled.div`
   width: 100%;
@@ -105,10 +107,25 @@ const ProfileCard = styled.div`
     border-radius: 8px;
   }
   
+  .name-logout {
+    margin: 20px 0;
+    display:flex;
+    justify-content: space-between;
+    align-items: end;
+  }
+
+  svg {
+    font-size: 25px;
+    padding-right: 5px;
+
+    &:hover {
+      color: #edaa45;
+    }
+  }
+
   .name {
     font-size: 20px;
     font-weight: 600;
-    padding: 30px 0;
   }
 
   .birth {
@@ -145,6 +162,8 @@ function Layout(props) {
 
   const logInUSerInfo = useSelector(LogInUser);
 
+  const dispatch = useDispatch();
+
   const handleChatModal = () => {
     setShowChatModal(true);
   };
@@ -176,7 +195,10 @@ function Layout(props) {
           <img src={logo} />
           <ProfileCard>
             <img src={logInUSerInfo.imagePath} /> 
-            <p className='name'>{logInUSerInfo.name} 님</p>          
+            <div className='name-logout'>
+              <p className='name'>{logInUSerInfo.name} 님</p>
+              <IoLogOutOutline onClick={() => dispatch(logOutUser())} />          
+            </div>
             <p className='birth'>{logInUSerInfo.birth}</p>          
           </ProfileCard>
         </ProfileArea>

@@ -21,29 +21,38 @@ align-items: start;
   display: flex;
   width: 100%;
 }
+.showImage {
+  width: 60%;
+  margin-right: 1%;
   img {
     width: 100%;
     object-fit: cover;
     border: 1px solid orange;
-    margin-right: 1%;
     height: 100%;
   }
+}
   .writeContent {
     width: 40%;
     display: block;
-    input {
+    textarea {
       background: none;
       outline: none;
       border: 1px solid orange;
       width: 100%;
       height: 100%;
+      display: flex;
       text-align: center;
+      align-items: center;
+      justify-content: center;
       }
 }
 .button {
-  margin-top: 10px;
   display: flex;
   justify-content: end;
+  margin-top: 10px;
+}
+.addButton {
+  margin-left: 10px;
 }
 `
 
@@ -55,7 +64,7 @@ function WritePhoto(props) {
 
   const navigate = useNavigate('/')
   
-  const [image, setImage] = useState("https://i.ibb.co/7KQPWbx/image.jpg");
+  const [image, setImage] = useState("https://i.ibb.co/hs4SzRx/image.jpg");
   const [content, setContent] = useState('');
   const [file, setFile] = useState('');
   const [posts, setPosts] = useState([]);
@@ -118,17 +127,20 @@ function WritePhoto(props) {
           onChange={imageFileChange}
           ref={fileInput}
         />
-        <img
-          alt='img'
-          src={image}
-          onClick={onClickEdit}
-        />
+        <div className='showImage'>
+          <img
+            alt='img'
+            src={image}
+            onClick={onClickEdit}
+          />
+        </div>
         <div className='writeContent'>
-          <input type='text' placeholder='내용을 입력하세요' value={content} onChange={handleChangeContent}>
-          </input>
+          <textarea type='text' placeholder='내용을 입력하세요' value={content} onChange={handleChangeContent}>
+          </textarea>
         </div>
       </div>
       <div className='button'>
+        <Button title='취소' onClick={(e) => navigate("/photo")}/> 
         <Button title='게시' onClick={handleSubmit}/> 
       </div>
     </WritePhotoWrapper>

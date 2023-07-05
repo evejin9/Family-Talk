@@ -29,6 +29,21 @@ function Calendar(props) {
     dispatch(deleteCalendarTitle(id));
   }
 
+  useEffect(() => {
+    
+    const savedDeletedItems = JSON.parse(localStorage.getItem('deletedItems'));
+    if (savedDeletedItems) {
+      setDeletedItems(savedDeletedItems);
+    }
+  }, []);
+
+  useEffect(() => {
+    localStorage.setItem('deletedItems', JSON.stringify(deletedItems));
+  }, [deletedItems]);
+
+
+
+
   const filteredSelectedTitle = selectedTitle.filter(
     (item) => !deletedItems.includes(item.id)
   );

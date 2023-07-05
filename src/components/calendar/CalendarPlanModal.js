@@ -51,6 +51,10 @@ const TitleInput = styled.input`
   border: none;
   margin-top: 10px;
   padding-left: 15px;
+  &:focus {
+    outline: none;
+  }
+  
 `;
 
 const DetailInput = styled.textarea`
@@ -62,6 +66,9 @@ const DetailInput = styled.textarea`
   resize: none;
   padding-left: 15px;
   padding-top: 15px;
+  &:focus {
+    outline: none;
+  }
 `;
 
 const ButtonWrapper = styled.div`
@@ -132,6 +139,14 @@ const CalendarPlanModal = ({ selectedDate, closeModal, onDateClick, selectedDate
     setContent(e.target.value);
   };
 
+  // 타이틀 인풋 에서 엔터키 입력시 컨텐트작성 창으로 이동
+  const handleKeyPress = (event) => {
+    if (event.key === 'Enter') {
+      event.preventDefault();
+      document.querySelector('#detailInput').focus();
+    }
+  };
+
   return (
     <Wrapper>
       {/* <SelectedDateDiv>{selectedPlan ? selectedPlan.date: selectedDate}</SelectedDateDiv> */}
@@ -141,12 +156,16 @@ const CalendarPlanModal = ({ selectedDate, closeModal, onDateClick, selectedDate
         placeholder='Title'
         onChange={handleTitleChange}
         value={title}
-      />
+        autoFocus
+        onKeyUp={handleKeyPress}
+        />
 
       <DetailInput
+        id='detailInput'
         placeholder='Content'
         onChange={handleContentChange}
         value={content}
+        
       />
 
       <ButtonWrapper>

@@ -22,6 +22,9 @@ function Calendar(props) {
   const dispatch = useDispatch();
 
 
+  
+
+
   const handleDelete = (id) => {
     setDeletedItems([...deletedItems, id]);
     dispatch(deleteCalendarTitle(id));
@@ -63,7 +66,7 @@ function Calendar(props) {
         <PlanList currentMonth={currentMonth} selectedDate={selectedDate} clickModal={clickModal} onDateClick={onDateClick} filteredSelectedTitle={filteredSelectedTitle}
         handleDelete={handleDelete}/>
         {modal && (
-          <div className='modal-container' style={{ position: 'absolute', top:'-10%', right: '0%', }}>
+          <div className='modal-container' style={{ position: 'absolute', top:'-10%', right: '-55%' }}>
             <CalendarPlanModal closeModal={closeModal} selectedDate={selectedDate} onDateClick={onDateClick} />
           </div>
         )}

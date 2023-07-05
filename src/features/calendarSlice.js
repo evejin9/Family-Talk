@@ -20,7 +20,7 @@ const calendarSlice = createSlice({
     },
     getSelectedPlan: (state, { payload: id }) => {
       const findPlan = state.calendarPlanData.find(plan => plan.id === id);
-      state.selectedPlan = findPlan;
+      state.selectedPlan = findPlan || null;
     },
     clearSelectedPlan: (state) => {
       state.selectedPlan = null;

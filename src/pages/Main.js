@@ -5,6 +5,7 @@ import MainDday from '../components/main/MainDday';
 import MainTodaySchedule from '../components/main/MainTodaySchedule';
 import MainWeather from '../components/main/MainWeather';
 import styled from 'styled-components';
+import Button from '../components/ui/Button';
 
 const MainWrapper = styled.div`
   width: 100%;
@@ -41,6 +42,7 @@ function Main(props) {
         <MainTodaySchedule today={today} />
         <MainDday />
       </MainWrapper>
+      <Button title="게시글을 눌러주세요" onClick={() => {}} />
     </div>
   );
 }

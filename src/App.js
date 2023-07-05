@@ -89,8 +89,8 @@ function App() {
               <Route path='/members' element={<Members />} />
               <Route path='/calendar' element={<Calendar />} />
               <Route path='/photo' element={<Photo />} />
-              <Route path='/writePhoto' element={<WritePhoto />} />
-              <Route path='/editPhoto/:editPhotoId' element={<EditPhoto />} />
+              <Route path='/photo/writePhoto' element={<WritePhoto />} />
+              <Route path='/photo/editPhoto/:editPhotoId' element={<EditPhoto />} />
             </Route>
             <Route path='/login' element={<LogIn />} />
           </Routes>

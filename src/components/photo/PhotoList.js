@@ -50,7 +50,7 @@ function PhotoList({post}) {
       {posts.map((post) => 
         <PhotoListItem key={post.id} post={post} />
       )}
-      <button className='writePhotoButton' onClick={() => navigate('/writePhoto')}><BsPlusCircleFill/></button>
+      <button className='writePhotoButton' onClick={() => navigate('/photo/writePhoto')}><BsPlusCircleFill/></button>
     </PhotoListWrapper>
   );
 }

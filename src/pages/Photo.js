@@ -21,7 +21,8 @@ function Photo() {
   //   initPhotoList(dataPhoto)
   // }, [])
   const [posts, setPosts] = useState([]);
-  // console.log(posts);
+  
+  
   const logInUSerInfo = useSelector(LogInUser)
 
   const handleInsert = useCallback((imagePath, content) => {
@@ -34,7 +35,6 @@ function Photo() {
     setPosts(posts => posts.concat(post))
   }, [])
 
-console.log(handleInsert);
 
   return (
     <PhotoWrapper className='show-content'>
@@ -42,7 +42,7 @@ console.log(handleInsert);
 
         <div className='hidden'>
           <WritePhoto onInsert={handleInsert}/>
-          <EditPhoto post={dataPhoto} onInsert={handleInsert}/>
+          <EditPhoto />
         </div>
     </PhotoWrapper>
     

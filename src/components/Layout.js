@@ -9,6 +9,7 @@ import logo from "../images/logo.png";
 
 import Chat from '../pages/Chat';
 import { LogInUser, isUserLogin, logOutUser } from '../features/loginSlice';
+import Button from './ui/Button';
 
 
 const LayoutStyled = styled.div`
@@ -185,6 +186,7 @@ function Layout(props) {
           <li><Category to="/members">Members</Category></li>
           <li><Category to="/calendar">Calendar</Category></li>
           <li><Category to="/photo">Photo</Category></li>
+          <li><Button title="Logout" onClick={() => {}} /></li>
         </ul>
         {/* 버튼 */}
       </Navbar>

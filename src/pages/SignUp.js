@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 
 import logo from "../images/logo.png";
@@ -51,22 +51,74 @@ const InputStyle = styled.input`
 `;
 
 function SignUp(props) {
+  const [inputValue, setInputValue] = useState({
+    userId: '',
+    pw: '',
+    confirmPw: '',
+    userName: '',
+    birth: '',
+    number: '',
+  });
+
+  const { userId, pw, confirmPw, userName, birth, number } = inputValue;
+
   const navigate = useNavigate();
 
-  const submitSignUp = {
+  const handleUserId = (e) => {
+    const { name, value } = e.target;
 
+    setInputValue({
+      ...inputValue,
+      [name]: value
+    })
   }
 
   return (
     <SignUpwrapper>
       <SignUpBox>
         <img className='cursor-point' src={logo} onClick={() => navigate('/login')} />
-        <InputStyle type='text' placeholder='아이디' />
-        <InputStyle type='password' placeholder='비밀번호' />
-        <InputStyle type='password' placeholder='비밀번호 확인' />
-        <InputStyle type='text' placeholder='이름' />
-        <InputStyle type='text' placeholder='생년월일 8자리' />
-        <InputStyle type='' placeholder='휴대전화번호' />
+        <InputStyle 
+          name='userId' 
+          defaultValue={userId} 
+          type='text' 
+          placeholder='아이디' 
+          onChange={handleUserId} 
+        />
+        <InputStyle 
+          name='pw' 
+          defaultValue={pw} 
+          type='password' 
+          placeholder='비밀번호' 
+          onChange={handleUserId} 
+        />
+        <InputStyle 
+          name='confirmPw' 
+          type='password' 
+          placeholder='비밀번호 확인' 
+          onChange={handleUserId} 
+        />
+        {/* {<p>{`비밀번호를 확인해주세요.`}</p>} */}
+        <InputStyle 
+          name='userName' 
+          defaultValue={userName} 
+          type='text' 
+          placeholder='이름' 
+          onChange={handleUserId} 
+        />
+        <InputStyle 
+          name='birth' 
+          defaultValue={birth} 
+          type='text' 
+          placeholder='생년월일 8자리' 
+          onChange={handleUserId} 
+        />
+        <InputStyle 
+          name='number' 
+          defaultValue={number} 
+          type='text' 
+          placeholder='휴대전화번호' 
+          onChange={handleUserId} 
+        />
         <button onClick={undefined}> 가입하기 </button>
       </SignUpBox>
       

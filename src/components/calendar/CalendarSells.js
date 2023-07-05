@@ -59,8 +59,8 @@ const CalendarContainer = styled.div`
     }
 
     &.selected {
-      background: #f5cc8d;
-      color: #fff;
+      /* background: #f5cc8d; */
+      /* color: #fff; */
     }
 
     &.not-valid {

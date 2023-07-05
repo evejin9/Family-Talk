@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import styled, { keyframes } from 'styled-components';
 import { addCalendarTitle, clearSelectedPlan, deleteCalendarTitle, selectSelectedPlan, selectTitle,  updateCalendarTitle,  updatedPlan } from '../../features/calendarSlice';
+import { format } from 'date-fns';
 
 const fadeIn = keyframes`
   from {
@@ -36,8 +37,9 @@ const SelectedDateDiv = styled.div`
   justify-content: center;
   align-items: center;
   margin-left: 390px;
-  font-size: 14px;
+  font-size: 12px;
   border-radius: 6px;
+  padding: 5px;
 `;
 
 const TitleInput = styled.input`
@@ -87,7 +89,7 @@ const CalendarPlanModal = ({ selectedDate, closeModal, onDateClick, selectedDate
   const selectedData = useSelector(selectTitle);
   const selectedPlan = useSelector(selectSelectedPlan);
   const dispatch = useDispatch();
-
+  
   useEffect(() => {
     return () => {
       dispatch(clearSelectedPlan());
@@ -108,7 +110,7 @@ const CalendarPlanModal = ({ selectedDate, closeModal, onDateClick, selectedDate
     if (selectedPlan) {
       dispatch(updateCalendarTitle({ id: selectedPlan.id, title, content }));
     } else {
-      dispatch(addCalendarTitle({ title, selectedDate, content }));
+      dispatch(addCalendarTitle({ title, selectedDate: format(selectedDate, 'yyyy-MM-dd'), content }));
     }
     setTitle('');
     setContent('');
@@ -132,7 +134,9 @@ const CalendarPlanModal = ({ selectedDate, closeModal, onDateClick, selectedDate
 
   return (
     <Wrapper>
-      <SelectedDateDiv>{selectedPlan ? selectedPlan.date: selectedDate}</SelectedDateDiv>
+      {/* <SelectedDateDiv>{selectedPlan ? selectedPlan.date: selectedDate}</SelectedDateDiv> */}
+      <SelectedDateDiv>{selectedPlan ? selectedPlan.date: format(selectedDate, 'yyyy-MM-dd')}</SelectedDateDiv>
+
       <TitleInput
         placeholder='Title'
         onChange={handleTitleChange}

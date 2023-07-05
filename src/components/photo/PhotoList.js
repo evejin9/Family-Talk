@@ -32,9 +32,9 @@ const PhotoListWrapper = styled.div`
     }
 `
 
-function PhotoList({post}) {
+function PhotoList(props) {
   // console.log(post);
-  const posts = post
+  const posts = dataPhoto
 
   const navigate = useNavigate('/')
 

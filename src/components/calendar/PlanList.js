@@ -76,25 +76,31 @@ function PlanList({ currentMonth, selectedDate, onDateClick, clickModal, filtere
     dispatch(getSelectedPlan(id));
   };
 
-
   return (
     <PlanListWrapper>
       <ScheduleList>Schedule List</ScheduleList>
         <>
-        {sortedSelectedTitle.map((item, index) => (
-        <StyledPlanList onClick={() => handleClickPlan(item.id)} key={index}>
-          <GoDotFill color='#f5cc8d' size={15} />
-          <StyledTitle>{item.title}</StyledTitle>
-          <SelectedDate>{item.date}</SelectedDate>
-          <MdDeleteForever 
-            onClick={(e) => {e.stopPropagation(); handleDelete(item.id);} } 
-            size={25} 
-            style={{  marginLeft: '20px'}}>
-          </MdDeleteForever>
-        </StyledPlanList>
-        ))}
+        {sortedSelectedTitle.map((item, index) => {
+        
+          console.log(item);
+
+        return (
+          <StyledPlanList onClick={() => handleClickPlan(item.id)} key={index}>
+            <GoDotFill color='#f5cc8d' size={15} />
+            <StyledTitle>{item.title}</StyledTitle>
+            <SelectedDate>{item.date}</SelectedDate> 
+            <MdDeleteForever 
+              onClick={(e) => {e.stopPropagation(); handleDelete(item.id);} } 
+              size={25} 
+              style={{  marginLeft: '20px'}}>
+            </MdDeleteForever>
+          </StyledPlanList>
+          );
+        }
+        )}
       </>
     </PlanListWrapper>
+    
   );
 }
 

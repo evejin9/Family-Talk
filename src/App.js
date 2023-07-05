@@ -8,15 +8,14 @@ import Layout from './components/Layout';
 import Calendar from './pages/Calendar';
 import Photo from './pages/Photo';
 
-import data from "./data.json";
 import Members from './pages/Members';
 import WritePhoto from './components/photo/WritePhoto';
 
 import EditPhoto from './components/photo/EditPhoto';
 
 import LogIn from './pages/LogIn';
-import { useState } from 'react';
-import AutoCheck from './components/AutoCheck';
+import AuthCheck from './components/AuthCheck';
+import SignUp from './pages/SignUp';
 
 
 
@@ -84,7 +83,7 @@ function App() {
       <Container>
         <Wrapper>
           <Routes>
-            <Route path='/' element={<AutoCheck><Layout /></AutoCheck>}>
+            <Route path='/' element={<AuthCheck><Layout /></AuthCheck>}>
               <Route index element={<Main />} />
               <Route path='/members' element={<Members />} />
               <Route path='/calendar' element={<Calendar />} />
@@ -93,6 +92,7 @@ function App() {
               <Route path='/editPhoto/:editPhotoId' element={<EditPhoto />} />
             </Route>
             <Route path='/login' element={<LogIn />} />
+            <Route path='/SignUp' element={<SignUp />} />
           </Routes>
         </Wrapper>
       </Container>
@@ -101,3 +101,7 @@ function App() {
 }
 
 export default App;
+
+// 가짜 Api 주소
+// https://my-json-server.typicode.com/evejin9/db-familyTalk/db
+

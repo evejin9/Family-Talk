@@ -3,7 +3,7 @@ import { isUserLogin } from '../features/loginSlice';
 import { useSelector } from 'react-redux';
 import { Navigate } from 'react-router';
 
-function AutoCheck(props) {
+function AuthCheck(props) {
   const isLogin = useSelector(isUserLogin)
 
   if (!isLogin) {
@@ -13,4 +13,4 @@ function AutoCheck(props) {
   return props.children;
 }
 
-export default AutoCheck;
+export default AuthCheck;

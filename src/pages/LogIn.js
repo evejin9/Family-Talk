@@ -59,6 +59,11 @@ const LogInBox = styled.div`
 
   li {
     font-weight: 600;
+
+    &:hover {
+      color: #f5cc8d;
+      text-decoration: underline;
+    }
   }
 
   li + li {
@@ -125,7 +130,7 @@ function LogIn(props) {
             <ul>
               <li className='cursor-point'>비밀번호 찾기</li>
               <li className='cursor-point'>아이디 찾기</li>
-              <li className='cursor-point'>회원가입</li>
+              <li className='cursor-point' onClick={() => navigate('/signUp')}>회원가입</li>
             </ul>
           </div>
       </LogInBox>

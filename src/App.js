@@ -19,6 +19,7 @@ import AutoCheck from './components/AutoCheck';
 import PhotoList from './components/photo/PhotoList';
 import AuthCheck from './components/AuthCheck';
 import SignUp from './pages/SignUp';
+import Pass from './pages/Pass';
 
 
 
@@ -90,11 +91,14 @@ function App() {
               <Route index element={<Main />} />
               <Route path='/members' element={<Members />} />
               <Route path='/calendar' element={<Calendar />} />
+              <Route path='/pass' element={<Pass />} />
+
               <Route path='/photo' element={<Photo />} >
                 <Route index element={<PhotoList />} />
                 <Route path='writePhoto' element={<WritePhoto />} />
                 <Route path='editPhoto/:editPhotoId' element={<EditPhoto />} />
               </Route>
+
             </Route>
             <Route path='/login' element={<LogIn />} />
             <Route path='/SignUp' element={<SignUp />} />

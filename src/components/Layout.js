@@ -3,7 +3,8 @@ import { NavLink, Outlet, useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import { useDispatch, useSelector } from 'react-redux';
 import { BsFillChatFill } from "react-icons/bs";
-import { IoLogOutOutline } from "react-icons/io5";
+import { IoLogOutOutline, IoTicketOutline } from "react-icons/io5";
+import { PiTicketBold } from "react-icons/pi";
 
 import logo from "../images/logo.png";
 
@@ -186,6 +187,7 @@ function Layout(props) {
           <li><Category to="/members">Members</Category></li>
           <li><Category to="/calendar">Calendar</Category></li>
           <li><Category to="/photo">Photo</Category></li>
+          <li><Category to="/pass"><IoTicketOutline /></Category></li>
           <li><Button title="Logout" onClick={() => dispatch(logOutUser())} /></li>
         </ul>
         {/* 버튼 */}

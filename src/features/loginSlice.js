@@ -10,14 +10,17 @@ const logInSlice = createSlice({
   name: "login",
   initialState,
   reducers: {
-    findLoginUser: (state, {payload}) => {
+    findLoginUser: (state, { payload }) => {
       state.logInUserInfo = payload;
       state.isLogin = true;
+    },
+    logOutUser: (state, { payload }) => {
+      state.isLogin = false;
     }
   }
 })
 
-export const { findLoginUser } = logInSlice.actions;
+export const { findLoginUser, logOutUser } = logInSlice.actions;
 
 export const LogInUser = (state) => state.login.logInUserInfo; 
 export const isUserLogin = (state) => state.login.isLogin; 

@@ -16,6 +16,7 @@ import EditPhoto from './components/photo/EditPhoto';
 import LogIn from './pages/LogIn';
 import AuthCheck from './components/AuthCheck';
 import SignUp from './pages/SignUp';
+import Pass from './pages/Pass';
 
 
 
@@ -88,6 +89,7 @@ function App() {
               <Route path='/members' element={<Members />} />
               <Route path='/calendar' element={<Calendar />} />
               <Route path='/photo' element={<Photo />} />
+              <Route path='/pass' element={<Pass />} />
               <Route path='/photo/writePhoto' element={<WritePhoto />} />
               <Route path='/photo/editPhoto/:editPhotoId' element={<EditPhoto />} />
             </Route>

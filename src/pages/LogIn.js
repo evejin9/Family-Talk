@@ -25,6 +25,10 @@ const LogInBox = styled.div`
   justify-content: center;
   align-items: center;
 
+  p {
+    margin-bottom: 30px;
+  }
+
   .logo {
     margin-bottom: 60px;
   }
@@ -106,7 +110,7 @@ function LogIn(props) {
   return (    
     <LogInModalWrapper isLogin={isLogin} >
       <LogInBox>
-          <p>아이디: aa ~ gg 중 아무거나 / 비번: 1234</p>
+          {/* <p>아이디: aa ~ gg 중 아무거나 / 비번: 1234</p> */}
           <img className='logo' src={logo}  />
           <input 
             type='text' 
@@ -115,7 +119,7 @@ function LogIn(props) {
             onChange={handleLogId} 
           />
           <input 
-            type='text' 
+            type='password' 
             value={logInPw} 
             placeholder='비밀번호' 
             onChange={handleLogPw} 

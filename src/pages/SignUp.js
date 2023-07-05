@@ -2,6 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 
 import logo from "../images/logo.png";
+import { useNavigate } from 'react-router-dom';
 
 const SignUpwrapper = styled.div`
   width: 100%;
@@ -50,6 +51,7 @@ const InputStyle = styled.input`
 `;
 
 function SignUp(props) {
+  const navigate = useNavigate();
 
   const submitSignUp = {
 
@@ -58,12 +60,13 @@ function SignUp(props) {
   return (
     <SignUpwrapper>
       <SignUpBox>
-        <img src={logo} />
-        <InputStyle placeholder='아이디' />
-        <InputStyle placeholder='비밀번호' />
-        <InputStyle placeholder='이름' />
-        <InputStyle placeholder='생년월일 8자리' />
-        <InputStyle placeholder='휴대전화번호' />
+        <img className='cursor-point' src={logo} onClick={() => navigate('/login')} />
+        <InputStyle type='text' placeholder='아이디' />
+        <InputStyle type='password' placeholder='비밀번호' />
+        <InputStyle type='password' placeholder='비밀번호 확인' />
+        <InputStyle type='text' placeholder='이름' />
+        <InputStyle type='text' placeholder='생년월일 8자리' />
+        <InputStyle type='' placeholder='휴대전화번호' />
         <button onClick={undefined}> 가입하기 </button>
       </SignUpBox>
       

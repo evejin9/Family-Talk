@@ -194,7 +194,7 @@ function Chat(props) {
   
   useEffect(() => {    
     messageRef.current.scrollIntoView();
-  }, [chatList])
+  }, [chatList]);
   
   const saveImgFile = (e) => {
     const targetFile = e.target.files;

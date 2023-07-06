@@ -12,7 +12,6 @@ const passSlice = createSlice({
   reducers: {
     getAllPassList: (state, action) => {
       state.passList = action.payload;
-      console.log(action.payload);
     },
     paymentPass: (state, action) => {
 
@@ -22,6 +21,6 @@ const passSlice = createSlice({
 
 export const { getAllPassList, paymentPass } = passSlice.actions;
 
-export const selectPassList = (state) => state.pass.PassList;
+export const selectPassList = (state) => state.pass.passList;
 
 export default passSlice.reducer;

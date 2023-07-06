@@ -1,6 +1,5 @@
 import React, { useEffect } from 'react';
 import styled from 'styled-components';
-
 import data from "../passData.json";
 import PassList from '../components/pass/PassList';
 import Payment from '../components/pass/Payment';
@@ -51,7 +50,7 @@ function Pass(props) {
   // 처음 마운트 됐을 때 서버에 데이터를 요청하고 그 결과를 리덕스 스토어에 전역 상태로 저장
   useEffect(() => {
     dispatch(getAllPassList(data));
-  }, []);
+  }, [passList]);
   
   return (
     <div className='show-content'>
@@ -66,13 +65,10 @@ function Pass(props) {
       </PassEvent>
 
       {/* 이용권 목록 표시 */}
-      <PassList 
-        // passInfo={data}
-        passList={passList}
-      />
+      <PassList passList={passList} />
 
       {/* 결제정보 */}
-      <Payment passInfo={data} />
+      <Payment passList={passList} />
 
       <PrecautionsUl>
         <li>이용권 구매 즉시 할인 가격이 적용되며, 할인 기간이 종료된 이후부터는 정상가로 결제됩니다.</li>

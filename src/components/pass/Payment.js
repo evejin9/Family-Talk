@@ -42,19 +42,17 @@ const PriceWrapper = styled.div`
   }
 `;
 
-function Payment({ passInfo }) {
-  // console.log(passInfo);
+function Payment(props) {
   const passList = useSelector(selectPassList);
   // console.log(passList);
-
 
   return (
     <PaymentWrapper>
       <PriceWrapper>
-        <p>{passInfo[1].id}인권</p>
+        <p>인권</p>
         <div className='fare'>
-          <p>&#92;{passInfo[1].price}</p>
-          <p>&#92;{passInfo[1].discountPrice}/월</p>
+          <p>&#92;</p>
+          <p>&#92;/월</p>
         </div>
       </PriceWrapper>
       <Button className='btn-payment' title="결제" onClick={undefined}/>

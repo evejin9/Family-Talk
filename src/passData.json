@@ -2,7 +2,7 @@
   {
     "id": 1,
     "membershipName": "30일 무료 이용권",
-    "membershipContent": "WHITE 멤버십 무료이용권(10개 게시글 업로드 가능)",
+    "membershipContent": "WHITE 멤버십 무료이용권",
     "price": "4,900",
     "discountPrice": "0"
   },
@@ -37,7 +37,7 @@
   {
     "id": 6,
     "membershipName": "VVIP",
-    "membershipContent": "매월 업로드무제한 이용",
+    "membershipContent": "매월 업로드 무제한 이용",
     "price": "12,900",
     "discountPrice": "9,900"
   }

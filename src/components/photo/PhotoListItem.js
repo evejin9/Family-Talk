@@ -141,12 +141,8 @@ margin-bottom: 50px;
 `
 
 function PhotoListItem({post}) {
-  // console.log(post.id);
-
   const navigate = useNavigate('/')
-  const onRemove = () => {
-
-  }
+  
 
   return (
     <PhotoLIstItemWrapper>
@@ -160,7 +156,7 @@ function PhotoListItem({post}) {
             <span className='name'>{post.name}</span> 
             <button onClick={() => navigate(`/photo/editPhoto/${post.id}`)} ><PiPencil /></button>
             <button
-              onClick={() => {onRemove(post.id);}}
+            
             ><PiTrash /></button>
           </div>
           <div className='contentAndComment'>

@@ -18,9 +18,6 @@ const MainWrapper = styled.div`
   flex-wrap: wrap;
   align-items: center;
 
-  & div + div {
-    /* margin-left: 20px; */
-  }
 `;
 
 function Main(props) {

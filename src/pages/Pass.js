@@ -1,5 +1,12 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import styled from 'styled-components';
+
+import data from "../passData.json";
+import PassList from '../components/pass/PassList';
+import Payment from '../components/pass/Payment';
+import { useDispatch, useSelector } from 'react-redux';
+import { selectPassList } from '../features/passSlice';
+import { getAllPassList } from "../features/passSlice";
 
 const PassTitle = styled.div`
 
@@ -27,65 +34,6 @@ const PassEvent = styled.div`
   }
 `;
 
-const PassWrapperUl = styled.ul`
-  width: 100%;
-
-  & li {
-    width: 100%;
-    height: 90px;
-    border: 2px solid #efefef;
-    border-radius: 8px;
-    padding: 0 20px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    cursor: pointer;
-
-    &:hover {
-      background-color: #efefef;
-    }
-
-    & .fare {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-
-      & p {
-        margin-left: 10px
-      }
-
-      & :first-child {
-        color: #ccc;
-        text-decoration: line-through;
-        font-size: 14px
-      }
-      .line-through {
-        color: #ccc;
-        text-decoration: line-through;
-        font-size: 14px
-      }
-      .free-exp {
-        color: #f5cc8d;
-        font-size: 18px;
-      }
-    }
-  }
-
-  & li + li {
-    margin-top: 20px;
-  }
-
-  .question {
-    color: #aaa;
-    font-size: 12px;
-    margin-top: 20px;
-  }
-`;
-
-const Payment = styled.div`
-  margin-top: 30px;
-`;
-
 const PrecautionsUl = styled.ul`
   margin: 25px 0;
   color: #aaa;
@@ -97,6 +45,14 @@ const PrecautionsUl = styled.ul`
 `;
 
 function Pass(props) {
+  const dispatch = useDispatch();
+  const passList = useSelector(selectPassList);
+
+  // 처음 마운트 됐을 때 서버에 데이터를 요청하고 그 결과를 리덕스 스토어에 전역 상태로 저장
+  useEffect(() => {
+    dispatch(getAllPassList(data));
+  }, []);
+  
   return (
     <div className='show-content'>
       <PassTitle>
@@ -109,47 +65,14 @@ function Pass(props) {
         <p>3인권 30일 무료체험</p>
       </PassEvent>
 
-      <PassWrapperUl>
-        <li>
-          <p>1인권</p>
-          <p>&#92;1,500/월</p>
-        </li>
-        <li>
-          <p>2인권</p>
-          <div className='fare'>
-            <p>&#92;3,000</p>
-            <p>&#92;2,800/월</p>
-          </div>
-        </li>
-        <li>
-          <p>3인권</p>
-          <div className='fare'>
-            <p>&#92;4,500 </p>
-            <p className='line-through'>&#92;4,200/월</p>
-            <p className='free-exp'>무료체험</p>
-          </div>
-        </li>
-        <li>
-          <p>4인권</p>
-          <div className='fare'>
-            <p>&#92;6,000</p>
-            <p>&#92;5,000/월</p>
-          </div>
-        </li>
-        <li>
-          <p>6인권</p>
-          <div className='fare'>
-            <p>&#92;9,000</p>
-            <p>&#92;6,500/월</p>
-          </div>
-        </li>
-        <p className='question'>※ 7인 이상 이용권은 별도 문의 바랍니다.</p>
-      </PassWrapperUl>
+      {/* 이용권 목록 표시 */}
+      <PassList 
+        // passInfo={data}
+        passList={passList}
+      />
 
       {/* 결제정보 */}
-      <Payment>
-        <div>결제</div>
-      </Payment>
+      <Payment passInfo={data} />
 
       <PrecautionsUl>
         <li>이용권 구매 즉시 할인 가격이 적용되며, 할인 기간이 종료된 이후부터는 정상가로 결제됩니다.</li>
@@ -165,3 +88,6 @@ function Pass(props) {
 }
 
 export default Pass;
+
+
+// 결제 모듈

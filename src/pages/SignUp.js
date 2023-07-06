@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useRef, useState } from 'react';
 import styled from 'styled-components';
 
 import logo from "../images/logo.png";
@@ -21,6 +21,12 @@ const SignUpBox = styled.div`
   img {
     width: 300px;
     margin-bottom: 50px;
+  }
+
+  .errorMsg {
+    font-size: 12px;
+    color: red;
+    padding: 10px;
   }
 
   input + input {
@@ -59,78 +65,185 @@ function SignUp(props) {
     birth: '',
     number: '',
   });
+  
+  const { userId, pw, confirmPw, userName, birth, number } = inputValue;
 
   const [userIdError, setUserIdError] = useState(false);
   const [pwError, setPwError] = useState(false);
   const [configError, setConfigError] = useState(false);
   const [userNameError, setUserNameError] = useState(false);
+  const [birthError, setBirthError] = useState(false);
   const [numberError, setNumberError] = useState(false);
 
-  const { userId, pw, confirmPw, userName, birth, number } = inputValue;
+  const birthRef = useRef();
+  const phoneRef = useRef();
+
+  const patternEng = /[a-zA-Z]/;
+  const patternNum = /[0-9]/;
+  const patternEngNum = /^[A-Za-z0-9]+$/;
 
   const navigate = useNavigate();
-
+  
   const handleUserId = (e) => {
     const { name, value } = e.target;
 
-    // if (name === 'userID') {
-    //   if (value.length < 5) setUserIdError(false);
-    //   else setUserIdError(true);
-    //   setUserIdError(true);
-    // }
+    if (name === 'userId') {
+      console.log(value);
+      
+        const aa = /^[a-zA-Z0-9]*$/g.test(value);
+        console.log(aa);
+        if (!aa) return;
+
+        // if (patternEngNum.test(value)) return;
+
+      if (value.length < 5 && value.length > 0) setUserIdError(true);
+      else setUserIdError(false);
+    }
+
+    if (name === 'pw') {
+      if (value.length >= 4 || value.length < 1) setPwError(false);
+      else setPwError(true);
+    }
+
+    if (name === 'confirmPw') {
+      if (value === inputValue.pw || value.length < 1) setConfigError(false);
+      else setConfigError(true);
+    }
+
+    if (name === 'userName') {
+      if (value.length > 2 || value.length <= 0) setUserNameError(false);
+      else setUserNameError(true);
+    }
+
+    if (name === 'birth') {
+      const birthValue = birthRef.current.value.replace(/\D+/g, "");
+      const birthLength = 8;
+
+      let result;
+      result = "";
+
+      for (let i = 0; i < birthValue.length && i < birthLength; i++) {
+        switch (i) {
+          case 4:
+            result += "-";
+            break;
+          case 6:
+            result += "-";
+            break;
+        
+          default:
+            break;
+        }
+
+        result += birthValue[i];
+      }
+      
+      birthRef.current.value = result;
+
+
+      if (value.length === 10 || value.length <= 0 ) setBirthError(false);
+      else setBirthError(true);
+    }
+
+    if (name === 'number') {
+      const numberValue = phoneRef.current.value.replace(/\D+/g, "");
+      const numberLength = 11;
+
+      let result;
+      result = "";
+
+      for (let i = 0; i < numberValue.length && i < numberLength; i++) {
+        switch (i) {
+          case 3:
+            result += "-";
+            break;
+          case 7:
+            result += "-";
+            break;
+        
+          default:
+            break;
+        }
+
+        result += numberValue[i];
+      }
+      
+      phoneRef.current.value = result;
+
+      if (value.length === 13 || value.length <= 0) setNumberError(false);
+      else setNumberError(true);
+    };
 
     setInputValue({
       ...inputValue,
       [name]: value
     })
-  }
+  };
 
   return (
     <SignUpwrapper>
       <SignUpBox>
         <img className='cursor-point' src={logo} onClick={() => navigate('/login')} />
         <InputStyle 
-          name='userId' 
-          defaultValue={userId} 
+          name='userId'  
           type='text' 
           placeholder='아이디' 
+          value={userId}
           onChange={handleUserId} 
         />
+        {userIdError && <p className='errorMsg'>아이디를 5자리 이상 입력해주세요</p>}
+
         <InputStyle 
           name='pw' 
-          defaultValue={pw} 
+          // defaultValue={pw} 
+          value={pw} 
           type='password' 
           placeholder='비밀번호' 
           onChange={handleUserId} 
         />
+        {pwError && <p className='errorMsg'>비밀번호를 4자리 이상 입력해주세요</p>}
+
         <InputStyle 
           name='confirmPw' 
           type='password' 
+          value={confirmPw}
           placeholder='비밀번호 확인' 
           onChange={handleUserId} 
         />
-        {/* {<p>{`비밀번호를 확인해주세요.`}</p>} */}
+        {configError && <p className='errorMsg'>비밀번호와 비밀번호 확인이 동일하지 않습니다.</p>}
+
         <InputStyle 
           name='userName' 
-          defaultValue={userName} 
+          // defaultValue={userName}
+          value={userName} 
           type='text' 
           placeholder='이름' 
           onChange={handleUserId} 
         />
+        {userNameError && <p className='errorMsg'>이름을 2자리 이상 입력해주세요</p>}
+
         <InputStyle 
           name='birth' 
           defaultValue={birth} 
           type='text' 
+          ref={birthRef}
           placeholder='생년월일 8자리' 
-          onChange={handleUserId} 
+          maxLength='10' 
+          onChange={handleUserId}
         />
+        {birthError && <p className='errorMsg'>생년월일을 필수로 입력해주세요.</p>}
+
         <InputStyle 
           name='number' 
           defaultValue={number} 
           type='text' 
-          placeholder='휴대전화번호' 
-          onChange={handleUserId} 
+          ref={phoneRef}
+          placeholder='휴대전화번호'
+          maxLength='13' 
+          onChange={handleUserId}
         />
+        {numberError && <p className='errorMsg'>휴대전화번호 11자리를 입력해주세요</p>}
+
         <button onClick={undefined}> 가입하기 </button>
       </SignUpBox>
       

@@ -50,6 +50,7 @@ const StyledTitle = styled.div`
   margin-left: 5px;
   font-weight: 600;
   font-size: 11px;
+  padding-top: 3px;
 `;
 
 

@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from 'react';
+import React, { useCallback, useRef, useState } from 'react';
 import styled from 'styled-components';
 import { BsCheck2 } from "react-icons/bs";
 import { FiMoreHorizontal } from "react-icons/fi";
@@ -9,6 +9,9 @@ import { uuid } from "react-uuid";
 import { BsFillTrash3Fill } from "react-icons/bs";
 import { PiPencil, PiTrash } from "react-icons/pi";
 import EditPhoto from './EditPhoto';
+import { useDispatch, useSelector } from 'react-redux';
+import { addComments } from '../../features/photoSlice';
+import { LogInUser } from '../../features/loginSlice';
 
 const PhotoLIstItemWrapper = styled.div`
 /* background-color: #efeeef; */
@@ -142,7 +145,19 @@ margin-bottom: 50px;
 
 function PhotoListItem({post}) {
   const navigate = useNavigate('/')
-  
+  const dispatch = useDispatch()
+  const [comment, setComment] = useState('');
+  const logInUSerInfo = useSelector(LogInUser);
+  const nextId = useRef(0)
+
+  const handleChangeComment = (e) => {
+    setComment(e.target.value)
+  }
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    dispatch(addComments({ logInUSerInfo, nextId,comment }))
+  }
 
   return (
     <PhotoLIstItemWrapper>
@@ -167,9 +182,9 @@ function PhotoListItem({post}) {
           </div>
         </div>
           <div className='writeComment'>
-            <input type='text'>
+            <input type='text' onChange={handleChangeComment}>
             </input>
-            <button type='button' className='commentButton'>
+            <button type='button' className='commentButton' onClick={handleSubmit}>
               <BsCheck2/>
             </button>
           </div>

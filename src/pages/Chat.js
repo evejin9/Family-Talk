@@ -13,6 +13,7 @@ import MyChatItem from '../components/chat/MyChatItem';
 import OtherUserChatItem from '../components/chat/OtherUserChatItem';
 import { addChatList, chatListArray, getChatList, } from '../features/chatSlice';
 import { LogInUser } from '../features/loginSlice';
+import Map from '../components/chat/Map';
 
 
 const ChatUi = styled.div`
@@ -171,7 +172,7 @@ const ModalCloseButton = styled.div`
 `;
 
 function Chat(props) {
-  const { setShowChatModal } = props;
+  const { setShowChatModal, setShowMapModal } = props;
 
   const [newChat, setNewChat] = useState('');
   const [imgFile, setImgFile] = useState('');
@@ -229,14 +230,10 @@ function Chat(props) {
   
   const handleShowChatModal = () => {
     setShowChatModal(false);
+    setShowMapModal(false);
     setImgFile('');
     setNewChat('');
   }
-
-  const mapApi = () => {
-
-  };
-
 
   return (
     <ChatUi >
@@ -272,8 +269,8 @@ function Chat(props) {
             ref={imgRef}
             />
         </ImgUploadInput>
-        <BiSolidMap style={{ fontSize: "30px" }} onClick={undefined} />
-        
+
+        <BiSolidMap className='cursor-point' style={{ fontSize: "30px" }} onClick={() => setShowMapModal(true)} />
         
         {/* 채팅 input 창 */}
         <ChatInput>
@@ -301,7 +298,6 @@ function Chat(props) {
                 }} 
               />
           }
-
           
           <BsFillArrowUpCircleFill 
             className='cursor-point addButton' 

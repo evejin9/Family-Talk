@@ -10,8 +10,9 @@ import { PiTicketBold } from "react-icons/pi";
 import logo from "../images/logo.png";
 
 import Chat from '../pages/Chat';
-import { LogInUser, isUserLogin, logOutUser } from '../features/loginSlice';
 import Button from './ui/Button';
+import { LogInUser, isUserLogin, logOutUser } from '../features/loginSlice';
+import Map from './chat/Map';
 
 
 const LayoutStyled = styled.div`
@@ -162,6 +163,7 @@ const ChatBox = styled.div`
 
 function Layout(props) {
   const [showChatModal, setShowChatModal] = useState(false);
+  const [showMapModal, setShowMapModal] = useState(false);
 
   const logInUSerInfo = useSelector(LogInUser);
 
@@ -220,7 +222,8 @@ function Layout(props) {
       
       {/* 채팅 모달 */}
       <ChatBox showModal = {showChatModal} >
-        <Chat setShowChatModal={setShowChatModal} />
+        <Chat setShowChatModal={setShowChatModal} setShowMapModal={setShowMapModal} />
+        <Map showMapModal={showMapModal} setShowMapModal={setShowMapModal} />
       </ChatBox>
     </LayoutStyled>
   );  

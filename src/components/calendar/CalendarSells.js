@@ -156,7 +156,7 @@ function CalendarSells({ currentMonth, selectedDate, onDateClick, clickModal, fi
             })
             .map((item, index) => (
               <SellInTitle key={index}>
-                <GoDotFill color='#f5cc8d' size={11}></GoDotFill>
+                <GoDotFill color='#5ce1e6' size={11}></GoDotFill>
                 <div className='title'>{item.title}</div>
               </SellInTitle>
             ))}

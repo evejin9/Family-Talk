@@ -1,10 +1,10 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import data from '../../data.json'
 
 import { LogInUser } from '../../features/loginSlice';
 import { useSelector } from 'react-redux';
-
+import {LiaPenSolid } from 'react-icons/lia'
 
 
 const ProfileWrapper = styled.div`
@@ -14,7 +14,18 @@ const ProfileWrapper = styled.div`
   width: 100%;
   /* background-color: orange; */
   /* margin-left: 70px; */
-  
+  .edit {
+  cursor: pointer;
+
+  };
+`;
+
+const EditInputWrapper = styled.label`
+
+`;
+
+const EditInput = styled.input`
+  display: none;
 `;
 
 
@@ -37,20 +48,33 @@ const ProfileSpan = styled.span`
 
 
 
+
+
+
+
 function Myprofile(props) {
   const logInUser = useSelector(LogInUser);
-  
-  const newData = [...data];
+  const [selectedImage, setSelectedImage] = useState(null);
 
-  const oldAgeArray = newData.sort((a, b) => { if (a.birth < b.birth) return -1; })
+  const handleImageChange = (event) => {
+    const file = event.target.files[0];
+    const reader = new FileReader();
 
-  const loginUserRelation = logInUser.members;
+    reader.onload = (e) => {
+      setSelectedImage(e.target.result);
+    };
 
+    reader.readAsDataURL(file);
+  };
 
   return (
     <ProfileWrapper>
       <ProfileDiv>
-        <img src={logInUser.imagePath}></img>
+        <img src={selectedImage || logInUser.imagePath} alt="Profile" />
+        <EditInputWrapper>
+        <LiaPenSolid size={25} color='#f5cc8d' style={{margin: '5px'}} className='edit'/>
+        <EditInput type='file'  onChange={handleImageChange}/>
+        </EditInputWrapper>
         <ProfileSpan>{logInUser.name} 님 환영합니다!</ProfileSpan>
       </ProfileDiv>
     </ProfileWrapper>

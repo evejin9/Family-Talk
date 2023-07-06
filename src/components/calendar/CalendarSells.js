@@ -41,7 +41,7 @@ const CalendarContainer = styled.div`
     font-size: 0.65em;
     padding: 2px;
     color: #333;
-    height: 70px;
+    height: 80px;
     margin-right: 3px;
   }
 
@@ -89,8 +89,9 @@ const SellInTitle = styled.div`
       overflow: hidden;
       text-overflow: ellipsis;
       margin-left: 2px;
-      font-size: 7px;
+      font-size: 9px;
       width: 50px;
+      padding: 2px;
     }
 `;
 
@@ -149,7 +150,7 @@ function CalendarSells({ currentMonth, selectedDate, onDateClick, clickModal, fi
           {filteredSelectedTitle
             .filter((item) => {
               const date = item.date instanceof Date ? format(item.date, 'yyyy-MM-dd') : item.date;
-              console.log(typeof date, '<=>', typeof cloneDay);
+              
               return date === cloneDay;
             })
             .map((item, index) => (

@@ -8,6 +8,7 @@ import  uuid  from "react-uuid";
 import { useNavigate } from 'react-router-dom';
 import Button from '../ui/Button';
 import dataPhoto from "../../dataPhoto.json";
+import PhotoList from './PhotoList';
 
 
 const WritePhotoWrapper = styled.div`
@@ -54,9 +55,12 @@ align-items: start;
 .addButton {
   margin-left: 10px;
 }
+.none {
+  display: none;
+}
 `
 
-function WritePhoto(props) {
+const WritePhoto = ({props}) => {
   // const {onWriterPage} = props;
   const fileInput = useRef(null); 
 
@@ -67,8 +71,14 @@ function WritePhoto(props) {
   const [image, setImage] = useState("https://i.ibb.co/hs4SzRx/image.jpg");
   const [content, setContent] = useState('');
   const [file, setFile] = useState('');
-  const [posts, setPosts] = useState([]);
 
+  const post = {
+    id: uuid(),
+    name: logInUSerInfo.name,
+    profileImage: logInUSerInfo.imagePath,
+    image,
+    content
+  }
   
   const onClickEdit = () => {
     fileInput.current.click();
@@ -91,32 +101,44 @@ function WritePhoto(props) {
     }
     reader.readAsDataURL(file)
   }
-
-  const handleInsert = useCallback((imagePath, content) => {
-    const post = {
-      id: uuid(),
-      name: logInUSerInfo.name,
-      profileImage: logInUSerInfo.imagePath,
-      image,
-      content
-    }
-    setPosts(posts => posts.concat(post))
-  }, []);
+  // const handleInsert = useCallback((imagePath, content) => {
+    // const post = {
+    //   id: uuid(),
+    //   name: logInUSerInfo.name,
+    //   profileImage: logInUSerInfo.imagePath,
+    //   image,
+    //   content
+    // }
+  //   setPosts(posts => posts.concat(post))
+  // }, []);
 
   const handleChangeContent = (e) => {
-    setContent(e.target.value);
+    // console.log("2");
+    // setContent(e.target.value)
+    // setContent(e.target.value);
+    // console.log("3");
+    // console.log(e.target.value);
+    // console.log("3"+content);
   }
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    handleInsert(image, content);
-    navigate("/photo")
-    setImage('')
-    setContent('')
+    navigate("/photo",  { 
+      state: { id: uuid(), 
+      name: logInUSerInfo.name, 
+      content: content, 
+      profileImage: logInUSerInfo.imagePath, 
+      image: image
+    } })
+    // handleInsert(image, content);
+    // setImage('')
+    // setContent('')
   }
-  const handleRemove = useCallback((id) => {
-    setPosts(posts => posts.filter((post) => post.id !== id))
-  })
+  // const handleRemove = useCallback((id) => {
+  //   setPosts(posts => posts.filter((post) => post.id !== id))
+  // })
+
+
 
   return (
     <WritePhotoWrapper>
@@ -142,6 +164,8 @@ function WritePhoto(props) {
       <div className='button'>
         <Button title='취소' onClick={(e) => navigate("/photo")}/> 
         <Button title='게시' onClick={handleSubmit}/> 
+      </div>
+      <div className='none'>
       </div>
     </WritePhotoWrapper>
   );

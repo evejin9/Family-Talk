@@ -90,14 +90,12 @@ function App() {
               <Route index element={<Main />} />
               <Route path='/members' element={<Members />} />
               <Route path='/calendar' element={<Calendar />} />
-              <Route path='/pass' element={<Pass />} />
-
               <Route path='/photo' element={<Photo />} >
                 <Route index element={<PhotoList />} />
                 <Route path='writePhoto' element={<WritePhoto />} />
                 <Route path='editPhoto/:editPhotoId' element={<EditPhoto />} />
               </Route>
-
+              <Route path='/pass' element={<Pass />} />
             </Route>
             <Route path='/login' element={<LogIn />} />
             <Route path='/SignUp' element={<SignUp />} />

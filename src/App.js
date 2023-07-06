@@ -14,12 +14,15 @@ import WritePhoto from './components/photo/WritePhoto';
 import EditPhoto from './components/photo/EditPhoto';
 
 import LogIn from './pages/LogIn';
-import { useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 import PhotoList from './components/photo/PhotoList';
 import AuthCheck from './components/AuthCheck';
 import SignUp from './pages/SignUp';
 import Pass from './pages/Pass';
-
+import dataPhoto from "./dataPhoto.json";
+import uuid from 'react-uuid';
+import { useSelector } from 'react-redux';
+import { LogInUser } from './features/loginSlice';
 
 
 const GlobalStyled = createGlobalStyle`
@@ -80,6 +83,22 @@ const Wrapper = styled.div`
   `;
 
 function App() {
+  // const [posts, setPosts] = useState(dataPhoto)
+  // const logInUSerInfo = useSelector(LogInUser)
+  // const nextId = useRef(7);
+
+  // const handleInsert = useCallback((content, image) => {
+  //   const post = {
+  //       name: logInUSerInfo.name, 
+  //       id: uuid(), 
+  //       content, 
+  //       profileImage: logInUSerInfo.imagePath, 
+  //       image
+  //   }
+  //   setPosts(posts => posts.concat(post).sort(function(a,b) { return a-b; }))
+  //   nextId.current += 1;
+  //   }, []);
+
   return (
     <>
       <GlobalStyled />

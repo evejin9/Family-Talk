@@ -2,13 +2,14 @@ import React, { useCallback, useEffect, useRef } from 'react';
 import styled from 'styled-components';
 import { useState } from "react";
 import { LogInUser } from '../../features/loginSlice';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { registPhotoItem } from '../../utils/local-storage.util';
 import  uuid  from "react-uuid";
 import { useNavigate } from 'react-router-dom';
 import Button from '../ui/Button';
 import dataPhoto from "../../dataPhoto.json";
 import PhotoList from './PhotoList';
+import { addPostList } from '../../features/photoSlice';
 
 
 const WritePhotoWrapper = styled.div`
@@ -42,9 +43,10 @@ align-items: start;
       width: 100%;
       height: 100%;
       display: flex;
-      text-align: center;
+      /* text-align: center; */
       align-items: center;
       justify-content: center;
+      padding: 7% 4%;
       }
 }
 .button {
@@ -60,25 +62,19 @@ align-items: start;
 }
 `
 
-const WritePhoto = ({props}) => {
-  // const {onWriterPage} = props;
-  const fileInput = useRef(null); 
+function WritePhoto (props) {
 
-  const logInUSerInfo = useSelector(LogInUser)
-
-  const navigate = useNavigate('/')
-  
   const [image, setImage] = useState("https://i.ibb.co/hs4SzRx/image.jpg");
   const [content, setContent] = useState('');
   const [file, setFile] = useState('');
+  
+  const logInUSerInfo = useSelector(LogInUser);
+  const navigate = useNavigate()
+  const fileInput = useRef(null); 
+  const nextId = useRef(7);
 
-  const post = {
-    id: uuid(),
-    name: logInUSerInfo.name,
-    profileImage: logInUSerInfo.imagePath,
-    image,
-    content
-  }
+
+  const dispatch = useDispatch();
   
   const onClickEdit = () => {
     fileInput.current.click();
@@ -94,51 +90,22 @@ const WritePhoto = ({props}) => {
 
     reader.onload = () => {
       const result = reader.result
-      // setPosts({...posts, imagePath: result})
       if (reader.readyState === 2) {
         setImage(result)
       }
     }
     reader.readAsDataURL(file)
   }
-  // const handleInsert = useCallback((imagePath, content) => {
-    // const post = {
-    //   id: uuid(),
-    //   name: logInUSerInfo.name,
-    //   profileImage: logInUSerInfo.imagePath,
-    //   image,
-    //   content
-    // }
-  //   setPosts(posts => posts.concat(post))
-  // }, []);
 
   const handleChangeContent = (e) => {
-    // console.log("2");
-    // setContent(e.target.value)
-    // setContent(e.target.value);
-    // console.log("3");
-    // console.log(e.target.value);
-    // console.log("3"+content);
+    setContent(e.target.value);
   }
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    navigate("/photo",  { 
-      state: { id: uuid(), 
-      name: logInUSerInfo.name, 
-      content: content, 
-      profileImage: logInUSerInfo.imagePath, 
-      image: image
-    } })
-    // handleInsert(image, content);
-    // setImage('')
-    // setContent('')
+    navigate("/photo")
+    dispatch(addPostList({ logInUSerInfo, nextId, content, image }));
   }
-  // const handleRemove = useCallback((id) => {
-  //   setPosts(posts => posts.filter((post) => post.id !== id))
-  // })
-
-
 
   return (
     <WritePhotoWrapper>

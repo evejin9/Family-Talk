@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { format } from "date-fns";
 import { BsFillArrowUpCircleFill } from "react-icons/bs";
 import { AiOutlinePlusCircle, AiOutlineClose as CloseButton } from "react-icons/ai";
+import { BiSolidMap } from "react-icons/bi";
 
 import chatData from "../chatData.json";
 import userData from "../data.json";
@@ -232,6 +233,10 @@ function Chat(props) {
     setNewChat('');
   }
 
+  const mapApi = () => {
+
+  };
+
 
   return (
     <ChatUi >
@@ -267,6 +272,8 @@ function Chat(props) {
             ref={imgRef}
             />
         </ImgUploadInput>
+        <BiSolidMap style={{ fontSize: "30px" }} onClick={undefined} />
+        
         
         {/* 채팅 input 창 */}
         <ChatInput>
@@ -294,6 +301,7 @@ function Chat(props) {
                 }} 
               />
           }
+
           
           <BsFillArrowUpCircleFill 
             className='cursor-point addButton' 

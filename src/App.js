@@ -19,6 +19,7 @@ import PhotoList from './components/photo/PhotoList';
 import AuthCheck from './components/AuthCheck';
 import SignUp from './pages/SignUp';
 import Pass from './pages/Pass';
+import Mypage from './pages/Mypage';
 
 
 
@@ -96,6 +97,7 @@ function App() {
                 <Route path='editPhoto/:editPhotoId' element={<EditPhoto />} />
               </Route>
               <Route path='/pass' element={<Pass />} />
+              <Route path='/mypage' element={<Mypage />} />
             </Route>
             <Route path='/login' element={<LogIn />} />
             <Route path='/SignUp' element={<SignUp />} />

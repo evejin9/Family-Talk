@@ -3,7 +3,7 @@ import { Placeholder } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import styled, { keyframes } from 'styled-components';
-import { addCalendarTitle, clearSelectedPlan, deleteCalendarTitle, selectSelectedPlan, selectTitle,  updateCalendarTitle,  updatedPlan } from '../../features/calendarSlice';
+import { addCalendarTitle, clearSelectedPlan, deleteCalendarTitle, selectSelectedPlan, selectTitle,  updateCalendarTitle,  updatedPlan, clickEditModal } from '../../features/calendarSlice';
 import { format } from 'date-fns';
 
 const fadeIn = keyframes`
@@ -51,10 +51,11 @@ const TitleInput = styled.input`
   border: none;
   margin-top: 10px;
   padding-left: 15px;
+  
   &:focus {
     outline: none;
+    
   }
-  
 `;
 
 const DetailInput = styled.textarea`
@@ -71,8 +72,8 @@ const DetailInput = styled.textarea`
     linear-gradient(to right,  #f5cc8d 10px, transparent 10px),
     linear-gradient(to left,  #f5cc8d 10px, transparent 10px),
     repeating-linear-gradient( #f5cc8d,  #f5cc8d 30px, #ccc 30px, black 31px, white 31px);
-    line-height: 31px;
-    padding: 8px 15px;
+  line-height: 31px;
+  padding: 8px 15px;
   &:focus {
     outline: none;
   }
@@ -97,7 +98,7 @@ const StyledButton = styled.button`
   cursor: pointer;
 `;
 
-const CalendarPlanModal = ({ selectedDate, closeModal, onDateClick, selectedDateCl }) => {
+const CalendarEditModal = ({ selectedDate, closeEditModal, onDateClick, selectedDateCl }) => {
   const [title, setTitle] = useState('');
   const [content, setContent] = useState('');
   const selectedData = useSelector(selectTitle);
@@ -120,6 +121,9 @@ const CalendarPlanModal = ({ selectedDate, closeModal, onDateClick, selectedDate
     }
   }, [selectedPlan]);
 
+
+
+
   const handleCalendarData = () => {
     if (selectedPlan) {
       dispatch(updateCalendarTitle({ id: selectedPlan.id, title, content }));
@@ -128,14 +132,14 @@ const CalendarPlanModal = ({ selectedDate, closeModal, onDateClick, selectedDate
     }
     setTitle('');
     setContent('');
-    closeModal();
+    closeEditModal();
   };
 
   const handleDelete = () => {
     if (selectedPlan) {
       dispatch(deleteCalendarTitle(selectedPlan.id));
     }
-    closeModal();
+    closeEditModal();
   };
 
   const handleTitleChange = (e) => {
@@ -166,6 +170,7 @@ const CalendarPlanModal = ({ selectedDate, closeModal, onDateClick, selectedDate
         autoFocus
         onKeyUp={handleKeyPress}
         spellCheck={false}
+        // disableds
         />
 
       <DetailInput
@@ -174,14 +179,15 @@ const CalendarPlanModal = ({ selectedDate, closeModal, onDateClick, selectedDate
         onChange={handleContentChange}
         value={content}
         spellCheck={false}
+        
       />
 
       <ButtonWrapper>
-        <StyledButton onClick={closeModal}>Close</StyledButton>
-        <StyledButton onClick={handleCalendarData}>Save</StyledButton>
+        <StyledButton onClick={closeEditModal}>Close</StyledButton>
+        <StyledButton onClick={handleCalendarData}>Edit</StyledButton>
       </ButtonWrapper>
     </Wrapper>
   );
 }
 
-export default CalendarPlanModal;
+export default CalendarEditModal;

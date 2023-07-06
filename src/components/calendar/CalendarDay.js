@@ -5,44 +5,37 @@ import styled from 'styled-components';
 const StyledDiv = styled.div`
   display: flex;
   font-size: 14px;
-  /* justify-content: space-around; */
   margin-top: 20px;
   font-weight: 600;
-  /* margin-left: 5px; */
-  width: 40%;
+  width: 30%;
   margin-bottom: 28px;
-  
-  .col {
-    margin-right: 33px;
-    background-color: #f5cc8d;
-    border-radius: 6px;
-    margin-left: 3px;
-    width: 160px;
-  } 
 `;
 
-
-
+const StyledCol = styled.div`
+  margin-right: 33px;
+  border-radius: 3px;
+  margin-left: 3px;
+  width: 160px;
+  padding: 2px;
+  margin-right: 30px;
+  color: ${props => (props.isSunday ? '#f5cc8d' : props.isSaturday ? '#5CE1E6' : 'black')};
+`;
 
 function CalendarDay(props) {
-
-
   const days = [];
-  const date = ['Sun', 'Mon', 'Thu', 'Wed', 'Thu', 'Fri', 'Sat'];
+  const date = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
 
-  for (let  i = 0; i < 7; i++) {
+  for (let i = 0; i < 7; i++) {
+    const isSunday = i === 0; // 0: Sunday
+    const isSaturday = i === 6; // 6: Saturday
     days.push(
-      <div className='col' key={i}>
+      <StyledCol key={i} isSunday={isSunday} isSaturday={isSaturday}>
         {date[i]}
-      </div>
-    )
-  };
+      </StyledCol>
+    );
+  }
 
-  return (
-    <StyledDiv>
-      {days}
-    </StyledDiv>
-  );
+  return <StyledDiv>{days}</StyledDiv>;
 }
 
 export default CalendarDay;

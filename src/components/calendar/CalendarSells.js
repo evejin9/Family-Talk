@@ -24,7 +24,7 @@ const CalendarContainer = styled.div`
     align-items: center;
     margin-bottom: 10px;
     margin-top: 5PX;
-    width: 70%;
+    width: 71%;
     /* margin-left: 200px; */
   }
 
@@ -56,6 +56,7 @@ const CalendarContainer = styled.div`
     &.disabled {
       opacity: 0.6;
       cursor: not-allowed;
+      pointer-events: none;
     }
 
     &.selected {

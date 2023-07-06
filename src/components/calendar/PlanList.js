@@ -65,7 +65,7 @@ const SelectedDate = styled.div`
 
 
 
-function PlanList({ currentMonth, selectedDate, onDateClick, clickModal, filteredSelectedTitle, handleDelete }) {
+function PlanList({ currentMonth, selectedDate, onDateClick, clickModal, filteredSelectedTitle, handleDelete, clickEditModal }) {
   const selectedTitle = useSelector(selectTitle);
   const [deletedItems, setDeletedItems] = useState([]);
   const dispatch = useDispatch();
@@ -73,8 +73,9 @@ function PlanList({ currentMonth, selectedDate, onDateClick, clickModal, filtere
 
   
   const handleClickPlan = (id) => {
-    clickModal();
+    // clickModal();
     dispatch(getSelectedPlan(id));
+    clickEditModal()
   };
 
   return (
@@ -83,7 +84,7 @@ function PlanList({ currentMonth, selectedDate, onDateClick, clickModal, filtere
         <>
         {sortedSelectedTitle.map((item, index) => {
         
-          console.log(item);
+        
 
         return (
           <StyledPlanList onClick={() => handleClickPlan(item.id)} key={index}>

@@ -8,6 +8,7 @@ import CalendarPlanModal from '../components/calendar/CalendarPlanModal';
 import PlanList from '../components/calendar/PlanList';
 import { deleteCalendarTitle, selectTitle } from '../features/calendarSlice';
 import { useDispatch, useSelector } from 'react-redux';
+import CalendarEditModal from '../components/calendar/CalendarEditModal';
 
 
 
@@ -17,6 +18,7 @@ function Calendar(props) {
   const [currentMonth, setcurrentMonth] = useState(new Date());
   const [selectedDate, setSelectedDate] = useState(new Date());
   const [modal, setModal] = useState(false);
+  const [editModal, setEditModal] = useState(false);
   const [deletedItems, setDeletedItems] = useState([]);
   const selectedTitle = useSelector(selectTitle);
   const dispatch = useDispatch();
@@ -48,11 +50,17 @@ function Calendar(props) {
     (item) => !deletedItems.includes(item.id)
   );
 
-  
+  const clickEditModal = () => {
+    setEditModal(true);
+  }
   
   const clickModal = () => {
     setModal(true);
   };
+
+  const closeEditModal = () => {
+    setEditModal(false)
+  }
 
   const closeModal = () => {
     setModal(false);
@@ -76,13 +84,18 @@ function Calendar(props) {
         <CalendarHeader currentMonth={currentMonth} prevMonth={prevMonth} nextMonth={nextMonth} />
         <CalendarDay />
         <CalendarSells currentMonth={currentMonth} selectedDate={selectedDate} clickModal={clickModal} onDateClick={onDateClick} filteredSelectedTitle={filteredSelectedTitle} />
-        <PlanList currentMonth={currentMonth} selectedDate={selectedDate} clickModal={clickModal} onDateClick={onDateClick} filteredSelectedTitle={filteredSelectedTitle}
-        handleDelete={handleDelete}/>
-        {modal && (
-          <div className='modal-container' style={{ position: 'absolute', top:'-10%', right: '-55%' }}>
+        <PlanList currentMonth={currentMonth} selectedDate={selectedDate} editModal={editModal} onDateClick={onDateClick} filteredSelectedTitle={filteredSelectedTitle}
+        handleDelete={handleDelete} clickEditModal={clickEditModal} />
+        {modal && 
+          <div className='modal-container' style={{ position: 'absolute', top:'-10%', right: '-56%' }}>  
             <CalendarPlanModal closeModal={closeModal} selectedDate={selectedDate} onDateClick={onDateClick} />
           </div>
-        )}
+        }
+        {editModal && 
+          <div className='modal-container' style={{ position: 'absolute', top:'-10%', right: '-56%' }}> 
+          <CalendarEditModal currentMonth={currentMonth} selectedDate={selectedDate} clickEditModal={clickEditModal} onDateClick={onDateClick} closeEditModal={closeEditModal}/>
+        </div>
+        }
       </div>
     </div>
   )}

@@ -5,7 +5,7 @@ const StyledDiv = styled.div`
   display: flex;
   /* background-color: blue; */
   width: 40%;
-  height: 400px;
+  height: 200px;
   margin-top: 20px;
   /* justify-content: center; */
   /* align-items: center; */

@@ -8,6 +8,7 @@ import { PiCake } from 'react-icons/pi'
 import { LiaPenSolid } from 'react-icons/lia'
 import { AiOutlineUser } from 'react-icons/ai'
 import { BsPhone } from 'react-icons/bs'
+import Button from '../ui/Button';
 
 
 
@@ -32,6 +33,29 @@ const StyledSpan = styled.span`
   margin-left: 20px;
   margin-bottom: 20px;
   font-size: 17px;
+  
+`;
+
+const StyledButtonWrapper = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+
+`;
+
+
+const StyledButton = styled.button`
+  width: 100px;
+  height: 30px;
+  border-radius: 6px;
+  outline: none;
+  font-size: 13px;
+  background-color: #fff;
+  border: 2px solid #acacac;
+
+  &:hover {
+    background-color: #f5cc8d;
+  }
 `;
 
 function DetailedProfile(props) {
@@ -44,8 +68,12 @@ function DetailedProfile(props) {
       <StyledSpan><AiOutlineUser size={25} style={{marginRight: '5px'}} color='#f5cc8d'/>ID:  {logInUser.id}</StyledSpan>
       <StyledSpan><LiaPenSolid size={25} style={{marginRight: '5px'}} color='#f5cc8d'/>Name:  {logInUser.name}</StyledSpan>
       <StyledSpan><PiCake size={25} style={{marginRight: '5px'}} color='#f5cc8d'/>Birth date:  {logInUser.birth}</StyledSpan>
-      <StyledSpan><BsPhone size={25} style={{marginRight: '5px'}} color='#f5cc8d'/>Phone:  000-0000-0000</StyledSpan>
-      <StyledSpan><MdOutlineEmail size={25} style={{marginRight: '5px'}} color='#f5cc8d'/>Email: yhk1492@naver.com</StyledSpan>
+      <StyledSpan><BsPhone size={25} style={{marginRight: '5px'}} color='#f5cc8d'/>Phone:  {logInUser.phone}</StyledSpan>
+      <StyledSpan><MdOutlineEmail size={25} style={{marginRight: '5px'}} color='#f5cc8d'/>Email: {logInUser.email}</StyledSpan>
+      <StyledButtonWrapper>
+        <StyledButton>비밀번호 변경</StyledButton>
+        <StyledButton>정보수정</StyledButton>
+      </StyledButtonWrapper>
     </StyledDiv>
   );
 }

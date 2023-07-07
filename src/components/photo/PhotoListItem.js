@@ -147,17 +147,28 @@ function PhotoListItem({post}) {
   const dispatch = useDispatch()
   const logInUSerInfo = useSelector(LogInUser);
   const commentId = useRef(10000)
-  const [commentContent, setCommentContent] = useState('');
-  const comments = post.comments;
-  console.log(post);
+  // const [commentContent, setCommentContent] = useState('');
+  const [comments, setComments] = useState('');
+  const [value, setValue] = useState('');
+
+  const handleInsert = useCallback(() => {
+    const comment = {
+      // commentId: uuid(),
+      commentContent: value,
+      // commentName: logInUSerInfo.name
+    }
+    setComments(comments => comments.concat(comment));
+  }, [])
 
   const handleChangeComment = (e) => {
-    setCommentContent(e.target.value);
+    setValue(e.target.value);
   }
 
-  const handleSubmit = (e) => {
+  const commentHandleSubmit = (e) => {
+    handleInsert(value);
+    setValue('')
     e.preventDefault();
-    dispatch(addComment({logInUSerInfo, commentContent}));
+    // dispatch(addComment({logInUSerInfo, commentContent}));
   }
   const handleDelete = () => {
       dispatch(deletePost(post.id));
@@ -196,7 +207,7 @@ function PhotoListItem({post}) {
           <div className='writeComment'>
             <input type='text' onChange={handleChangeComment}>
             </input>
-            <button type='button' className='commentButton' onClick={handleSubmit}>
+            <button type='button' className='commentButton' onClick={commentHandleSubmit}>
               <BsCheck2/>
             </button>
           </div>

@@ -11,7 +11,7 @@ function CommentList({comments}) {
 console.log(comments);
   return (
     <CommentListWrapper>
-      {comments.map((comment) => <Comment key={comment.commentId} commentName={comment.commentName} commentContent={comment.commentContent} />)}
+      {/* {comments.map((comment) => <Comment key={comment.commentId} commentName={comment.commentName} commentContent={comment.commentContent} />)} */}
     </CommentListWrapper>
   );
 }

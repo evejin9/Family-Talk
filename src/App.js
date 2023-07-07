@@ -28,6 +28,9 @@ import uuid from 'react-uuid';
 import { useSelector } from 'react-redux';
 import { LogInUser } from './features/loginSlice';
 import PayCheckout from './components/pass/payment/PayCheckout';
+import Payment from './components/pass/Payment';
+import PayFail from './components/pass/payment/PayFail';
+import PassPage from './pages/PassPage';
 
 
 
@@ -120,7 +123,8 @@ function App() {
                 <Route path='writePhoto' element={<WritePhoto />} />
                 <Route path='editPhoto/:editPhotoId' element={<EditPhoto />} />
               </Route>
-              <Route path='/pass' element={<Pass />}>
+              <Route path='/pass' element={<PassPage />}>
+                <Route index element={<Pass />} />
                 <Route path='payment' element={<PayCheckout />} />
               </Route>
               <Route path='/mypage' element={<Mypage />} />

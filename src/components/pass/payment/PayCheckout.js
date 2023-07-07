@@ -5,14 +5,64 @@ import { loadPaymentWidget, PaymentWidgetInstance, ANONYMOUS } from "@tosspaymen
 
 import { uuid } from "react-uuid";
 import Button from '../../ui/Button';
+import styled from 'styled-components';
 
 const clientKey = "test_ck_D5GePWvyJnrK0W0k6q8gLzN97Eoq";
 const customerKey = "dXMVAbsDOSTuZGxC_Jinj";
 
+const PassTitle = styled.div`
+  & h1 {
+    font-size: 30px;
+    margin: 20px;
+  }
+`;
+
+const StyledOrder = styled.div`
+  
+  .order-title {
+    margin-top: 80px;
+    font-size: 25px;
+    text-align: center;
+  }
+  .price {
+    font-size: 20px;
+  }
+`;
+
+const PriceArea = styled.div`
+  padding-top: 50px;
+  p {
+    font-size: 20px;
+  }
+  & div + div {
+    margin-top: 20px;
+  }
+  .price {
+    display: flex;
+    justify-content: space-between;
+  }
+  .coupon {
+    display: flex;
+    justify-content: space-between;
+
+  }
+`;
+
+const PaymentMethod = styled.div`
+  margin-top: 30px;
+  border: 1px solid #eee;
+
+  .btn-payment {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 30px;
+  }
+`;
+
 function PayCheckout(props) {
   const paymentWidgetRef = useRef(null);
   const paymentMethodsWidgetRef = useRef(null);
-  const [price, setPrice] = useState(50000);
+  const [price, setPrice] = useState(9900);
 
   useEffect(() => {
     (async () => {
@@ -64,27 +114,44 @@ function PayCheckout(props) {
   };
 
   return (
-    <div>
-      <h1>주문서</h1>
-      <span>{`${price.toLocaleString()}원`}</span>
-      <div>
-        <label>
-          <input
-            type='checkbox'
-            onChange={(e) => {
-              setPrice(e.target.checked ? price - 5000 : price + 5000)
-            }}
-          />
-          5,000원 할인 쿠폰 적용
-        </label>
-      </div>
-      <div id='payment-widget' />
-      <div id='agreement' />
-      <Button
-        title="결제"
-        onClick={handlePayClick}
-      />
-    </div>
+    <>
+      <PassTitle>
+        <h1>FAMILY TALK 이용권 구매</h1>
+      </PassTitle>
+      <StyledOrder>
+        <h2 className='order-title'>주문서</h2>
+        <PriceArea>
+          <div className='price'>
+            <p>결제금액</p>
+            <span>{`${price.toLocaleString()}원`}</span>
+          </div>
+          <div className='coupon'>
+            <p>쿠폰</p>
+            <div>
+              <label>
+                <input
+                  type='checkbox'
+                  onChange={(e) => {
+                    setPrice(e.target.checked ? price - 1000 : price + 1000)
+                  }}
+                />
+                1,000원 할인 쿠폰 적용
+              </label>
+            </div>
+          </div>
+        </PriceArea>
+        <PaymentMethod>
+          <div id='payment-widget' />
+          <div id='agreement' />
+          <div className='btn-payment'>
+            <Button
+              title="결제"
+              onClick={handlePayClick}
+            />
+          </div>
+        </PaymentMethod>
+      </StyledOrder>
+    </>
   );
 }
 

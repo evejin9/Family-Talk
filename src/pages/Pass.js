@@ -6,6 +6,7 @@ import Payment from '../components/pass/Payment';
 import { useDispatch, useSelector } from 'react-redux';
 import { selectPassList } from '../features/passSlice';
 import { getAllPassList } from "../features/passSlice";
+import { Outlet } from 'react-router-dom';
 
 const PassTitle = styled.div`
 
@@ -69,6 +70,7 @@ function Pass(props) {
 
       {/* 결제정보 */}
       <Payment passList={passList} />
+      <Outlet />
 
       <PrecautionsUl>
         <li>이용권 구매 즉시 할인 가격이 적용되며, 할인 기간이 종료된 이후부터는 정상가로 결제됩니다.</li>

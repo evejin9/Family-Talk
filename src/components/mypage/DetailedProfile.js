@@ -21,11 +21,11 @@ const StyledDiv = styled.div`
   /* background-color: blue; */
   width: 50%;
   height: 400px;
-  margin-top: 20px;
+  /* margin-top: 20px; */
   /* justify-content: center; */
   /* align-items: center; */
   flex-direction: column;
-  border: 1px solid rgb(172, 172 ,172);
+  /* border: 1px solid rgb(172, 172 ,172); */
   border-radius: 6px;
 `;
 

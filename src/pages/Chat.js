@@ -13,7 +13,7 @@ import MyChatItem from '../components/chat/MyChatItem';
 import OtherUserChatItem from '../components/chat/OtherUserChatItem';
 import { addChatList, chatListArray, getChatList, } from '../features/chatSlice';
 import { LogInUser } from '../features/loginSlice';
-import Map from '../components/chat/Map';
+import MapModal from '../components/chat/MapModal';
 
 const ChatBox = styled.div`
   width: 100%;
@@ -23,7 +23,7 @@ const ChatBox = styled.div`
   align-items: center;
   position: fixed;
   background-color: none;
-  display: ${props => props.showChatModal ? "flex" : "none" };
+  display: flex;
   z-index: 10;
 `;
 
@@ -81,17 +81,6 @@ const InputArea = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-`
-
-const ImgUploadInputMap = styled.label`
-  display: flex;
-  justify-content: space-between;
-  padding-right: 10px;
-
-  input {
-    display:none;
-  }
-
   .button {
     font-size: 35px;
     color: #f5cc8d;
@@ -100,6 +89,17 @@ const ImgUploadInputMap = styled.label`
       color: red;
     }
   }
+`
+
+const ImgUploadInput = styled.label`
+  display: flex;
+  justify-content: space-between;
+  padding-right: 10px;
+
+  input {
+    display:none;
+  }
+
   
   img {
     max-height: 150px;
@@ -270,7 +270,7 @@ function Chat(props) {
 
         {/* 사진 업로드 input 및 버튼 */}
         <InputArea>
-          <ImgUploadInputMap>
+          <ImgUploadInput>
             <AiOutlinePlusCircle className='cursor-point button' />
             <input 
               type='file' 
@@ -278,17 +278,18 @@ function Chat(props) {
               onChange={saveImgFile}
               ref={imgRef}
               />
-              <Map 
-                showMapModal={showMapModal} 
-                setShowMapModal={setShowMapModal} 
-                addNewChat={addNewChat} 
-                nextId={nextId}
-                logInUser={logInUser}
-              />
-              <BiSolidMap className='cursor-point button' onClick={() => setShowMapModal(true)} />
-          </ImgUploadInputMap>
+          </ImgUploadInput>
 
           <div>
+            { showMapModal && 
+            <MapModal 
+              setShowMapModal={setShowMapModal} 
+              addNewChat={addNewChat} 
+              nextId={nextId}
+              logInUser={logInUser}
+            />
+            }
+            <BiSolidMap className='cursor-point button' onClick={() => setShowMapModal(true)} />
           </div>
           
           {/* 채팅 input 창 */}

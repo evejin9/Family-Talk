@@ -1,5 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
+import MapModal from './MapModal';
+import ChatMap from './ChatMap';
 
 const Mychat = styled.div`
   padding: 10px 0;
@@ -23,7 +25,6 @@ const Mychat = styled.div`
       border-radius: 10px;
     };
   };
-
 `;
 
 function MyChatItem(props) {
@@ -35,9 +36,11 @@ function MyChatItem(props) {
       <div className='chatArea'>
         <span>{relation}</span>
         {
-          content.includes('data:image')
-          ? <p className='contentArea'><img src={content} /></p>
-          : <p className='contentArea'>{content}</p>
+          typeof content === 'object'
+          ? <ChatMap />
+          : content.includes('data:')
+            ? <p className='contentArea'><img src={content} /></p>
+            : <p className='contentArea'>{content}</p>
         }
       </div>
     </Mychat>

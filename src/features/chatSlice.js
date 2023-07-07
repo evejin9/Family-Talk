@@ -24,12 +24,23 @@ const chatSlice = createSlice({
         time: time,
       });
     },
+    addMapInfo: (state, { payload: { location, nextId, logInUser } }) => {
+      const now = new Date();
+      const time = format(now, `HH:mm`);
+      
+      state.chatList.push({
+        id: `${nextId.current += 1}`,
+        memberId: logInUser.id,
+        content: location,
+        time: time,
+      });
+    }
   }
 });
 
 console.log();
 
-export const { getChatList, addChatList } = chatSlice.actions;
+export const { getChatList, addChatList, addMapInfo } = chatSlice.actions;
 
 export const chatListArray = (state) => state.chat.chatList;
 export const newChatItem = (state) => state.chat.newChat;

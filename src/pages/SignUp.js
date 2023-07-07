@@ -119,9 +119,7 @@ function SignUp(props) {
     }
 
     if (name === 'pw') {
-      console.log(value);
       const patternCheck =/^[A-Za-z0-9]{0,12}$/g.test(value);
-      console.log(patternCheck);
       if (!patternCheck) return;
     }
 
@@ -132,7 +130,6 @@ function SignUp(props) {
 
     if (name === 'userName') {
       const patternCheck =/^[ㄱ-ㅎ가-힣a-zA-Z]{0,12}$/g.test(value);
-      console.log(patternCheck);
       if (!patternCheck) return;
     }
 
@@ -230,6 +227,11 @@ const checkPattern = () => {
   }
 };
 
+const submitButton = () => {
+  navigate(`/login`);
+  alert(`${userName}님, 가입이 완료되었습니다.`);
+}
+
   return (
     <SignUpwrapper>
       <SignUpBox>
@@ -314,7 +316,7 @@ const checkPattern = () => {
         {emailError && <p className='errorMsg'>이메일 주소가 정확한지 확인해주세요.</p>}
 
         <button 
-          onClick={() => navigate("/login")} 
+          onClick={submitButton} 
           disabled={isEnable}
         > 
           가입하기 

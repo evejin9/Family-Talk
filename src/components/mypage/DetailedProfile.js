@@ -10,7 +10,7 @@ import { AiOutlineUser } from 'react-icons/ai'
 import { BsPhone } from 'react-icons/bs'
 import Button from '../ui/Button';
 import { useNavigate } from 'react-router-dom';
-import { selectUserEditData, setUserEditData, userEditData, userEditDatas } from '../../features/mypageSlice';
+import { selectUserEditData } from '../../features/mypageSlice';
 
 
 
@@ -59,8 +59,11 @@ const StyledButton = styled.button`
     background-color: #f5cc8d;
   }
 `;
+
+
 function DetailedProfile({ openModal }) {
-  const editUserData = useSelector(setUserEditData);
+  const editUserData = useSelector(selectUserEditData);
+  console.log(editUserData);
   const logInUser = useSelector(LogInUser);
   const navigate = useNavigate();
 

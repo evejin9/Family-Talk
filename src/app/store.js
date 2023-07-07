@@ -5,6 +5,7 @@ import calendarSlice from "../features/calendarSlice";
 import photoSlice from "../features/photoSlice";
 import loginSlice from "../features/loginSlice";
 import passSlice from "../features/passSlice";
+import mypageSlice from "../features/mypageSlice";
 
 export const store = configureStore({
   reducer: {
@@ -13,6 +14,7 @@ export const store = configureStore({
     calendar: calendarSlice,
     photo: photoSlice,
     login: loginSlice,
-    pass: passSlice
+    pass: passSlice,
+    mypage: mypageSlice
   }
 });

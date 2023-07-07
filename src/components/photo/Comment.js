@@ -1,8 +1,15 @@
 import React from 'react';
 import styled from 'styled-components';
+import { IoMdRemoveCircleOutline } from "react-icons/io";
 
 const CommentWrapper = styled.div`
-  height: auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  /* height: auto; */
+  .flexdiv {
+    width: 100%
+  }
   & + & {
     margin-top: 1%;
   } 
@@ -17,17 +24,26 @@ const CommentWrapper = styled.div`
     display: inline;
     font-size: 12px;
   }
+  svg {
+    color: orange;
+    cursor: pointer;
+  }
 `
 
-function Comment({comment}) {
-  // console.log(comment);
+function Comment({commentName, commentContent}) {
+  // console.log(commentName);
   return (
     <CommentWrapper>
-      <div className='name'>
-        {comment.name}
+      <div className='flexdiv'>
+        <div className='name'>
+          {commentName}
+        </div>
+        <div className='content'>
+          {commentContent}
+        </div>
       </div>
-      <div className='content'>
-        {comment.content}
+      <div className='commentRemove'>
+        <IoMdRemoveCircleOutline />
       </div>
     </CommentWrapper>
   );

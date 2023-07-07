@@ -9,6 +9,8 @@ import { LiaPenSolid } from 'react-icons/lia'
 import { AiOutlineUser } from 'react-icons/ai'
 import { BsPhone } from 'react-icons/bs'
 import Button from '../ui/Button';
+import { useNavigate } from 'react-router-dom';
+import { selectUserEditData, setUserEditData, userEditData, userEditDatas } from '../../features/mypageSlice';
 
 
 
@@ -32,7 +34,7 @@ const StyledDiv = styled.div`
 const StyledSpan = styled.span`
   margin-left: 20px;
   margin-bottom: 20px;
-  font-size: 17px;
+  font-size: 15px;
   
 `;
 
@@ -57,22 +59,26 @@ const StyledButton = styled.button`
     background-color: #f5cc8d;
   }
 `;
-
-function DetailedProfile(props) {
-
+function DetailedProfile({ openModal }) {
+  const editUserData = useSelector(setUserEditData);
   const logInUser = useSelector(LogInUser);
-    
+  const navigate = useNavigate();
+
+  const goToSignUpPage = () => {
+    navigate('/signUp');
+  };
+
   return (
     <StyledDiv>
-      <div style={{margin: '0 auto', marginBottom: '50px', fontSize: '20px', marginTop: '20px'}}>User details</div>
-      <StyledSpan><AiOutlineUser size={25} style={{marginRight: '5px'}} color='#5CE1E6'/>ID:  {logInUser.id}</StyledSpan>
-      <StyledSpan><LiaPenSolid size={25} style={{marginRight: '5px'}} color='#5CE1E6'/>Name:  {logInUser.name}</StyledSpan>
-      <StyledSpan><PiCake size={25} style={{marginRight: '5px'}} color='#5CE1E6'/>Birth date:  {logInUser.birth}</StyledSpan>
-      <StyledSpan><BsPhone size={25} style={{marginRight: '5px'}} color='#5CE1E6'/>Phone:  {logInUser.phone}</StyledSpan>
-      <StyledSpan><MdOutlineEmail size={25} style={{marginRight: '5px'}} color='#5CE1E6'/>Email: {logInUser.email}</StyledSpan>
+      <div style={{ margin: '0 auto', marginBottom: '50px', fontSize: '20px', marginTop: '20px' }}>User details</div>
+      <StyledSpan><AiOutlineUser size={25} style={{ marginRight: '5px' }} color='#5CE1E6' />ID:  {editUserData?.id || logInUser.id}</StyledSpan>
+      <StyledSpan><LiaPenSolid size={25} style={{ marginRight: '5px' }} color='#5CE1E6' />Name:  {editUserData?.name || logInUser.name}</StyledSpan>
+      <StyledSpan><PiCake size={25} style={{ marginRight: '5px' }} color='#5CE1E6' />Birth date:  {editUserData?.birth || logInUser.birth}</StyledSpan>
+      <StyledSpan><BsPhone size={25} style={{ marginRight: '5px' }} color='#5CE1E6' />Phone:  {editUserData?.phone || logInUser.phone}</StyledSpan>
+      <StyledSpan><MdOutlineEmail size={25} style={{ marginRight: '5px' }} color='#5CE1E6' />Email: {editUserData?.email || logInUser.email}</StyledSpan>
       <StyledButtonWrapper>
-        <StyledButton>비밀번호 변경</StyledButton>
-        <StyledButton>정보수정</StyledButton>
+        <StyledButton onClick={goToSignUpPage}>비밀번호 변경</StyledButton>
+        <StyledButton onClick={openModal}>정보수정</StyledButton>
       </StyledButtonWrapper>
     </StyledDiv>
   );

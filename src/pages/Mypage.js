@@ -1,8 +1,9 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Myprofile from '../components/mypage/Myprofile';
 import UserPass from '../components/mypage/UserPass';
 import DetailedProfile from '../components/mypage/DetailedProfile';
 import styled from 'styled-components';
+import EditModal from '../components/mypage/EditModal';
 
 
 const DetailedWrapper = styled.div`
@@ -17,13 +18,28 @@ const DetailedWrapper = styled.div`
 
 
 function Mypage(props) {
+  const [editModal, setEditModal] = useState(false);
+
+  const openModal = () => {
+    setEditModal(true)
+  };
+
+  const closeModal = () => {
+    setEditModal(false)
+  }
+
+  
+
   return (
     <div className='show-content'>
       <Myprofile />
       <DetailedWrapper>
         <UserPass />
-        <DetailedProfile />
+        <DetailedProfile openModal={openModal} />
       </DetailedWrapper>
+        <div style={{position:'absolute', top:'28%', right: '10%'}}>
+        {editModal && <EditModal closeModal={closeModal}/>}
+        </div>
     </div>
   );
 }

@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
+import { useDispatch } from 'react-redux';
 import styled from 'styled-components';
+import { paymentPass } from '../../features/passSlice';
 
 const StyledListItem = styled.div`
   width: 100%;
@@ -50,16 +52,11 @@ const StyledPrice = styled.div`
 `;
 
 function PassListItem(props) {
-  const { pass: { membershipName, membershipContent, price, discountPrice } } = props;
-  const [selectPass, setSelectPass] = useState([]);
+  const { pass: { id, membershipName, membershipContent, price, discountPrice } } = props;
+  const dispatch = useDispatch();
 
-  // console.log(selectPass);
   const handleClickPass = () => {
-    // setSelectPass(
-    //   {membershipName, discountPrice}
-    // );
-    
-    // console.log(membershipName, price);
+    dispatch(paymentPass({id, membershipName, membershipContent, price, discountPrice}));
   };
 
   return (
@@ -70,7 +67,7 @@ function PassListItem(props) {
       </StyledMembership>
       <StyledPrice>
         <p>&#92;{price}</p>
-        <p className={discountPrice === "0" ? "free" : undefined}>{discountPrice === "0" ? '무료' : `${discountPrice} /월`}</p>
+        <p className={id === "0" ? "free" : undefined}>{id === "0" ? '무료' : `${discountPrice} /월`}</p>
       </StyledPrice>
     </StyledListItem>
   );

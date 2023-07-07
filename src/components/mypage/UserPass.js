@@ -54,7 +54,7 @@ function UserPass(props) {
 
   const usePass = useSelector(selectPassList)
   const navigate = useNavigate()
-  console.log(usePass);
+  // console.log(usePass);
 
   const goPassPage = () => {
     navigate('/pass')
@@ -64,10 +64,10 @@ function UserPass(props) {
     <StyledDiv>
       <TitleDiv><IoTicketOutline size={25} style={{marginRight: '5px'}} color='#f5cc8d' />Pass information</TitleDiv>
       <StyledSpan><LiaCrownSolid size={25} style={{marginRight: '5px'}} color='#f5cc8d'/>
-        회원등급:  
+        회원등급:  { '비회원'}
       </StyledSpan>
       <StyledSpan><LiaCrownSolid size={25} style={{marginRight: '5px'}} color='#f5cc8d'/>
-        이용권혜택:  
+        이용권혜택:  { '비회원'}
       </StyledSpan>
       <StyledButton onClick={goPassPage}>이용권 구매</StyledButton>
     </StyledDiv>

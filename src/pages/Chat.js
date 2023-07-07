@@ -13,7 +13,6 @@ import MyChatItem from '../components/chat/MyChatItem';
 import OtherUserChatItem from '../components/chat/OtherUserChatItem';
 import { addChatList, chatListArray, getChatList, } from '../features/chatSlice';
 import { LogInUser } from '../features/loginSlice';
-import Map from '../components/chat/Map';
 
 
 const ChatUi = styled.div`
@@ -28,7 +27,7 @@ const ChatUi = styled.div`
   flex-direction: column;
   justify-content: center;
   /* align-items: center; */
-  position: fixed;
+  position: absolute;
   margin: auto;
   top: 0;
   bottom: 0;

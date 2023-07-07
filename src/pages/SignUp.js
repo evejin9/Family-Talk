@@ -1,8 +1,9 @@
 import React, { useRef, useState } from 'react';
 import styled from 'styled-components';
+import { useNavigate } from 'react-router-dom';
+import { AiFillEyeInvisible, AiFillEye, } from "react-icons/ai";
 
 import logo from "../images/logo.png";
-import { useNavigate } from 'react-router-dom';
 
 const SignUpwrapper = styled.div`
   width: 100%;
@@ -43,6 +44,26 @@ const SignUpBox = styled.div`
     border-radius: 10px;
     margin-top: 50px;
   }
+
+  .pwArea {
+    padding: 20px 0;
+    position: relative;
+    
+    input {
+      padding: 0 60px 0 20px;
+    }
+    
+    svg {
+      position: absolute;
+      right: 15px;
+      bottom: 35px;
+      font-size: 20px;
+
+      &:hover {
+        color: '#f5cc8d'
+      }
+    }
+  }
 `;
 
 const InputStyle = styled.input`
@@ -64,17 +85,22 @@ function SignUp(props) {
     userName: '',
     birth: '',
     number: '',
+    email: '',
   });
   
-  const { userId, pw, confirmPw, userName, birth, number } = inputValue;
+  const { userId, pw, confirmPw, userName, birth, number, email } = inputValue;
 
   // 에러 상태값
   const [userIdError, setUserIdError] = useState(false);
   const [pwError, setPwError] = useState(false);
-  const [configError, setConfigError] = useState(false);
+  const [confirmError, setConfirmError] = useState(false);
   const [userNameError, setUserNameError] = useState(false);
   const [birthError, setBirthError] = useState(false);
   const [numberError, setNumberError] = useState(false);
+  const [emailError, setEmailError] = useState(false);
+
+  // 비밀번호 표시
+  const [showPw, setShowPw] = useState(false);
 
   // 버튼 활성화 
   const [isEnable, setIsEnable] = useState(true);
@@ -90,30 +116,24 @@ function SignUp(props) {
     if (name === 'userId') {
         const patternCheck = /^[a-zA-Z0-9]*$/g.test(value);
         if (!patternCheck) return;
-
-        // if (patternEngNum.test(value)) return;
-
-      if (value.length < 5 && value.length > 0) setUserIdError(true);
-      else setUserIdError(false);
     }
 
     if (name === 'pw') {
       console.log(value);
       const patternCheck =/^[A-Za-z0-9]{0,12}$/g.test(value);
+      console.log(patternCheck);
       if (!patternCheck) return;
-
-      if (value.length >= 4 || value.length < 1) setPwError(false);
-      else setPwError(true);
     }
 
     if (name === 'confirmPw') {
-      if (value === inputValue.pw || value.length < 1) setConfigError(false);
-      else setConfigError(true);
+      if (value === inputValue.pw || value.length < 0) setConfirmError(false);
+      else setConfirmError(true);
     }
 
     if (name === 'userName') {
-      if (value.length > 2 || value.length <= 0) setUserNameError(false);
-      else setUserNameError(true);
+      const patternCheck =/^[ㄱ-ㅎ가-힣a-zA-Z]{0,12}$/g.test(value);
+      console.log(patternCheck);
+      if (!patternCheck) return;
     }
 
     if (name === 'birth') {
@@ -180,10 +200,35 @@ function SignUp(props) {
       [name]: value
     })
 
-    // if (userIdError && pwError) {
-    //   setIsEnable(false);
-    // }
+    if (userId !== '' && pw !== '' && confirmPw !== '' && userName !== '' && birth !== '' && number !== '' && email !== '') {
+      setIsEnable(false);
+    }
   };
+
+const checkPattern = () => {
+  if (userId !== '') {
+    if (userId.length >= 5 && userId.length > 0) setUserIdError(false);
+    else setUserIdError(true);
+  }
+
+  if (pw !== '') {
+      if (pw.length >= 6 || pw.length < 1) setPwError(false);
+      else setPwError(true);
+  }
+
+  if (userName !== '') {
+    if (userName.length >= 2 || userName.length <= 0) setUserNameError(false);
+    else setUserNameError(true);
+  }
+
+  if (email !== '') {
+    const emailRegEx = /^[A-Za-z0-9]([-_.]?[A-Za-z0-9])*@[A-Za-z0-9]([-_.]?[A-Za-z0-9])*\.[A-Za-z]{2,3}$/;
+    if (emailRegEx.test(email)) {
+      setEmailError(false);
+    }
+    else setEmailError(true);
+  }
+};
 
   return (
     <SignUpwrapper>
@@ -195,19 +240,24 @@ function SignUp(props) {
           placeholder='아이디' 
           value={userId}
           maxLength='10' 
-          onChange={handleUserId} 
+          onChange={handleUserId}
+          onBlur={checkPattern}
         />
-        {userIdError && <p className='errorMsg'>아이디를 5자리 이상 입력해주세요</p>}
+        {userIdError && <p className='errorMsg'>아이디를 5자리 이상 입력해주세요.</p>}
 
-        <InputStyle 
-          name='pw' 
-          // defaultValue={pw} 
-          value={pw} 
-          type='password' 
-          placeholder='비밀번호' 
-          onChange={handleUserId} 
-        />
-        {pwError && <p className='errorMsg'>숫자와 문자 포함 형태의 6~12자리 이내의 암호를 입력해주세요</p>}
+        <div className='pwArea'>
+          <InputStyle 
+            name='pw' 
+            // defaultValue={pw} 
+            value={pw} 
+            type={showPw ? 'text':'password'} 
+            placeholder='비밀번호' 
+            onChange={handleUserId} 
+            onBlur={checkPattern}
+          />
+          {showPw ? <AiFillEye onClick={() => setShowPw(false)}/> : <AiFillEyeInvisible onClick={() => setShowPw(true)} /> }
+        </div>
+        {pwError && <p className='errorMsg'>숫자와 문자 포함 형태의 6~12자리 이내의 암호를 입력해주세요.</p>}
 
         <InputStyle 
           name='confirmPw' 
@@ -216,7 +266,7 @@ function SignUp(props) {
           placeholder='비밀번호 확인' 
           onChange={handleUserId} 
         />
-        {configError && <p className='errorMsg'>비밀번호와 동일하지 않습니다.</p>}
+        {confirmError && <p className='errorMsg'>비밀번호와 동일하지 않습니다.</p>}
 
         <InputStyle 
           name='userName' 
@@ -225,8 +275,9 @@ function SignUp(props) {
           type='text' 
           placeholder='이름' 
           onChange={handleUserId} 
+          onBlur={checkPattern}
         />
-        {userNameError && <p className='errorMsg'>이름을 2자리 이상 입력해주세요</p>}
+        {userNameError && <p className='errorMsg'>이름을 2자리 이상 입력해주세요.</p>}
 
         <InputStyle 
           name='birth' 
@@ -236,6 +287,7 @@ function SignUp(props) {
           placeholder='생년월일 8자리' 
           maxLength='10' 
           onChange={handleUserId}
+          onBlur={checkPattern}
         />
         {birthError && <p className='errorMsg'>생년월일을 필수로 입력해주세요.</p>}
 
@@ -247,10 +299,26 @@ function SignUp(props) {
           placeholder='휴대전화번호'
           maxLength='13' 
           onChange={handleUserId}
+          onBlur={checkPattern}
         />
-        {numberError && <p className='errorMsg'>휴대전화번호 11자리를 입력해주세요</p>}
+        {numberError && <p className='errorMsg'>휴대전화번호 11자리를 입력해주세요.</p>}
 
-        <button onClick={undefined} disabled={isEnable}> 가입하기 </button>
+        <InputStyle 
+          name='email' 
+          value={email}
+          type='text' 
+          placeholder='이메일'
+          onChange={handleUserId}
+          onBlur={checkPattern}
+        />
+        {emailError && <p className='errorMsg'>이메일 주소가 정확한지 확인해주세요.</p>}
+
+        <button 
+          onClick={() => navigate("/login")} 
+          disabled={isEnable}
+        > 
+          가입하기 
+        </button>
       </SignUpBox>
       
     </SignUpwrapper>

@@ -86,6 +86,8 @@ function LogIn(props) {
   const dispatch = useDispatch();
 
   const handleLogId = (e) => {
+    const patternCheck = /^[a-zA-Z0-9]*$/g.test(e.target.value);
+    if (!patternCheck) return;
     setLogInId(e.target.value);
   };
 

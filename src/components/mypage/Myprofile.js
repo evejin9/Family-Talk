@@ -38,6 +38,8 @@ const ProfileDiv = styled.div`
   flex-direction: column;
   img {
     border-radius: 100px;
+    height: 200px;
+    width: 200px;
   }
 `;
 

@@ -2,60 +2,70 @@ import React from 'react';
 import styled from 'styled-components';
 import Button from '../ui/Button';
 import { useSelector } from 'react-redux';
-import { selectPassList } from '../../features/passSlice';
+import { selectSelectedPass } from '../../features/passSlice';
 
 const PaymentWrapper = styled.div`
   margin-top: 30px;
-  border: 2px solid #efefef;
+  border: 4px solid #f5cc8d;
   border-radius: 8px;
-  padding: 0 20px;
-
-  & .btn-payment {
-    
-  }
+  padding: 30px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 `;
 
 const PriceWrapper = styled.div`
-  height: 90px;
+  margin: 30px 0;
   display: flex;
   justify-content: center;
   align-items: center;
+  flex-direction: column;
 
   & p {
     font-size: 22px;
   }
 
-  & .fare {
+  & .membership-content {
+    font-size: 14px;
+    margin-top: 20px;
+  }
+`;
+
+const StyledMembership = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  & .price {
+    color: #ccc;
+    text-decoration: line-through;
+    font-size: 14px
+  }
+  & p + p {
     margin-left: 10px;
-    display: flex;
-    align-items: center;
-
-    & p {
-      margin-left: 10px;
-    }
-
-    & :first-child {
-      color: #ccc;
-      text-decoration: line-through;
-      font-size: 14px
-    }
   }
 `;
 
 function Payment(props) {
-  const passList = useSelector(selectPassList);
-  // console.log(passList);
+  const pass = useSelector(selectSelectedPass);
+  console.log(pass);
 
   return (
     <PaymentWrapper>
-      <PriceWrapper>
-        <p>인권</p>
-        <div className='fare'>
-          <p>&#92;</p>
-          <p>&#92;/월</p>
-        </div>
-      </PriceWrapper>
-      <Button className='btn-payment' title="결제" onClick={undefined}/>
+      {pass.id === "0"
+      ? <PriceWrapper>
+          <p>{pass.membershipName}</p>
+        </PriceWrapper>
+      : <PriceWrapper>
+          <StyledMembership>
+            <p>{pass.membershipName}</p>
+            <p className='price'>&#92;{pass.price}</p>
+            <p>&#92;{pass.discountPrice}/월</p>
+          </StyledMembership>
+          <div className='membership-content'>{pass.membershipContent}</div>
+        </PriceWrapper>
+      }
+      <Button title="결제" onClick={undefined}/>
     </PaymentWrapper>
   );
 }

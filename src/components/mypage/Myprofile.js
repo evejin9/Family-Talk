@@ -74,7 +74,7 @@ function Myprofile(props) {
       <ProfileDiv>
         <img src={selectedImage || logInUser.imagePath} alt="Profile" />
         <EditInputWrapper>
-        <LiaPenSolid size={25} color='#f5cc8d' style={{margin: '5px'}} className='edit'/>
+        <LiaPenSolid size={25} color='#5CE1E6' style={{margin: '5px'}} className='edit'/>
         <EditInput type='file'  onChange={handleImageChange}/>
         </EditInputWrapper>
         <ProfileSpan>{logInUser.name} 님 환영합니다!</ProfileSpan>

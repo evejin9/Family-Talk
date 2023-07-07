@@ -10,8 +10,9 @@ const DetailedWrapper = styled.div`
   width: 100%;
   align-items: center;
   justify-content: space-around;
-  border: 2px solid  rgb(172, 172 ,172);
+  border: 2px solid   #f5cc8d;
   margin-top: 10px;
+  border-radius: 10px;
 `;
 
 

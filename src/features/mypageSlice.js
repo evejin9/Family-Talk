@@ -1,12 +1,11 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-
 const initialState = {
   userEditData: null,
 };
 
 const mypageSlice = createSlice({
-  name: 'mypage',
+  name: "mypage",
   initialState,
   reducers: {
     setUserEditData(state, action) {

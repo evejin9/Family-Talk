@@ -12,7 +12,6 @@ import logo from "../images/logo.png";
 import Chat from '../pages/Chat';
 import Button from './ui/Button';
 import { LogInUser, isUserLogin, logOutUser } from '../features/loginSlice';
-import Map from './chat/Map';
 
 
 const LayoutStyled = styled.div`
@@ -211,7 +210,8 @@ function Layout(props) {
       </ChatButton>
       
       {/* 채팅 모달 */}
-        <Chat showChatModal = {showChatModal} setShowChatModal={setShowChatModal} />
+        {/* <Chat showChatModal = {showChatModal} setShowChatModal={setShowChatModal} /> */}
+        { showChatModal && <Chat setShowChatModal={setShowChatModal} /> }
     </LayoutStyled>
   );  
 }

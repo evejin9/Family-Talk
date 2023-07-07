@@ -27,6 +27,7 @@ import dataPhoto from "./dataPhoto.json";
 import uuid from 'react-uuid';
 import { useSelector } from 'react-redux';
 import { LogInUser } from './features/loginSlice';
+import PayCheckout from './components/pass/payment/PayCheckout';
 
 
 
@@ -119,7 +120,9 @@ function App() {
                 <Route path='writePhoto' element={<WritePhoto />} />
                 <Route path='editPhoto/:editPhotoId' element={<EditPhoto />} />
               </Route>
-              <Route path='/pass' element={<Pass />} />
+              <Route path='/pass' element={<Pass />}>
+                <Route path='payment' element={<PayCheckout />} />
+              </Route>
               <Route path='/mypage' element={<Mypage />} />
             </Route>
             <Route path='/login' element={<LogIn />} />
@@ -135,4 +138,3 @@ export default App;
 
 // 가짜 Api 주소
 // https://my-json-server.typicode.com/evejin9/db-familyTalk/db
-

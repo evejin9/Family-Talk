@@ -10,8 +10,8 @@ import { BsFillTrash3Fill } from "react-icons/bs";
 import { PiPencil, PiTrash } from "react-icons/pi";
 import EditPhoto from './EditPhoto';
 import { useDispatch, useSelector } from 'react-redux';
-import { addComments } from '../../features/photoSlice';
 import { LogInUser } from '../../features/loginSlice';
+import { addComment, addPostList, deletePost, editPost } from '../../features/photoSlice';
 
 const PhotoLIstItemWrapper = styled.div`
 /* background-color: #efeeef; */
@@ -125,7 +125,6 @@ margin-bottom: 50px;
       background: none;
       outline: none;
       border: none;
-      height: 100%;
       /* line-height: 100%; */
       display: flex;
       align-items: end;
@@ -146,18 +145,31 @@ margin-bottom: 50px;
 function PhotoListItem({post}) {
   const navigate = useNavigate('/')
   const dispatch = useDispatch()
-  const [comment, setComment] = useState('');
   const logInUSerInfo = useSelector(LogInUser);
-  const nextId = useRef(0)
+  const commentId = useRef(10000)
+  const [commentContent, setCommentContent] = useState('');
+  const comments = post.comments;
+  console.log(post);
 
   const handleChangeComment = (e) => {
-    setComment(e.target.value)
+    setCommentContent(e.target.value);
   }
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    dispatch(addComments({ logInUSerInfo, nextId,comment }))
+    dispatch(addComment({logInUSerInfo, commentContent}));
   }
+  const handleDelete = () => {
+      dispatch(deletePost(post.id));
+  };
+  const handleEditPost = () => {
+      dispatch(editPost({ id: post.id}));
+      // dispatch(addCalendarTitle({ title, selectedDate: format(selectedDate, 'yyyy-MM-dd'), content }));
+    // setTitle('');
+    // setContent('');
+    // closeModal();
+    navigate(`/photo/editPhoto/${post.id}`)
+  };
 
   return (
     <PhotoLIstItemWrapper>
@@ -169,15 +181,15 @@ function PhotoListItem({post}) {
           <div className='profileImgNameMore'>
             <img src={post.profileImage} alt='profileImg'></img>
             <span className='name'>{post.name}</span> 
-            <button onClick={() => navigate(`/photo/editPhoto/${post.id}`)} ><PiPencil /></button>
+            <button onClick={handleEditPost} ><PiPencil /></button>
             <button
-            
+            onClick={handleDelete}
             ><PiTrash /></button>
           </div>
           <div className='contentAndComment'>
             <div className='postContent'>{post.content}</div>
             <div className='comment'>
-              <CommentList key={post.id} comments={post?.comments?.length ? post.comments : []}/>
+              <CommentList comments={comments}/>
             </div>
           </div>
         </div>

@@ -71,7 +71,7 @@ function WritePhoto (props) {
   const logInUSerInfo = useSelector(LogInUser);
   const navigate = useNavigate()
   const fileInput = useRef(null); 
-  const nextId = useRef(7);
+  const nextId = useRef(50000);
 
 
   const dispatch = useDispatch();

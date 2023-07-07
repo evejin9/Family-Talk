@@ -25,7 +25,7 @@ const StyledDiv = styled.div`
   /* justify-content: center; */
   /* align-items: center; */
   flex-direction: column;
-  /* border: 1px solid rgb(172, 172 ,172); */
+  /* border: 1px solid #f5cc8d; */
   border-radius: 6px;
 `;
 
@@ -61,15 +61,15 @@ const StyledButton = styled.button`
 function DetailedProfile(props) {
 
   const logInUser = useSelector(LogInUser);
-  
+    
   return (
     <StyledDiv>
       <div style={{margin: '0 auto', marginBottom: '50px', fontSize: '20px', marginTop: '20px'}}>User details</div>
-      <StyledSpan><AiOutlineUser size={25} style={{marginRight: '5px'}} color='#f5cc8d'/>ID:  {logInUser.id}</StyledSpan>
-      <StyledSpan><LiaPenSolid size={25} style={{marginRight: '5px'}} color='#f5cc8d'/>Name:  {logInUser.name}</StyledSpan>
-      <StyledSpan><PiCake size={25} style={{marginRight: '5px'}} color='#f5cc8d'/>Birth date:  {logInUser.birth}</StyledSpan>
-      <StyledSpan><BsPhone size={25} style={{marginRight: '5px'}} color='#f5cc8d'/>Phone:  {logInUser.phone}</StyledSpan>
-      <StyledSpan><MdOutlineEmail size={25} style={{marginRight: '5px'}} color='#f5cc8d'/>Email: {logInUser.email}</StyledSpan>
+      <StyledSpan><AiOutlineUser size={25} style={{marginRight: '5px'}} color='#5CE1E6'/>ID:  {logInUser.id}</StyledSpan>
+      <StyledSpan><LiaPenSolid size={25} style={{marginRight: '5px'}} color='#5CE1E6'/>Name:  {logInUser.name}</StyledSpan>
+      <StyledSpan><PiCake size={25} style={{marginRight: '5px'}} color='#5CE1E6'/>Birth date:  {logInUser.birth}</StyledSpan>
+      <StyledSpan><BsPhone size={25} style={{marginRight: '5px'}} color='#5CE1E6'/>Phone:  {logInUser.phone}</StyledSpan>
+      <StyledSpan><MdOutlineEmail size={25} style={{marginRight: '5px'}} color='#5CE1E6'/>Email: {logInUser.email}</StyledSpan>
       <StyledButtonWrapper>
         <StyledButton>비밀번호 변경</StyledButton>
         <StyledButton>정보수정</StyledButton>

@@ -10,8 +10,16 @@ import { uuid } from "react-uuid";
 const clientKey = "test_ck_D5GePWvyJnrK0W0k6q8gLzN97Eoq";
 const customerKey = "dXMVAbsDOSTuZGxC_Jinj";
 
+const Wrapper = styled.div`
+  margin-top: 50px;
+
+  & p {
+    font-size: 25px;
+  }
+`;
+
 const PaymentWrapper = styled.div`
-  margin-top: 30px;
+  margin-top: 20px;
   border: 4px solid #f5cc8d;
   border-radius: 8px;
   padding: 30px;
@@ -127,7 +135,8 @@ function Payment(props) {
   };
 
   return (
-    <>
+    <Wrapper>
+      <p>결제 정보</p>
       {selectedpass.id === ""
       ? <PaymentWrapper>
           <p className='unselected'>선택된 이용권이 없습니다.</p>
@@ -147,11 +156,11 @@ function Payment(props) {
               <div className='membership-content'>{selectedpass.membershipContent}</div>
             </PriceWrapper>
           }
-          {/* <Button title="결제" onClick={() => {navigate("/pass/payment")}}/> */}
-          <Button title="결제" onClick={handlePayClick}/>
+          <Button title="결제" onClick={() => {navigate("/pass/payment")}}/>
+          {/* <Button title="결제" onClick={handlePayClick}/> */}
         </PaymentWrapper>
       }
-    </>
+    </Wrapper>
   );
 }
 

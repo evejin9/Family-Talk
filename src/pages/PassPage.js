@@ -1,7 +1,8 @@
 import React from 'react';
 import { Outlet } from 'react-router-dom';
 
-function PayFail(props) {
+function PassPage(props) {
+
   return (
     <div className='show-content'>
       <Outlet />
@@ -9,4 +10,4 @@ function PayFail(props) {
   );
 }
 
-export default PayFail;
+export default PassPage;

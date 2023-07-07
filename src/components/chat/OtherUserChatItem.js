@@ -5,7 +5,7 @@ const OtherUserChat = styled.div`
   padding: 10px 0;
   display: flex;
   justify-content: flex-start;
-  align-items: flex-start;
+  align-items: flex-end;
 
   .profile {
     width: 50px;

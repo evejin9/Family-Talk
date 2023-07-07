@@ -1,6 +1,7 @@
 import React, { useEffect, useState, useMemo, useRef } from "react";
 import styled from "styled-components";
 import { AiOutlineClose as CloseButton } from "react-icons/ai";
+import { BsFillArrowUpCircleFill } from "react-icons/bs";
 import axios from "axios";
 
 const MapBox = styled.div`
@@ -8,17 +9,30 @@ const MapBox = styled.div`
   background-color: #fff;
   box-shadow: 3px 4px 10px 0 rgba(0, 0, 0, 0.4);
   border-radius: 10px;
-  position: relative;
-  margin: auto;
-  right: 500px;
-  top: 150px;
+  position: absolute;
+  margin: 0 auto;
+  left: -400px;
+  bottom: 0px;
   display: ${props => props.showMapModal ? 'flex' : 'none'};
   flex-direction: column;
   justify-content: space-around;
   align-items: center;
 
   .addressBox {
+    font-size: 15px;
     padding-bottom: 10px;
+  }
+
+  .addButton {
+    padding-top: 5px;
+    font-size: 30px;
+    color: #f5cc8d;
+    bottom: 10px;
+    right: 23px;
+    
+    &:hover {
+      color: red;
+    }
   }
 `;
 
@@ -40,7 +54,7 @@ const ModalCloseButton = styled.div`
 `;
 
 function Map(props) {
-  const { showMapModal, setShowMapModal } = props;
+  const { showMapModal, setShowMapModal, addNewChat, nextId, logInUser } = props;
   // 위치 담는 곳
   const [location, setLocation] = useState("");
   const [address, setAddress] = useState("");
@@ -113,7 +127,6 @@ function Map(props) {
     setAddress(res.data.documents[0].address.address_name);
   })
   .catch(error => console.log(error))
-
     
   return (
     <MapBox showMapModal={showMapModal}>
@@ -130,6 +143,10 @@ function Map(props) {
         }}
       >
       </div>
+      <BsFillArrowUpCircleFill 
+        className='cursor-point addButton' 
+        onClick={() => addNewChat()} 
+      />
     </MapBox>
   );
 }

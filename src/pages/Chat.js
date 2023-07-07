@@ -13,10 +13,23 @@ import MyChatItem from '../components/chat/MyChatItem';
 import OtherUserChatItem from '../components/chat/OtherUserChatItem';
 import { addChatList, chatListArray, getChatList, } from '../features/chatSlice';
 import { LogInUser } from '../features/loginSlice';
+import Map from '../components/chat/Map';
 
+const ChatBox = styled.div`
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  background-color: none;
+  display: ${props => props.showChatModal ? "flex" : "none" };
+  z-index: 10;
+`;
 
 const ChatUi = styled.div`
   width: 500px;
+  height: 100%;
   max-height: 700px;
   padding: 10px 15px;
   background-color: #fff;
@@ -26,14 +39,7 @@ const ChatUi = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
-  /* align-items: center; */
-  position: absolute;
-  margin: auto;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
-
+  position: relative;
 
   img {
     max-height: 150px;
@@ -77,15 +83,17 @@ const InputArea = styled.div`
   align-items: center;
 `
 
-const ImgUploadInput = styled.label`
+const ImgUploadInputMap = styled.label`
+  display: flex;
+  justify-content: space-between;
   padding-right: 10px;
 
   input {
     display:none;
   }
 
-  svg {
-    font-size: 30px;
+  .button {
+    font-size: 35px;
     color: #f5cc8d;
 
     &:hover {
@@ -171,7 +179,9 @@ const ModalCloseButton = styled.div`
 `;
 
 function Chat(props) {
-  const { setShowChatModal, setShowMapModal } = props;
+  const { showChatModal, setShowChatModal, } = props;
+
+  const [showMapModal, setShowMapModal] = useState(false);
 
   const [newChat, setNewChat] = useState('');
   const [imgFile, setImgFile] = useState('');
@@ -235,76 +245,87 @@ function Chat(props) {
   }
 
   return (
-    <ChatUi >
-      <ModalCloseButton>
-        <CloseButton className='cursor-point' onClick={handleShowChatModal} />
-      </ModalCloseButton>
+    <ChatBox showChatModal={showChatModal}>
+      <ChatUi>
+        <ModalCloseButton>
+          <CloseButton className='cursor-point' onClick={handleShowChatModal} />
+        </ModalCloseButton>
 
-      <UserChat>
-        <div className='today'>{today}</div>
+        <UserChat>
+          <div className='today'>{today}</div>
 
-        {chatList.map((chat) => {
-          const target = logInUser.members.find((a) => a.memberId === chat.memberId);
+          {chatList.map((chat) => {
+            const target = logInUser.members.find((a) => a.memberId === chat.memberId);
 
-          return (
-            target.relation === '나' ? 
-            <MyChatItem chat={chat} key={chat.id} target={target} /> : 
-            <OtherUserChatItem chat={chat} key={chat.id} userData={userData} target={target} />
-          )
-        })}
+            return (
+              target.relation === '나' ? 
+              <MyChatItem chat={chat} key={chat.id} target={target} /> : 
+              <OtherUserChatItem chat={chat} key={chat.id} userData={userData} target={target} />
+            )
+          })}
 
-        {/* 하단으로 자동 스크롤 하기 위한 div */}
-        <div ref={messageRef}></div>
-      </UserChat>
+          {/* 하단으로 자동 스크롤 하기 위한 div */}
+          <div ref={messageRef}></div>
+        </UserChat>
 
-      {/* 사진 업로드 input 및 버튼 */}
-      <InputArea>
-        <ImgUploadInput>
-          <AiOutlinePlusCircle />
-          <input 
-            type='file' 
-            accept='image/*'
-            onChange={saveImgFile}
-            ref={imgRef}
-            />
-        </ImgUploadInput>
-
-        <BiSolidMap className='cursor-point' style={{ fontSize: "30px" }} onClick={() => setShowMapModal(true)} />
-        
-        {/* 채팅 input 창 */}
-        <ChatInput>
-          {imgFile? 
-            <InputImgArea>
-              <img src={imgFile ? imgFile : undefined} /> 
-              <CloseButton 
-                onClick={() => {
-                  setImgFile('') 
-                  setNewChat('')
-                }}
+        {/* 사진 업로드 input 및 버튼 */}
+        <InputArea>
+          <ImgUploadInputMap>
+            <AiOutlinePlusCircle className='cursor-point button' />
+            <input 
+              type='file' 
+              accept='image/*'
+              onChange={saveImgFile}
+              ref={imgRef}
               />
-            </InputImgArea>
-            : <input 
-                type='text'
-                value={newChat} 
-                onChange={handleNewChat}
-                onKeyUp={(e) => {
-                  if(e.key === 'Enter') {
-                    addNewChat();
-                  } else if (e.key === 'Escape') {
-                      setShowChatModal(false);
-                      setNewChat('');
-                    }
-                }} 
+              <Map 
+                showMapModal={showMapModal} 
+                setShowMapModal={setShowMapModal} 
+                addNewChat={addNewChat} 
+                nextId={nextId}
+                logInUser={logInUser}
               />
-          }
+              <BiSolidMap className='cursor-point button' onClick={() => setShowMapModal(true)} />
+          </ImgUploadInputMap>
+
+          <div>
+          </div>
           
-          <BsFillArrowUpCircleFill 
-            className='cursor-point addButton' 
-            onClick={() => addNewChat()} 
-          />
-        </ChatInput>
-      </InputArea>
-    </ChatUi>
+          {/* 채팅 input 창 */}
+          <ChatInput>
+            {imgFile? 
+              <InputImgArea>
+                <img src={imgFile ? imgFile : undefined} /> 
+                <CloseButton 
+                  onClick={() => {
+                    setImgFile('') 
+                    setNewChat('')
+                  }}
+                />
+              </InputImgArea>
+              : <input 
+                  type='text'
+                  value={newChat} 
+                  onChange={handleNewChat}
+                  onKeyUp={(e) => {
+                    if(e.key === 'Enter') {
+                      addNewChat();
+                    } else if (e.key === 'Escape') {
+                        setShowChatModal(false);
+                        setNewChat('');
+                      }
+                  }} 
+                />
+            }
+            
+            <BsFillArrowUpCircleFill 
+              className='cursor-point addButton' 
+              onClick={() => addNewChat()} 
+            />
+          </ChatInput>
+        </InputArea>
+      </ChatUi>
+    </ChatBox>
   );
 }
 

@@ -12,6 +12,14 @@ const PaymentWrapper = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+
+  & .unselected{
+    padding: 10px 0;
+
+    :first-child{
+      font-size: 20px;
+    }
+  }
 `;
 
 const PriceWrapper = styled.div`
@@ -47,26 +55,34 @@ const StyledMembership = styled.div`
 `;
 
 function Payment(props) {
-  const pass = useSelector(selectSelectedPass);
-  console.log(pass);
+  const selectedpass = useSelector(selectSelectedPass);
+  console.log(selectedpass.id);
 
   return (
-    <PaymentWrapper>
-      {pass.id === "0"
-      ? <PriceWrapper>
-          <p>{pass.membershipName}</p>
-        </PriceWrapper>
-      : <PriceWrapper>
-          <StyledMembership>
-            <p>{pass.membershipName}</p>
-            <p className='price'>&#92;{pass.price}</p>
-            <p>&#92;{pass.discountPrice}/월</p>
-          </StyledMembership>
-          <div className='membership-content'>{pass.membershipContent}</div>
-        </PriceWrapper>
+    <>
+      {selectedpass.id === ""
+      ? <PaymentWrapper>
+        <p className='unselected'>선택된 이용권이 없습니다.</p>
+        <p className='unselected'>이용권을 선택하세요.</p>
+      </PaymentWrapper>
+      : <PaymentWrapper>
+          {selectedpass.id === "0"
+          ? <PriceWrapper>
+              <p>{selectedpass.membershipName}</p>
+            </PriceWrapper>
+          : <PriceWrapper>
+              <StyledMembership>
+                <p>{selectedpass.membershipName}</p>
+                <p className='price'>&#92;{selectedpass.price}</p>
+                <p>&#92;{selectedpass.discountPrice}/월</p>
+              </StyledMembership>
+              <div className='membership-content'>{selectedpass.membershipContent}</div>
+            </PriceWrapper>
+          }
+          <Button title="결제" onClick={undefined}/>
+        </PaymentWrapper>
       }
-      <Button title="결제" onClick={undefined}/>
-    </PaymentWrapper>
+    </>
   );
 }
 

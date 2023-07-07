@@ -68,6 +68,7 @@ function SignUp(props) {
   
   const { userId, pw, confirmPw, userName, birth, number } = inputValue;
 
+  // 에러 상태값
   const [userIdError, setUserIdError] = useState(false);
   const [pwError, setPwError] = useState(false);
   const [configError, setConfigError] = useState(false);
@@ -75,12 +76,11 @@ function SignUp(props) {
   const [birthError, setBirthError] = useState(false);
   const [numberError, setNumberError] = useState(false);
 
+  // 버튼 활성화 
+  const [isEnable, setIsEnable] = useState(true);
+
   const birthRef = useRef();
   const phoneRef = useRef();
-
-  const patternEng = /[a-zA-Z]/;
-  const patternNum = /[0-9]/;
-  const patternEngNum = /^[A-Za-z0-9]+$/;
 
   const navigate = useNavigate();
   
@@ -88,11 +88,8 @@ function SignUp(props) {
     const { name, value } = e.target;
 
     if (name === 'userId') {
-      console.log(value);
-      
-        const aa = /^[a-zA-Z0-9]*$/g.test(value);
-        console.log(aa);
-        if (!aa) return;
+        const patternCheck = /^[a-zA-Z0-9]*$/g.test(value);
+        if (!patternCheck) return;
 
         // if (patternEngNum.test(value)) return;
 
@@ -101,6 +98,10 @@ function SignUp(props) {
     }
 
     if (name === 'pw') {
+      console.log(value);
+      const patternCheck =/^[A-Za-z0-9]{0,12}$/g.test(value);
+      if (!patternCheck) return;
+
       if (value.length >= 4 || value.length < 1) setPwError(false);
       else setPwError(true);
     }
@@ -178,6 +179,10 @@ function SignUp(props) {
       ...inputValue,
       [name]: value
     })
+
+    // if (userIdError && pwError) {
+    //   setIsEnable(false);
+    // }
   };
 
   return (
@@ -189,6 +194,7 @@ function SignUp(props) {
           type='text' 
           placeholder='아이디' 
           value={userId}
+          maxLength='10' 
           onChange={handleUserId} 
         />
         {userIdError && <p className='errorMsg'>아이디를 5자리 이상 입력해주세요</p>}
@@ -201,7 +207,7 @@ function SignUp(props) {
           placeholder='비밀번호' 
           onChange={handleUserId} 
         />
-        {pwError && <p className='errorMsg'>비밀번호를 4자리 이상 입력해주세요</p>}
+        {pwError && <p className='errorMsg'>숫자와 문자 포함 형태의 6~12자리 이내의 암호를 입력해주세요</p>}
 
         <InputStyle 
           name='confirmPw' 
@@ -210,7 +216,7 @@ function SignUp(props) {
           placeholder='비밀번호 확인' 
           onChange={handleUserId} 
         />
-        {configError && <p className='errorMsg'>비밀번호와 비밀번호 확인이 동일하지 않습니다.</p>}
+        {configError && <p className='errorMsg'>비밀번호와 동일하지 않습니다.</p>}
 
         <InputStyle 
           name='userName' 
@@ -244,7 +250,7 @@ function SignUp(props) {
         />
         {numberError && <p className='errorMsg'>휴대전화번호 11자리를 입력해주세요</p>}
 
-        <button onClick={undefined}> 가입하기 </button>
+        <button onClick={undefined} disabled={isEnable}> 가입하기 </button>
       </SignUpBox>
       
     </SignUpwrapper>

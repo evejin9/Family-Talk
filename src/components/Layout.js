@@ -152,18 +152,9 @@ const ChatButton = styled.div`
   }
 `;
 
-const ChatBox = styled.div`
-  width: 100%;
-  height: 100%;
-  position: fixed;
-  background-color: none;
-  display: ${props => props.showModal ? "flex" : "none" };
-  z-index: 10;
-`;
 
 function Layout(props) {
   const [showChatModal, setShowChatModal] = useState(false);
-  const [showMapModal, setShowMapModal] = useState(false);
 
   const logInUSerInfo = useSelector(LogInUser);
 
@@ -205,7 +196,6 @@ function Layout(props) {
             <img src={logInUSerInfo.imagePath} /> 
             <div className='name-logout'>
               <p className='name'>{logInUSerInfo.name} 님</p>
-              {/* <IoLogOutOutline onClick={() => dispatch(logOutUser())} />           */}
             </div>
             <p className='birth'>{logInUSerInfo.birth}</p>          
           </ProfileCard>
@@ -221,10 +211,7 @@ function Layout(props) {
       </ChatButton>
       
       {/* 채팅 모달 */}
-      <ChatBox showModal = {showChatModal} >
-        <Chat setShowChatModal={setShowChatModal} setShowMapModal={setShowMapModal} />
-        <Map showMapModal={showMapModal} setShowMapModal={setShowMapModal} />
-      </ChatBox>
+        <Chat showChatModal = {showChatModal} setShowChatModal={setShowChatModal} />
     </LayoutStyled>
   );  
 }

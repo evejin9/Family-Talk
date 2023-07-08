@@ -5,7 +5,7 @@ import styled from 'styled-components';
 // import CommentList from './CommentList';
 import { useFetcher, useLocation, useNavigate } from 'react-router-dom';
 import { BsPlusCircleFill } from "react-icons/bs";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import WritePhoto from "./WritePhoto";
 import uuid from "react-uuid";
 import { useDispatch, useSelector } from "react-redux";
@@ -39,13 +39,26 @@ const PhotoListWrapper = styled.div`
 `
 
 function PhotoList(props)  {
+
   const postList = useSelector(postLists);
   const navigate = useNavigate('/')
+
+  const [comments, setComments] = useState([]);
+  const logInUSerInfo = useSelector(LogInUser)
+
+  const handleInsert = useCallback((value) => {
+    const comment = {
+      commentId: uuid(),
+      commentContent: value,
+      commentName: logInUSerInfo.name
+    }
+    setComments(comments => comments.concat(comment));
+  }, [])
 
   return (
     <PhotoListWrapper>
       {postList.map((post) => 
-        <PhotoListItem key={post.id} post={post} />
+        <PhotoListItem key={post.id} post={post} onWriteComment={handleInsert} comments={comments}/>
       )}
       <button className='writePhotoButton' onClick={() => {navigate('/photo/writePhoto')}}><BsPlusCircleFill/></button>
     </PhotoListWrapper>

@@ -93,20 +93,18 @@ const Wrapper = styled.div`
 
 function App() {
   // const [posts, setPosts] = useState(dataPhoto)
-  // const logInUSerInfo = useSelector(LogInUser)
   // const nextId = useRef(7);
+  // const [comments, setComments] = useState('');
+  // const logInUSerInfo = useSelector(LogInUser)
 
-  // const handleInsert = useCallback((content, image) => {
-  //   const post = {
-  //       name: logInUSerInfo.name, 
-  //       id: uuid(), 
-  //       content, 
-  //       profileImage: logInUSerInfo.imagePath, 
-  //       image
+  // const handleInsert = useCallback((value) => {
+  //   const comment = {
+  //     commentId: uuid(),
+  //     commentContent: value,
+  //     commentName: logInUSerInfo.name
   //   }
-  //   setPosts(posts => posts.concat(post).sort(function(a,b) { return a-b; }))
-  //   nextId.current += 1;
-  //   }, []);
+  //   setComments(comments => comments.concat(comment));
+  // }, [])
 
   return (
     <>

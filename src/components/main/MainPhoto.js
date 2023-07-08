@@ -17,6 +17,7 @@ const StyledMainPhoto = styled.div`
 
 const StyledSwiper = styled(Swiper)`
   width: 100%;
+  height: 100%;
 `;
 
 const StyledSwiperSlide = styled(SwiperSlide)`

@@ -55,10 +55,14 @@ function PhotoList(props)  {
     setComments(comments => comments.concat(comment));
   }, [])
 
+  const handleRemoveComment = useCallback((id) =>{
+    setComments(comments => comments.filter((comment) => comment.commentId !== id));
+  }, []);
+
   return (
     <PhotoListWrapper>
       {postList.map((post) => 
-        <PhotoListItem key={post.id} post={post} onWriteComment={handleInsert} comments={comments}/>
+        <PhotoListItem key={post.id} post={post} onWriteComment={handleInsert} removeComment={handleRemoveComment} comments={comments}/>
       )}
       <button className='writePhotoButton' onClick={() => {navigate('/photo/writePhoto')}}><BsPlusCircleFill/></button>
     </PhotoListWrapper>

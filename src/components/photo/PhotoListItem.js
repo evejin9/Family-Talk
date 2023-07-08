@@ -143,7 +143,7 @@ margin-bottom: 50px;
 `
 
 function PhotoListItem(props) {
-  const {post, onWriteComment, comments} = props;
+  const {post, onWriteComment, comments, removeComment} = props;
   const navigate = useNavigate('/')
   const dispatch = useDispatch()
   const logInUSerInfo = useSelector(LogInUser);
@@ -156,6 +156,10 @@ function PhotoListItem(props) {
   }
 
   const commentHandleSubmit = (e) => {
+    if (value.length < 1){
+      alert('내용을 입력해 주세요')
+      return;
+    }
     onWriteComment(value);
     setValue('')
     e.preventDefault();
@@ -172,6 +176,8 @@ function PhotoListItem(props) {
     // closeModal();
     navigate(`/photo/editPhoto/${post.id}`)
   };
+
+
 
   return (
     <PhotoLIstItemWrapper>
@@ -191,12 +197,12 @@ function PhotoListItem(props) {
           <div className='contentAndComment'>
             <div className='postContent'>{post.content}</div>
             <div className='comment'>
-              <CommentList comments={comments}/>
+              <CommentList comments={comments} removeComment={removeComment}/>
             </div>
           </div>
         </div>
           <div className='writeComment'>
-            <input type='text' onChange={handleChangeComment}>
+            <input type='text' value={value} onChange={handleChangeComment}>
             </input>
             <button type='button' className='commentButton' onClick={commentHandleSubmit}>
               <BsCheck2/>

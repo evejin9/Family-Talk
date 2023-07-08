@@ -7,11 +7,11 @@ import Comment from './Comment';
 // overflow: auto;
 // `
 
-function CommentList({comments}) {
+function CommentList({comments, removeComment}) {
   console.dir(comments)
   return (
     <div>
-      {comments.map((comment) => <Comment key={comment.commentId} commentName={comment.commentName} commentContent={comment.commentContent} />)}
+      {comments.map((comment) => <Comment key={comment.commentId} id={comment.commentId} commentName={comment.commentName} commentContent={comment.commentContent} removeComment={removeComment}/>)}
     </div>
   );
 }

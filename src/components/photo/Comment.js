@@ -30,8 +30,8 @@ const CommentWrapper = styled.div`
   }
 `
 
-function Comment({commentName, commentContent}) {
-  // console.log(commentName);
+function Comment({commentName, commentContent, id, removeComment}) {
+  console.log(id);
   return (
     <CommentWrapper>
       <div className='flexdiv'>
@@ -43,7 +43,7 @@ function Comment({commentName, commentContent}) {
         </div>
       </div>
       <div className='commentRemove'>
-        <IoMdRemoveCircleOutline />
+        <IoMdRemoveCircleOutline onClick={() => {removeComment(id);}}/>
       </div>
     </CommentWrapper>
   );

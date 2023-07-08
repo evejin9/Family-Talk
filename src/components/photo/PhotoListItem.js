@@ -142,30 +142,21 @@ margin-bottom: 50px;
   } 
 `
 
-function PhotoListItem({post}) {
+function PhotoListItem(props) {
+  const {post, onWriteComment, comments} = props;
   const navigate = useNavigate('/')
   const dispatch = useDispatch()
   const logInUSerInfo = useSelector(LogInUser);
   const commentId = useRef(10000)
   // const [commentContent, setCommentContent] = useState('');
-  const [comments, setComments] = useState('');
   const [value, setValue] = useState('');
-
-  const handleInsert = useCallback(() => {
-    const comment = {
-      // commentId: uuid(),
-      commentContent: value,
-      // commentName: logInUSerInfo.name
-    }
-    setComments(comments => comments.concat(comment));
-  }, [])
 
   const handleChangeComment = (e) => {
     setValue(e.target.value);
   }
 
   const commentHandleSubmit = (e) => {
-    handleInsert(value);
+    onWriteComment(value);
     setValue('')
     e.preventDefault();
     // dispatch(addComment({logInUSerInfo, commentContent}));

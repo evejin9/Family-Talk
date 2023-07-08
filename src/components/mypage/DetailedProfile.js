@@ -34,7 +34,10 @@ const StyledDiv = styled.div`
 const StyledSpan = styled.span`
   margin-left: 20px;
   margin-bottom: 20px;
-  font-size: 15px;
+  font-size: 13px;
+  border: 2px solid #f5cc8d;
+  border-radius: 6px;
+  padding: 2px;
   
 `;
 

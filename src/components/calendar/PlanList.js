@@ -88,7 +88,7 @@ function PlanList({ currentMonth, selectedDate, onDateClick, clickModal, filtere
 
         return (
           <StyledPlanList onClick={() => handleClickPlan(item.id)} key={index}>
-            <GoDotFill color='#f5cc8d' size={15} />
+            <GoDotFill color='#5CE1E6' size={15} />
             <StyledTitle>{item.title}</StyledTitle>
             <SelectedDate>{item.date}</SelectedDate> 
             <MdDeleteForever 

@@ -1,9 +1,12 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import styled from 'styled-components';
 
 import data from "../data.json";
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { LogInUser } from '../features/loginSlice';
+import { getUserData } from '../api/userDataAPI';
+import { addUserData } from '../features/userDataSlice';
+
 
 
 const MembersBox = styled.div`
@@ -51,6 +54,21 @@ const MembersCard = styled.div`
 
 function Members(props) {
   const logInUser = useSelector(LogInUser);
+  const dispatch = useDispatch();
+  
+  
+  
+  useEffect(() => {
+    const handleGetUserData = async () => {
+      const result = await getUserData();
+      if (!result) return
+      
+      dispatch(addUserData(result.user));
+    }
+
+    handleGetUserData();
+  }, []);
+  
 
   const newData = [...data];
 

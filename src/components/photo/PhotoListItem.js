@@ -169,7 +169,7 @@ function PhotoListItem(props) {
       dispatch(deletePost(post.id));
   };
   const handleEditPost = () => {
-      dispatch(editPost({ id: post.id}));
+      // dispatch(editPost({ id: post.id}));
       // dispatch(addCalendarTitle({ title, selectedDate: format(selectedDate, 'yyyy-MM-dd'), content }));
     // setTitle('');
     // setContent('');

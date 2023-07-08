@@ -9,7 +9,6 @@ const userDataSlice = createSlice({
   initialState,
   reducers: {
     addUserData: (state, {payload: user}) => {
-      console.log(user);
       state.userList = user;
     }
   }

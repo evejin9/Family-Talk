@@ -3,6 +3,13 @@ import styled from "styled-components";
 import { AiOutlineClose as CloseButton } from "react-icons/ai";
 import axios from "axios";
 
+const ContentArea = styled.div`
+  margin-top: 5px;
+  padding: 10px;
+  background-color: #d9d9d9;
+  border-radius: 10px;
+`;
+
 const { kakao } = window;
 const REST_API_KEY = '50bfc417180bd6f04dd51f8484164b3a';
 // 현재 위치 세부 조정
@@ -72,6 +79,7 @@ function ChatMap(props) {
   // .catch(error => console.log(error))
 
   return (
+    <ContentArea>
       <div 
         ref={mapDiv}
         style={{ 
@@ -81,6 +89,7 @@ function ChatMap(props) {
         }}
       >
       </div>
+    </ContentArea>
   );
 }
 

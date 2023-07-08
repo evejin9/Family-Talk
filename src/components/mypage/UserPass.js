@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import {} from 'react-icons/io'
 import { IoTicketOutline } from 'react-icons/io5';
 import { useSelector } from 'react-redux';
-import { selectPassList } from '../../features/passSlice';
+import { selectPassList, selectSelectedPass } from '../../features/passSlice';
 import { LiaCrownSolid } from 'react-icons/lia'
 import { useNavigate } from 'react-router-dom';
 
@@ -51,7 +51,8 @@ const StyledButton = styled.button`
 
 
 function UserPass(props) {
-
+  
+  const payPass = useSelector(selectSelectedPass)
   const usePass = useSelector(selectPassList)
   const navigate = useNavigate()
   // console.log(usePass);
@@ -64,10 +65,10 @@ function UserPass(props) {
     <StyledDiv>
       <TitleDiv><IoTicketOutline size={25} style={{marginRight: '5px'}} color='#f5cc8d' />Pass information</TitleDiv>
       <StyledSpan><LiaCrownSolid size={25} style={{marginRight: '5px'}} color='#f5cc8d'/>
-        회원등급:  { '비회원'}
+        회원등급:  {payPass.membershipName || '비회원'}
       </StyledSpan>
       <StyledSpan><LiaCrownSolid size={25} style={{marginRight: '5px'}} color='#f5cc8d'/>
-        이용권혜택:  { '비회원'}
+        이용권혜택:  {payPass.membershipContent || '비회원'}
       </StyledSpan>
       <StyledButton onClick={goPassPage}>이용권 구매</StyledButton>
     </StyledDiv>

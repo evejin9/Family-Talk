@@ -12,13 +12,18 @@ import { setUserEditData } from '../../features/mypageSlice';
 const StyledSpan = styled.span`
   margin-top: 30px;
   margin-left: 10px;
+  border: 2px solid #f5cc8d;
+  border-radius: 6px;
+  width: 400px;
+  padding: 2px;
+  font-size: 13px;
 `;
 
 
 const StyledInput = styled.input`
   outline: none;
   border: none;
-  border-bottom: 2px solid #f5cc8d;
+  /* border-bottom: 2px solid #f5cc8d; */
   width: 200px;
 `;
 
@@ -27,12 +32,12 @@ const StyledDiv = styled.div`
   background-color: white;
 
   width: 500px;
-  height: 400px;
+  height: 450px;
   /* margin-top: 20px; */
   /* justify-content: center; */
   /* align-items: center; */
   flex-direction: column;
-  border: 1px solid #f5cc8d;
+  border: 2px solid #f5cc8d;
   border-radius: 6px;
 `;
 
@@ -41,7 +46,7 @@ const StyledButtonWrapper = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-around;
-  margin-top: 80px;
+  margin-top: 40px;
 `;
 
 

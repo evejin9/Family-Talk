@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 
 import { useEffect, useRef } from "react";
+import { useSelector } from 'react-redux';
+import { selectSelectedPass } from '../../../features/passSlice';
 import { loadPaymentWidget, PaymentWidgetInstance, ANONYMOUS } from "@tosspayments/payment-widget-sdk";
 
 import { uuid } from "react-uuid";
@@ -37,6 +39,10 @@ const PriceArea = styled.div`
   & div + div {
     margin-top: 20px;
   }
+  .membership-name {
+    display: flex;
+    justify-content: space-between;
+  }
   .price {
     display: flex;
     justify-content: space-between;
@@ -62,9 +68,20 @@ const PaymentMethod = styled.div`
 function PayCheckout(props) {
   const paymentWidgetRef = useRef(null);
   const paymentMethodsWidgetRef = useRef(null);
-  const [price, setPrice] = useState(9900);
+  const [price, setPrice] = useState('');
+  const selectedpass = useSelector(selectSelectedPass);
+  
+  // console.log(typeof price);
+  // setPrice(selectedpass.discountPrice);
+  // console.log(typeof Number(selectedpass.discountPrice));
 
+  // useEffect(() => {
+    
+  // }, [price]);
+  
   useEffect(() => {
+    // setPrice(selectedpass.discountPrice);
+    // console.log(price);
     (async () => {
       // 결제 위젯 초기화
       const paymentWidget = await loadPaymentWidget(clientKey, customerKey);
@@ -74,7 +91,6 @@ function PayCheckout(props) {
         "#payment-widget",
         price
       );
-      
       // 이용 약관 렌더링
       paymentWidget.renderAgreement("#agreement");
       paymentWidgetRef.current = paymentWidget;
@@ -102,12 +118,14 @@ function PayCheckout(props) {
       // 결제 버튼 누르면 결제창 띄우기
       await paymentWidget?.requestPayment({
         orderId: uuid(),
-        orderName: "토스 티셔츠 외 2건",
+        // orderName: "토스 티셔츠 외 2건",
+        orderName: selectedpass.membershipName,
         customerName: "김토스",
         customerEmail: "customer123@gmail.com",
         successUrl: `${window.location.origin}/success`,
         failUrl: `${window.location.origin}/fail`
       })
+      // console.log('눌리나?');
     } catch (error) {
       console.error(error);
     }
@@ -121,11 +139,16 @@ function PayCheckout(props) {
       <StyledOrder>
         <h2 className='order-title'>주문서</h2>
         <PriceArea>
+          <div className='membership-name'>
+            <p>구매 이용권</p>
+            <p>{selectedpass.membershipName}</p>
+          </div>
           <div className='price'>
             <p>결제금액</p>
-            <span>{`${price.toLocaleString()}원`}</span>
+            {/* <span>{`${price.toLocaleString()}원`}</span> */}
+            <span>{`${selectedpass.discountPrice}원`}</span>
           </div>
-          <div className='coupon'>
+          {/* <div className='coupon'>
             <p>쿠폰</p>
             <div>
               <label>
@@ -138,7 +161,7 @@ function PayCheckout(props) {
                 1,000원 할인 쿠폰 적용
               </label>
             </div>
-          </div>
+          </div> */}
         </PriceArea>
         <PaymentMethod>
           <div id='payment-widget' />

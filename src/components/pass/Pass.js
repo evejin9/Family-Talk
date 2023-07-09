@@ -1,11 +1,11 @@
 import React, { useEffect } from 'react';
 import styled from 'styled-components';
-import data from "../passData.json";
-import PassList from '../components/pass/PassList';
-import Payment from '../components/pass/Payment';
+import data from "../../passData.json";
+import PassList from './PassList';
+import Payment from './Payment';
 import { useDispatch, useSelector } from 'react-redux';
-import { selectPassList } from '../features/passSlice';
-import { getAllPassList } from "../features/passSlice";
+import { selectPassList } from '../../features/passSlice';
+import { getAllPassList } from "../../features/passSlice";
 import { Outlet } from 'react-router-dom';
 
 const PassTitle = styled.div`

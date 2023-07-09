@@ -49,7 +49,7 @@ const PriceArea = styled.div`
 `;
 
 const PaymentMethod = styled.div`
-  margin-top: 30px;
+  margin: 30px 0;
   border: 1px solid #eee;
 
   .btn-payment {

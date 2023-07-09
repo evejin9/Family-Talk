@@ -33,6 +33,7 @@ import PayFail from './components/pass/payment/PayFail';
 import PassPage from './pages/PassPage';
 import { getUserData } from './api/userDataAPI';
 import { addUserData } from './features/userDataSlice';
+import PaySuccess from './components/pass/payment/PaySuccess';
 
 
 
@@ -140,6 +141,8 @@ function App() {
               <Route path='/pass' element={<PassPage />}>
                 <Route index element={<Pass />} />
                 <Route path='payment' element={<PayCheckout />} />
+                <Route path='paymentSuccess' element={<PaySuccess />} />
+                <Route path='paymentFail' element={<PayFail />} />
               </Route>
               <Route path='/mypage' element={<Mypage />} />
             </Route>

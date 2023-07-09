@@ -5,7 +5,6 @@ import MainDday from '../components/main/MainDday';
 import MainTodaySchedule from '../components/main/MainTodaySchedule';
 import MainWeather from '../components/main/MainWeather';
 import styled from 'styled-components';
-import Button from '../components/ui/Button';
 
 const MainWrapper = styled.div`
   width: 100%;

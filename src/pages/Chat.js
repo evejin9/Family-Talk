@@ -7,13 +7,13 @@ import { AiOutlinePlusCircle, AiOutlineClose as CloseButton } from "react-icons/
 import { BiSolidMap } from "react-icons/bi";
 
 import chatData from "../chatData.json";
-import userData from "../data.json";
 
 import MyChatItem from '../components/chat/MyChatItem';
 import OtherUserChatItem from '../components/chat/OtherUserChatItem';
 import { addChatList, chatListArray, getChatList, } from '../features/chatSlice';
 import { LogInUser } from '../features/loginSlice';
 import MapModal from '../components/chat/MapModal';
+import { userDataList } from '../features/userDataSlice';
 
 const ChatBox = styled.div`
   width: 100%;
@@ -188,6 +188,7 @@ function Chat(props) {
 
   const chatList = useSelector(chatListArray);
   const logInUser = useSelector(LogInUser);
+  const userData = useSelector(userDataList);
 
   const dispatch = useDispatch();
 

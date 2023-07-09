@@ -1,12 +1,9 @@
 import React, { useEffect } from 'react';
 import styled from 'styled-components';
 
-import data from "../data.json";
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { LogInUser } from '../features/loginSlice';
-import { getUserData } from '../api/userDataAPI';
-import { addUserData } from '../features/userDataSlice';
-
+import { userDataList } from '../features/userDataSlice';
 
 
 const MembersBox = styled.div`
@@ -54,23 +51,9 @@ const MembersCard = styled.div`
 
 function Members(props) {
   const logInUser = useSelector(LogInUser);
-  const dispatch = useDispatch();
-  
-  
-  
-  useEffect(() => {
-    const handleGetUserData = async () => {
-      const result = await getUserData();
-      if (!result) return
-      
-      dispatch(addUserData(result.user));
-    }
+  const userList = useSelector(userDataList);
 
-    handleGetUserData();
-  }, []);
-  
-
-  const newData = [...data];
+  const newData = [...userList];
 
   const oldAgeArray = newData.sort((a, b) => { if (a.birth < b.birth) return -1; })
 
@@ -79,9 +62,6 @@ function Members(props) {
   return (
     <MembersBox>
       {
-        // 로그인 유저가 가지고 있는 
-        // logInUser.embers.memberId와 user.id의 값이 일치하는 index를 찾아내어
-        // logInUser.members.relation을 출력
         oldAgeArray.map((user) => {
           const target = loginUserRelation.find((a) => a.memberId === user.id);
 

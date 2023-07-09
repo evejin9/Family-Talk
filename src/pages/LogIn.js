@@ -1,12 +1,12 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
 
 import { findLoginUser, isUserLogin } from '../features/loginSlice';
 
-import userData from "../data.json";
 import logo from "../images/logo.png";
 import { useNavigate } from 'react-router';
+import { userDataList } from '../features/userDataSlice';
 
 const LogInModalWrapper = styled.div`
   width: 100%;
@@ -80,6 +80,7 @@ function LogIn(props) {
   const [logInPw, setLogInPw] = useState('');
 
   const isLogin = useSelector(isUserLogin);
+  const userData = useSelector(userDataList);
 
   const navigate = useNavigate();
 
@@ -96,8 +97,8 @@ function LogIn(props) {
   };
 
   const submitLoginData = () => {
-    const logInUser = userData.find(user =>  user.id === logInId);
-
+    const logInUser = userData.find(user => user.id === logInId);
+    
     if(logInId === logInUser?.id && Number(logInPw) === logInUser?.password) {
       dispatch(findLoginUser(logInUser));
       alert(`${logInUser.name}님, 환영합니다!`);

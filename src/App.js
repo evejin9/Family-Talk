@@ -18,7 +18,7 @@ import { useCallback, useEffect, useRef, useState } from 'react';
 import PhotoList from './components/photo/PhotoList';
 import AuthCheck from './components/AuthCheck';
 import SignUp from './pages/SignUp';
-import Pass from './pages/Pass';
+import Pass from './components/pass/Pass';
 
 import Mypage from './pages/Mypage';
 

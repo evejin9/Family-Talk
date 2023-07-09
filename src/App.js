@@ -25,12 +25,14 @@ import Mypage from './pages/Mypage';
 
 import dataPhoto from "./dataPhoto.json";
 import uuid from 'react-uuid';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { LogInUser } from './features/loginSlice';
 import PayCheckout from './components/pass/payment/PayCheckout';
 import Payment from './components/pass/Payment';
 import PayFail from './components/pass/payment/PayFail';
 import PassPage from './pages/PassPage';
+import { getUserData } from './api/userDataAPI';
+import { addUserData } from './features/userDataSlice';
 
 
 
@@ -105,6 +107,20 @@ function App() {
   //   }
   //   setComments(comments => comments.concat(comment));
   // }, [])
+
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    const handleGetUserData = async () => {
+      const result = await getUserData();
+      
+      if (!result) return
+      
+      dispatch(addUserData(result.user));
+    }
+    
+    handleGetUserData();
+  }, []);
 
   return (
     <>

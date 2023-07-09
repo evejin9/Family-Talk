@@ -10,11 +10,11 @@ const userDataSlice = createSlice({
   reducers: {
     addUserData: (state, {payload: user}) => {
       state.userList = user;
-    }
+    },
   }
 })
 
-export const { addUserData } = userDataSlice.actions;
+export const { addUserData, } = userDataSlice.actions;
 
 export const userDataList = state => state.userData.userList;
 

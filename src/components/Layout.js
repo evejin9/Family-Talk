@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { NavLink, Outlet, useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import { useDispatch, useSelector } from 'react-redux';
@@ -12,6 +12,8 @@ import logo from "../images/logo.png";
 import Chat from '../pages/Chat';
 import Button from './ui/Button';
 import { LogInUser, isUserLogin, logOutUser } from '../features/loginSlice';
+import { getUserData } from '../api/userDataAPI';
+import { addUserData } from '../features/userDataSlice';
 
 
 const LayoutStyled = styled.div`
@@ -156,13 +158,11 @@ function Layout(props) {
   const [showChatModal, setShowChatModal] = useState(false);
 
   const logInUSerInfo = useSelector(LogInUser);
-
   const dispatch = useDispatch();
 
   const handleChatModal = () => {
     setShowChatModal(true);
   };
-
 
   return (
     <LayoutStyled >

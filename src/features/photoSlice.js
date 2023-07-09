@@ -192,13 +192,13 @@ const photoSlice = createSlice({
       state.postList = state.postList.filter(post => post.id !== id);
       state.selectedTitle = null;
     },
-    // editPost: (state, { payload: { id, imagePath, content } }) => {
-    //   const postIndex = state.postList.findIndex(post => post.id === id);
-    //   if (postIndex !== -1) {
-    //     state.postList[postIndex].imagePath = imagePath;
-    //     state.postList[postIndex].content = content;
-    //   }
-    // }
+    editPost: (state, { payload: { id, imagePath, content } }) => {
+      const postIndex = state.postList.findIndex(post => post.id === id);
+      if (postIndex !== -1) {
+        state.postList[postIndex].imagePath = imagePath;
+        state.postList[postIndex].content = content;
+      }
+    }
   }
 });
 

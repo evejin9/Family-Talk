@@ -8,6 +8,7 @@ const ContentArea = styled.div`
   padding: 10px;
   background-color: #d9d9d9;
   border-radius: 10px;
+  text-align: center;
 `;
 
 const { kakao } = window;
@@ -50,12 +51,12 @@ function ChatMap(props) {
     map?.setCenter(markerPosition);
     marker.setMap(map);
   }, [location]);
-
+  
   // 현재 위치 가져오기
   if (navigator.geolocation) {
     navigator.geolocation.getCurrentPosition(success, error, options);
   }
-
+  
   function success(position) {
     setLocation({ 
       latitude: position.coords.latitude,
@@ -87,9 +88,11 @@ function ChatMap(props) {
           width: "200px", 
           height: "200px",
           boxSizing: "border-box", 
+          marginBottom: "10px"
         }}
       >
       </div>
+      {/* <p>{address}</p> */}
     </ContentArea>
   );
 }

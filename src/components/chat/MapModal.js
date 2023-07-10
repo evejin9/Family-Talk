@@ -89,6 +89,7 @@ function MapModal(props) {
       level: 4
     };
     setMap(new kakao.maps.Map(mapDiv.current, options));
+
   }, []);
 
   useEffect(() => {
@@ -101,6 +102,38 @@ function MapModal(props) {
     
     marker.setMap(map);
   }, [location]);
+
+  // 주소-좌표 변환
+  useEffect(() => {
+
+    // const getAddress = async () => {
+    //   await axios.get(`https://dapi.kakao.com/v2/local/geo/coord2address.json?x=${location.longitude}&y=${location.latitude}&input_coord=WGS84`
+    //   ,{ headers: { Authorization:`KakaoAK ${REST_API_KEY}` }}
+    //   )
+    //   .then(res => {
+    //     setAddress(res.data.documents[0]?.address.address_name);
+    //   })
+    //   .catch(error => console.log(error))
+    // }
+
+    const getAddress = async () => {
+      try {
+        await axios.get(`https://dapi.kakao.com/v2/local/geo/coord2address.json?x=${location.longitude}&y=${location.latitude}&input_coord=WGS84`
+        ,{ headers: { Authorization:`KakaoAK ${REST_API_KEY}` }}
+        )
+        .then(res => {
+          console.log(res);
+          if (res.status === 200 )
+          setAddress(res.data.documents[0]?.address.address_name);
+        })
+        
+      } catch (error) {
+        console.log(error);
+      }
+    }
+    
+    getAddress();
+  }, [address]);
 
   // 현재 위치 가져오기
   if (navigator.geolocation) {
@@ -122,14 +155,6 @@ function MapModal(props) {
     console.log("위치 받기 실패");
   }
 
-  // axios.get(`https://dapi.kakao.com/v2/local/geo/coord2address.json?x=${location.longitude}&y=${location.latitude}&input_coord=WGS84`
-  // ,{ headers: { Authorization:`KakaoAK ${REST_API_KEY}` }}
-  // )
-  // .then(res => {
-  //   setAddress(res.data.documents[0].address.address_name);
-  // })
-  // .catch(error => console.log(error))
-
   const addNewChat = () => {
     location !== '' && 
     
@@ -143,7 +168,7 @@ function MapModal(props) {
         <CloseButton className='cursor-point' onClick={() => setShowMapModal(false)} />
       </ModalCloseButton>
 
-      <p className="addressBox"></p>
+      <p className="addressBox">{address}</p>
       <div 
         ref={mapDiv}
         style={{ 

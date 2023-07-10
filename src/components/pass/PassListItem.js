@@ -66,8 +66,8 @@ function PassListItem(props) {
         <p className='membership-content'>{membershipContent}</p>
       </StyledMembership>
       <StyledPrice>
-        <p>&#92;{price}</p>
-        <p className={id === "0" ? "free" : undefined}>{id === "0" ? '무료' : `${discountPrice} /월`}</p>
+        <p>&#92;{Number(price).toLocaleString()}</p>
+        <p className={id === "0" ? "free" : undefined}>{id === "0" ? '무료' : `${Number(discountPrice).toLocaleString()} /월`}</p>
       </StyledPrice>
     </StyledListItem>
   );

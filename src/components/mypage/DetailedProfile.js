@@ -66,12 +66,12 @@ const StyledButton = styled.button`
 
 function DetailedProfile({ openModal }) {
   const editUserData = useSelector(selectUserEditData);
-  console.log(editUserData);
+  // console.log(editUserData);
   const logInUser = useSelector(LogInUser);
   const navigate = useNavigate();
 
-  const goToSignUpPage = () => {
-    navigate('/signUp');
+  const gotoHomePage = () => {
+    navigate('/');
   };
 
   return (
@@ -83,8 +83,8 @@ function DetailedProfile({ openModal }) {
       <StyledSpan><BsPhone size={25} style={{ marginRight: '5px' }} color='#5CE1E6' />Phone:  {editUserData?.phone || logInUser.phone}</StyledSpan>
       <StyledSpan><MdOutlineEmail size={25} style={{ marginRight: '5px' }} color='#5CE1E6' />Email: {editUserData?.email || logInUser.email}</StyledSpan>
       <StyledButtonWrapper>
-        <StyledButton onClick={goToSignUpPage}>비밀번호 변경</StyledButton>
         <StyledButton onClick={openModal}>정보수정</StyledButton>
+        <StyledButton onClick={gotoHomePage}>확인</StyledButton>
       </StyledButtonWrapper>
     </StyledDiv>
   );

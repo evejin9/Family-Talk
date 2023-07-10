@@ -17,7 +17,7 @@ const DetailedWrapper = styled.div`
 `;
 
 
-function Mypage(props) {
+function Mypage({selectedImage , handleImageChange}) {
   const [editModal, setEditModal] = useState(false);
 
   const openModal = () => {
@@ -32,7 +32,7 @@ function Mypage(props) {
 
   return (
     <div className='show-content'>
-      <Myprofile />
+      <Myprofile selectedImage={selectedImage} handleImageChange={handleImageChange}  />
       <DetailedWrapper>
         <UserPass />
         <DetailedProfile openModal={openModal} />

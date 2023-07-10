@@ -123,13 +123,31 @@ function App() {
     handleGetUserData();
   }, []);
 
+
+  // 프로필 카드 이미지 변경
+  const [selectedImage, setSelectedImage] = useState(null);
+
+  const handleImageChange = (event) => {
+    const file = event.target.files[0];
+  
+    if (file) {
+      const reader = new FileReader();
+    
+      reader.onload = (e) => {
+        setSelectedImage(e.target.result);
+      };
+    
+      reader.readAsDataURL(file);
+    }
+  };
+
   return (
     <>
       <GlobalStyled />
       <Container>
         <Wrapper>
           <Routes>
-            <Route path='/' element={<AuthCheck><Layout /></AuthCheck>}>
+            <Route path='/' element={<AuthCheck><Layout selectedImage={selectedImage}/></AuthCheck>}>
               <Route index element={<Main />} />
               <Route path='/members' element={<Members />} />
               <Route path='/calendar' element={<Calendar />} />
@@ -144,7 +162,7 @@ function App() {
                 <Route path='paymentSuccess' element={<PaySuccess />} />
                 <Route path='paymentFail' element={<PayFail />} />
               </Route>
-              <Route path='/mypage' element={<Mypage />} />
+              <Route path='/mypage' element={<Mypage selectedImage={selectedImage} handleImageChange={handleImageChange}/>} />
             </Route>
             <Route path='/login' element={<LogIn />} />
             <Route path='/SignUp' element={<SignUp />} />

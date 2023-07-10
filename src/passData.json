@@ -2,13 +2,13 @@
   {
     "id": "0",
     "membershipName": "30일 무료 이용권",
-    "membershipContent": "WHITE 멤버십 무료이용권",
+    "membershipContent": "BRONZE 멤버십 무료이용권",
     "price": "4900",
     "discountPrice": "0"
   },
   {
     "id": "1",
-    "membershipName": "WHITE",
+    "membershipName": "BRONZE",
     "membershipContent": "매월 10개 게시글 업로드",
     "price": "4900",
     "discountPrice": "4000"

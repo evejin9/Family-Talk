@@ -210,12 +210,12 @@ function App() {
       <Footer>
         <div className='innerFooter'>
           <div className='footerContent'>
-            <ul class="menu">
-              <li><a href="javascript:void(0)" class="green">개인정보처리방침</a></li>
+            <ul className="menu">
+              <li><a href="javascript:void(0)" >개인정보처리방침</a></li>
               <li><a href="javascript:void(0)">홈페이지 이용약관</a></li>
-              <li><a href="javascript:void(0)" class="green">위치정보 이용약관</a></li>
+              <li><a href="javascript:void(0)" >위치정보 이용약관</a></li>
             </ul>
-            <div class="info">
+            <div className="info">
               <div>
                 <span>{`(주)Family Talk | `}</span>
                 <span>{`대표 김유미 | `}</span>
@@ -228,8 +228,8 @@ function App() {
               </div>
             </div>
 
-            <p class="copyright">
-              &copy; <span class="this-year"></span>
+            <p className="copyright">
+              &copy; <span className="this-year"></span>
               Family Talk Company. All Rights Reserved.
             </p>
             {/* <img src="./images/starbucks_logo_only_text.png" alt="STARBUCKS" class="logo"> */}

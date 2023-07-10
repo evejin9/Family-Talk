@@ -89,6 +89,26 @@ function MapModal(props) {
       level: 4
     };
     setMap(new kakao.maps.Map(mapDiv.current, options));
+
+    // 현재 위치 가져오기
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(success, error, options);
+    }
+
+    function success(position) {
+      setLocation({ 
+        latitude: position.coords.latitude,
+        longitude: position.coords.longitude,
+      });
+    }
+
+    function error() {
+      setLocation({
+        latitude: 33.450701,
+        longitude: 126.570667,
+      });
+      console.log("위치 받기 실패");
+    }
   }, []);
 
   useEffect(() => {
@@ -98,42 +118,22 @@ function MapModal(props) {
     });
 
     map?.setCenter(markerPosition);
-    
     marker.setMap(map);
+
+    const geocoder = new kakao.maps.services.Geocoder();
+    geocoder.coord2Address(location.longitude, location.latitude, (result, status) => {
+      if (status === kakao.maps.services.Status.OK) {
+        setAddress(result[0].address.address_name);
+      }
+    });
   }, [location]);
 
-  // 현재 위치 가져오기
-  if (navigator.geolocation) {
-    navigator.geolocation.getCurrentPosition(success, error, options);
-  }
 
-  function success(position) {
-    setLocation({ 
-      latitude: position.coords.latitude,
-      longitude: position.coords.longitude,
-    });
-  }
-
-  function error() {
-    setLocation({
-      latitude: 33.450701,
-      longitude: 126.570667,
-    });
-    console.log("위치 받기 실패");
-  }
-
-  // axios.get(`https://dapi.kakao.com/v2/local/geo/coord2address.json?x=${location.longitude}&y=${location.latitude}&input_coord=WGS84`
-  // ,{ headers: { Authorization:`KakaoAK ${REST_API_KEY}` }}
-  // )
-  // .then(res => {
-  //   setAddress(res.data.documents[0].address.address_name);
-  // })
-  // .catch(error => console.log(error))
 
   const addNewChat = () => {
     location !== '' && 
     
-    dispatch(addMapInfo({location, nextId, logInUser}));
+    dispatch(addMapInfo({location, nextId, logInUser, address}));
     setShowMapModal(false);
   }
 
@@ -143,7 +143,7 @@ function MapModal(props) {
         <CloseButton className='cursor-point' onClick={() => setShowMapModal(false)} />
       </ModalCloseButton>
 
-      <p className="addressBox"></p>
+      <p className="addressBox">{address}</p>
       <div 
         ref={mapDiv}
         style={{ 

@@ -28,7 +28,7 @@ const Mychat = styled.div`
 `;
 
 function MyChatItem(props) {
-  const { chat : {id, content, time}, target : { memberId, relation } } = props;
+  const { chat : {id, content, time, address,}, target : { memberId, relation } } = props;
 
   return (
     <Mychat>
@@ -37,7 +37,7 @@ function MyChatItem(props) {
         <span>{relation}</span>
         {
           typeof content === 'object'
-          ? <ChatMap />
+          ? <ChatMap content={content} address={address} />
           : content.includes('data:')
             ? <p className='contentArea'><img src={content} /></p>
             : <p className='contentArea'>{content}</p>

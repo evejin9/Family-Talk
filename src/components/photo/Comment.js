@@ -31,7 +31,6 @@ const CommentWrapper = styled.div`
 `
 
 function Comment({commentName, commentContent, id, removeComment}) {
-  console.log(id);
   return (
     <CommentWrapper>
       <div className='flexdiv'>

@@ -1,21 +1,16 @@
-import React, { useCallback, useRef, useState } from 'react';
+import React, { useCallback, useState } from 'react';
 import styled from 'styled-components';
 import { BsCheck2 } from "react-icons/bs";
-import { FiMoreHorizontal } from "react-icons/fi";
+import { PiPencil, PiTrash } from "react-icons/pi";
 import CommentList from './CommentList';
-import { useNavigate } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { v4 as uuidv4 } from "uuid";
-import { BsFillTrash3Fill } from "react-icons/bs";
-import { PiPencil, PiTrash } from "react-icons/pi";
-import EditPhoto from './EditPhoto';
 import { useDispatch, useSelector } from 'react-redux';
 import { LogInUser } from '../../features/loginSlice';
-import { addComment, addPostList, deletePost, editPost } from '../../features/photoSlice';
+import { deletePost, editPost } from '../../features/photoSlice';
 import Button from '../ui/Button';
 
 const PhotoLIstItemWrapper = styled.div`
-/* background-color: #efeeef; */
 border-radius: 8px;
 display: flex;
 position: relative;
@@ -39,22 +34,6 @@ margin-bottom: 50px;
     object-fit: cover;  
   }
 }
-
-
-/* .iconAndContent {
-  display: flex;
-  flex-direction: column;
-  position: relative;
-  height: auto;
-} */
-
-/* .icon {
-  margin-left: 15px;
-  svg {
-    font-size: 25px;
-  }
-} */
-
 
 .mainContent {
   width: 40%;
@@ -174,33 +153,11 @@ margin-bottom: 50px;
 
 function PhotoListItem(props) {
   const {post} = props;
-  const navigate = useNavigate('/')
   const dispatch = useDispatch()
 
-  // const handleChangeComment = (e) => {
-  //   setValue(e.target.value);
-  // }
-
-  // const commentHandleSubmit = (e) => {
-  //   if (value.length < 1){
-  //     alert('내용을 입력해 주세요')
-  //     return;
-  //   }
-  //   const newComment = {
-  //     postId: postId,
-  //     commentId : uuid(),
-  //     commentContent: value,
-  //     commentName: logInUSerInfo.name,
-  //   };
-  //   onWriteComment(newComment);
-  //   setValue('');
-  //   // onWriteComment(value);
-  //   // setValue('')
-  //   // e.preventDefault();
-  //   // dispatch(addComment({logInUSerInfo, commentContent}));
-  // }
+  // 게시글 삭제
   const handleDelete = () => {
-      dispatch(deletePost(post.id));
+    dispatch(deletePost(post.id));
   };
 
   // 수정 영역
@@ -231,24 +188,133 @@ function PhotoListItem(props) {
 
 
   // 댓글영역
-  const [comments, setComments] = useState([]);
+  const [comments, setComments] = useState([
+    {
+      postId: 1,
+      commentName: "신돌식",
+      commentId: 11,
+      commentContent: "좋아보이네😄"
+    },
+    {
+      postId: 1,
+      commentName: "이옥분",
+      commentId: 12,
+      commentContent: "다음에는 같이 가고 싶구나."
+    },
+    {
+      postId: 1,
+      commentName: "신앵두",
+      commentId: 13,
+      commentContent: "나만 빼고 가고..."
+    },
+    {
+      postId: 1,
+      commentName: "신형만",
+      commentId: 14,
+      commentContent: "좋았었지~"
+    },
+    {
+      postId: 1,
+      commentName: "신짱구",
+      commentId: 15,
+      commentContent: "👍"
+    },
+    {
+      postId: 2,
+      commentName: "봉미선",
+      commentId: 22,
+      commentContent: "예쁘게 잘나왔네~"
+    },
+    {
+      postId: 2,
+      commentName: "신짱아",
+      commentId: 24,
+      commentContent: "😁"
+    },
+    {
+      postId: 2,
+      commentName: "신짱구",
+      commentId: 25,
+      commentContent: "호호잇!"
+    },
+    {
+      postId: 3,
+      commentName: "신형만",
+      commentId: 31,
+      commentContent: "감성뭐야~"
+    },
+    {
+      postId: 3,
+      commentName: "봉미선",
+      commentId: 32,
+      commentContent: "이야 예쁘네"
+    },
+    {
+      postId: 3,
+      commentName: "신짱아",
+      commentId: 33,
+      commentContent: "👍"
+    },
+    {
+      postId: 3,
+      commentName: "신돌식",
+      commentId: 35,
+      commentContent: "훅..."
+    },
+    {
+      postId: 4,
+      commentName: "신짱구",
+      commentId: 41,
+      commentContent: "다음에 또 사주세요 ㅋㅋㅋ"
+    },
+    {
+      postId: 4,
+      commentName: "신짱아",
+      commentId: 42,
+      commentContent: "👏"
+    },
+    {
+      postId: 5,
+      commentName: "신형만",
+      commentId: 51,
+      commentContent: "넵~!"
+    },
+    {
+      postId: 5,
+      commentName: "신짱아",
+      commentId: 52,
+      commentContent: "좋습니다😃"
+    },
+    {
+      postId: 5,
+      commentName: "신짱구",
+      commentId: 54,
+      commentContent: "👍👍"
+    },
+    {
+      postId: 6,
+      commentName: "신짱구",
+      commentId: 61,
+      commentContent: "👍"
+    }
+  ]);
   const [value, setValue] = useState('');
   const logInUSerInfo = useSelector(LogInUser);
-  // const filteredComments = comments.filter((comment) => comment.postId === postId);
   const postId = post.id;
+  const filteredComments = comments.filter((comment) => comment.postId === postId);
 
     const onWriteComment = useCallback((value) => {
-    const comment = {
-      postId: postId,
-      commentId: uuidv4(),
-      commentContent: value,
-      commentName: logInUSerInfo.name
-    }
-    setComments(comments => comments.concat(comment))
+      const comment = {
+        postId: postId,
+        commentId: uuidv4(),
+        commentContent: value,
+        commentName: logInUSerInfo.name
+      }
+      setComments(comments => comments.concat(comment))
   }, [])
 
     const handleChangeComment = (e) => {
-    setValue(e.target.value);
+      setValue(e.target.value);
     }
     
     const commentHandleSubmit = (e) => {
@@ -258,13 +324,7 @@ function PhotoListItem(props) {
       }
       onWriteComment(value);
       setValue('');
-      // onWriteComment(value);
-      // setValue('')
-      // e.preventDefault();
-      // dispatch(addComment({logInUSerInfo, commentContent}));
     }
-
-
 
     const handleRemoveComment = useCallback((id) =>{
       setComments(comments => comments.filter((comment) => comment.commentId !== id));
@@ -277,8 +337,6 @@ function PhotoListItem(props) {
       }
     };
 
-  
-
   return (
     <PhotoLIstItemWrapper>
       <div className='uploadImage'>
@@ -290,29 +348,30 @@ function PhotoListItem(props) {
             <img src={post.profileImage} alt='profileImg'></img>
             <span className='name'>{post.name}</span> 
             <button onClick={handleEditPost} ><PiPencil /></button>
-            <button
-            onClick={handleDelete}
-            ><PiTrash /></button>
+            <button onClick={handleDelete}>
+              <PiTrash />
+            </button>
           </div>
           <div className='contentAndComment'>
-            {isEditing ? (
-            <div>
-              <textarea 
-                value={editContent}
-                onChange={handleChangeEditContent}
-                className="editContent"
-              />
-                <div className='editButton'>
-                <Button title='취소' onClick={handleCancelEdit} />
-                <Button title='수정' onClick={handleSaveEdit} />
+            {isEditing ? 
+              (
+                <div>
+                  <textarea 
+                    value={editContent}
+                    onChange={handleChangeEditContent}
+                    className="editContent"
+                  />
+                    <div className='editButton'>
+                    <Button title='취소' onClick={handleCancelEdit} />
+                    <Button title='수정' onClick={handleSaveEdit} />
+                    </div>
                 </div>
-            </div>
-          ) : (
-            <div className="postContent">{post.content}</div>
-          )}
-            {/* <div className='postContent'>{post.content}</div> */}
+              ) : (
+                <div className="postContent">{post.content}</div>
+              )
+            }
             <div className='comment'>
-              <CommentList comments={comments} removeComment={handleRemoveComment}/>
+              <CommentList comments={filteredComments} removeComment={handleRemoveComment}/>
             </div>
           </div>
         </div>

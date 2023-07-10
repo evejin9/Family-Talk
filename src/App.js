@@ -96,6 +96,7 @@ const Wrapper = styled.div`
 
   const Footer = styled.div`
   border-top: 2px solid #f5cc8d;
+  color: #acacac;
   width: 100%;
   height: 120px;
   display: flex;
@@ -132,19 +133,6 @@ const Wrapper = styled.div`
   `;
 
 function App() {
-  // const [posts, setPosts] = useState(dataPhoto)
-  // const nextId = useRef(7);
-  // const [comments, setComments] = useState('');
-  // const logInUSerInfo = useSelector(LogInUser)
-
-  // const handleInsert = useCallback((value) => {
-  //   const comment = {
-  //     commentId: uuid(),
-  //     commentContent: value,
-  //     commentName: logInUSerInfo.name
-  //   }
-  //   setComments(comments => comments.concat(comment));
-  // }, [])
 
   const dispatch = useDispatch();
 
@@ -211,14 +199,14 @@ function App() {
         <div className='innerFooter'>
           <div className='footerContent'>
             <ul className="menu">
-              <li><a href="javascript:void(0)" >개인정보처리방침</a></li>
-              <li><a href="javascript:void(0)">홈페이지 이용약관</a></li>
-              <li><a href="javascript:void(0)" >위치정보 이용약관</a></li>
+              {/* <li><link href=''>개인정보처리방침</link></li>
+              <li><link href=''>홈페이지 이용약관</link></li>
+              <li><link href=''>위치정보 이용약관</link></li> */}
             </ul>
             <div className="info">
               <div>
                 <span>{`(주)Family Talk | `}</span>
-                <span>{`대표 김유미 | `}</span>
+                <span>{`대표 김수진 | `}</span>
                 <span>{`사업자등록번호 201-81-21515 | `}</span>
                 <span>고객센터 feedback@familytalk.us</span>
               </div>

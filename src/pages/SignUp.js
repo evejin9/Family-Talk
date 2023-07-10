@@ -4,6 +4,8 @@ import { useNavigate } from 'react-router-dom';
 import { AiFillEyeInvisible, AiFillEye, } from "react-icons/ai";
 
 import logo from "../images/logo.png";
+import { useSelector } from 'react-redux';
+import { userDataList } from '../features/userDataSlice';
 
 const SignUpwrapper = styled.div`
   width: 100%;
@@ -34,6 +36,14 @@ const SignUpBox = styled.div`
     margin-top: 20px;
   }
 
+  input + div {
+    margin-top: 20px;
+  }
+
+  div + input {
+    margin-top: 20px;
+  }
+
   button {
     width: 400px;
     height: 50px;
@@ -46,7 +56,6 @@ const SignUpBox = styled.div`
   }
 
   .pwArea {
-    padding: 20px 0;
     position: relative;
     
     input {
@@ -56,11 +65,12 @@ const SignUpBox = styled.div`
     svg {
       position: absolute;
       right: 15px;
-      bottom: 35px;
-      font-size: 20px;
+      bottom: 14px;
+      font-size: 22px;
+      /* color: #f5cc8d; */
 
       &:hover {
-        color: '#f5cc8d'
+        color: #f5cc8d;
       }
     }
   }
@@ -98,6 +108,7 @@ function SignUp(props) {
   const [birthError, setBirthError] = useState(false);
   const [numberError, setNumberError] = useState(false);
   const [emailError, setEmailError] = useState(false);
+  const [isSameId, setIsSameId] = useState(false);
 
   // 비밀번호 표시
   const [showPw, setShowPw] = useState(false);
@@ -108,6 +119,8 @@ function SignUp(props) {
   const birthRef = useRef();
   const phoneRef = useRef();
 
+  const userList = useSelector(userDataList);
+
   const navigate = useNavigate();
   
   const handleUserId = (e) => {
@@ -116,6 +129,11 @@ function SignUp(props) {
     if (name === 'userId') {
         const patternCheck = /^[a-zA-Z0-9]*$/g.test(value);
         if (!patternCheck) return;
+
+        const idChecked = userList.find(user => user.id === value);
+        if (idChecked) setIsSameId(true);
+        else setIsSameId(false);
+
     }
 
     if (name === 'pw') {
@@ -246,6 +264,7 @@ const submitButton = () => {
           onBlur={checkPattern}
         />
         {userIdError && <p className='errorMsg'>아이디를 5자리 이상 입력해주세요.</p>}
+        {isSameId && <p className='errorMsg'>동일한 아이디가 존재합니다.</p> }
 
         <div className='pwArea'>
           <InputStyle 
@@ -257,7 +276,7 @@ const submitButton = () => {
             onChange={handleUserId} 
             onBlur={checkPattern}
           />
-          {showPw ? <AiFillEye onClick={() => setShowPw(false)}/> : <AiFillEyeInvisible onClick={() => setShowPw(true)} /> }
+          {showPw ? <AiFillEye className='cursor-point' onClick={() => setShowPw(false)}/> : <AiFillEyeInvisible className='cursor-point' onClick={() => setShowPw(true)} /> }
         </div>
         {pwError && <p className='errorMsg'>숫자와 문자 포함 형태의 6~12자리 이내의 암호를 입력해주세요.</p>}
 

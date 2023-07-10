@@ -96,6 +96,9 @@ function MapModal(props) {
     const marker = new kakao.maps.Marker({
       position: markerPosition 
     });
+
+    map?.setCenter(markerPosition);
+    
     marker.setMap(map);
   }, [location]);
 

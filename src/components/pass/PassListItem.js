@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
-import { paymentPass } from '../../features/passSlice';
+import { paymentPass, selectSelectedPass } from '../../features/passSlice';
 
 const StyledListItem = styled.div`
   width: 100%;
@@ -20,6 +20,11 @@ const StyledListItem = styled.div`
 
   & + & {
     margin-top: 20px;
+  }
+
+  &.selected {
+    background-color: #efefef;
+    border: 2px solid #f5cc8d;
   }
 `;
 
@@ -54,13 +59,17 @@ const StyledPrice = styled.div`
 function PassListItem(props) {
   const { pass: { id, membershipName, membershipContent, price, discountPrice } } = props;
   const dispatch = useDispatch();
+  const selectedPass = useSelector(selectSelectedPass);
 
   const handleClickPass = () => {
     dispatch(paymentPass({id, membershipName, membershipContent, price, discountPrice}));
   };
 
   return (
-    <StyledListItem onClick={handleClickPass}>
+    <StyledListItem
+      onClick={handleClickPass}
+      className={selectedPass.id === id && "selected"}
+    >
       <StyledMembership>
         <p>{membershipName}</p>
         <p className='membership-content'>{membershipContent}</p>

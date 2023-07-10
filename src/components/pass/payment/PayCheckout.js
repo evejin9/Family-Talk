@@ -71,13 +71,11 @@ const PaymentMethod = styled.div`
 function PayCheckout(props) {
   const paymentWidgetRef = useRef(null);
   const paymentMethodsWidgetRef = useRef(null);
-  const [price, setPrice] = useState(0);
   const selectedpass = useSelector(selectSelectedPass);
+  const [price, setPrice] = useState(Number(selectedpass.discountPrice));
   
   useEffect(() => {
     (async () => {
-      setPrice(Number(selectedpass.discountPrice));
-
       // 결제 위젯 초기화
       const paymentWidget = await loadPaymentWidget(clientKey, customerKey);
 
@@ -144,7 +142,7 @@ function PayCheckout(props) {
           <div className='coupon'>
             <p>쿠폰</p>
             <div>
-              {price === 0
+              {price <= '1000'
               ? <p className='no-coupon'>사용가능한 쿠폰이 없습니다.</p>
               : <label>
                   <input

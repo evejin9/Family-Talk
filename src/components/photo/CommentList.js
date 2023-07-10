@@ -8,7 +8,7 @@ import Comment from './Comment';
 // `
 
 function CommentList({comments, removeComment}) {
-  console.dir(comments)
+
   return (
     <div>
       {comments.map((comment) => <Comment key={comment.commentId} id={comment.commentId} commentName={comment.commentName} commentContent={comment.commentContent} removeComment={removeComment}/>)}

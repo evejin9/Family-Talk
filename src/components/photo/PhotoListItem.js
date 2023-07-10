@@ -5,13 +5,14 @@ import { FiMoreHorizontal } from "react-icons/fi";
 import CommentList from './CommentList';
 import { useNavigate } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { uuid } from "react-uuid";
+import { v4 as uuidv4 } from "uuid";
 import { BsFillTrash3Fill } from "react-icons/bs";
 import { PiPencil, PiTrash } from "react-icons/pi";
 import EditPhoto from './EditPhoto';
 import { useDispatch, useSelector } from 'react-redux';
 import { LogInUser } from '../../features/loginSlice';
 import { addComment, addPostList, deletePost, editPost } from '../../features/photoSlice';
+import Button from '../ui/Button';
 
 const PhotoLIstItemWrapper = styled.div`
 /* background-color: #efeeef; */
@@ -82,6 +83,12 @@ margin-bottom: 50px;
       cursor: pointer;
       color: gray;
     }
+    button {
+    background: none;
+    outline: none;
+    border: none;
+    width: auto;
+    }
   }
   .contentAndComment {
     height: auto;
@@ -125,7 +132,6 @@ margin-bottom: 50px;
       background: none;
       outline: none;
       border: none;
-      /* line-height: 100%; */
       display: flex;
       align-items: end;
       svg {
@@ -133,51 +139,141 @@ margin-bottom: 50px;
       }
     }
   }
-  button {
-      background: none;
-      outline: none;
-      border: none;
-      width: auto;
+  }
+  .editContent {
+    width: 100%;
+    overflow: auto;
+    background: none;
+    outline: none;
+    border: none;
+    border-bottom: solid 1px black;
+    &::-webkit-scrollbar {
+      width: 5px;
+    }
+    &::-webkit-scrollbar-thumb {
+      border-radius: 2px;
+      background: #ccc;
+      cursor: pointer;
+    }
+  }
+  .editButton {
+    display: flex;
+    justify-content: end;
+    button {
+      margin-left: 3%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      width: 20%;
+      font-size: 12px;
+      padding: 2%;
     }
   } 
 `
 
 function PhotoListItem(props) {
-  const {post, onWriteComment, comments, removeComment} = props;
+  const {post} = props;
   const navigate = useNavigate('/')
   const dispatch = useDispatch()
-  const logInUSerInfo = useSelector(LogInUser);
-  const commentId = useRef(10000)
-  // const [commentContent, setCommentContent] = useState('');
-  const [value, setValue] = useState('');
 
-  const handleChangeComment = (e) => {
-    setValue(e.target.value);
-  }
+  // const handleChangeComment = (e) => {
+  //   setValue(e.target.value);
+  // }
 
-  const commentHandleSubmit = (e) => {
-    if (value.length < 1){
-      alert('내용을 입력해 주세요')
-      return;
-    }
-    onWriteComment(value);
-    setValue('')
-    e.preventDefault();
-    // dispatch(addComment({logInUSerInfo, commentContent}));
-  }
+  // const commentHandleSubmit = (e) => {
+  //   if (value.length < 1){
+  //     alert('내용을 입력해 주세요')
+  //     return;
+  //   }
+  //   const newComment = {
+  //     postId: postId,
+  //     commentId : uuid(),
+  //     commentContent: value,
+  //     commentName: logInUSerInfo.name,
+  //   };
+  //   onWriteComment(newComment);
+  //   setValue('');
+  //   // onWriteComment(value);
+  //   // setValue('')
+  //   // e.preventDefault();
+  //   // dispatch(addComment({logInUSerInfo, commentContent}));
+  // }
   const handleDelete = () => {
       dispatch(deletePost(post.id));
   };
+
+  // 수정 영역
+  const [editContent, setEditContent] = useState(post.content);
+  const [isEditing, setIsEditing] = useState(false);
+
   const handleEditPost = () => {
-      // dispatch(editPost({ id: post.id}));
-      // dispatch(addCalendarTitle({ title, selectedDate: format(selectedDate, 'yyyy-MM-dd'), content }));
-    // setTitle('');
-    // setContent('');
-    // closeModal();
-    navigate(`/photo/editPhoto/${post.id}`)
+    setIsEditing(true);
+  };
+
+  const handleChangeEditContent = (e) => {
+    setEditContent(e.target.value);
+  };
+  
+  const handleSaveEdit = () => {
+    dispatch(editPost({ id: post.id, content: editContent }));
+    setIsEditing(false);
+  };
+  
+  const handleCancelEdit = () => {
+    setEditContent(post.content);
+    setIsEditing(false);
   };
 
 
+  // 댓글영역
+  const [comments, setComments] = useState([]);
+  const [value, setValue] = useState('');
+  const logInUSerInfo = useSelector(LogInUser);
+  // const filteredComments = comments.filter((comment) => comment.postId === postId);
+  const postId = post.id;
+
+    const onWriteComment = useCallback((value) => {
+    const comment = {
+      postId: postId,
+      commentId: uuidv4(),
+      commentContent: value,
+      commentName: logInUSerInfo.name
+    }
+    setComments(comments => comments.concat(comment))
+  }, [])
+
+    const handleChangeComment = (e) => {
+    setValue(e.target.value);
+    }
+    
+    const commentHandleSubmit = (e) => {
+      if (value.length < 1){
+        alert('내용을 입력해 주세요')
+        return;
+      }
+      onWriteComment(value);
+      setValue('');
+      // onWriteComment(value);
+      // setValue('')
+      // e.preventDefault();
+      // dispatch(addComment({logInUSerInfo, commentContent}));
+    }
+
+
+
+    const handleRemoveComment = useCallback((id) =>{
+      setComments(comments => comments.filter((comment) => comment.commentId !== id));
+    }, []);
+
+    const handleKeyDown = (e) => {
+      if (e.key === 'Enter') {
+        e.preventDefault(); 
+        commentHandleSubmit();
+      }
+    };
+
+  
 
   return (
     <PhotoLIstItemWrapper>
@@ -195,16 +291,31 @@ function PhotoListItem(props) {
             ><PiTrash /></button>
           </div>
           <div className='contentAndComment'>
-            <div className='postContent'>{post.content}</div>
+            {isEditing ? (
+            <div>
+              <textarea 
+                value={editContent}
+                onChange={handleChangeEditContent}
+                className="editContent"
+              />
+                <div className='editButton'>
+                <Button title='취소' onClick={handleCancelEdit} />
+                <Button title='수정' onClick={handleSaveEdit} />
+                </div>
+            </div>
+          ) : (
+            <div className="postContent">{post.content}</div>
+          )}
+            {/* <div className='postContent'>{post.content}</div> */}
             <div className='comment'>
-              <CommentList comments={comments} removeComment={removeComment}/>
+              <CommentList comments={comments} removeComment={handleRemoveComment}/>
             </div>
           </div>
         </div>
           <div className='writeComment'>
             <input type='text' value={value} onChange={handleChangeComment}>
             </input>
-            <button type='button' className='commentButton' onClick={commentHandleSubmit}>
+            <button type='button' className='commentButton' onClick={commentHandleSubmit} onKeyDown={handleKeyDown}>
               <BsCheck2/>
             </button>
           </div>

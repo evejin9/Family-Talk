@@ -70,7 +70,6 @@ function Pass(props) {
 
       {/* 결제정보 */}
       <Payment passList={passList} />
-      <Outlet />
 
       <PrecautionsUl>
         <li>이용권 구매 즉시 할인 가격이 적용되며, 할인 기간이 종료된 이후부터는 정상가로 결제됩니다.</li>

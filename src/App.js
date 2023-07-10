@@ -196,8 +196,8 @@ function App() {
               <Route path='/pass' element={<PassPage />}>
                 <Route index element={<Pass />} />
                 <Route path='payment' element={<PayCheckout />} />
-                <Route path='paymentSuccess' element={<PaySuccess />} />
-                <Route path='paymentFail' element={<PayFail />} />
+                <Route path='success' element={<PaySuccess />} />
+                <Route path='fail' element={<PayFail />} />
               </Route>
               <Route path='/mypage' element={<Mypage selectedImage={selectedImage} handleImageChange={handleImageChange}/>} />
             </Route>

@@ -13,26 +13,31 @@ const initialState = {
       content: "우리 가족 첫 바다여행!!",
       comments: [
         {
-        commentName: "신돌식",
+          postId: 1,
+          commentName: "신돌식",
           commentId: 11,
           commentContent: "좋아보이네😄엄청나게 긴 댓글 쓰면 제대로 잘 내려갈까 안되면 어떡하지 제발 됐으면 좋겠다!!!!!!!"
         },
         {
+          postId: 1,
           commentName: "이옥분",
           commentId: 12,
           commentContent: "다음에는 같이 가고 싶구나."
         },
         {
+          postId: 1,
           commentName: "신앵두",
           commentId: 13,
           commentContent: "나만 빼고 가고..."
         },
         {
+          postId: 1,
           commentName: "신형만",
           commentId: 14,
           commentContent: "좋았었지~"
         },
         {
+          postId: 1,
           commentName: "신짱구",
           commentId: 15,
           commentContent: "👍"

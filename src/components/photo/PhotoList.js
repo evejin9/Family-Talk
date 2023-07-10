@@ -16,20 +16,17 @@ import { getPostList, postLists } from "../../features/photoSlice";
 const PhotoListWrapper = styled.div`
   .writePhotoButton {
     position: fixed;
-    bottom: 40px;
-    left: 583px
+    bottom: 100px;
+    right: 67px;
   }
   .writePhotoButton{
       background: none;
       outline: none;
       border: none;
-      height: 100%;
-      /* line-height: 100%; */
       display: flex;
       align-items: end;
       svg {
         font-size: 40px;
-        opacity: .8;
         color: rgb(245, 204, 141);;
         &:hover {
           color: red;
@@ -43,7 +40,9 @@ function PhotoList(props)  {
   const postList = useSelector(postLists);
   const navigate = useNavigate('/')
 
-  const [comments, setComments] = useState([]);
+  const [comments, setComments] = useState([
+    
+  ]);
   const logInUSerInfo = useSelector(LogInUser)
 
   const handleInsert = useCallback((value) => {

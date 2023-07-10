@@ -94,6 +94,43 @@ const Wrapper = styled.div`
     /* height: 850px; */
   `;
 
+  const Footer = styled.div`
+  border-top: 2px solid #f5cc8d;
+  width: 100%;
+  height: 120px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  .innerFooter {
+    width: 900px;
+    .footerContent {
+      margin-left: 1%;
+      .menu {
+      display: flex;
+      margin-bottom: 7px;
+      li {
+        margin-right: 10px;
+        a {
+          color: inherit;
+          text-decoration: none;
+        }
+      }
+      }
+    .info {
+      margin-bottom: 5px;
+      font-weight: 300;
+      font-size: 12px;
+    }
+    .copyright {
+      font-size: 12px;
+    }
+    }
+  }
+
+
+  `;
+
 function App() {
   // const [posts, setPosts] = useState(dataPhoto)
   // const nextId = useRef(7);
@@ -151,6 +188,36 @@ function App() {
           </Routes>
         </Wrapper>
       </Container>
+      {/* 푸터 영역 */}
+      <Footer>
+        <div className='innerFooter'>
+          <div className='footerContent'>
+            <ul class="menu">
+              <li><a href="javascript:void(0)" class="green">개인정보처리방침</a></li>
+              <li><a href="javascript:void(0)">홈페이지 이용약관</a></li>
+              <li><a href="javascript:void(0)" class="green">위치정보 이용약관</a></li>
+            </ul>
+            <div class="info">
+              <div>
+                <span>{`(주)Family Talk | `}</span>
+                <span>{`대표 김유미 | `}</span>
+                <span>{`사업자등록번호 201-81-21515 | `}</span>
+                <span>고객센터 feedback@familytalk.us</span>
+              </div>
+              <div>
+                <span>{`주소 인천 남동구 문화로 147 건설회관 2층 | `}</span>
+                <span>TEL : 1522-9999</span>
+              </div>
+            </div>
+
+            <p class="copyright">
+              &copy; <span class="this-year"></span>
+              Family Talk Company. All Rights Reserved.
+            </p>
+            {/* <img src="./images/starbucks_logo_only_text.png" alt="STARBUCKS" class="logo"> */}
+          </div>
+        </div>
+      </Footer>
     </>
   );
 }

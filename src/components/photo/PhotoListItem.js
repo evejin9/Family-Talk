@@ -216,6 +216,10 @@ function PhotoListItem(props) {
   };
   
   const handleSaveEdit = () => {
+    if (editContent.length < 1){
+      alert('내용을 입력해 주세요')
+      return;
+    }
     dispatch(editPost({ id: post.id, content: editContent }));
     setIsEditing(false);
   };

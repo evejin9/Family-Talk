@@ -102,6 +102,10 @@ function WritePhoto (props) {
   }
 
   const handleSubmit = (e) => {
+    if (content.length < 1){
+      alert('내용을 입력해 주세요')
+      return;
+    }
     e.preventDefault();
     navigate("/photo")
     dispatch(addPostList({ logInUSerInfo, nextId, content, image }));

@@ -1,14 +1,9 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React from 'react';
 import styled from 'styled-components';
 import Button from '../ui/Button';
-import { useSelector } from 'react-redux';
-import { selectSelectedPass } from '../../features/passSlice';
+import { useDispatch, useSelector } from 'react-redux';
+import { passInUse, selectSelectedPass } from '../../features/passSlice';
 import { useNavigate } from 'react-router';
-import { loadPaymentWidget, PaymentWidgetInstance, ANONYMOUS } from "@tosspayments/payment-widget-sdk";
-import { uuid } from "react-uuid";
-
-const clientKey = "test_ck_D5GePWvyJnrK0W0k6q8gLzN97Eoq";
-const customerKey = "dXMVAbsDOSTuZGxC_Jinj";
 
 const Wrapper = styled.div`
   margin-top: 50px;
@@ -70,8 +65,13 @@ const StyledMembership = styled.div`
 
 function Payment(props) {
   const selectedpass = useSelector(selectSelectedPass);
-  // console.log(selectedpass.id);
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+
+  const handleClickPaymentButton = () => {
+    navigate("/pass/payment");
+    // dispatch(passInUse(selectedpass));
+  };
 
   return (
     <Wrapper>
@@ -95,7 +95,7 @@ function Payment(props) {
               <div className='membership-content'>{selectedpass.membershipContent}</div>
             </PriceWrapper>
           }
-          <Button title="결제" onClick={() => {navigate("/pass/payment")}}/>
+          <Button title="결제" onClick={handleClickPaymentButton}/>
         </PaymentWrapper>
       }
     </Wrapper>

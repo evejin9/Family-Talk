@@ -1,7 +1,10 @@
-import React, { useEffect, useRef, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { passInUse, selectSelectedPass } from '../../../features/passSlice';
+import React, { useState } from 'react';
+
+import { useEffect, useRef } from "react";
+import { useSelector } from 'react-redux';
+import { selectSelectedPass } from '../../../features/passSlice';
 import { loadPaymentWidget, PaymentWidgetInstance, ANONYMOUS } from "@tosspayments/payment-widget-sdk";
+
 import uuid from "react-uuid";
 import Button from '../../ui/Button';
 import styled from 'styled-components';
@@ -17,6 +20,7 @@ const PassTitle = styled.div`
 `;
 
 const StyledOrder = styled.div`
+  
   .order-title {
     margin-top: 80px;
     font-size: 25px;
@@ -69,15 +73,10 @@ function PayCheckout(props) {
   const paymentMethodsWidgetRef = useRef(null);
   const [price, setPrice] = useState(0);
   const selectedpass = useSelector(selectSelectedPass);
-
-  const dispatch = useDispatch();
   
   useEffect(() => {
     (async () => {
       setPrice(Number(selectedpass.discountPrice));
-
-      // 결제하는 이용권 정보 넘겨주기
-      dispatch(passInUse({...selectedpass, paymentAmount: price}));
 
       // 결제 위젯 초기화
       const paymentWidget = await loadPaymentWidget(clientKey, customerKey);
@@ -92,7 +91,7 @@ function PayCheckout(props) {
       paymentWidgetRef.current = paymentWidget;
       paymentMethodsWidgetRef.current = paymentMethodsWidget;
     })()
-  }, [price]);
+  }, []);
 
   useEffect(() => {
     const paymentMethodsWidget = paymentMethodsWidgetRef.current;
@@ -105,8 +104,6 @@ function PayCheckout(props) {
       price,
       paymentMethodsWidget.UPDATE_REASON.COUPON
     )
-    // 결제 금액
-    dispatch(passInUse({...selectedpass, paymentAmount: price}));
   }, [price]);
 
   const handlePayClick = async () => {
@@ -116,7 +113,8 @@ function PayCheckout(props) {
       // 결제 버튼 누르면 결제창 띄우기
       await paymentWidget?.requestPayment({
         orderId: uuid(),
-        orderName: "토스 티셔츠 외 2건",
+        // orderName: "토스 티셔츠 외 2건",
+        orderName: selectedpass.membershipName,
         customerName: "김토스",
         customerEmail: "customer123@gmail.com",
         successUrl: `${window.location.origin}/success`,
@@ -146,7 +144,7 @@ function PayCheckout(props) {
           <div className='coupon'>
             <p>쿠폰</p>
             <div>
-              {price <= '1000'
+              {price === 0
               ? <p className='no-coupon'>사용가능한 쿠폰이 없습니다.</p>
               : <label>
                   <input

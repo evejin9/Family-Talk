@@ -89,8 +89,8 @@ function Payment(props) {
           : <PriceWrapper>
               <StyledMembership>
                 <p>{selectedpass.membershipName}</p>
-                <p className='price'>&#92;{selectedpass.price}</p>
-                <p>&#92;{selectedpass.discountPrice}/월</p>
+                <p className='price'>&#92;{Number(selectedpass.price).toLocaleString()}</p>
+                <p>&#92;{Number(selectedpass.discountPrice).toLocaleString()}/월</p>
               </StyledMembership>
               <div className='membership-content'>{selectedpass.membershipContent}</div>
             </PriceWrapper>

@@ -51,6 +51,9 @@ const PriceArea = styled.div`
     display: flex;
     justify-content: space-between;
 
+    .no-coupon {
+      font-size: 15px;
+    }
   }
 `;
 
@@ -68,21 +71,13 @@ const PaymentMethod = styled.div`
 function PayCheckout(props) {
   const paymentWidgetRef = useRef(null);
   const paymentMethodsWidgetRef = useRef(null);
-  const [price, setPrice] = useState('');
+  const [price, setPrice] = useState(0);
   const selectedpass = useSelector(selectSelectedPass);
   
-  // console.log(typeof price);
-  // setPrice(selectedpass.discountPrice);
-  // console.log(typeof Number(selectedpass.discountPrice));
-
-  // useEffect(() => {
-    
-  // }, [price]);
-  
   useEffect(() => {
-    // setPrice(selectedpass.discountPrice);
-    // console.log(price);
     (async () => {
+      setPrice(Number(selectedpass.discountPrice));
+
       // 결제 위젯 초기화
       const paymentWidget = await loadPaymentWidget(clientKey, customerKey);
 
@@ -125,7 +120,6 @@ function PayCheckout(props) {
         successUrl: `${window.location.origin}/success`,
         failUrl: `${window.location.origin}/fail`
       })
-      // console.log('눌리나?');
     } catch (error) {
       console.error(error);
     }
@@ -145,23 +139,25 @@ function PayCheckout(props) {
           </div>
           <div className='price'>
             <p>결제금액</p>
-            {/* <span>{`${price.toLocaleString()}원`}</span> */}
-            <span>{`${selectedpass.discountPrice}원`}</span>
+            <span>{`${price.toLocaleString()}원`}</span>
           </div>
-          {/* <div className='coupon'>
+          <div className='coupon'>
             <p>쿠폰</p>
             <div>
-              <label>
-                <input
-                  type='checkbox'
-                  onChange={(e) => {
-                    setPrice(e.target.checked ? price - 1000 : price + 1000)
-                  }}
-                />
-                1,000원 할인 쿠폰 적용
-              </label>
+              {price === 0
+              ? <p className='no-coupon'>사용가능한 쿠폰이 없습니다.</p>
+              : <label>
+                  <input
+                    type='checkbox'
+                    onChange={(e) => {
+                      setPrice(e.target.checked ? price - 1000 : price + 1000)
+                    }}
+                  />
+                  1,000원 할인 쿠폰 적용
+                </label>
+              }
             </div>
-          </div> */}
+          </div>
         </PriceArea>
         <PaymentMethod>
           <div id='payment-widget' />

@@ -67,14 +67,14 @@ align-items: start;
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const posts = useSelector(postLists);
-    const [imagePath, setImagePath] = useState("");
+    const [imagePath, setImagePath] = useState(image);
     const [content, setContent] = useState("");
     const postId = useSelector(state => state.postId);
-  
+    
     const selectedPost = posts.find((post) => post.id === postId); // postId로 선택한 게시글 찾기
     const image = selectedPost ? selectedPost.imagePath : ""; // 선택한 게시글의 이미지 가져오기
     const existingContent = selectedPost ? selectedPost.content : ""; // 기존 게시글의 내용 가져오기
-  
+    
     console.log(selectedPost);
     console.log(postId);
 
@@ -106,16 +106,16 @@ align-items: start;
       <EditPhotoWrapper>
         <form onSubmit={handleSubmit}>
           <div className='imgAndInput'>
-            <input
+            {/* <input
               className='plusImage'
               type='file'
               accept='image/jpg, image/png, image/jpeg'
               onChange={handleImagePathChange} // 이미지 변경 핸들러 추가
-            />
+            /> */}
             <div className='showImage'>
               <img
                 alt='img'
-                src={imagePath}
+                src={image}
               />
             </div>
             <div className='writeContent'>

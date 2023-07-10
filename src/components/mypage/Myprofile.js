@@ -5,6 +5,7 @@ import data from '../../data.json'
 import { LogInUser } from '../../features/loginSlice';
 import { useSelector } from 'react-redux';
 import {LiaPenSolid } from 'react-icons/lia'
+import { selectUserEditData } from '../../features/mypageSlice';
 
 
 const ProfileWrapper = styled.div`
@@ -32,10 +33,10 @@ const EditInput = styled.input`
 const ProfileDiv = styled.div`
   display: flex;
   /* width: 60%; */
-  /* background-color: orange; */
   align-items: center;
   justify-content: center;
   flex-direction: column;
+
   img {
     border-radius: 100px;
     height: 200px;
@@ -46,6 +47,11 @@ const ProfileDiv = styled.div`
 const ProfileSpan = styled.span`
   margin-top: 10px;
   font-size: 20px;
+
+  &.email {
+    font-size: 15px;
+    margin-bottom: 10px;
+  }
 `;
 
 
@@ -54,20 +60,10 @@ const ProfileSpan = styled.span`
 
 
 
-function Myprofile(props) {
+function Myprofile({selectedImage, handleImageChange}) {
   const logInUser = useSelector(LogInUser);
-  const [selectedImage, setSelectedImage] = useState(null);
+  const editUserData = useSelector(selectUserEditData);
 
-  const handleImageChange = (event) => {
-    const file = event.target.files[0];
-    const reader = new FileReader();
-
-    reader.onload = (e) => {
-      setSelectedImage(e.target.result);
-    };
-
-    reader.readAsDataURL(file);
-  };
 
   return (
     <ProfileWrapper>
@@ -78,6 +74,7 @@ function Myprofile(props) {
         <EditInput type='file'  onChange={handleImageChange}/>
         </EditInputWrapper>
         <ProfileSpan>{logInUser.name} 님 환영합니다!</ProfileSpan>
+        <ProfileSpan className='email'>{editUserData?.email || logInUser.email}</ProfileSpan>
       </ProfileDiv>
     </ProfileWrapper>
   );

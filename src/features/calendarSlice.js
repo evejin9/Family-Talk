@@ -33,10 +33,10 @@ const calendarSlice = createSlice({
         state.calendarPlanData[planIndex].content = content;
       }
     },
-      deleteCalendarTitle(state, action) {
+    deleteCalendarTitle(state, action) {
       const id = action.payload;
-      state.titles = state.titles.filter(title => title.id !== id);
-      state.selectedTitle = null;
+      state.calendarPlanData = state.calendarPlanData.filter(plan => plan.id !== id);
+      state.selectedPlan = null;
     },
   },
     

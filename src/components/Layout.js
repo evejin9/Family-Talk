@@ -154,7 +154,7 @@ const ChatButton = styled.div`
 `;
 
 
-function Layout(props) {
+function Layout({selectedImage}) {
   const [showChatModal, setShowChatModal] = useState(false);
 
   const logInUSerInfo = useSelector(LogInUser);
@@ -163,6 +163,8 @@ function Layout(props) {
   const handleChatModal = () => {
     setShowChatModal(true);
   };
+
+  
 
   return (
     <LayoutStyled >
@@ -192,7 +194,7 @@ function Layout(props) {
         <ProfileArea>
           <img src={logo} />
           <ProfileCard>
-            <img src={logInUSerInfo.imagePath} /> 
+          <img src={selectedImage || logInUSerInfo.imagePath} alt="Profile" />
             <div className='name-logout'>
               <p className='name'>{logInUSerInfo.name} 님</p>
             </div>

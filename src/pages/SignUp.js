@@ -278,7 +278,7 @@ const submitButton = () => {
           />
           {showPw ? <AiFillEye className='cursor-point' onClick={() => setShowPw(false)}/> : <AiFillEyeInvisible className='cursor-point' onClick={() => setShowPw(true)} /> }
         </div>
-        {pwError && <p className='errorMsg'>숫자와 문자 포함 형태의 6~12자리 이내의 암호를 입력해주세요.</p>}
+        {pwError && <p className='errorMsg'>숫자, 문자를 사용한 형태의 6~12자리 이내의 암호를 입력해주세요.</p>}
 
         <InputStyle 
           name='confirmPw' 
@@ -287,7 +287,7 @@ const submitButton = () => {
           placeholder='비밀번호 확인' 
           onChange={handleUserId} 
         />
-        {confirmError && <p className='errorMsg'>비밀번호와 동일하지 않습니다.</p>}
+        {confirmError && <p className='errorMsg'>비밀번호가 일치하지 않습니다.</p>}
 
         <InputStyle 
           name='userName' 

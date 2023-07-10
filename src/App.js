@@ -199,9 +199,9 @@ function App() {
         <div className='innerFooter'>
           <div className='footerContent'>
             <ul className="menu">
-              {/* <li><link href=''>개인정보처리방침</link></li>
-              <li><link href=''>홈페이지 이용약관</link></li>
-              <li><link href=''>위치정보 이용약관</link></li> */}
+              <li className='cursor-point'>개인정보처리방침</li>
+              <li className='cursor-point'>홈페이지 이용약관</li>
+              <li className='cursor-point'>위치정보 이용약관</li>
             </ul>
             <div className="info">
               <div>

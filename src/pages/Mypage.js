@@ -10,7 +10,7 @@ const DetailedWrapper = styled.div`
   display: flex;
   width: 100%;
   align-items: center;
-  justify-content: space-around;
+  justify-content: center;
   border: 2px solid   #f5cc8d;
   margin-top: 10px;
   border-radius: 10px;

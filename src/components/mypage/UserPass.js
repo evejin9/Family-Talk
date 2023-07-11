@@ -12,7 +12,7 @@ const StyledDiv = styled.div`
   display: flex;
   /* background-color: blue; */
   width: 40%;
-  height: 200px;
+  height: 300px;
   /* margin-top: 20px; */
   /* justify-content: center; */
   /* align-items: center; */
@@ -58,7 +58,7 @@ const StyledButton = styled.button`
   background-color: #fff;
   border: 2px solid #acacac;
   margin-left: 5px;
-
+  margin-top: 50px;
   &:hover {
     background-color: #f5cc8d;
   }

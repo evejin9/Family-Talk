@@ -115,8 +115,8 @@ function PayCheckout(props) {
         orderName: selectedpass.membershipName,
         customerName: "김토스",
         customerEmail: "customer123@gmail.com",
-        successUrl: `${window.location.origin}/success`,
-        failUrl: `${window.location.origin}/fail`
+        successUrl: `${window.location.origin}/pass/payment/success`,
+        failUrl: `${window.location.origin}/pass/payment/fail`
       })
     } catch (error) {
       console.error(error);

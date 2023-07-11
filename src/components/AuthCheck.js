@@ -4,7 +4,7 @@ import { useSelector } from 'react-redux';
 import { Navigate } from 'react-router';
 
 function AuthCheck(props) {
-  const isLogin = useSelector(isUserLogin)
+  const isLogin = useSelector(isUserLogin);
 
   if (!isLogin) {
     return <Navigate to='/login' />

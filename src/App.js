@@ -183,9 +183,10 @@ function App() {
               </Route>
               <Route path='/pass' element={<PassPage />}>
                 <Route index element={<Pass />} />
-                <Route path='payment' element={<PayCheckout />} />
-                <Route path='success' element={<PaySuccess />} />
-                <Route path='fail' element={<PayFail />} />
+                <Route path='payment' element={<PayCheckout />}>
+                  <Route path='success' element={<PaySuccess />} />
+                  <Route path='fail' element={<PayFail />} />
+                </Route>
               </Route>
               <Route path='/mypage' element={<Mypage selectedImage={selectedImage} handleImageChange={handleImageChange}/>} />
             </Route>
@@ -220,7 +221,6 @@ function App() {
               &copy; <span className="this-year"></span>
               Family Talk Company. All Rights Reserved.
             </p>
-            {/* <img src="./images/starbucks_logo_only_text.png" alt="STARBUCKS" class="logo"> */}
           </div>
         </div>
       </Footer>

@@ -11,7 +11,7 @@ import "swiper/css/scrollbar";
 
 const StyledMainPhoto = styled.div`
   width: 100%;
-  height: 50vh;
+  height: 450px;
   /* overflow: hidden; */
 `;
 
@@ -26,15 +26,15 @@ const StyledSwiperSlide = styled(SwiperSlide)`
   }
 `;
 
-const StyledImg = styled.img`
-  /* width: 100%;
-  height: 100%; */
-  cursor: pointer;
-`;
+// const StyledImg = styled.img`
+//   /* width: 100%;
+//   height: 100%; */
+//   cursor: pointer;
+// `;
 
-const Edited = styled.input`
-  display: none;
-`;
+// const Edited = styled.input`
+//   display: none;
+// `;
 
 function MainPhoto(props) {
   const [image, setImage] = useState("https://ifh.cc/g/NAwTpt.jpg");

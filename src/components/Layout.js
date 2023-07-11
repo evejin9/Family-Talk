@@ -159,6 +159,7 @@ function Layout({selectedImage}) {
 
   const logInUSerInfo = useSelector(LogInUser);
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const handleChatModal = () => {
     setShowChatModal(true);
@@ -188,7 +189,7 @@ function Layout({selectedImage}) {
             <Button title="Logout" onClick={() => {
               dispatch(logOutUser());
               localStorage.removeItem('loginUser');
-              Navigate('login');
+              navigate('login');
             }} />
           </li>
         </ul>

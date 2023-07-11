@@ -1,0 +1,44 @@
+[
+  {
+    "id": "0",
+    "membershipName": "30일 무료 이용권",
+    "membershipContent": "BRONZE 멤버십 무료이용권",
+    "price": "4900",
+    "discountPrice": "0"
+  },
+  {
+    "id": "1",
+    "membershipName": "BRONZE",
+    "membershipContent": "매월 10개 게시글 업로드",
+    "price": "4900",
+    "discountPrice": "4000"
+  },
+  {
+    "id": "2",
+    "membershipName": "SILVER",
+    "membershipContent": "매월 20개 게시글 업로드",
+    "price": "5900",
+    "discountPrice": "5000"
+  },
+  {
+    "id": "3",
+    "membershipName": "GOLD",
+    "membershipContent": "매월 30개 게시글 업로드",
+    "price": "6900",
+    "discountPrice": "5900"
+  },
+  {
+    "id": "4",
+    "membershipName": "VIP",
+    "membershipContent": "매월 50개 게시글 업로드",
+    "price": "9900",
+    "discountPrice": "8500"
+  },
+  {
+    "id": "5",
+    "membershipName": "VVIP",
+    "membershipContent": "매월 업로드 무제한 이용",
+    "price": "12900",
+    "discountPrice": "9900"
+  }
+]

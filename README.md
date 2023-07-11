@@ -1,70 +1,48 @@
-# Getting Started with Create React App
+# 가족 일상 공유 App
+  우리 가족만의 프라이빗한 공간.
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+  가족 구성원과 더욱 돈독하고 행복한 시간을 공유해보세요. 
 
-## Available Scripts
+  가족 공동 일정을 공유하는 캘린더는 물론, 특별한 날을 d-day로 설정하여 손쉽게 확인할 수 있어요!
 
-In the project directory, you can run:
+  가족들의 일상을 사진으로 옮겨 기록하고 좋아요와 댓글 등을 남기며 상호작용 할 수 있어요. 
+  
+  홈화면에서 가족 사진과 d-day를 설정하여 한 눈에 확인할 수 있습니다. 
 
-### `npm start`
+  캘린더에 등록된 오늘의 일정과 날씨정보를 보여줍니다.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+  가족 구성원과 함께하는 채팅방에서도 함께 이야기를 나눌 수 있습니다. 
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+1. 김유미
+  * 메인 홈
+    - 캘린더와 연동하여 오늘의 일정을 보여주는 기능
+    - 가장 가까운 날짜의 가족 구성원 생일이 디데이로 출력
+    - 현재 위치의 날씨 정보 (날씨 api 사용) 
+  * 유료 이용권 (결제 서비스)
+    - 다양한 이용권 구현 및 토스 페이먼츠에서 제공하는 결제 서비스를 이용한 결제창 구현 
 
-### `npm test`
+2. 김수진 
+  * 채팅
+    - 가족 구성원과 함께 이용 가능한 채팅 구현.
+    - 메세지, 사진, 현재 위치를 실시간으로 전송 가능하도록 구현
+  * 로그인
+    - 유저 데이터를 활용해 로그인 구현
+    - 정규표현식을 활용한 유효성 검사 구현
+  * 회원가입
+    - 정규 표현식 등을 이용한 유효성 검사를 통해 모두 바르게 입력해야한 회원가입 버튼이 활성화 되로록 구현
+  * 멤버 페이지
+    - 함께 가입되어있는 가족 구성원의 관계 및 정보를 볼 수 있도록 카드 형식으로 구현. (가족 구성원의 이름은 사용자가 설정한 별명으로 출력)  
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+3. 이상혁 
+  * 캘린더
+    - 달력을 확인할 수 있고, 일정이나 가족 행사를 기록할 수 있도록 구현
+    - 오늘 날짜로 입력된 일정은 메인 페이지에서 확인 가능
+  * 마이 페이지
+    - 로그인한 유저의 정보를 확인할 수 있도록 구현 
+    - 프로필 사진과 유저 정보를 변경하거나 탈퇴 기능 구현
 
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+4. 김상아 
+  * 포토
+    - 게시글 등록 및 수정 삭제 기능 구현
+    - 댓글 등록 및 수정 삭제 기능 구현
+    - 로그인한 유저가 작성한 댓글만 수정/삭제할 수 있도록 구현

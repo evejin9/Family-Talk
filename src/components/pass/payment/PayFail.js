@@ -3,6 +3,7 @@ import { useSearchParams } from 'react-router-dom';
 
 function PayFail(props) {
   const [searchParams] = useSearchParams();
+  // console.log('결제실패');
 
   return (
     <div>

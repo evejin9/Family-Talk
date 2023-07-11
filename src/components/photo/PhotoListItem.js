@@ -58,15 +58,16 @@ margin-bottom: 50px;
       width: 75%;
     }
     svg {
-      font-size: 30px;
+      font-size: 25px;
       cursor: pointer;
-      color: gray;
+      color:#acacac;
     }
     button {
     background: none;
     outline: none;
     border: none;
     width: auto;
+    padding: 1px;
     }
   }
   .contentAndComment {
@@ -154,6 +155,7 @@ margin-bottom: 50px;
 function PhotoListItem(props) {
   const {post} = props;
   const dispatch = useDispatch()
+  const logInUserInfo = useSelector(LogInUser);
 
   // 게시글 삭제
   const handleDelete = () => {
@@ -303,6 +305,8 @@ function PhotoListItem(props) {
   const postId = post.id;
   const filteredComments = comments.filter((comment) => comment.postId === postId);
 
+  console.log(logInUserInfo);
+
     const onWriteComment = useCallback((value) => {
       const comment = {
         postId: postId,
@@ -347,10 +351,11 @@ function PhotoListItem(props) {
           <div className='profileImgNameMore'>
             <img src={post.profileImage} alt='profileImg'></img>
             <span className='name'>{post.name}</span> 
-            <button onClick={handleEditPost} ><PiPencil /></button>
-            <button onClick={handleDelete}>
-              <PiTrash />
-            </button>
+            {logInUserInfo.name === post.name && 
+            (<>
+            <button onClick={handleEditPost}><PiPencil /></button>
+            <button onClick={handleDelete}><PiTrash /></button>
+            </>)}
           </div>
           <div className='contentAndComment'>
             {isEditing ? 

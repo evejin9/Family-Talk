@@ -14,8 +14,7 @@ const initialState = {
     "membershipName": "",
     "membershipContent": "",
     "price": "",
-    "discountPrice": "",
-    "paymentAmount": ""
+    "discountPrice": ""
   }
 }
 

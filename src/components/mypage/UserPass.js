@@ -2,10 +2,11 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 import {} from 'react-icons/io'
 import { IoTicketOutline } from 'react-icons/io5';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { selectMyPass, selectPassList, selectSelectedPass } from '../../features/passSlice';
 import { LiaCrownSolid } from 'react-icons/lia'
 import { useNavigate } from 'react-router-dom';
+import { logOutUser } from '../../features/loginSlice';
 
 const StyledDiv = styled.div`
   display: flex;
@@ -100,18 +101,18 @@ const StyledButtonWrapper = styled.div`
 function UserPass(props) {
   
   const [passwordInput, setPasswordInput] = useState('');
+  const [passwordCorrect, setPasswordCorrect] = useState(false);
   const [showConfirmationAlert, setShowConfirmationAlert] = useState(false);  
-
-  const payPass = useSelector(selectMyPass)
+  
+  
+  const dispatch = useDispatch()
+  const payPass = useSelector(selectSelectedPass)
   const usePass = useSelector(selectPassList)
   const navigate = useNavigate()
 
   const goPassPage = () => {
     navigate('/pass')
-  }
-  
-  const goLoginPage = () => {
-  }
+  };
   
   const handleWithdrawalClick = () => {
     setShowConfirmationAlert(true);
@@ -127,9 +128,13 @@ function UserPass(props) {
   };
   
   const handleConfirmationConfirm = () => {
-    navigate('/login')
     setShowConfirmationAlert(false);
     setPasswordInput('');
+    alert('탈퇴 완료되었습니다 감사합니다.')
+  };
+  
+  const goLoginPage = () => {
+    navigate('/login')
   };
 
   return (
@@ -150,12 +155,13 @@ function UserPass(props) {
         <StyledDeleteSpan>비밀번호를 입력하여 회원 탈퇴를 진행하시겠습니까?</StyledDeleteSpan>
         <StyledInput type="password" value={passwordInput} onChange={handlePasswordChange} />
         <StyledButtonWrapper>
-          <StyledDeleteButton onClick={handleConfirmationConfirm}>확인</StyledDeleteButton>
+          <StyledDeleteButton onClick={() => {dispatch(logOutUser()); handleConfirmationConfirm();}} disabled={passwordInput !== '1234'}>확인</StyledDeleteButton>
           <StyledDeleteButton onClick={handleConfirmationCancel}>취소</StyledDeleteButton>
         </StyledButtonWrapper>
       </StyledDeleteDiv>
     )}
     </StyledDiv>
+    
   );
 }
 

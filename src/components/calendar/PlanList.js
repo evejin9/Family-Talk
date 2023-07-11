@@ -11,7 +11,7 @@ const PlanListWrapper = styled.div`
   width: 220px;
   /* height: 300px; */
   position: absolute;
-  top: 60px;
+  top: 72px;
   right: 0px;
 `;
 

@@ -112,10 +112,10 @@ function EditModal({closeModal}) {
       password: editPassword
     };
   
-    if (!validateEmail(editEmail)) {
-      alert('올바른 이메일 형식이 아닙니다.');
-      return;
-    }
+    // if (!validateEmail(editEmail)) {
+    //   alert('올바른 이메일 형식이 아닙니다.');
+    //   return;
+    // }
   
     dispatch(setUserEditData(userInfo));
   };
@@ -177,11 +177,13 @@ function EditModal({closeModal}) {
       <StyledDiv>
       <StyledSpan>
         <AiOutlineUser size={25} style={{ marginRight: '5px' }} color="#5CE1E6" />
-        ID: { <StyledInput value={editId} onChange={handleId} autoFocus spellCheck={false}/>}
+        ID: {logInUser.id}
+        {/* { <StyledInput value={editId} onChange={handleId} autoFocus spellCheck={false}/>} */}
       </StyledSpan>
       <StyledSpan>
         <LiaPenSolid size={25} style={{ marginRight: '5px' }} color="#5CE1E6" />
-        Name: { <StyledInput value={editName} onChange={handleName} spellCheck={false}/> }
+        Name: {logInUser.name} 
+        {/* { <StyledInput value={editName} onChange={handleName} spellCheck={false}/> } */}
       </StyledSpan>
       <StyledSpan>
         <PiCake size={25} style={{ marginRight: '5px' }} color="#5CE1E6" />

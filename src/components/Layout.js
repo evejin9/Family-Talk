@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { NavLink, Outlet, useNavigate } from 'react-router-dom';
+import { NavLink, Navigate, Outlet, useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import { useDispatch, useSelector } from 'react-redux';
 import { BsFillChatFill } from "react-icons/bs";
@@ -184,7 +184,13 @@ function Layout({selectedImage}) {
           <li><Category to="/photo">Photo</Category></li>
           <li><Category to="/pass"><IoTicketOutline /></Category></li>
           <li><Category to="/mypage"><LiaUserCircleSolid  size={28}/></Category></li>
-          <li><Button title="Logout" onClick={() => dispatch(logOutUser())} /></li>
+          <li>
+            <Button title="Logout" onClick={() => {
+              dispatch(logOutUser());
+              localStorage.removeItem('loginUser');
+              Navigate('login');
+            }} />
+          </li>
         </ul>
         {/* 버튼 */}
       </Navbar>

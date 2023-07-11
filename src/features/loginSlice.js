@@ -15,6 +15,7 @@ const logInSlice = createSlice({
       state.isLogin = true;
     },
     logOutUser: (state, { payload }) => {
+      state.logInUserInfo = {};
       state.isLogin = false;
     }
   }

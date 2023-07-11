@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
 
-import { findLoginUser, isUserLogin } from '../features/loginSlice';
+import { LogInUser, findLoginUser, isUserLogin } from '../features/loginSlice';
 
 import logo from "../images/logo.png";
 import { useNavigate } from 'react-router';
@@ -81,6 +81,7 @@ function LogIn(props) {
 
   const isLogin = useSelector(isUserLogin);
   const userData = useSelector(userDataList);
+  const userLogin = useSelector(LogInUser)
 
   const navigate = useNavigate();
 
@@ -101,6 +102,8 @@ function LogIn(props) {
     
     if(logInId === logInUser?.id && Number(logInPw) === logInUser?.password) {
       dispatch(findLoginUser(logInUser));
+      localStorage.setItem('loginUser', JSON.stringify(logInUser));
+      
       alert(`${logInUser.name}님, 환영합니다!`);
       setLogInId('');
       setLogInPw('');
@@ -150,3 +153,6 @@ export default LogIn;
 // 시간 남으면 해보기 (실무와 유사하게)
 // 로그인 시 유저 정보, 로그인 시간을 로컬에 담은 후
 // 일정 시간(예) 30분)이 지나면 자동 로그아웃 될 수 있도록 구현
+
+// 로그인 할 때 유저 정보를 로컬 스토리지에 넣고
+// 권한 체크할 때 로컬 스토리지에 유저 인포가 있으면 로컬 스토리지의 데이터를 가져와 로그인 처리

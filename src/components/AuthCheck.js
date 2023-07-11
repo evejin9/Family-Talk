@@ -13,8 +13,10 @@ function AuthCheck(props) {
   useEffect(() => {
     if (loginUser) {
       dispatch(findLoginUser(loginUser));
+      navigate('/');
+    } else {
+      navigate('/login');
     }
-    navigate('/');
   }, [])
 
   if (!isLogin) {

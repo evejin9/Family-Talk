@@ -29,7 +29,7 @@ align-items: start;
   img {
     width: 100%;
     object-fit: cover;
-    border: 1px solid orange;
+    border: 2px solid #f5cc8d;
     height: 100%;
   }
 }
@@ -39,7 +39,7 @@ align-items: start;
     textarea {
       background: none;
       outline: none;
-      border: 1px solid orange;
+      border: 2px solid #f5cc8d;
       width: 100%;
       height: 100%;
       display: flex;
@@ -53,13 +53,11 @@ align-items: start;
   display: flex;
   justify-content: end;
   margin-top: 10px;
+  button {
+    margin-left: 10px;
+  }
 }
-.addButton {
-  margin-left: 10px;
-}
-.none {
-  display: none;
-}
+
 `
 
 function WritePhoto (props) {
@@ -102,14 +100,21 @@ function WritePhoto (props) {
   }
 
   const handleSubmit = (e) => {
-    if (content.length < 1){
-      alert('내용을 입력해 주세요')
+    e.preventDefault();
+  
+    if (!file) {
+      alert('이미지를 추가해 주세요');
       return;
     }
-    e.preventDefault();
-    navigate("/photo")
+  
+    if (content.length < 1){
+      alert('내용을 입력해 주세요');
+      return;
+    }
+  
+    navigate("/photo");
     dispatch(addPostList({ logInUSerInfo, nextId, content, image }));
-  }
+  };
 
   return (
     <WritePhotoWrapper>
@@ -135,8 +140,6 @@ function WritePhoto (props) {
       <div className='button'>
         <Button title='취소' onClick={(e) => navigate("/photo")}/> 
         <Button title='게시' onClick={handleSubmit}/> 
-      </div>
-      <div className='none'>
       </div>
     </WritePhotoWrapper>
   );

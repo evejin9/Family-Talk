@@ -28,7 +28,7 @@ align-items: start;
   img {
     width: 100%;
     object-fit: cover;
-    border: 1px solid orange;
+    border: 1px solid #f5cc8d;
     height: 100%;
   }
 }
@@ -38,7 +38,7 @@ align-items: start;
     textarea {
       background: none;
       outline: none;
-      border: 1px solid orange;
+      border: 1px solid #f5cc8d;
       width: 100%;
       height: 100%;
       display: flex;

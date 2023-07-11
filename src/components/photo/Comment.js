@@ -6,7 +6,6 @@ const CommentWrapper = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  /* height: auto; */
   .flexdiv {
     width: 100%
   }
@@ -25,12 +24,12 @@ const CommentWrapper = styled.div`
     font-size: 12px;
   }
   svg {
-    color: orange;
+    color: #FD7469;
     cursor: pointer;
   }
 `
 
-function Comment({commentName, commentContent, id, removeComment}) {
+function Comment({commentName, commentContent, id, removeComment, isAuthor}) {
   return (
     <CommentWrapper>
       <div className='flexdiv'>
@@ -42,7 +41,7 @@ function Comment({commentName, commentContent, id, removeComment}) {
         </div>
       </div>
       <div className='commentRemove'>
-        <IoMdRemoveCircleOutline onClick={() => {removeComment(id);}}/>
+        {isAuthor && <IoMdRemoveCircleOutline onClick={() => { removeComment(id); }} />}
       </div>
     </CommentWrapper>
   );

@@ -118,7 +118,7 @@ function MainWeather({ today }) {
           <p className='today-date'>{todayData()}</p>
           <p className='location'>{name}</p>
           <p className='temp'>{Math.round(temp)}º</p>
-          <img className='temp-icon' src={`http://openweathermap.org/img/wn/${icon}@2x.png`} />
+          <img className='temp-icon' src={`https://openweathermap.org/img/wn/${icon}@2x.png`} />
         </div>
       }
     </StyledSection>

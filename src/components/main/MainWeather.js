@@ -84,7 +84,7 @@ function MainWeather({ today }) {
   const getWeatherByCurrentLocation = async (lat, lon) => {
     setLoading(true);
     try {
-      let url = `http://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=1eb8c3144c11e82d58bf7e93e3eed28f&units=metric`;
+      let url = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=1eb8c3144c11e82d58bf7e93e3eed28f&units=metric`;
       let reponse = await fetch(url);
       let data = await reponse.json();
       // console.log('데이터 확인', data);

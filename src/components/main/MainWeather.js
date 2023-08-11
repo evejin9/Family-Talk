@@ -4,7 +4,7 @@ import { MoonLoader } from "react-spinners";
 
 const StyledSection = styled.div`
   width: 100%;
-  height: 10vh;
+  height: 100px;
   border: 2px solid #efefef;
   border-radius: 8px;
   font-size: 18px;
@@ -22,19 +22,7 @@ const StyledSection = styled.div`
     }
   }
 
-  /* &.container_cool{
-    background: #005AA7;
-    background: -webkit-linear-gradient(to bottom, #005AA7, #FFFDE4);
-    background: linear-gradient(to bottom, #005AA7, #FFFDE4);
-  }
-  &.container_warm{
-    background: #FDC830;
-    background: -webkit-linear-gradient(to bottom, #F37335, #FDC830);
-    background: linear-gradient(to bottom, #F37335, #FDC830);
-  } */
-
   .weather-contents {
-    /* color: #fff; */
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
@@ -62,7 +50,7 @@ const StyledSection = styled.div`
 function MainWeather({ today }) {
   const [weather, setWeather] = useState();
   const [name, setName] = useState();
-  const [icon, setIcon] = useState();
+  const [icon, setIcon] = useState('50d');
   const [temp, setTemp] = useState();
   const [loading, setLoading] = useState(false);
   
@@ -100,9 +88,7 @@ function MainWeather({ today }) {
   };
 
   return (
-    <StyledSection
-      // className={temp > 26 ? "container_warm" : "container_cool"}
-    >
+    <StyledSection>
       {
         loading
         ?

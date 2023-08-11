@@ -5,19 +5,19 @@ import { Navigate, useNavigate } from 'react-router-dom';
 
 function AuthCheck(props) {
   const isLogin = useSelector(isUserLogin)
-  const loginUser = JSON.parse(localStorage.getItem('loginUser'));
+  // const loginUser = JSON.parse(localStorage.getItem('loginUser'));
 
-  const navigate = useNavigate();
-  const dispatch = useDispatch();
+  // const navigate = useNavigate();
+  // const dispatch = useDispatch();
 
-  useEffect(() => {
-    if (loginUser) {
-      dispatch(findLoginUser(loginUser));
-      navigate('/');
-    } else {
-      navigate('/login');
-    }
-  }, [])
+  // useEffect(() => {
+    // if (loginUser) {
+    //   dispatch(findLoginUser(loginUser));
+    //   navigate('/');
+    // } else {
+    //   navigate('/login');
+    // }
+  // }, [])
 
   if (!isLogin) {
     return <Navigate to='/login' />

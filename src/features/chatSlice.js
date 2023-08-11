@@ -39,7 +39,7 @@ const chatSlice = createSlice({
   }
 });
 
-console.log();
+// console.log();
 
 export const { getChatList, addChatList, addMapInfo } = chatSlice.actions;
 

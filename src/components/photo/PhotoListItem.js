@@ -305,8 +305,6 @@ function PhotoListItem(props) {
   const postId = post.id;
   const filteredComments = comments.filter((comment) => comment.postId === postId);
 
-  console.log(logInUserInfo);
-
     const onWriteComment = useCallback((value) => {
       const comment = {
         postId: postId,

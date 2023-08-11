@@ -102,7 +102,7 @@ function LogIn(props) {
     
     if(logInId === logInUser?.id && Number(logInPw) === logInUser?.password) {
       dispatch(findLoginUser(logInUser));
-      localStorage.setItem('loginUser', JSON.stringify(logInUser));
+      // localStorage.setItem('loginUser', JSON.stringify(logInUser));
       
       alert(`${logInUser.name}님, 환영합니다!`);
       setLogInId('');
@@ -116,8 +116,12 @@ function LogIn(props) {
   return (    
     <LogInModalWrapper isLogin={isLogin} >
       <LogInBox>
-          {/* <p>아이디: aa ~ gg 중 아무거나 / 비번: 1234</p> */}
+
           <img className='logo' src={logo}  />
+
+          {/* 포트폴리오 용 */}
+          <p>아이디: aa ~ gg 중 아무거나 / 비번: 1234</p>
+
           <input 
             type='text' 
             value={logInId} 

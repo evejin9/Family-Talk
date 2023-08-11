@@ -75,8 +75,8 @@ align-items: start;
     const image = selectedPost ? selectedPost.imagePath : ""; // 선택한 게시글의 이미지 가져오기
     const existingContent = selectedPost ? selectedPost.content : ""; // 기존 게시글의 내용 가져오기
     
-    console.log(selectedPost);
-    console.log(postId);
+    // console.log(selectedPost);
+    // console.log(postId);
 
 
     const handleImagePathChange = (event) => {

@@ -8,7 +8,7 @@ import styled from 'styled-components';
 
 const MainWrapper = styled.div`
   width: 100%;
-  height: 10vh;
+  height: 100px;
   border: 2px solid #efefef;
   border-radius: 8px;
   margin-top: 20px;
